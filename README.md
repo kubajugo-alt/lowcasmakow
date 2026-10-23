@@ -73,6 +73,13 @@ Spice mixes are products in the CMS (*Sklep: mieszanki przypraw*, `content/produ
 
 The cart, checkout, payments, order e-mails, stock, shipping rates, discounts and taxes are [Snipcart](https://snipcart.com)'s. It runs on top of these pages: each "Do koszyka" button carries the product (`snipcart-add-item` with `data-item-*`; every size is listed with its price difference, so Snipcart can check the price of whichever size is in the cart). `js/snipcart.js` is Snipcart's official loader (v3.7.4 pinned in `build.py`); it loads on the first interaction, in Polish because the pages are `lang="pl"`, and the cart takes the site's colours from the CSS variables on `#snipcart`. `js/shop.js` connects the size picker and quantity on product pages to the button.
 
+Links to the shop are worked out from links that already exist, so nothing needs maintaining by hand:
+
+- a mix's "Pasuje do przepisów" and "Powiązane historie" put a "Ze spiżarni Łowcy" box on those recipes and stories, and on workshops and trips linked to them;
+- a mix whose *Pochodzenie* starts with a country also appears on travel stories from that country (their *Miejsce*), on trips there, and in that country's list on the "Smaki świata" globe;
+- the first Old Polish mix sits in the "Kuchnia staropolska" band on the homepage;
+- the menu, the footer, the mobile chips, "Na skróty" and the 404 page link to `/sklep/`.
+
 Until a key is set, the shop shows its products with "Wkrótce w sprzedaży" buttons and no Snipcart code loads.
 
 To open the shop:

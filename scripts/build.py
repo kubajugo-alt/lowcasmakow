@@ -381,6 +381,8 @@ def article_page(a):
           <p class="meta">{e(CAT.get(r['category'], ''))} · {e(r.get('card_meta', ''))}</p>
         </div>
       </aside>'''
+    prods = products_for(recipes=[a['recipe']] if a.get('recipe') else [], articles=[a['slug']],
+                         country=(a.get('place') or '').split(',')[0].strip() or None)
     hero = video(a.get('video'), a['title'], a['image'], sizes='(max-width:720px) 100vw, 1216px', eager=True) or \
         f'<div class="ph frame {T()}">{img(a["image"], "(max-width:720px) 100vw, 1216px", eager=True)}</div>'
     main = f'''
@@ -399,10 +401,12 @@ def article_page(a):
     <div class="a-body">
       {body}
       {recipe_box}
+      {shop_box(prods)}
     </div>
   </article>
 {related(rel)}'''
-    images = [a['image']] + state['images'] + ([recipe_card_image(R[a['recipe']])] if a.get('recipe') in R else []) + [ref_image(s) for s in rel]
+    images = [a['image']] + state['images'] + ([recipe_card_image(R[a['recipe']])] if a.get('recipe') in R else []) + \
+        [pp['image'] for _, pp in prods[:2]] + [ref_image(s) for s in rel]
     return shell(a['title'], a['lead'], main, images, body_class='article-page')
 
 
@@ -416,17 +420,9 @@ def recipe_page(slug, r):
              if vid else '')
     media_attrs = f' data-yt="{e(vid)}" data-yt-title="{e(name)}"' if vid else ''
     shop = ''
-    prods = products_for_recipe(slug)
+    prods = products_for(recipes=[slug])
     if prods:
-        shop = '\n'.join(f'''
-      <div class="shop shop-live" id="sklep">
-        <a href="/sklep/{ps}.html" tabindex="-1" aria-hidden="true">{framed(img(pp['image'], '64px'), 'small')}</a>
-        <div>
-          <p class="label">Ze spiżarni Łowcy</p>
-          <p class="shop-t"><a href="/sklep/{ps}.html">{e(pp['title'])}</a> <span>{pln(float(pp['price']))}</span></p>
-        </div>
-        {buy_button(ps, pp, 'btn btn-sm btn-light', 'Do koszyka')}
-      </div>''' for ps, pp in prods[:2])
+        shop = shop_box(prods, anchor=True)
     elif r.get('shop'):
         sh = r['shop']
         shop = f'''
@@ -653,6 +649,7 @@ def offer_page(kind, slug, o):
              + (f'<div><h2>Poza ceną</h2><ul class="no-list">{exc}</ul></div>' if exc else '') + '</div>') if inc else ''
     sub = f'<p class="sub">{e(o["subtitle"])}</p>' if o.get('subtitle') else ''
     rel = [s for s in o.get('related') or [] if s in A or s in R]
+    prods = products_for(recipes=rel, articles=rel, country=o.get('country') if trip else None)
     main = f'''
   <nav class="crumbs" aria-label="Ścieżka">
     <a href="/">Strona główna</a><span aria-hidden="true">›</span><a href="/{kind}/">{section}</a><span aria-hidden="true">›</span><span>{e(o['title'])}</span>
@@ -680,10 +677,11 @@ def offer_page(kind, slug, o):
       <h2>{'Plan wyprawy' if trip else 'Program'}</h2>
       <ol class="plan">{plan}</ol>
       {lists}
+      {f'<h2>{"Zabierz smak do domu" if trip else "Po warsztatach w domu"}</h2>' + shop_box(prods) if prods else ''}
     </div>
   </article>
 {related(rel, 'Poczytaj przed wyjazdem' if trip else 'Poczytaj przed warsztatami') if rel else ''}'''
-    images = [o['image']] + state['images'] + [ref_image(s) for s in rel]
+    images = [o['image']] + state['images'] + [pp['image'] for _, pp in prods[:2]] + [ref_image(s) for s in rel]
     return shell(o['title'], o['lead'], main, images, current='Wyprawy' if trip else 'Warsztaty', body_class='offer-page')
 
 
@@ -857,8 +855,27 @@ def product_page(slug, p):
                  body_class='product-page', scripts=('/js/shop.js',))
 
 
-def products_for_recipe(slug):
-    return [(s, p) for s, p in PR.items() if slug in (p.get('recipes') or [])]
+def products_for(recipes=(), articles=(), country=None):
+    """Spice mixes linked to these recipes or stories (or, for trips, made from that country's cooking)."""
+    out = []
+    for slug, p in PR.items():
+        if (set(p.get('recipes') or []) & set(recipes) or set(p.get('articles') or []) & set(articles)
+                or (country and (p.get('origin') or '').split(',')[0].strip() == country)):
+            out.append((slug, p))
+    return out
+
+
+def shop_box(prods, n=2, anchor=False):
+    """The "Ze spiżarni Łowcy" box: a mix with its price and buy button (recipes, stories, workshops, trips)."""
+    return '\n'.join(f'''
+      <div class="shop shop-live"{' id="sklep"' if anchor and k == 0 else ''}>
+        <a href="/sklep/{ps}.html" tabindex="-1" aria-hidden="true">{framed(img(pp['image'], '64px'), 'small')}</a>
+        <div>
+          <p class="label">Ze spiżarni Łowcy</p>
+          <p class="shop-t"><a href="/sklep/{ps}.html">{e(pp['title'])}</a> <span>{pln(float(pp['price']))}</span></p>
+        </div>
+        {buy_button(ps, pp, 'btn btn-sm btn-light', 'Do koszyka')}
+      </div>''' for k, (ps, pp) in enumerate(prods[:n]))
 
 
 GO = '<span class="go" aria-hidden="true"></span>'
@@ -972,6 +989,12 @@ def home_page():
     if op.get('side_recipe') in R:
         side.append(side_recipe(op['side_recipe'], op.get('side_recipe_title')))
     side += [side_article(s) for s in sides[1:]]
+    old_mix = next(((ps, pp) for ps, pp in PR.items() if 'staropolsk' in (pp.get('origin') or '').lower()), None)
+    if old_mix:
+        ps, pp = old_mix; images.append(pp['image'])
+        side.append(f'<a href="/sklep/{ps}.html" class="card row">{framed(img(pp["image"], "120px"))}'
+                    f'<div class="card-body"><p class="kicker"><span class="no">{pln(float(pp["price"]))}</span> W sklepie</p>'
+                    f'<h4>Mieszanka „{e(pp["title"])}”: {e(pp.get("subtitle", "").lower())}</h4></div></a>')
 
     stories = {s['region']: s for s in H['regions'].get('stories', []) if s.get('article') in A}
 
@@ -991,6 +1014,10 @@ def home_page():
     for slug, o in TR.items():
         if o.get('country') in WORLD['regions']:
             by_country.setdefault(o['country'], []).append([f'/wyprawy/{slug}.html', f'Wyprawa: {o["title"]}'])
+    for slug, pr in PR.items():
+        c = (pr.get('origin') or '').split(',')[0].strip()
+        if c in WORLD['regions']:
+            by_country.setdefault(c, []).append([f'/sklep/{slug}.html', f'W sklepie: mieszanka „{pr["title"]}”'])
     for st in (H.get('world') or {}).get('stories', []):
         href = (f'/historie/{st["article"]}.html' if st.get('article') in A else
                 f'/przepisy/{st["recipe"]}.html' if st.get('recipe') in R else None)
