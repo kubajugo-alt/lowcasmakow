@@ -4,7 +4,7 @@ Static website for **Łowca Smaków** (food anthropology: where what we eat come
 
 | Page | File |
 |---|---|
-| Homepage (desktop + mobile, responsive) | `index.html` |
+| Homepage (desktop + mobile, responsive) | `index.html` (generated) |
 | Articles (11) | `historie/*.html` (generated) |
 | Recipes (4) | `przepisy/*.html` (generated) |
 | Cook mode | `gotowanie.html?r=<recipe-slug>` |
@@ -12,9 +12,21 @@ Static website for **Łowca Smaków** (food anthropology: where what we eat come
 
 `przepis.html` now redirects to `/przepisy/slimaki-w-szarym-sosie.html` (301 in `netlify.toml`).
 
+## Look
+
+Black on white like the logo (`img/logo.svg`, `img/logo-white.svg`, traced from the supplied artwork), fine 1 px rules and sharp-edged photos. The structure follows highly rated food and culture magazines:
+
+- an issue line above the masthead and a numbered "W tym wydaniu" index beside a very large lead headline (NYT Cooking, The Gourmand);
+- catalogue numbers on every story, `№ 001`, and recipes `P01` (Cereal);
+- Monday / Wednesday / Sunday columns for the week's stories;
+- a full-width black band for the Old Polish series (Apartamento, Bon Appétit);
+- a side-scrolling recipe rail and a large-type newsletter statement.
+
+Type: Cormorant Garamond for headings, Instrument Sans for text. No accent colour: the food photography brings the colour.
+
 ## Content
 
-Article copy lives in `scripts/content.py`, recipes (ingredients with scalable quantities, steps, timer minutes) in `js/recipes.js`. Regenerate the article and recipe pages after editing either:
+Article copy lives in `scripts/content.py`, recipes (ingredients with scalable quantities, steps, timer minutes) in `js/recipes.js`. Regenerate the homepage, article and recipe pages after editing either:
 
 ```sh
 python3 scripts/build.py
