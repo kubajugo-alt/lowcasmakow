@@ -28,4 +28,4 @@ python3 -m http.server 8000
 
 ## Still placeholders (from the wireframe)
 
-Everything in `[square brackets]` and every hatched image block is waiting for real content: photos and video, article leads, quantities, step texts, times. Recipe content lives in `js/recipe-data.js`; a step's timer starts working as soon as its `minutes` is a number. Links to stories that don't exist yet point to `#`.
+The photos are placeholder stock from Unsplash (Unsplash License, loaded from `images.unsplash.com`, photographers credited in each page's footer), picked to match each story's topic. Swap them for the shoot's own photography. Everything in `[square brackets]` is waiting for real content: video, article leads, quantities, step texts, times. Recipe content lives in `js/recipe-data.js`; a step's timer starts working as soon as its `minutes` is a number. Links to stories that don't exist yet point to `#`.
