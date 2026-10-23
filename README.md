@@ -109,7 +109,17 @@ python3 scripts/build.py --local   # rebuild after saving (--local: uploads with
 
 ## What works
 
-- Header: sticky, burger menu below 1100 px, search (filters the recipe grid; on other pages it goes to the homepage).
+- Header: sticky, burger menu below 1100 px, site search: typing shows the best matches from stories, recipes, workshops, trips and the shop, ignoring Polish accents; Enter opens `/szukaj/?q=…` with every result. The build writes the index to `js/search-index.json`, and `js/search.js` loads it on first use.
+- Listing pages: `/historie/` (newest first, filter by section) and `/przepisy/` (filter by category); `?k=…` opens them filtered, which is what breadcrumbs use.
+- Issue line at the top: counted in Monday–Sunday weeks from *Strona główna → Pierwsze wydanie*, and recomputed in the browser so it's never stale. Typing a line in the CMS overrides it.
+- Search engines and link previews: every page has a canonical URL, Open Graph/Twitter tags and breadcrumbs. Structured data per page type:
+  - Recipe on recipes;
+  - Article on stories (plus VideoObject for episodes);
+  - Event per workshop date;
+  - Product once the shop is open.
+  
+  The build also writes `sitemap.xml` and `robots.txt`; the site address comes from Netlify's `URL`.
+- "Wersja robocza" switch on stories, recipes, workshops and trips shows the "to be checked" note; switch it off once the content is verified.
 - Homepage: recipe filter chips; a map of Poland with the 16 voivodeships (click, tap or Enter selects one, in step with the region chips; regions with a published episode are mustard with a pin); newsletter form (Netlify Forms, so it collects sign-ups once deployed on Netlify).
 - Map outlines: GUGiK's register of boundaries (PRG) via [ppatrzyk/polska-geojson](https://github.com/ppatrzyk/polska-geojson), turned into SVG paths by `scripts/map-paths.py` (writes `scripts/wojewodztwa.json`, which the build reads). Regions with an episode are set in the CMS under *Strona główna → Smaki regionów*.
 - "Smaki świata": a globe you can spin (drag, arrow keys; Enter picks the country in the middle). Countries with stories are mustard with pins; clicking one lists its stories and recipes; the country chips turn the globe to it. `js/globe.js` draws it on a canvas with d3-geo (self-hosted in `js/vendor/`, ISC licence) from `js/world-globe.json`, and loads only when the section is near the screen. Until then (or without JavaScript) a flat map shows instead (`scripts/swiat.json`, Equal Earth projection). Both come from Natural Earth 1:110m countries (public domain) via `scripts/map-paths.py world|globe`. Countries and their stories are set in the CMS under *Strona główna → Smaki świata*: one entry per article or recipe, and a country can have several.

@@ -273,7 +273,7 @@ SECTION_NAV = '''<nav class="section-nav" aria-label="Działy">
 def shell(title, desc, main, images, current=None, body_class='', body_attrs='', scripts=(), home=False,
           path='/', image=None, og_type='website', ld=(), head=''):
     nav = '\n'.join(f'    <a class="navlink" href="{h}"{" aria-current=\"page\"" if n == current else ""}>{n}</a>' for n, h in NAV)
-    js = '\n'.join(f'<script src="{s}"></script>' for s in ('/js/site.js', *scripts))
+    js = '\n'.join(f'<script src="{s}"></script>' for s in ('/js/site.js', '/js/search.js', *scripts))
     if SHOP_KEY:
         js += ('\n<script>window.SnipcartSettings = ' + json.dumps({'publicApiKey': SHOP_KEY, 'loadStrategy': 'on-user-interaction',
                'currency': 'pln', 'version': SNIPCART_VERSION, 'modalStyle': 'side'}) + ';</script>\n<script src="/js/snipcart.js"></script>')
@@ -324,12 +324,14 @@ def shell(title, desc, main, images, current=None, body_class='', body_attrs='',
   <nav class="main-nav" id="main-nav" aria-label="Główne menu">
 {nav}
   </nav>
-  <form class="search-bar" id="search" role="search" action="/#przepisy" hidden data-search>
+  <form class="search-bar" id="search" role="search" action="/szukaj/" hidden data-search>
     <div class="wrap">
-      <label for="q" class="sr-only">Szukaj przepisów i historii</label>
-      <input id="q" name="q" type="search" placeholder="Szukaj przepisów, np. „ogórki”" autocomplete="off">
+      <label for="q" class="sr-only">Szukaj w historiach, przepisach, warsztatach, wyprawach i sklepie</label>
+      <input id="q" name="q" type="search" placeholder="Szukaj, np. „ogórki”, „Meksyk”, „pierogi”" autocomplete="off"
+             role="combobox" aria-expanded="false" aria-controls="search-live" aria-autocomplete="list">
       <button class="btn btn-ink" type="submit">Szukaj</button>
     </div>
+    <div class="wrap search-live" id="search-live" role="listbox" aria-label="Wyniki" hidden></div>
   </form>
 </header>
 {SECTION_NAV if home else ""}
@@ -1437,6 +1439,52 @@ def listing_page(kind):
                  ld=[crumbs_ld([('Strona główna', '/'), (title, f'/{kind}/')])])
 
 
+# ---------- site search: a small index the browser searches (js/search.js) ----------
+
+def search_index():
+    def thumb(image):
+        return abs_image(image, 160, 160) if (image or {}).get('src', '').startswith('https://') else (image or {}).get('src', '')
+    def text(blocks):
+        return ' '.join(b.get('text', '') for b in blocks or [] if b.get('type') in ('text', 'heading', 'quote'))[:600]
+    out = []
+    for slug, a in A.items():
+        out.append({'t': a['title'], 'u': f'/historie/{slug}.html', 'k': a['section'], 's': a['kicker'], 'd': a.get('date', ''),
+                    'i': thumb(a['image']), 'x': ' '.join([a['lead'], a.get('place') or '', text(a['body'])])})
+    for slug, r in R.items():
+        out.append({'t': r['title'], 'u': f'/przepisy/{slug}.html', 'k': 'Przepis', 's': r.get('subtitle', ''), 'i': thumb(recipe_card_image(r)),
+                    'x': ' '.join([r.get('kicker', ''), CAT.get(r['category'], ''), ' '.join(i['n'] for i in r.get('ingredients') or [])])})
+    for kind, (label, _, items) in KINDS.items():
+        for slug, o in items.items():
+            out.append({'t': o['title'], 'u': f'/{kind}/{slug}.html', 'k': 'Wyprawa' if kind == 'wyprawy' else 'Warsztaty',
+                        's': o.get('subtitle') or o.get('kind') or '', 'i': thumb(o['image']),
+                        'x': ' '.join([o['lead'], o.get('country') or o.get('place') or '', text(o.get('body'))])})
+    for slug, p in PR.items():
+        out.append({'t': p['title'], 'u': f'/sklep/{slug}.html', 'k': 'Sklep', 's': p.get('subtitle', ''), 'i': thumb(p['image']),
+                    'x': ' '.join([p.get('lead', ''), p.get('origin', ''), p.get('ingredients', ''), SHOP_CATS.get(p.get('category'), '')])})
+    return json.dumps(out, ensure_ascii=False, separators=(',', ':'))
+
+
+def search_page():
+    main = '''
+  <nav class="crumbs" aria-label="Ścieżka">
+    <a href="/">Strona główna</a><span aria-hidden="true">›</span><span>Szukaj</span>
+  </nav>
+  <header class="list-head">
+    <h1 data-ghost="Szukaj">Szukaj</h1>
+  </header>
+  <section class="sec search-page" aria-labelledby="h-results" data-search-page>
+    <form class="search-form" action="/szukaj/" role="search">
+      <label for="q2" class="sr-only">Czego szukasz?</label>
+      <input id="q2" name="q" type="search" placeholder="np. ogórki, Meksyk, szafran" autocomplete="off">
+      <button class="btn btn-ink" type="submit">Szukaj</button>
+    </form>
+    <h2 id="h-results" class="results-h" aria-live="polite" data-results-h></h2>
+    <ol class="results" data-results></ol>
+  </section>'''
+    return shell('Szukaj', 'Szukaj w historiach, przepisach, warsztatach, wyprawach i sklepie Łowcy Smaków.', main, [],
+                 body_class='search-results', path='/szukaj/', head='\n<meta name="robots" content="noindex">')
+
+
 def write_sitemap():
     """sitemap.xml with every public page, and robots.txt pointing to it."""
     today = date.today().isoformat()
@@ -1467,6 +1515,9 @@ def main():
     open(os.path.join(ROOT, 'sklep', 'index.html'), 'w', encoding='utf-8').write(shop_page())
     for kind in ('historie', 'przepisy'):
         open(os.path.join(ROOT, kind, 'index.html'), 'w', encoding='utf-8').write(listing_page(kind))
+    os.makedirs(os.path.join(ROOT, 'szukaj'), exist_ok=True)
+    open(os.path.join(ROOT, 'szukaj', 'index.html'), 'w', encoding='utf-8').write(search_page())
+    open(os.path.join(ROOT, 'js', 'search-index.json'), 'w', encoding='utf-8').write(search_index())
     for slug, pr in PR.items():
         open(os.path.join(ROOT, 'sklep', f'{slug}.html'), 'w', encoding='utf-8').write(product_page(slug, pr))
     for kind, (_, _, items) in KINDS.items():

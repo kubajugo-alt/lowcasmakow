@@ -55,12 +55,14 @@
     <a class="navlink" href="/wyprawy/">Wyprawy</a>
     <a class="navlink" href="/sklep/">Sklep</a>
   </nav>
-  <form class="search-bar" id="search" role="search" action="/#przepisy" hidden data-search>
+  <form class="search-bar" id="search" role="search" action="/szukaj/" hidden data-search>
     <div class="wrap">
-      <label for="q" class="sr-only">Szukaj przepisów i historii</label>
-      <input id="q" name="q" type="search" placeholder="Szukaj przepisów, np. „ogórki”" autocomplete="off">
+      <label for="q" class="sr-only">Szukaj w historiach, przepisach, warsztatach, wyprawach i sklepie</label>
+      <input id="q" name="q" type="search" placeholder="Szukaj, np. „ogórki”, „Meksyk”, „pierogi”" autocomplete="off"
+             role="combobox" aria-expanded="false" aria-controls="search-live" aria-autocomplete="list">
       <button class="btn btn-ink" type="submit">Szukaj</button>
     </div>
+    <div class="wrap search-live" id="search-live" role="listbox" aria-label="Wyniki" hidden></div>
   </form>
 </header>
 
@@ -139,5 +141,6 @@
 </footer>
 
 <script src="/js/site.js"></script>
+<script src="/js/search.js"></script>
 </body>
 </html>

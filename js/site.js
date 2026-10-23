@@ -15,7 +15,7 @@
     });
   }
 
-  // search: filters the recipe grid by title
+  // search: the header button opens the search bar (results come from js/search.js)
   var searchBtn = $('[data-search-toggle]'), search = $('[data-search]');
   if (searchBtn && search) {
     searchBtn.addEventListener('click', function () {
@@ -23,24 +23,6 @@
       searchBtn.setAttribute('aria-expanded', String(!search.hidden));
       if (!search.hidden) $('input', search).focus();
     });
-    search.addEventListener('submit', function (e) {
-      var recipes = $('[data-recipes]');
-      if (!recipes) return; // other pages: let the form go to the homepage
-      e.preventDefault();
-      var q = $('input', search).value.trim().toLowerCase();
-      setFilter(recipes, 'all');
-      var shown = 0;
-      $$('[data-cat]', recipes).forEach(function (c) {
-        var hit = !q || c.textContent.toLowerCase().indexOf(q) !== -1;
-        c.hidden = !hit; if (hit) shown++;
-      });
-      var empty = $('[data-recipes-empty]', recipes);
-      empty.textContent = shown ? '' : 'Nic nie znaleźliśmy dla „' + q + '”.';
-      empty.hidden = !!shown;
-      recipes.scrollIntoView();
-    });
-    var q0 = new URLSearchParams(location.search).get('q');
-    if (q0 && $('[data-recipes]')) { $('input', search).value = q0; search.hidden = false; search.requestSubmit(); }
   }
 
   // filter chips: recipes on the homepage, spice mixes in the shop
