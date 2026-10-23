@@ -5,37 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Łowca Smaków — antropologia jedzenia</title>
 <meta name="description" content="Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.">
-<meta name="theme-color" content="#F5EFE4">
+<meta name="theme-color" content="#FBFAF7">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <a class="skip" href="#tresc">Przejdź do treści</a>
 
 <header class="site-header">
-  <div class="wrap">
-    <a href="index.html" class="logo">Łowca Smaków</a>
-    <nav class="main-nav" id="main-nav" aria-label="Główne menu">
+  <div class="wrap masthead">
+    <div class="left">
+      <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+    </div>
+    <a href="index.html" class="logo"><img src="img/logo.svg" alt="Łowca Smaków" width="199" height="96"></a>
+    <div class="header-actions">
+      <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <a href="#newsletter" class="btn btn-ink">Newsletter</a>
+    </div>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Główne menu">
       <a class="navlink" href="#nowe">Historie</a>
       <a class="navlink" href="#przepisy">Przepisy</a>
       <a class="navlink" href="#staropolska">Wideo</a>
       <a class="navlink" href="#podroze">Podróże</a>
       <a class="navlink" href="#regiony">Smaki regionów</a>
       <a class="navlink" href="przepis.html#sklep">Sklep</a>
-    </nav>
-    <div class="header-actions">
-      <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle>
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-      </button>
-      <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
-        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-      <a href="#newsletter" class="btn btn-ink">Newsletter</a>
-    </div>
-  </div>
+  </nav>
   <form class="search-bar" id="search" role="search" hidden data-search>
     <div class="wrap">
       <label for="q" class="sr-only">Szukaj przepisów i historii</label>
@@ -110,7 +112,7 @@
     <div class="feature">
       <a href="przepis.html" class="card feature-main">
         <div class="ph">
-          <span class="play"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="play"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
         </div>
         <p class="kicker">Odcinek · Wideo [mm:ss]</p>
         <h3>Ślimaki w szarym sosie piernikowym według Czernieckiego</h3>
@@ -236,6 +238,7 @@
 
   <section class="newsletter" id="newsletter" aria-labelledby="h-nl">
     <div class="nl-copy">
+      <svg class="flourish" viewBox="0 0 220 28" aria-hidden="true"><path d="M2 18C40 18 70 18 92 16C104 15 112 6 106 4C99 2 96 14 104 20C112 26 124 22 128 14C131 8 124 4 120 10C116 16 126 18 140 18C170 18 196 18 218 18"/></svg>
       <h2 id="h-nl">Jedna historia. Jeden przepis. Co tydzień.</h2>
       <p>Antropologia jedzenia prosto do skrzynki — bez spamu.</p>
     </div>
@@ -256,7 +259,7 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="foot-about">
-      <a href="index.html" class="logo">Łowca Smaków</a>
+      <a href="index.html" class="logo"><img src="img/logo-white.svg" alt="Łowca Smaków" width="248" height="120"></a>
       <p>Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.</p>
     </div>
     <nav class="foot-nav" aria-label="Stopka">

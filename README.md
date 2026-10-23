@@ -7,6 +7,11 @@ Static website for **Łowca Smaków** (food anthropology: where what we eat come
 | Homepage (desktop + mobile, responsive) | `index.html` | Strona główna — desktop / mobile |
 | Recipe | `przepis.html` | Przepis — desktop |
 | Cook mode | `gotowanie.html` | Tryb gotowania — mobile |
+| Not found | `404.html` | — |
+
+## Look
+
+Taken from the logo (`img/logo.svg`, `img/logo-white.svg`, traced from the supplied artwork): one black line on white and its white-on-black twin. Off-white paper `#FBFAF7`, ink `#121212`, fine 1 px rules, black bands (newsletter, footer, cook mode) carrying the white logo, and the logo's looping line as a divider. Type: Cormorant Garamond for headings, Instrument Sans for text. No accent colour: the food photography brings the colour.
 
 No build step: plain HTML, CSS (`css/style.css`) and JS (`js/`). Open `index.html`, or serve the folder:
 

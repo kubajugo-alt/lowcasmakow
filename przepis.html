@@ -5,36 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ślimaki w szarym sosie piernikowym — Łowca Smaków</title>
 <meta name="description" content="Przepis według Stanisława Czernieckiego, „Compendium ferculorum” (1682), w wersji współczesnej.">
-<meta name="theme-color" content="#F5EFE4">
+<meta name="theme-color" content="#FBFAF7">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="recipe">
 <a class="skip" href="#tresc">Przejdź do treści</a>
 
 <header class="site-header">
-  <div class="wrap">
-    <a href="index.html" class="logo">Łowca Smaków</a>
-    <nav class="main-nav" id="main-nav" aria-label="Główne menu">
+  <div class="wrap masthead">
+    <div class="left">
+      <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+    </div>
+    <a href="index.html" class="logo"><img src="img/logo.svg" alt="Łowca Smaków" width="199" height="96"></a>
+    <div class="header-actions">
+      <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      
+    </div>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Główne menu">
       <a class="navlink" href="index.html#nowe">Historie</a>
       <a class="navlink" href="index.html#przepisy" aria-current="page">Przepisy</a>
       <a class="navlink" href="index.html#staropolska">Wideo</a>
       <a class="navlink" href="index.html#podroze">Podróże</a>
       <a class="navlink" href="index.html#regiony">Smaki regionów</a>
       <a class="navlink" href="#sklep">Sklep</a>
-    </nav>
-    <div class="header-actions">
-      <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle>
-        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-      </button>
-      <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
-        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-    </div>
-  </div>
+  </nav>
   <form class="search-bar" id="search" role="search" action="index.html#przepisy" hidden data-search>
     <div class="wrap">
       <label for="q" class="sr-only">Szukaj przepisów i historii</label>
@@ -122,7 +125,7 @@
       <h2>Przygotowanie</h2>
       <ol class="steps" data-steps></ol>
       <div class="sources">
-        <p class="kicker" style="color:var(--muted)">Źródła</p>
+        <p class="kicker">Źródła</p>
         <p>Czerniecki S., <i>Compendium ferculorum albo zebranie potraw</i>, Kraków 1682.</p>
         <p class="meta" style="font-size:15px">[Kolejne źródło / opracowanie]</p>
       </div>
@@ -159,7 +162,7 @@
 
 <footer class="site-footer slim">
   <div class="wrap">
-    <a href="index.html" class="logo" style="font-size:20px">Łowca Smaków</a>
+    <a href="index.html" class="logo"><img src="img/logo-white.svg" alt="Łowca Smaków" width="149" height="72"></a>
     <p class="meta">© 2026 Savour Ventures OÜ</p>
   </div>
 </footer>
