@@ -375,15 +375,15 @@ def ref_image(slug):
     return recipe_card_image(R[slug]) if slug in R else A[slug]['image']
 
 
-def related(slugs, heading='Czytaj dalej', note=''):
+def related(slugs, heading='Czytaj dalej', note='', hid='h-related'):
     slugs = [s for s in slugs if s in A or s in R]
     if not slugs:
         return ''
     cards = '\n      '.join(recipe_card(s) if s in R else article_card(s) for s in slugs)
     return f'''
-  <section class="sec related" aria-labelledby="h-related">
+  <section class="sec related" aria-labelledby="{hid}">
     <div class="sec-head">
-      <h2 id="h-related">{heading}</h2>
+      <h2 id="{hid}">{heading}</h2>
       {f'<p class="meta">{note}</p>' if note else ''}
     </div>
     <div class="grid grid-4">
@@ -808,7 +808,8 @@ def offer_list(kind):
     <h1 data-ghost="{section.split()[0]}">{section}</h1>
     <p class="lead">{e(intro)}</p>
   </header>
-  <section class="sec" aria-label="{section}">
+  <section class="sec" aria-labelledby="h-offers">
+    <h2 id="h-offers" class="sr-only">{'Terminy wypraw' if trip else 'Terminy warsztatów'}</h2>
     <div class="grid grid-3 offers">
       {cards}
     </div>
@@ -903,7 +904,8 @@ def shop_page():
     <p class="lead">{e(SHOP.get('intro', ''))}</p>
     {shop_notice()}
   </header>
-  <section class="sec" aria-label="Mieszanki przypraw" data-filterable>
+  <section class="sec" aria-labelledby="h-mixes" data-filterable>
+    <h2 id="h-mixes" class="sr-only">Mieszanki przypraw</h2>
     <div class="chips" role="group" aria-label="Filtruj">
       <button type="button" class="chip" data-filter="all" aria-pressed="true">Wszystkie</button>
       {chips}
@@ -961,7 +963,7 @@ def product_page(slug, p):
     <div class="pr-body">{body}</div>
   </article>
 {related(recs, 'Ugotuj z tą mieszanką') if recs else ''}
-{related(arts, 'Historia w słoiku') if arts else ''}'''
+{related(arts, 'Historia w słoiku', hid='h-related-stories') if arts else ''}'''
     images = [p['image']] + state['images'] + [ref_image(x) for x in recs + arts]
     path = f'/sklep/{slug}.html'
     ld = [crumbs_ld([('Strona główna', '/'), ('Sklep', '/sklep/'), (p['title'], path)])]
@@ -1394,7 +1396,8 @@ def listing_page(kind):
     <h1 data-ghost="{ghost}">{title}</h1>
     <p class="lead">{intro}</p>
   </header>
-  <section class="sec" aria-label="{title}" data-filterable>
+  <section class="sec" aria-labelledby="h-all" data-filterable>
+    <h2 id="h-all" class="sr-only">Wszystkie {title.lower()}</h2>
     <div class="chips" role="group" aria-label="Filtruj">
       <button type="button" class="chip" data-filter="all" aria-pressed="true">Wszystkie</button>
       {chips}

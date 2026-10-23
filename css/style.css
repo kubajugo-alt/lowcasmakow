@@ -580,7 +580,7 @@ a:hover .go::after{transform:translateX(4px)}
 .travel-split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:start}
 .travel-panel{position:sticky;top:24px;background:var(--sage);color:var(--white);min-height:520px;display:flex;align-items:center;justify-content:center;text-align:center;padding:56px 40px}
 .travel-panel-in{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:340px}
-.travel-panel .kicker{color:rgba(255,255,255,.75)}
+.travel-panel .kicker{color:rgba(255,255,255,.92)}
 .travel-panel h2{font-family:var(--serif);font-size:72px;line-height:.9;font-weight:500}
 .travel-panel h2::after{content:"";display:block;width:96px;height:1px;background:currentColor;margin:28px auto 0;opacity:.6}
 .travel-panel .body{color:rgba(255,255,255,.88)}
@@ -655,7 +655,7 @@ body.home .site-footer{margin-top:0}
 .main-nav{max-width:1216px;margin:0 auto 4px;width:calc(100% - 64px);background:var(--vermilion);border:0;border-radius:6px;gap:0;padding:0 8px}
 .main-nav .navlink{color:var(--white);font-family:var(--display);font-weight:600;font-size:14.5px;padding:13px 18px;border:0;margin:0;position:relative}
 .main-nav .navlink+.navlink::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:1px;background:rgba(255,255,255,.35)}
-.main-nav .navlink:hover,.main-nav .navlink[aria-current="page"]{color:var(--white);background:rgba(255,255,255,.18);border:0}
+.main-nav .navlink:hover,.main-nav .navlink[aria-current="page"]{color:var(--white);background:rgba(0,0,0,.25);border:0}
 
 /* ghost words behind section titles */
 .sec-head{border-top:0;padding-top:28px;isolation:isolate;overflow-x:clip}
@@ -859,7 +859,7 @@ body.home .site-footer{margin-top:0}
 .dates{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .dates li{display:flex;flex-direction:column;gap:2px;padding:10px 14px;border-radius:8px;background:var(--panel)}
 .dates .d{font-weight:600}
-.dates .note{font-size:13px;color:var(--vermilion);font-weight:600}
+.dates .note{font-size:13px;color:#A8361A;font-weight:600}
 .o-book .draft{font-size:12.5px}
 
 /* sign-up form */
