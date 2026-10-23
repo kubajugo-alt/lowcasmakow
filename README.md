@@ -14,19 +14,23 @@ Static website for **Łowca Smaków** (food anthropology: where what we eat come
 
 ## Look
 
-The masthead uses the single-line wordmark (`img/wordmark.svg`, `img/wordmark-white.svg`, from the supplied Canva PDF); the plate logo (`img/logo.svg`, `img/logo-white.svg`) stays in the footer and favicon. Four inks (mustard, vermilion, ultramarine, sage) plus burgundy for the Old Polish band.
+The rules live at **`/styl/`** (not indexed), shown with the real components; build new sections from them.
 
-After [alemeksyk.eu](https://www.alemeksyk.eu/):
+- **Type:** Poppins for headings, Instrument Sans for text. Cormorant Garamond only for numbers (counters, step numbers) and quotes. Sizes are tokens: `--fs-h1` … `--fs-label`.
+- **Colour:** the four photo-frame inks (mustard, vermilion, ultramarine, sage) carry the colour and cycle from card to card. Vermilion as `--accent` is for actions only (buttons, links that do something). Section backgrounds are paper, one light panel (`--panel`) or one dark tone (`--dark`: menu, Old Polish band, newsletter, footer). Labels are neutral pills.
+- **Two card types:** the photo card (title on the picture: homepage mosaic, recipes) and the framed card (text below: stories, shop, workshops, trips). Hovering a framed card turns its title the colour of its frame and zooms the photo slightly.
+- **Homepage (8 sections):**
+  1. lead mosaic
+  2. new this week
+  3. recipes
+  4. Old Polish band
+  5. maps (Poland and world as tabs)
+  6. shop
+  7. workshops and trips
+  8. newsletter
 
-- a vermilion menu bar under the masthead;
-- the lead story in a photo mosaic with two more stories beside it, titles in white on the picture over a dark gradient;
-- red tag pills from each story's section and kicker, and grey date pills (`№ 001`, `26.10.2026`);
-- "Na skróty": round photo shortcuts to the sections, with counts;
-- huge pale words behind each section title (`data-ghost` on the `h2`);
-- recipes as rounded photo cards with the title on the picture;
-- Poppins for headings, Instrument Sans for text, Cormorant Garamond kept for italic accents.
-
-Kept from earlier rounds: photos with text below sit in simple coloured frames with a soft pinned-photo shadow; catalogue numbers `№ 001` / `P01`; staggered Monday / Wednesday / Sunday columns; "Z podróży" as a sticky sage panel beside a zigzag list (after [kukbuk.pl](https://kukbuk.pl/)); the newsletter as a full-width ultramarine block.
+  Each section uses one of two or three layout patterns. Pale "ghost" words sit only behind "Nowe w tym tygodniu", "Przepisy" and the listing-page titles.
+- Masthead: the single-line wordmark (`img/wordmark.svg`). The plate logo (`img/logo.svg`) is used in the footer and favicon.
 
 ## Content
 

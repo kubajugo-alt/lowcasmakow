@@ -94,7 +94,6 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
 .grid{display:grid;gap:32px}
 .grid-3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 .grid-4{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px}
-.grid-travel{grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:28px}
 
 .card{display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--ink)}
 .card:hover{color:var(--ink)}
@@ -126,7 +125,7 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
 .regions{display:flex;flex-wrap:wrap;gap:56px;align-items:center;background:var(--panel);padding:56px;border:1px solid var(--rule)}
 .regions .map{flex:1 1 380px}
 .regions-copy{flex:1 1 380px;display:flex;flex-direction:column;gap:20px}
-.regions-copy h2{font-family:var(--serif);font-size:56px;line-height:.98;font-weight:600}
+.regions-copy :is(h2,h3){font-family:var(--serif);font-size:56px;line-height:.98;font-weight:600}
 .region-pick{min-height:24px;font-weight:600}
 
 /* dark bands: the logo's white-on-black version */
@@ -289,7 +288,7 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
   .hero .btn-line{display:none}
   .hero .btns .btn{flex:1;min-height:52px}
   .sec-head h2{font-size:32px}
-  .grid-3,.grid-travel{grid-template-columns:1fr;gap:18px}
+  .grid-3{grid-template-columns:1fr;gap:18px}
   .grid-3 .card{flex-direction:row;gap:14px;align-items:flex-start}
   .grid-3 .card .ph{width:96px;height:96px!important;flex:none;font-size:10px}
   .grid-3 .card h3{font-size:22px;line-height:1.08}
@@ -302,7 +301,7 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
   .card.row h4{font-size:22px}
   .regions{padding:32px 20px;margin:0 -20px;border-width:1px 0;gap:14px}
   .regions-copy{display:contents}
-  .regions-copy h2{font-size:38px;order:-1}
+  .regions-copy :is(h2,h3){font-size:38px;order:-1}
   .regions-copy .kicker{order:-2}
   .regions .map{flex-basis:100%;order:0}
   .regions .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -20px;padding:0 20px;order:1}
@@ -310,7 +309,6 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
   .grid-4 .ph{height:170px!important}
   .grid-4 h3{font-size:20px}
   .sec .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -20px;padding:0 20px}
-  .grid-travel .ph{height:200px!important}
   .newsletter{margin:0 -20px;padding:40px 20px;gap:18px}
   .newsletter h2{font-size:36px}
   .nl-row{flex-direction:column}
@@ -394,23 +392,6 @@ body{overflow-x:clip}
 .ratio-1610{aspect-ratio:16/10;height:auto!important}
 
 /* lead story + numbered index */
-.lead-grid{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:56px;align-items:start}
-.lead-story{display:flex;flex-direction:column;gap:18px}
-.lead-img{display:block;aspect-ratio:16/10}
-.lead-story h1{font-family:var(--serif);font-size:clamp(56px,7.2vw,112px);line-height:.9;font-weight:600;letter-spacing:-.02em}
-.lead-story h1 a{color:inherit;text-decoration:none}
-.lead-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end;border-top:1px solid var(--ink);padding-top:18px}
-.issue{border-top:1px solid var(--ink);padding-top:14px;display:flex;flex-direction:column}
-.issue .label{font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;padding-bottom:14px}
-.issue ol{list-style:none;margin:0;padding:0}
-.issue-item{display:grid;grid-template-columns:44px minmax(0,1fr) 72px;gap:14px;align-items:center;padding:16px 0;border-top:1px solid var(--rule);text-decoration:none;color:var(--ink)}
-.issue-item:hover{color:var(--ink)}
-.issue-item .no{font-family:var(--serif);font-size:24px;font-style:italic;font-weight:500;letter-spacing:0;font-variant-numeric:lining-nums tabular-nums}
-.issue-t{display:flex;flex-direction:column;gap:4px}
-.issue-t .kicker{font-size:11px;color:var(--muted)}
-.issue-t .t{font-family:var(--serif);font-size:21px;line-height:1.1;font-weight:600}
-.issue-item .ph{width:72px;height:72px;padding:0}
-.issue .more{margin-top:14px;font-weight:600;font-size:14px}
 
 /* week: Monday, Wednesday, Sunday */
 .week .card{gap:14px}
@@ -441,9 +422,6 @@ body{overflow-x:clip}
 .rail>*{scroll-snap-align:start}
 .rail .card h3{font-size:24px}
 
-/* travel index */
-.caption{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.caption .no{color:var(--ink)}
 
 /* newsletter statement */
 .statement{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:end;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:56px 0}
@@ -462,15 +440,10 @@ body{overflow-x:clip}
   .topbar-r{display:none}
 }
 @media (max-width:960px){
-  .lead-grid,.statement{grid-template-columns:1fr;gap:32px}
+  .statement{grid-template-columns:1fr;gap:32px}
 }
 @media (max-width:720px){
   .topbar .wrap{justify-content:center;font-size:11px}
-  .lead-grid{gap:28px}
-  .lead-story h1{font-size:52px}
-  .lead-foot{grid-template-columns:1fr;gap:18px}
-  .lead-foot .btn-line{display:none}
-  .lead-foot .btn{width:100%}
   .week .card{flex-direction:column;align-items:stretch;gap:12px}
   .grid-3.week .card .ph{width:100%!important;height:auto!important;aspect-ratio:4/3}
   .week .card h3{font-size:26px}
@@ -489,12 +462,9 @@ body{overflow-x:clip}
 .frame>img.fill,.frame>iframe.fill{inset:8px;width:calc(100% - 16px);height:calc(100% - 16px)}
 span.frame{display:block;position:relative;flex:none}
 .frame.small>img.fill{inset:4px;width:calc(100% - 8px);height:calc(100% - 8px)}
-.issue-item .frame{width:72px;height:72px}
 .card.row .frame{width:120px;height:120px}
 .a-recipe .frame{width:120px;height:120px}
 .shop .frame{width:64px;height:64px}
-.travel-card{gap:16px}
-.travel-card .frame{width:100%}
 @media (max-width:720px){
   .frame>img.fill,.frame>iframe.fill{inset:6px;width:calc(100% - 12px);height:calc(100% - 12px)}
   .card.row .frame,.a-recipe .frame{width:96px;height:96px}
@@ -508,7 +478,7 @@ span.frame{display:block;position:relative;flex:none}
 .tint-ultramarine{background:var(--ultramarine)}
 .tint-sage{background:var(--sage)}
 .topbar{background:var(--mustard);border-bottom:0;color:var(--ink)}
-.no,.issue-item .no,.caption .no{color:var(--vermilion)}
+.no,.caption .no{color:var(--vermilion)}
 .dark .no{color:var(--mustard)}
 .btn-accent,.btn-ink,.tool.primary,.statement .nl-row button{background:var(--vermilion);color:#fff}
 .btn-accent:hover,.btn-ink:hover,.tool.primary:hover,.statement .nl-row button:hover{background:#9E3415;color:#fff}
@@ -528,7 +498,7 @@ span.frame{display:block;position:relative;flex:none}
 .regions{background:#F3EBDC;border-color:#EADFCB}
 .chip[aria-pressed="true"],.chip.is-active{background:var(--ink);border-color:var(--ink)}
 a:hover{color:var(--vermilion)}
-.card:hover,.issue-item:hover{color:var(--ink)}
+.card:hover{color:var(--ink)}
 .dark .card:hover{color:#fff}
 .shop{background:var(--ultramarine)}
 
@@ -560,14 +530,9 @@ blockquote.pull cite{display:block;margin-top:12px;font-style:normal;font-size:1
 .dark .frame{box-shadow:0 14px 30px -18px rgba(0,0,0,.8)}
 
 /* small uppercase labels set vertically in the margin */
-.vlabel{font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);color:var(--muted);white-space:nowrap}
 .sec-head{position:relative}
 
 /* line and arrow: "read more" without words */
-.go{display:flex;align-items:center;gap:10px;margin-top:6px;color:var(--ink)}
-.go::before{content:"";flex:1;height:1px;background:currentColor;transition:flex-grow .25s}
-.go::after{content:"→";font-size:18px;line-height:1;transition:transform .25s}
-a:hover .go::after{transform:translateX(4px)}
 
 /* week: staggered columns */
 .week{align-items:start}
@@ -576,47 +541,15 @@ a:hover .go::after{transform:translateX(4px)}
 .week .day{border-bottom:0;padding-bottom:0}
 .week .day em{font-size:40px}
 
-/* travel: sticky colour panel + zigzag list */
-.travel-split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:start}
-.travel-panel{position:sticky;top:24px;background:var(--sage);color:var(--white);min-height:520px;display:flex;align-items:center;justify-content:center;text-align:center;padding:56px 40px}
-.travel-panel-in{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:340px}
-.travel-panel .kicker{color:rgba(255,255,255,.92)}
-.travel-panel h2{font-family:var(--serif);font-size:72px;line-height:.9;font-weight:500}
-.travel-panel h2::after{content:"";display:block;width:96px;height:1px;background:currentColor;margin:28px auto 0;opacity:.6}
-.travel-panel .body{color:rgba(255,255,255,.88)}
-.travel-panel .btn-line{border-color:var(--white);color:var(--white);margin-top:8px}
-.travel-panel .btn-line:hover{background:var(--white);color:var(--sage)}
-.travel-list{display:flex;flex-direction:column;gap:72px;padding-top:24px}
-.travel-item{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:end;text-decoration:none;color:var(--ink);max-width:640px}
-.travel-item:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;margin-left:auto}
-.travel-item:nth-child(even) .vlabel{order:3;transform:none;align-self:start}
-.travel-item:nth-child(even) .frame{order:2}
-.travel-item:nth-child(even) .travel-t{order:1}
-.travel-item .vlabel{align-self:end}
-.travel-item .frame{width:100%}
 .ratio-1{aspect-ratio:1;height:auto!important}
-.travel-t{display:flex;flex-direction:column;gap:10px;padding-bottom:4px}
-.travel-t .no{font-size:12px;color:var(--vermilion)}
-.travel-t .h{font-family:var(--serif);font-size:30px;line-height:1.02;font-weight:600}
 
 .logo img{height:68px}
 .cook-top .logo img{height:32px}
 
-@media (max-width:1100px){
-  .travel-split{grid-template-columns:1fr;gap:40px}
-  .travel-panel{position:static;min-height:0}
-}
 @media (max-width:720px){
   .logo img{height:44px}
   .sec-head h2{font-size:36px}
   .week .card:nth-child(n){margin-top:0}
-  .travel-panel{padding:40px 24px}
-  .travel-panel h2{font-size:52px}
-  .travel-list{gap:44px;padding-top:0}
-  .travel-item,.travel-item:nth-child(even){grid-template-columns:auto minmax(0,1fr);margin-left:0}
-  .travel-item:nth-child(even) .vlabel{order:0;transform:rotate(180deg);align-self:end}
-  .travel-item .travel-t,.travel-item:nth-child(even) .travel-t{order:3;grid-column:1/-1}
-  .travel-item:nth-child(even) .frame{order:1}
 }
 
 /* newsletter: a full-width colour block */
@@ -633,21 +566,19 @@ body.home .site-footer{margin-top:0}
 /* ---------- after alemeksyk.eu: bold sans headings, red menu bar, a mosaic of photo cards with
    the title on the picture, red tag pills and grey date pills, ghost words behind section titles,
    round shortcuts ---------- */
-.sec-head h2,.card h3,.card.row h4,.hero h1,.regions-copy h2,.newsletter h2,.r-title h1,.r-body h2,.cook h1,.lost h1,
-.a-head h1,.a-body h2,.statement h2,.travel-panel h2,.travel-t .h,.dropcap::first-letter{font-family:var(--display);font-weight:700;letter-spacing:-.015em}
+.sec-head h2,.card h3,.card.row h4,.hero h1,.regions-copy :is(h2,h3),.newsletter h2,.r-title h1,.r-body h2,.cook h1,.lost h1,
+.a-head h1,.a-body h2,.statement h2,.dropcap::first-letter{font-family:var(--display);font-weight:700;letter-spacing:-.015em}
 .sec-head h2{font-size:34px}
 .card h3{font-size:22px;line-height:1.2}
 .card.row h4{font-size:18px;line-height:1.25}
 .week .card h3{font-size:22px}
-.regions-copy h2{font-size:44px;line-height:1.05}
+.regions-copy :is(h2,h3){font-size:44px;line-height:1.05}
 .a-head h1{font-size:clamp(36px,4.6vw,60px);line-height:1.08}
 .a-body h2{font-size:28px;line-height:1.2}
 .r-title h1{font-size:60px;line-height:1.02}
 .r-body h2{font-size:30px}
 .statement h2{font-size:clamp(44px,5.4vw,80px);line-height:1}
 .statement h2 em{font-family:var(--serif);font-weight:500;font-size:1.15em}
-.travel-panel h2{font-size:56px;line-height:1}
-.travel-t .h{font-size:22px;line-height:1.2}
 .dark .feature-main h3{font-size:34px}
 .cook h1{font-size:36px;line-height:1.1}
 
@@ -695,17 +626,6 @@ body.home .site-footer{margin-top:0}
 .ov-tile .h{font-size:20px}
 
 /* shortcuts: round photos with counts */
-.shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
-.shortcut{display:flex;flex-direction:column;align-items:center;gap:6px;padding:26px 16px 22px;border-radius:10px;background:var(--panel);text-decoration:none;color:var(--ink);transition:transform .2s,box-shadow .2s}
-.shortcut:hover{color:var(--ink);transform:translateY(-3px);box-shadow:0 14px 30px -20px rgba(18,18,18,.55)}
-.shortcut .ring{position:relative;width:104px;height:104px;border-radius:50%;overflow:hidden;border:4px solid var(--white);box-shadow:0 10px 22px -12px rgba(18,18,18,.6);margin-bottom:8px}
-.shortcut:nth-child(4n+1) .ring{border-color:var(--mustard)}
-.shortcut:nth-child(4n+2) .ring{border-color:var(--vermilion)}
-.shortcut:nth-child(4n+3) .ring{border-color:var(--ultramarine)}
-.shortcut:nth-child(4n+4) .ring{border-color:var(--sage)}
-.shortcut .ring img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.shortcut .h{font:700 16px/1.2 var(--display);text-align:center}
-.shortcut .n{font-size:13px;color:var(--muted)}
 
 /* rounder frames to match */
 .frame{border-radius:8px}
@@ -729,10 +649,7 @@ body.home .site-footer{margin-top:0}
   .ov-lead .lead{font-size:15px}
   .ov-side{aspect-ratio:16/11}
   .sec-head h2{font-size:28px}
-  .shortcuts{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:150px;overflow-x:auto;padding-bottom:6px}
-  .shortcut .ring{width:84px;height:84px}
   .r-title h1{font-size:40px}
-  .travel-panel h2{font-size:42px}
 }
 
 /* "Smaki regionów": a map of Poland, one shape per voivodeship */
@@ -786,13 +703,13 @@ body.home .site-footer{margin-top:0}
 }
 
 /* hover: a story's title turns the colour of its photo's frame (no underline) */
-.card,.travel-item,.issue-item,.a-recipe,.offer-card{--hl:var(--vermilion)}
-:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-mustard){--hl:var(--mustard)}
-:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-vermilion){--hl:var(--vermilion)}
-:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-ultramarine){--hl:var(--ultramarine)}
-:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-sage){--hl:var(--sage)}
-.card :is(h3,h4),.travel-t .h,.issue-t .t,.a-recipe h2 a,.ov .h,.offer-card h3{transition:color .15s}
-.card:hover :is(h3,h4),.travel-item:hover .h,.issue-item:hover .t,.a-recipe h2 a:hover,.offer-card:hover h3{color:var(--hl)}
+.card,.a-recipe,.offer-card{--hl:var(--vermilion)}
+:is(.card,.a-recipe,.offer-card):has(.tint-mustard){--hl:var(--mustard)}
+:is(.card,.a-recipe,.offer-card):has(.tint-vermilion){--hl:var(--vermilion)}
+:is(.card,.a-recipe,.offer-card):has(.tint-ultramarine){--hl:var(--ultramarine)}
+:is(.card,.a-recipe,.offer-card):has(.tint-sage){--hl:var(--sage)}
+.card :is(h3,h4),.a-recipe h2 a,.ov .h,.offer-card h3{transition:color .15s}
+.card:hover :is(h3,h4),.a-recipe h2 a:hover,.offer-card:hover h3{color:var(--hl)}
 .ov{--hl:var(--mustard)}
 .ov:hover .h,.ov:focus-within .h{color:var(--hl)}
 
@@ -811,15 +728,6 @@ body.home .site-footer{margin-top:0}
 .badge b{font:800 26px/1 var(--display);letter-spacing:-.02em;margin-bottom:3px}
 
 /* trips band on the homepage */
-.trips-band{background:var(--night);color:var(--white)}
-.trips-band+.statement{margin-top:-88px}
-.trips-band .sec-head a,.trips-band .sec-intro{color:var(--white)}
-.trips-band .sec-intro{opacity:.9}
-.trips-band .sec-head h2[data-ghost]::before{color:rgba(255,255,255,.09)}
-.trips-band .offer-card,.trips-band .offer-card:hover,.trips-band .offer-card .when{color:var(--white)}
-.trips-band .offer-card .more-dates{color:rgba(255,255,255,.75)}
-.trips-band .date{background:rgba(255,255,255,.18);color:var(--white)}
-.trips-band .frame{box-shadow:0 18px 34px -18px rgba(0,0,0,.6)}
 
 /* listing pages */
 .list-head{display:flex;flex-direction:column;gap:16px;max-width:760px;padding-top:24px;isolation:isolate;overflow-x:clip}
@@ -887,14 +795,12 @@ body.home .site-footer{margin-top:0}
   .o-head .sub{font-size:21px}
   .badge{top:14px;left:14px}
 }
-@media (max-width:720px){.trips-band+.statement{margin-top:-56px}}
 
 /* hover: every linked photo zooms in slightly, like the mosaic cards (scale 1.04).
    The clip shrinks by the same amount, so the zoomed photo stays exactly inside its coloured frame. */
 .frame>img.fill{clip-path:inset(0 round 3px);transition:transform .5s ease,clip-path .5s ease}
 :is(a,.a-recipe):is(:hover,:focus-visible) .frame>img.fill{transform:scale(1.04);clip-path:inset(1.923% round 3px)}
-.shortcut .ring img{transition:transform .5s ease}
-.shortcut:is(:hover,:focus-visible) .ring img{transform:scale(1.08)}
+:focus-visible) .ring img{transform:scale(1.08)}
 
 /* ---------- shop ---------- */
 .btn-sm{min-height:38px;padding:0 16px;font-size:13.5px}
@@ -1032,3 +938,110 @@ body.home .site-footer{margin-top:0}
 .results .r-t{font-size:19px}
 .results-h{padding:0;font:600 16px var(--sans);color:var(--ink-2)}
 .search-form input,.search-bar input{min-width:0}
+
+/* ======================================================================
+   Design system (see /styl/). The rules, in one place:
+   - Type: Poppins for headings, Instrument Sans for text. Cormorant Garamond only for numbers
+     (counters, step numbers) and quotes.
+   - Colour: the four photo-frame inks carry the colour; vermilion (--accent) is for actions only
+     (buttons, links that act); section backgrounds are paper or one dark tone (--dark), panels one light neutral.
+   - Two card types: the photo card (title on the picture) and the framed card (text below).
+   ====================================================================== */
+:root{
+  --accent:var(--vermilion);
+  --dark:var(--night);
+  --fs-label:12px;--fs-small:14px;--fs-body:17px;--fs-lead:19px;
+  --fs-h4:18px;--fs-h3:22px;--fs-h2:32px;--fs-h1:clamp(36px,4.6vw,60px);
+}
+
+/* actions */
+.btn-ink,.btn-accent{background:var(--accent);color:var(--white)}
+.btn-ink:hover,.btn-accent:hover{background:var(--ink);color:var(--white)}
+.header-actions .btn-ink{background:var(--ink)}
+.header-actions .btn-ink:hover{background:var(--accent)}
+
+/* top: a quiet issue line, then a dark menu bar (the current page is underlined in the accent) */
+.topbar{background:var(--paper);color:var(--muted);border-bottom:1px solid var(--rule)}
+@media (min-width:1101px){
+  .main-nav{background:var(--dark)}
+  .main-nav .navlink+.navlink::before{background:rgba(255,255,255,.18)}
+  .main-nav .navlink:hover,.main-nav .navlink[aria-current="page"]{background:rgba(255,255,255,.08);box-shadow:inset 0 -3px 0 var(--accent)}
+}
+
+/* labels are neutral; only "act" pills use the accent */
+.tag{background:var(--panel);color:var(--ink)}
+.ov .tag{background:rgba(255,255,255,.92);color:var(--ink)}
+.dark .tag{background:rgba(255,255,255,.14);color:var(--white)}
+.tag-link,.ov .tag-link{background:var(--accent);color:var(--white)}
+.tag-link:hover{background:var(--white);color:var(--ink)}
+.price{background:none;padding:0;min-height:0;font:700 17px/1 var(--display);color:var(--ink)}
+.p-badge{background:var(--ink);color:var(--white)}
+.kicker .no,.card.row .no{color:inherit;opacity:.65}
+.counter{color:var(--ink)}
+.week .card:nth-child(n) .day em{color:var(--ink)}
+
+/* backgrounds: paper, one light neutral panel, one dark tone */
+.dark,.statement,.shop,.site-footer{background:var(--dark)}
+.regions,.regions.world,.custom,.shop-notice{background:var(--panel);border-color:transparent}
+.dates li{background:var(--panel)}
+.statement{border-bottom:1px solid rgba(255,255,255,.1)}
+.statement h2 em{color:var(--white)}
+.statement .nl-row button{background:var(--accent);color:var(--white)}
+.statement .nl-row button:hover{background:var(--white);color:var(--ink)}
+.shop-live .btn-light{background:var(--accent);color:var(--white)}
+.shop-live .btn-light:hover{background:var(--white);color:var(--ink)}
+
+/* type: subtitles in the text face, headings on one scale */
+.r-title .sub,.o-head .sub,.pr-info .sub{font-family:var(--sans);font-style:normal;font-weight:400;font-size:20px;color:var(--muted)}
+.p-sub{font-family:var(--sans);font-style:normal;font-size:15px;color:var(--muted)}
+.sec-head h2{font-size:var(--fs-h2)}
+.card h3,.offer-card h3,.product-card h3,.story-card h3,.week .card h3{font-size:var(--fs-h3);line-height:1.2}
+.card.row h4{font-size:var(--fs-h4)}
+.dark .feature-main h3{font-size:30px}
+.regions-copy :is(h2,h3){font:700 40px/1.05 var(--display);letter-spacing:-.015em}
+
+/* framed cards share one rhythm */
+.card,.offer-card,.product-card,.story-card{gap:14px}
+.card-body,.offer-body,.p-body{gap:8px}
+
+/* maps: Poland / world as two tabs in one section */
+.maps .regions{border:0}
+.maps [role="tabpanel"][hidden]{display:none}
+.tabs{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:var(--panel)}
+.tabs [role="tab"]{border:0;background:none;padding:9px 20px;border-radius:999px;font:600 14.5px/1 var(--display);color:var(--ink-2);cursor:pointer}
+.tabs [role="tab"][aria-selected="true"]{background:var(--ink);color:var(--white)}
+.tabs [role="tab"]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.sec-links{display:flex;gap:20px;font-weight:600;font-size:15px}
+.offers-4{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+@media (max-width:1100px){.offers-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+@media (max-width:720px){
+  :root{--fs-h2:28px;--fs-h3:20px}
+  .offers-4{grid-template-columns:1fr}
+  .regions-copy :is(h2,h3){font-size:32px}
+  .maps .sec-head{flex-direction:column;align-items:flex-start;gap:14px}
+}
+
+/* style guide (/styl/) */
+.sg-rules{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:12px;max-width:820px;font-size:17px;line-height:1.55}
+.sg-type{display:grid;grid-template-columns:240px minmax(0,1fr);gap:18px 32px;align-items:baseline}
+.sg-k{font-size:13px;color:var(--muted)}
+.sg-h1{font:700 var(--fs-h1)/1.05 var(--display);letter-spacing:-.02em}
+.sg-h2{font:700 var(--fs-h2)/1.1 var(--display);letter-spacing:-.015em}
+.sg-h3{font:700 var(--fs-h3)/1.2 var(--display)}
+.sg-sub{font:700 18px var(--display);margin-top:8px}
+.sg-sws{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.sg-sw{display:flex;flex-direction:column;gap:4px;font-size:14px}
+.sg-sw span{height:72px;border-radius:8px;border:1px solid var(--line);margin-bottom:6px}
+.sg-sw code{font-size:12.5px;color:var(--muted)}
+.sg-sw small{color:var(--ink-2);line-height:1.4}
+.sg-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.sg-cards{max-width:760px}
+.sg-framed{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;max-width:none}
+@media (max-width:720px){.sg-type{grid-template-columns:1fr;gap:4px}.sg-type .sg-k{margin-top:14px}.sg-framed{grid-template-columns:1fr}}
+
+.p-origin{text-transform:none;letter-spacing:0}
+.newsletter .nl-row button{background:var(--accent);color:var(--white)}
+.newsletter .nl-row button:hover{background:var(--white);color:var(--ink)}
+.steps .n,.plan li::before{color:var(--ink)}
+.dates .note{color:var(--ink-2)}

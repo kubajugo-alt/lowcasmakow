@@ -252,7 +252,7 @@ CART_BTN = ('<button class="icon-btn cart-btn snipcart-checkout" type="button" a
 MENU = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>')
 NAV = [('Historie', '/historie/'), ('Przepisy', '/przepisy/'), ('Wideo', '/#staropolska'),
-       ('Smaki regionów', '/#regiony'), ('Smaki świata', '/#swiat'), ('Warsztaty', '/warsztaty/'),
+       ('Mapy smaków', '/#mapy'), ('Warsztaty', '/warsztaty/'),
        ('Wyprawy', '/wyprawy/'), ('Sklep', '/sklep/')]
 FOOT_NAV = '''<div><a href="/historie/">Historie</a><a href="/przepisy/">Przepisy</a><a href="/#staropolska">Wideo</a><a href="/warsztaty/">Warsztaty</a><a href="/wyprawy/">Wyprawy kulinarne</a><a href="/sklep/">Sklep</a></div>
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
@@ -262,11 +262,9 @@ SECTION_NAV = '''<nav class="section-nav" aria-label="Działy">
   <a href="#nowe" class="chip">Historie</a>
   <a href="#przepisy" class="chip">Przepisy</a>
   <a href="#staropolska" class="chip">Wideo</a>
-  <a href="#regiony" class="chip">Regiony</a>
-  <a href="#swiat" class="chip">Świat</a>
-  <a href="#warsztaty" class="chip">Warsztaty</a>
-  <a href="#wyprawy" class="chip">Wyprawy</a>
+  <a href="#mapy" class="chip">Mapy</a>
   <a href="#sklep" class="chip">Sklep</a>
+  <a href="#warsztaty" class="chip">Warsztaty i wyprawy</a>
 </nav>'''
 
 
@@ -381,7 +379,7 @@ def newsletter():
 
 def card(href, image, kicker, title, sizes='(max-width:720px) 50vw, 25vw'):
     return (f'<a href="{href}" class="card sm"><div class="ph frame {T()} ratio-43">{img(image, sizes)}</div>'
-            f'<p class="kicker">{e(kicker)}</p><h3>{e(title)}</h3></a>')
+            f'{tags([kicker], 1)}<h3>{e(title)}</h3></a>')
 
 
 def article_card(slug):
@@ -904,7 +902,7 @@ def product_card(slug, p, sizes='(max-width:720px) 50vw, 25vw'):
     many = len(p.get('sizes') or []) > 1
     return (f'<article class="product-card" data-cat="{e(p.get("category", ""))}">'
             f'<a href="/sklep/{slug}.html" class="p-photo" tabindex="-1" aria-hidden="true"><span class="ph frame {T()} ratio-1">{img(p["image"], sizes)}</span>{badge}</a>'
-            f'<div class="p-body"><p class="p-origin">{e(p.get("origin", ""))} {heat(p.get("heat"))}</p>'
+            f'<div class="p-body"><p class="p-origin">{tags([p.get("origin", "")], 1)} {heat(p.get("heat"))}</p>'
             f'<h3><a href="/sklep/{slug}.html">{e(p["title"])}</a></h3><p class="p-sub">{e(p.get("subtitle", ""))}</p>'
             f'<p class="p-buy"><span class="p-price">{"od " if many else ""}{pln(float(p["price"]))}</span>'
             f'{buy_button(slug, p, "btn btn-ink btn-sm")}</p></div></article>')
@@ -1024,7 +1022,6 @@ def shop_box(prods, n=2, anchor=False):
       </div>''' for k, (ps, pp) in enumerate(prods[:n]))
 
 
-GO = '<span class="go" aria-hidden="true"></span>'
 DAYS = {'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'}
 
 
@@ -1086,47 +1083,13 @@ def home_page():
                 f'<span class="ov-body">{tags([CAT.get(r["category"], "")] + (r.get("card_meta") or "").split(" · ")[:1])}'
                 f'<span class="h">{e(r["title"])}</span><span class="pills"><span class="no">{rno(slug)}</span></span></span></a>')
 
-    def travel_card(slug):
-        a = A[slug]; images.append(a['image'])
-        place = a.get('place') or a['section']
-        return (f'<a href="/historie/{slug}.html" class="travel-item"><span class="vlabel">{e(place)}</span>'
-                f'{framed(img(a["image"], "(max-width:720px) 100vw, 22vw"), "ratio-1")}'
-                f'<span class="travel-t"><span class="no">№ {no(slug)}</span><span class="h">{e(a["title"])}</span>'
-                f'<span class="excerpt">{e(first_sentence(a["lead"]))}</span>{GO}</span></a>')
-
     def overlay(slug, cls='', sizes='(max-width:720px) 100vw, 30vw'):
         a = A[slug]; images.append(a['image'])
         return (f'<article class="ov {cls}">{img(a["image"], sizes)}<div class="ov-body">{article_tags(a)}'
                 f'<h2 class="h"><a class="stretch" href="/historie/{slug}.html">{e(a["title"])}</a></h2>'
                 f'<p class="pills">{numbered(slug)}{datepill(a)}</p></div></article>')
 
-    def shortcut(label, href, image, count):
-        images.append(image)
-        return (f'<a class="shortcut" href="{href}"><span class="ring">{img(image, "120px")}</span>'
-                f'<span class="h">{e(label)}</span><span class="n">{count if isinstance(count, str) else wpisy(count)}</span></a>')
-
-    by_section = lambda sec: [a for a in A.values() if a['section'] == sec]
-    shortcuts = []
-    for label, href, sec in [('Historie', '#nowe', 'Historie'), ('Wideo', '#staropolska', 'Wideo'),
-                             ('Smaki regionów', '#regiony', 'Smaki regionów'), ('Z podróży', '#podroze', 'Z podróży')]:
-        items = by_section(sec)
-        if items:
-            shortcuts.append(shortcut(label, href, items[0]['image'], len(items)))
-    if R:
-        shortcuts.insert(1, shortcut('Przepisy', '#przepisy', recipe_card_image(next(iter(R.values()))), len(R)))
-    images += [o['image'] for o in list(WS.values())[:3] + list(TR.values())[:3] + list(PR.values())[:4]]
-    if WS:
-        n = sum(len(upcoming(o)) for o in WS.values())
-        shortcuts.append(shortcut('Warsztaty', '/warsztaty/', next(iter(WS.values()))['image'],
-                                  f'{n} {"termin" if n == 1 else "terminy" if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14) else "terminów"}'))
-    if PR:
-        n = len(PR)
-        shortcuts.append(shortcut('Sklep', '/sklep/', next(iter(PR.values()))['image'],
-                                  f'{n} {"mieszanka" if n == 1 else "mieszanki" if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14) else "mieszanek"}'))
-    if TR:
-        n = len(TR)
-        shortcuts.append(shortcut('Wyprawy', '/wyprawy/', next(iter(TR.values()))['image'],
-                                  f'{n} {"wyprawa" if n == 1 else "wyprawy" if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14) else "wypraw"}'))
+    images += [o['image'] for o in list(WS.values())[:2] + list(TR.values())[:2] + list(PR.values())[:4]]
 
     op = H['old_polish']
     feat = A[op['feature']]; images.append(feat['image'])
@@ -1206,13 +1169,6 @@ def home_page():
     {''.join(overlay(s, 'ov-side') for s in issue[:2])}
   </section>
 
-  <section class="sec shortcuts-sec" aria-labelledby="h-skroty">
-    <div class="sec-head"><h2 id="h-skroty" data-ghost="Na skróty">Na skróty</h2></div>
-    <nav class="shortcuts" aria-label="Działy">
-      {''.join(shortcuts)}
-    </nav>
-  </section>
-
   <section class="sec" id="nowe" aria-labelledby="h-nowe">
     <div class="sec-head">
       <h2 id="h-nowe" data-ghost="W tym tygodniu">Nowe w tym tygodniu</h2>
@@ -1220,75 +1176,6 @@ def home_page():
     </div>
     <div class="grid grid-3 week">
       {''.join(week_card(w) for w in H.get('week', []) if w.get('article') in A)}
-    </div>
-  </section>
-
-  <section class="bleed dark" id="staropolska" aria-labelledby="h-staro">
-    <div class="bleed-in">
-      <div class="sec-head">
-        <h2 id="h-staro" data-ghost="Staropolska">{e(op.get('title') or 'Kuchnia staropolska')}</h2>
-        <a href="/historie/{(sides or [feat['slug']])[0]}.html">Cała seria →</a>
-      </div>
-      <div class="feature">
-        <a href="/historie/{feat['slug']}.html" class="card feature-main">
-          <div class="ph frame {T()} ratio-1610">{img(feat['image'], '(max-width:720px) 100vw, 62vw')}
-            <span class="play">{PLAY}</span>
-          </div>
-          <p class="kicker">{numbered(feat['slug'])} {e(op.get('feature_label', ''))}</p>
-          <h3>{e(feat['title'])}</h3>
-          <p class="body">{e(first_sentence(feat['lead']))}</p>
-        </a>
-        <div class="feature-side">
-          {''.join(side)}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="regions" id="regiony" aria-labelledby="h-regiony" data-regions>
-    <div class="map" role="group" aria-label="Mapa województw">
-      <svg class="pl-map" viewBox="{MAP['viewBox']}" xmlns="http://www.w3.org/2000/svg">
-{tiles}
-        <g class="pins" aria-hidden="true">
-{pins}
-        </g>
-      </svg>
-      <p class="map-key" aria-hidden="true"><span class="sw has"></span> Jest odcinek <span class="sw soon"></span> Wkrótce</p>
-    </div>
-    <div class="regions-copy">
-      <p class="counter" aria-hidden="true">{len(stories):02d}<span>/16</span></p>
-      <p class="kicker">Seria w 16 częściach</p>
-      <h2 id="h-regiony">Smaki regionów</h2>
-      <p class="body">{e(H['regions'].get('intro', ''))}</p>
-      <div class="chips">
-{chips}
-        <a href="#regiony" class="chip" data-regions-more>+ 9 kolejnych</a>
-      </div>
-      <p class="region-pick" aria-live="polite" data-region-out></p>
-    </div>
-  </section>
-
-  <section class="regions world" id="swiat" aria-labelledby="h-swiat" data-world>
-    <div class="regions-copy">
-      <p class="counter" aria-hidden="true">{nk:02d}<span> {kraje}</span></p>
-      <p class="kicker">Z podróży</p>
-      <h2 id="h-swiat">Smaki świata</h2>
-      <p class="body">{e((H.get('world') or {}).get('intro', ''))}</p>
-    </div>
-    <div class="world-side">
-      <div class="chips" role="group" aria-label="Kraje">
-{world_chips}
-      </div>
-      <div class="world-pick" aria-live="polite" data-world-out><p class="meta">Wybierz kraj, żeby zobaczyć historie i przepisy.</p></div>
-    </div>
-    <div class="map world-map" role="group" aria-label="Mapa świata">
-      <svg class="pl-map w-map" viewBox="{WORLD['viewBox']}" xmlns="http://www.w3.org/2000/svg">
-{countries}
-        <g class="pins" aria-hidden="true">
-{world_pins}
-        </g>
-      </svg>
-      <p class="map-key" aria-hidden="true"><span class="sw has"></span> Nasze historie <span class="sw soon"></span> Jeszcze tu nie byliśmy</p>
     </div>
   </section>
 
@@ -1307,9 +1194,87 @@ def home_page():
     <p class="meta" aria-live="polite" data-recipes-empty hidden>Wkrótce więcej przepisów w tej kategorii.</p>
   </section>
 
+  <section class="bleed dark" id="staropolska" aria-labelledby="h-staro">
+    <div class="bleed-in">
+      <div class="sec-head">
+        <h2 id="h-staro">{e(op.get('title') or 'Kuchnia staropolska')}</h2>
+        <a href="/historie/{(sides or [feat['slug']])[0]}.html">Cała seria →</a>
+      </div>
+      <div class="feature">
+        <a href="/historie/{feat['slug']}.html" class="card feature-main">
+          <div class="ph frame {T()} ratio-1610">{img(feat['image'], '(max-width:720px) 100vw, 62vw')}
+            <span class="play">{PLAY}</span>
+          </div>
+          <p class="kicker">{numbered(feat['slug'])} {e(op.get('feature_label', ''))}</p>
+          <h3>{e(feat['title'])}</h3>
+          <p class="body">{e(first_sentence(feat['lead']))}</p>
+        </a>
+        <div class="feature-side">
+          {''.join(side)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec maps" id="mapy" aria-labelledby="h-mapy" data-tabs>
+    <div class="sec-head">
+      <h2 id="h-mapy">Smaki na mapie</h2>
+      <div class="tabs" role="tablist" aria-label="Mapa">
+        <button type="button" role="tab" id="tab-regiony" aria-controls="regiony" aria-selected="true">Polska</button>
+        <button type="button" role="tab" id="tab-swiat" aria-controls="swiat" aria-selected="false" tabindex="-1">Świat</button>
+      </div>
+    </div>
+    <section class="regions" id="regiony" role="tabpanel" aria-labelledby="tab-regiony" data-regions>
+      <div class="map" role="group" aria-label="Mapa województw">
+        <svg class="pl-map" viewBox="{MAP['viewBox']}" xmlns="http://www.w3.org/2000/svg">
+  {tiles}
+          <g class="pins" aria-hidden="true">
+  {pins}
+          </g>
+        </svg>
+        <p class="map-key" aria-hidden="true"><span class="sw has"></span> Jest odcinek <span class="sw soon"></span> Wkrótce</p>
+      </div>
+      <div class="regions-copy">
+        <p class="counter" aria-hidden="true">{len(stories):02d}<span>/16</span></p>
+        <p class="kicker">Seria w 16 częściach</p>
+        <h3 id="h-regiony">Smaki regionów</h3>
+        <p class="body">{e(H['regions'].get('intro', ''))}</p>
+        <div class="chips">
+  {chips}
+          <a href="#regiony" class="chip" data-regions-more>+ 9 kolejnych</a>
+        </div>
+        <p class="region-pick" aria-live="polite" data-region-out></p>
+      </div>
+    </section>
+
+    <section class="regions world" id="swiat" role="tabpanel" aria-labelledby="tab-swiat" data-world hidden>
+      <div class="regions-copy">
+        <p class="counter" aria-hidden="true">{nk:02d}<span> {kraje}</span></p>
+        <p class="kicker">Z podróży</p>
+        <h3 id="h-swiat">Smaki świata</h3>
+        <p class="body">{e((H.get('world') or {}).get('intro', ''))}</p>
+      </div>
+      <div class="world-side">
+        <div class="chips" role="group" aria-label="Kraje">
+  {world_chips}
+        </div>
+        <div class="world-pick" aria-live="polite" data-world-out><p class="meta">Wybierz kraj, żeby zobaczyć historie i przepisy.</p></div>
+      </div>
+      <div class="map world-map" role="group" aria-label="Mapa świata">
+        <svg class="pl-map w-map" viewBox="{WORLD['viewBox']}" xmlns="http://www.w3.org/2000/svg">
+  {countries}
+          <g class="pins" aria-hidden="true">
+  {world_pins}
+          </g>
+        </svg>
+        <p class="map-key" aria-hidden="true"><span class="sw has"></span> Nasze historie <span class="sw soon"></span> Jeszcze tu nie byliśmy</p>
+      </div>
+    </section>
+  </section>
+
   <section class="sec shop-sec" id="sklep" aria-labelledby="h-sklep" data-filterable>
     <div class="sec-head">
-      <h2 id="h-sklep" data-ghost="Spiżarnia">Ze spiżarni Łowcy</h2>
+      <h2 id="h-sklep">Ze spiżarni Łowcy</h2>
       <a href="/sklep/">Cały sklep →</a>
     </div>
     <p class="sec-intro">{e(SHOP.get('intro', ''))}</p>
@@ -1320,39 +1285,12 @@ def home_page():
 
   <section class="sec offers-sec" id="warsztaty" aria-labelledby="h-warsztaty">
     <div class="sec-head">
-      <h2 id="h-warsztaty" data-ghost="Warsztaty">Warsztaty</h2>
-      <a href="/warsztaty/">Wszystkie warsztaty →</a>
+      <h2 id="h-warsztaty">Gotuj i podróżuj z nami</h2>
+      <p class="sec-links"><a href="/warsztaty/">Warsztaty →</a> <a href="/wyprawy/">Wyprawy →</a></p>
     </div>
-    <p class="sec-intro">{e(OFERTA.get('workshops_intro', ''))}</p>
-    <div class="grid grid-3 offers">
-      {''.join(offer_card('warsztaty', s, o) for s, o in list(WS.items())[:3])}
-    </div>
-  </section>
-
-  <section class="sec travel-split" id="podroze" aria-labelledby="h-podroze">
-    <div class="travel-panel">
-      <div class="travel-panel-in">
-        <p class="kicker">Reportaże</p>
-        <h2 id="h-podroze">Z podróży</h2>
-        <p class="body">Targi, kuchnie i ludzie: jedzenie oglądane tam, gdzie się rodzi.</p>
-        <a href="/historie/{(H.get('travel') or ['peru-ziemniaki'])[0]}.html" class="btn btn-line">Wszystkie reportaże</a>
-      </div>
-    </div>
-    <div class="travel-list">
-      {''.join(travel_card(s) for s in H.get('travel', []) if s in A)}
-    </div>
-  </section>
-
-  <section class="bleed trips-band" id="wyprawy" aria-labelledby="h-wyprawy">
-    <div class="bleed-in">
-      <div class="sec-head">
-        <h2 id="h-wyprawy" data-ghost="Wyprawy">Wyprawy kulinarne</h2>
-        <a href="/wyprawy/">Wszystkie wyprawy →</a>
-      </div>
-      <p class="sec-intro">{e(OFERTA.get('trips_intro', ''))}</p>
-      <div class="grid grid-3 offers">
-        {''.join(offer_card('wyprawy', s, o) for s, o in list(TR.items())[:3])}
-      </div>
+    <p class="sec-intro">{e(OFERTA.get('home_intro') or 'Warsztaty kulinarne i wieczory antropologii jedzenia w małych grupach, a raz na sezon wyprawa tam, gdzie rodzą się smaki.')}</p>
+    <div class="grid offers offers-4">
+      {''.join([offer_card('warsztaty', s, o, '(max-width:720px) 100vw, 25vw') for s, o in list(WS.items())[:2]] + [offer_card('wyprawy', s, o, '(max-width:720px) 100vw, 25vw') for s, o in list(TR.items())[:2]])}
     </div>
   </section>
 
@@ -1485,6 +1423,86 @@ def search_page():
                  body_class='search-results', path='/szukaj/', head='\n<meta name="robots" content="noindex">')
 
 
+# ---------- style guide: /styl/ shows the design rules with the real components ----------
+
+def styleguide_page():
+    _tint[0] = 0
+    sw = lambda var, name, role: (f'<div class="sg-sw"><span style="background:var({var})"></span><b>{name}</b><code>{var}</code>'
+                                  f'<small>{role}</small></div>')
+    first = lambda d: next(iter(d)) if d else None
+    cards = []
+    if A: cards.append(story_card(first(A)))
+    if PR: cards.append(product_card(first(PR), PR[first(PR)]))
+    if WS: cards.append(offer_card('warsztaty', first(WS), WS[first(WS)]))
+    main = f'''
+  <header class="list-head">
+    <h1 data-ghost="Styl">Styl Łowcy Smaków</h1>
+    <p class="lead">Zasady wyglądu strony, pokazane na prawdziwych elementach. Nowe sekcje i strony składamy z tych klocków.</p>
+  </header>
+
+  <section class="sec sg" aria-labelledby="sg-1">
+    <div class="sec-head"><h2 id="sg-1">Trzy zasady</h2></div>
+    <ol class="sg-rules">
+      <li><b>Dwa kroje.</b> Poppins na tytuły, Instrument Sans na tekst. Cormorant Garamond tylko do liczb (licznik, numery kroków) i cytatów.</li>
+      <li><b>Kolor ma swoje zadania.</b> Kolorowe są ramki zdjęć. Cynober jest tylko dla działań: przycisków i linków, które coś robią. Tła sekcji: papier, jeden jasny panel albo jeden ciemny ton.</li>
+      <li><b>Dwie karty.</b> Karta ze zdjęciem (tytuł na zdjęciu) i karta w ramce (tekst pod zdjęciem). Inne układy to warianty tych dwóch.</li>
+    </ol>
+  </section>
+
+  <section class="sec sg" aria-labelledby="sg-2">
+    <div class="sec-head"><h2 id="sg-2">Typografia</h2></div>
+    <div class="sg-type">
+      <p class="sg-k">H1 · Poppins 700 · var(--fs-h1)</p><p class="sg-h1">Dlaczego kisimy ogórki?</p>
+      <p class="sg-k">H2 · Poppins 700 · 32 px</p><p class="sg-h2">Nowe w tym tygodniu</p>
+      <p class="sg-k">H3 · Poppins 700 · 22 px (tytuł karty)</p><p class="sg-h3">Pierogi: danie, które każdy region ma za swoje</p>
+      <p class="sg-k">Lead · Instrument Sans 19 px</p><p class="lead">Słoik ogórków w spiżarni to nie tylko smak dzieciństwa.</p>
+      <p class="sg-k">Tekst · Instrument Sans 17 px</p><p class="body">Ciasto, farsz, zlepiony brzeg. Prostszej konstrukcji trudno sobie wyobrazić.</p>
+      <p class="sg-k">Etykieta · 12 px, wersaliki</p><p class="kicker">Seria w 16 częściach</p>
+      <p class="sg-k">Liczby i cytaty · Cormorant Garamond</p><p class="counter">01<span>/16</span></p>
+    </div>
+  </section>
+
+  <section class="sec sg" aria-labelledby="sg-3">
+    <div class="sec-head"><h2 id="sg-3">Kolory</h2></div>
+    <h3 class="sg-sub">Tła i tekst</h3>
+    <div class="sg-sws">
+      {sw('--paper', 'Papier', 'tło strony')}{sw('--panel', 'Panel', 'jedyne jasne tło sekcji: mapy, zamówienia')}
+      {sw('--dark', 'Ciemny', 'jedyne ciemne tło: seria, newsletter, stopka, menu')}{sw('--ink', 'Atrament', 'tekst, tytuły')}
+      {sw('--muted', 'Szary', 'podpisy, metadane')}{sw('--line', 'Linia', 'obramowania, rozdzielacze')}
+    </div>
+    <h3 class="sg-sub">Działanie</h3>
+    <div class="sg-sws">{sw('--accent', 'Cynober', 'tylko przyciski i linki-działania; biały tekst 5,2:1')}</div>
+    <h3 class="sg-sub">Ramki zdjęć (kolejno, po kolei na stronie)</h3>
+    <div class="sg-sws">
+      {sw('--mustard', 'Musztarda', 'ramka; tytuł karty po najechaniu')}{sw('--vermilion', 'Cynober', 'ramka')}
+      {sw('--ultramarine', 'Ultramaryna', 'ramka')}{sw('--sage', 'Szałwia', 'ramka')}
+    </div>
+  </section>
+
+  <section class="sec sg" aria-labelledby="sg-4">
+    <div class="sec-head"><h2 id="sg-4">Przyciski i etykiety</h2></div>
+    <div class="sg-row">
+      <a href="#" class="btn btn-ink">Czytaj historię</a><a href="#" class="btn btn-line">Przejdź do przepisu</a>
+      <button type="button" class="btn btn-ink btn-sm">Do koszyka</button><button type="button" class="btn btn-sm" disabled>Wkrótce w sprzedaży</button>
+    </div>
+    <div class="sg-row">
+      {tags(['Historie', 'Antropologia'])}<span class="tag tag-link">Przepis →</span>
+      <span class="pills"><span class="no">№ 001</span><span class="date">19.10.2026</span></span><span class="price">od 29 zł</span>
+      <button type="button" class="chip" aria-pressed="true">Wszystkie</button><button type="button" class="chip" aria-pressed="false">Kiszonki</button>
+    </div>
+  </section>
+
+  <section class="sec sg" aria-labelledby="sg-5">
+    <div class="sec-head"><h2 id="sg-5">Dwie karty</h2></div>
+    <h3 class="sg-sub">Karta ze zdjęciem: tytuł na zdjęciu (strona główna, przepisy)</h3>
+    <div class="grid recipes-grid sg-cards">{''.join(recipe_tile_card(s) for s in list(R)[:2])}</div>
+    <h3 class="sg-sub">Karta w ramce: tekst pod zdjęciem (historie, sklep, warsztaty, wyprawy)</h3>
+    <div class="grid sg-cards sg-framed">{''.join(cards)}</div>
+  </section>'''
+    return shell('Styl', 'Zasady wyglądu strony Łowca Smaków.', main, [], body_class='styleguide', path='/styl/',
+                 head='\n<meta name="robots" content="noindex">')
+
+
 def write_sitemap():
     """sitemap.xml with every public page, and robots.txt pointing to it."""
     today = date.today().isoformat()
@@ -1515,6 +1533,8 @@ def main():
     open(os.path.join(ROOT, 'sklep', 'index.html'), 'w', encoding='utf-8').write(shop_page())
     for kind in ('historie', 'przepisy'):
         open(os.path.join(ROOT, kind, 'index.html'), 'w', encoding='utf-8').write(listing_page(kind))
+    os.makedirs(os.path.join(ROOT, 'styl'), exist_ok=True)
+    open(os.path.join(ROOT, 'styl', 'index.html'), 'w', encoding='utf-8').write(styleguide_page())
     os.makedirs(os.path.join(ROOT, 'szukaj'), exist_ok=True)
     open(os.path.join(ROOT, 'szukaj', 'index.html'), 'w', encoding='utf-8').write(search_page())
     open(os.path.join(ROOT, 'js', 'search-index.json'), 'w', encoding='utf-8').write(search_index())

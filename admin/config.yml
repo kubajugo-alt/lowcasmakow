@@ -404,6 +404,7 @@ collections:
         file: content/settings/oferta.json
         format: json
         fields:
+          - { label: 'Wstęp na stronie głównej (warsztaty i wyprawy razem)', name: home_intro, widget: text, required: false }
           - { label: 'Wstęp: warsztaty', name: workshops_intro, widget: text }
           - { label: 'Wstęp: wyprawy', name: trips_intro, widget: text }
           - { label: 'Na zamówienie: warsztaty', name: workshops_custom, widget: text }

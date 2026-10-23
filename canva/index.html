@@ -102,7 +102,6 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
 .grid{display:grid;gap:32px}
 .grid-3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 .grid-4{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px}
-.grid-travel{grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:28px}
 
 .card{display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--ink)}
 .card:hover{color:var(--ink)}
@@ -134,7 +133,7 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
 .regions{display:flex;flex-wrap:wrap;gap:56px;align-items:center;background:var(--panel);padding:56px;border:1px solid var(--rule)}
 .regions .map{flex:1 1 380px}
 .regions-copy{flex:1 1 380px;display:flex;flex-direction:column;gap:20px}
-.regions-copy h2{font-family:var(--serif);font-size:56px;line-height:.98;font-weight:600}
+.regions-copy :is(h2,h3){font-family:var(--serif);font-size:56px;line-height:.98;font-weight:600}
 .region-pick{min-height:24px;font-weight:600}
 
 /* dark bands: the logo's white-on-black version */
@@ -316,23 +315,6 @@ body{overflow-x:clip}
 .ratio-1610{aspect-ratio:16/10;height:auto!important}
 
 /* lead story + numbered index */
-.lead-grid{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:56px;align-items:start}
-.lead-story{display:flex;flex-direction:column;gap:18px}
-.lead-img{display:block;aspect-ratio:16/10}
-.lead-story h1{font-family:var(--serif);font-size:clamp(56px,7.2vw,112px);line-height:.9;font-weight:600;letter-spacing:-.02em}
-.lead-story h1 a{color:inherit;text-decoration:none}
-.lead-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end;border-top:1px solid var(--ink);padding-top:18px}
-.issue{border-top:1px solid var(--ink);padding-top:14px;display:flex;flex-direction:column}
-.issue .label{font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;padding-bottom:14px}
-.issue .x-ol{list-style:none;margin:0;padding:0}
-.issue-item{display:grid;grid-template-columns:44px minmax(0,1fr) 72px;gap:14px;align-items:center;padding:16px 0;border-top:1px solid var(--rule);text-decoration:none;color:var(--ink)}
-.issue-item:hover{color:var(--ink)}
-.issue-item .no{font-family:var(--serif);font-size:24px;font-style:italic;font-weight:500;letter-spacing:0;font-variant-numeric:lining-nums tabular-nums}
-.issue-t{display:flex;flex-direction:column;gap:4px}
-.issue-t .kicker{font-size:11px;color:var(--muted)}
-.issue-t .t{font-family:var(--serif);font-size:21px;line-height:1.1;font-weight:600}
-.issue-item .ph{width:72px;height:72px;padding:0}
-.issue .more{margin-top:14px;font-weight:600;font-size:14px}
 
 /* week: Monday, Wednesday, Sunday */
 .week .card{gap:14px}
@@ -363,9 +345,6 @@ body{overflow-x:clip}
 .rail>*{scroll-snap-align:start}
 .rail .card h3{font-size:24px}
 
-/* travel index */
-.caption{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.caption .no{color:var(--ink)}
 
 /* newsletter statement */
 .statement{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:end;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:56px 0}
@@ -389,12 +368,9 @@ body{overflow-x:clip}
 .frame>img.fill,.frame>iframe.fill{inset:8px;width:calc(100% - 16px);height:calc(100% - 16px)}
 span.frame{display:block;position:relative;flex:none}
 .frame.small>img.fill{inset:4px;width:calc(100% - 8px);height:calc(100% - 8px)}
-.issue-item .frame{width:72px;height:72px}
 .card.row .frame{width:120px;height:120px}
 .a-recipe .frame{width:120px;height:120px}
 .shop .frame{width:64px;height:64px}
-.travel-card{gap:16px}
-.travel-card .frame{width:100%}
 
 
 /* ---------- colour: four inks ---------- */
@@ -403,7 +379,7 @@ span.frame{display:block;position:relative;flex:none}
 .tint-ultramarine{background:var(--ultramarine)}
 .tint-sage{background:var(--sage)}
 .topbar{background:var(--mustard);border-bottom:0;color:var(--ink)}
-.no,.issue-item .no,.caption .no{color:var(--vermilion)}
+.no,.caption .no{color:var(--vermilion)}
 .dark .no{color:var(--mustard)}
 .btn-accent,.btn-ink,.tool.primary,.statement .nl-row button{background:var(--vermilion);color:#fff}
 .btn-accent:hover,.btn-ink:hover,.tool.primary:hover,.statement .nl-row button:hover{background:#9E3415;color:#fff}
@@ -423,7 +399,7 @@ span.frame{display:block;position:relative;flex:none}
 .regions{background:#F3EBDC;border-color:#EADFCB}
 .chip[aria-pressed="true"],.chip.is-active{background:var(--ink);border-color:var(--ink)}
 a:hover{color:var(--vermilion)}
-.card:hover,.issue-item:hover{color:var(--ink)}
+.card:hover{color:var(--ink)}
 .dark .card:hover{color:#fff}
 .shop{background:var(--ultramarine)}
 
@@ -455,14 +431,9 @@ blockquote.pull cite{display:block;margin-top:12px;font-style:normal;font-size:1
 .dark .frame{box-shadow:0 14px 30px -18px rgba(0,0,0,.8)}
 
 /* small uppercase labels set vertically in the margin */
-.vlabel{font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);color:var(--muted);white-space:nowrap}
 .sec-head{position:relative}
 
 /* line and arrow: "read more" without words */
-.go{display:flex;align-items:center;gap:10px;margin-top:6px;color:var(--ink)}
-.go::before{content:"";flex:1;height:1px;background:currentColor;transition:flex-grow .25s}
-.go::after{content:"→";font-size:18px;line-height:1;transition:transform .25s}
-a:hover .go::after{transform:translateX(4px)}
 
 /* week: staggered columns */
 .week{align-items:start}
@@ -471,32 +442,10 @@ a:hover .go::after{transform:translateX(4px)}
 .week .day{border-bottom:0;padding-bottom:0}
 .week .day em{font-size:40px}
 
-/* travel: sticky colour panel + zigzag list */
-.travel-split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;align-items:start}
-.travel-panel{position:sticky;top:24px;background:var(--sage);color:var(--white);min-height:520px;display:flex;align-items:center;justify-content:center;text-align:center;padding:56px 40px}
-.travel-panel-in{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:340px}
-.travel-panel .kicker{color:rgba(255,255,255,.92)}
-.travel-panel h2{font-family:var(--serif);font-size:72px;line-height:.9;font-weight:500}
-.travel-panel h2::after{content:"";display:block;width:96px;height:1px;background:currentColor;margin:28px auto 0;opacity:.6}
-.travel-panel .body{color:rgba(255,255,255,.88)}
-.travel-panel .btn-line{border-color:var(--white);color:var(--white);margin-top:8px}
-.travel-panel .btn-line:hover{background:var(--white);color:var(--sage)}
-.travel-list{display:flex;flex-direction:column;gap:72px;padding-top:24px}
-.travel-item{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:end;text-decoration:none;color:var(--ink);max-width:640px}
-.travel-item:nth-child(even){grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;margin-left:auto}
-.travel-item:nth-child(even) .vlabel{order:3;transform:none;align-self:start}
-.travel-item:nth-child(even) .frame{order:2}
-.travel-item:nth-child(even) .travel-t{order:1}
-.travel-item .vlabel{align-self:end}
-.travel-item .frame{width:100%}
 .ratio-1{aspect-ratio:1;height:auto!important}
-.travel-t{display:flex;flex-direction:column;gap:10px;padding-bottom:4px}
-.travel-t .no{font-size:12px;color:var(--vermilion)}
-.travel-t .h{font-family:var(--serif);font-size:30px;line-height:1.02;font-weight:600}
 
 .logo img{height:68px}
 .cook-top .logo img{height:32px}
-
 
 
 
@@ -514,21 +463,19 @@ body.home .site-footer{margin-top:0}
 /* ---------- after alemeksyk.eu: bold sans headings, red menu bar, a mosaic of photo cards with
    the title on the picture, red tag pills and grey date pills, ghost words behind section titles,
    round shortcuts ---------- */
-.sec-head h2,.card h3,.card.row h4,.hero h1,.regions-copy h2,.newsletter h2,.r-title h1,.r-body h2,.cook h1,.lost h1,
-.a-head h1,.a-body h2,.statement h2,.travel-panel h2,.travel-t .h,.dropcap::first-letter{font-family:var(--display);font-weight:700;letter-spacing:-.015em}
+.sec-head h2,.card h3,.card.row h4,.hero h1,.regions-copy :is(h2,h3),.newsletter h2,.r-title h1,.r-body h2,.cook h1,.lost h1,
+.a-head h1,.a-body h2,.statement h2,.dropcap::first-letter{font-family:var(--display);font-weight:700;letter-spacing:-.015em}
 .sec-head h2{font-size:34px}
 .card h3{font-size:22px;line-height:1.2}
 .card.row h4{font-size:18px;line-height:1.25}
 .week .card h3{font-size:22px}
-.regions-copy h2{font-size:44px;line-height:1.05}
+.regions-copy :is(h2,h3){font-size:44px;line-height:1.05}
 .a-head h1{font-size:clamp(36px,4.6vw,60px);line-height:1.08}
 .a-body h2{font-size:28px;line-height:1.2}
 .r-title h1{font-size:60px;line-height:1.02}
 .r-body h2{font-size:30px}
 .statement h2{font-size:clamp(44px,5.4vw,80px);line-height:1}
 .statement h2 em{font-family:var(--serif);font-weight:500;font-size:1.15em}
-.travel-panel h2{font-size:56px;line-height:1}
-.travel-t .h{font-size:22px;line-height:1.2}
 .dark .feature-main h3{font-size:34px}
 .cook h1{font-size:36px;line-height:1.1}
 
@@ -576,17 +523,6 @@ body.home .site-footer{margin-top:0}
 .ov-tile .h{font-size:20px}
 
 /* shortcuts: round photos with counts */
-.shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
-.shortcut{display:flex;flex-direction:column;align-items:center;gap:6px;padding:26px 16px 22px;border-radius:10px;background:var(--panel);text-decoration:none;color:var(--ink);transition:transform .2s,box-shadow .2s}
-.shortcut:hover{color:var(--ink);transform:translateY(-3px);box-shadow:0 14px 30px -20px rgba(18,18,18,.55)}
-.shortcut .ring{position:relative;width:104px;height:104px;border-radius:50%;overflow:hidden;border:4px solid var(--white);box-shadow:0 10px 22px -12px rgba(18,18,18,.6);margin-bottom:8px}
-.shortcut:nth-child(4n+1) .ring{border-color:var(--mustard)}
-.shortcut:nth-child(4n+2) .ring{border-color:var(--vermilion)}
-.shortcut:nth-child(4n+3) .ring{border-color:var(--ultramarine)}
-.shortcut:nth-child(4n+4) .ring{border-color:var(--sage)}
-.shortcut .ring img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.shortcut .h{font:700 16px/1.2 var(--display);text-align:center}
-.shortcut .n{font-size:13px;color:var(--muted)}
 
 /* rounder frames to match */
 .frame{border-radius:8px}
@@ -642,13 +578,13 @@ body.home .site-footer{margin-top:0}
 
 
 /* hover: a story's title turns the colour of its photo's frame (no underline) */
-.card,.travel-item,.issue-item,.a-recipe,.offer-card{--hl:var(--vermilion)}
-:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-mustard){--hl:var(--mustard)}
-:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-vermilion){--hl:var(--vermilion)}
-:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-ultramarine){--hl:var(--ultramarine)}
-:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-sage){--hl:var(--sage)}
-.card :is(h3,h4),.travel-t .h,.issue-t .t,.a-recipe h2 a,.ov .h,.offer-card h3{transition:color .15s}
-.card:hover :is(h3,h4),.travel-item:hover .h,.issue-item:hover .t,.a-recipe h2 a:hover,.offer-card:hover h3{color:var(--hl)}
+.card,.a-recipe,.offer-card{--hl:var(--vermilion)}
+:is(.card,.a-recipe,.offer-card):has(.tint-mustard){--hl:var(--mustard)}
+:is(.card,.a-recipe,.offer-card):has(.tint-vermilion){--hl:var(--vermilion)}
+:is(.card,.a-recipe,.offer-card):has(.tint-ultramarine){--hl:var(--ultramarine)}
+:is(.card,.a-recipe,.offer-card):has(.tint-sage){--hl:var(--sage)}
+.card :is(h3,h4),.a-recipe h2 a,.ov .h,.offer-card h3{transition:color .15s}
+.card:hover :is(h3,h4),.a-recipe h2 a:hover,.offer-card:hover h3{color:var(--hl)}
 .ov{--hl:var(--mustard)}
 .ov:hover .h,.ov:focus-within .h{color:var(--hl)}
 
@@ -667,15 +603,6 @@ body.home .site-footer{margin-top:0}
 .badge b{font:800 26px/1 var(--display);letter-spacing:-.02em;margin-bottom:3px}
 
 /* trips band on the homepage */
-.trips-band{background:var(--night);color:var(--white)}
-.trips-band+.statement{margin-top:-88px}
-.trips-band .sec-head a,.trips-band .sec-intro{color:var(--white)}
-.trips-band .sec-intro{opacity:.9}
-.trips-band .sec-head h2[data-ghost]::before{color:rgba(255,255,255,.09)}
-.trips-band .offer-card,.trips-band .offer-card:hover,.trips-band .offer-card .when{color:var(--white)}
-.trips-band .offer-card .more-dates{color:rgba(255,255,255,.75)}
-.trips-band .date{background:rgba(255,255,255,.18);color:var(--white)}
-.trips-band .frame{box-shadow:0 18px 34px -18px rgba(0,0,0,.6)}
 
 /* listing pages */
 .list-head{display:flex;flex-direction:column;gap:16px;max-width:760px;padding-top:24px;isolation:isolate;overflow-x:clip}
@@ -736,13 +663,11 @@ body.home .site-footer{margin-top:0}
 
 
 
-
 /* hover: every linked photo zooms in slightly, like the mosaic cards (scale 1.04).
    The clip shrinks by the same amount, so the zoomed photo stays exactly inside its coloured frame. */
 .frame>img.fill{clip-path:inset(0 round 3px);transition:transform .5s ease,clip-path .5s ease}
 :is(a,.a-recipe):is(:hover,:focus-visible) .frame>img.fill{transform:scale(1.04);clip-path:inset(1.923% round 3px)}
-.shortcut .ring img{transition:transform .5s ease}
-.shortcut:is(:hover,:focus-visible) .ring img{transform:scale(1.08)}
+:focus-visible) .ring img{transform:scale(1.08)}
 
 /* ---------- shop ---------- */
 .btn-sm{min-height:38px;padding:0 16px;font-size:13.5px}
@@ -867,6 +792,104 @@ body.home .site-footer{margin-top:0}
 .results-h{padding:0;font:600 16px var(--sans);color:var(--ink-2)}
 .search-form input,.search-bar input{min-width:0}
 
+/* ======================================================================
+   Design system (see /styl/). The rules, in one place:
+   - Type: Poppins for headings, Instrument Sans for text. Cormorant Garamond only for numbers
+     (counters, step numbers) and quotes.
+   - Colour: the four photo-frame inks carry the colour; vermilion (--accent) is for actions only
+     (buttons, links that act); section backgrounds are paper or one dark tone (--dark), panels one light neutral.
+   - Two card types: the photo card (title on the picture) and the framed card (text below).
+   ====================================================================== */
+:root{
+  --accent:var(--vermilion);
+  --dark:var(--night);
+  --fs-label:12px;--fs-small:14px;--fs-body:17px;--fs-lead:19px;
+  --fs-h4:18px;--fs-h3:22px;--fs-h2:32px;--fs-h1:clamp(36px,4.6vw,60px);
+}
+
+/* actions */
+.btn-ink,.btn-accent{background:var(--accent);color:var(--white)}
+.btn-ink:hover,.btn-accent:hover{background:var(--ink);color:var(--white)}
+.header-actions .btn-ink{background:var(--ink)}
+.header-actions .btn-ink:hover{background:var(--accent)}
+
+/* top: a quiet issue line, then a dark menu bar (the current page is underlined in the accent) */
+.topbar{background:var(--paper);color:var(--muted);border-bottom:1px solid var(--rule)}
+
+
+/* labels are neutral; only "act" pills use the accent */
+.tag{background:var(--panel);color:var(--ink)}
+.ov .tag{background:rgba(255,255,255,.92);color:var(--ink)}
+.dark .tag{background:rgba(255,255,255,.14);color:var(--white)}
+.tag-link,.ov .tag-link{background:var(--accent);color:var(--white)}
+.tag-link:hover{background:var(--white);color:var(--ink)}
+.price{background:none;padding:0;min-height:0;font:700 17px/1 var(--display);color:var(--ink)}
+.p-badge{background:var(--ink);color:var(--white)}
+.kicker .no,.card.row .no{color:inherit;opacity:.65}
+.counter{color:var(--ink)}
+.week .card:nth-child(n) .day em{color:var(--ink)}
+
+/* backgrounds: paper, one light neutral panel, one dark tone */
+.dark,.statement,.shop,.site-footer{background:var(--dark)}
+.regions,.regions.world,.custom,.shop-notice{background:var(--panel);border-color:transparent}
+.dates .x-li{background:var(--panel)}
+.statement{border-bottom:1px solid rgba(255,255,255,.1)}
+.statement h2 em{color:var(--white)}
+.statement .nl-row button{background:var(--accent);color:var(--white)}
+.statement .nl-row button:hover{background:var(--white);color:var(--ink)}
+.shop-live .btn-light{background:var(--accent);color:var(--white)}
+.shop-live .btn-light:hover{background:var(--white);color:var(--ink)}
+
+/* type: subtitles in the text face, headings on one scale */
+.r-title .sub,.o-head .sub,.pr-info .sub{font-family:var(--sans);font-style:normal;font-weight:400;font-size:20px;color:var(--muted)}
+.p-sub{font-family:var(--sans);font-style:normal;font-size:15px;color:var(--muted)}
+.sec-head h2{font-size:var(--fs-h2)}
+.card h3,.offer-card h3,.product-card h3,.story-card h3,.week .card h3{font-size:var(--fs-h3);line-height:1.2}
+.card.row h4{font-size:var(--fs-h4)}
+.dark .feature-main h3{font-size:30px}
+.regions-copy :is(h2,h3){font:700 40px/1.05 var(--display);letter-spacing:-.015em}
+
+/* framed cards share one rhythm */
+.card,.offer-card,.product-card,.story-card{gap:14px}
+.card-body,.offer-body,.p-body{gap:8px}
+
+/* maps: Poland / world as two tabs in one section */
+.maps .regions{border:0}
+.maps [role="tabpanel"][hidden]{display:none}
+.tabs{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:var(--panel)}
+.tabs [role="tab"]{border:0;background:none;padding:9px 20px;border-radius:999px;font:600 14.5px/1 var(--display);color:var(--ink-2);cursor:pointer}
+.tabs [role="tab"][aria-selected="true"]{background:var(--ink);color:var(--white)}
+.tabs [role="tab"]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.sec-links{display:flex;gap:20px;font-weight:600;font-size:15px}
+.offers-4{grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+
+
+
+
+/* style guide (/styl/) */
+.sg-rules{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:12px;max-width:820px;font-size:17px;line-height:1.55}
+.sg-type{display:grid;grid-template-columns:240px minmax(0,1fr);gap:18px 32px;align-items:baseline}
+.sg-k{font-size:13px;color:var(--muted)}
+.sg-h1{font:700 var(--fs-h1)/1.05 var(--display);letter-spacing:-.02em}
+.sg-h2{font:700 var(--fs-h2)/1.1 var(--display);letter-spacing:-.015em}
+.sg-h3{font:700 var(--fs-h3)/1.2 var(--display)}
+.sg-sub{font:700 18px var(--display);margin-top:8px}
+.sg-sws{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.sg-sw{display:flex;flex-direction:column;gap:4px;font-size:14px}
+.sg-sw span{height:72px;border-radius:8px;border:1px solid var(--line);margin-bottom:6px}
+.sg-sw code{font-size:12.5px;color:var(--muted)}
+.sg-sw small{color:var(--ink-2);line-height:1.4}
+.sg-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.sg-cards{max-width:760px}
+.sg-framed{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;max-width:none}
+
+
+.p-origin{text-transform:none;letter-spacing:0}
+.newsletter .nl-row button{background:var(--accent);color:var(--white)}
+.newsletter .nl-row button:hover{background:var(--white);color:var(--ink)}
+.steps .n,.plan .x-li::before{color:var(--ink)}
+.dates .note{color:var(--ink-2)}
+
 /* Canva pages */
 .tick{width:18px;height:18px;border:1.5px solid var(--ink);border-radius:3px;flex:none}
 body{margin:0}
@@ -900,8 +923,7 @@ body{margin:0}
     <a class="navlink" href="https://lowca-smakow.netlify.app/historie/">Historie</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/przepisy/">Przepisy</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a>
-    <a class="navlink" href="https://lowca-smakow.netlify.app/#regiony">Smaki regionów</a>
-    <a class="navlink" href="https://lowca-smakow.netlify.app/#swiat">Smaki świata</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#mapy">Mapy smaków</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/sklep/">Sklep</a>
@@ -924,13 +946,6 @@ body{margin:0}
     <article class="ov ov-side"><img class="fill" src="https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ręce nakładające farsz na krążki ciasta na pierogi" decoding="async"><div class="ov-body"><span class="tags"><span class="tag">Historie</span><span class="tag">Antropologia</span></span><h2 class="h"><a class="stretch" href="https://lowca-smakow.netlify.app/historie/pierogi.html">Pierogi: danie, które każdy region ma za swoje</a></h2><p class="pills"><span class="no">№ 002</span><span class="date">19.10.2026</span></p></div></article><article class="ov ov-side"><img class="fill" src="https://images.unsplash.com/photo-1792582232028-0d8b0c703797?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Drewniany dom w stylu podhalańskim wśród jesiennych drzew" decoding="async"><div class="ov-body"><span class="tags"><span class="tag">Smaki regionów</span></span><h2 class="h"><a class="stretch" href="https://lowca-smakow.netlify.app/historie/podhale-oscypek.html">Podhale: smak, który je definiuje</a></h2><p class="pills"><span class="no">№ 003</span><span class="date">21.10.2026</span></p></div></article>
   </section>
 
-  <section class="sec shortcuts-sec" aria-labelledby="h-skroty">
-    <div class="sec-head"><h2 id="h-skroty" data-ghost="Na skróty">Na skróty</h2></div>
-    <nav class="shortcuts" aria-label="Działy">
-      <a class="shortcut" href="#nowe"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1627861446476-42fd9925e151?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Słoiki z kiszonymi ogórkami, koperkiem i czosnkiem" decoding="async"></span><span class="h">Historie</span><span class="n">5 wpisów</span></a><a class="shortcut" href="#przepisy"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1549413468-24b18ebf5d9c?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimaki zapiekane z masłem ziołowym w ceramicznym naczyniu" decoding="async"></span><span class="h">Przepisy</span><span class="n">4 wpisy</span></a><a class="shortcut" href="#staropolska"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimaki w muszlach na żeliwnej patelni" decoding="async"></span><span class="h">Wideo</span><span class="n">2 wpisy</span></a><a class="shortcut" href="#regiony"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1792582232028-0d8b0c703797?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Drewniany dom w stylu podhalańskim wśród jesiennych drzew" decoding="async"></span><span class="h">Smaki regionów</span><span class="n">1 wpis</span></a><a class="shortcut" href="#podroze"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1683543124235-400a2b31cc73?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ziemniaki na straganie targowym" decoding="async"></span><span class="h">Z podróży</span><span class="n">3 wpisy</span></a><a class="shortcut" href="https://lowca-smakow.netlify.app/warsztaty/"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1763570645098-371723617ee9?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ludzie przy stole wspólnie przygotowują jedzenie" decoding="async"></span><span class="h">Warsztaty</span><span class="n">6 terminów</span></a><a class="shortcut" href="https://lowca-smakow.netlify.app/sklep/"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1589536677029-c0aa1808fba6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Przyprawy rozsypane na drewnianym blacie" decoding="async"></span><span class="h">Sklep</span><span class="n">6 mieszanek</span></a><a class="shortcut" href="https://lowca-smakow.netlify.app/wyprawy/"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1715353540913-986fb16f6ef4?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Kościół w Oaxace na tle gór" decoding="async"></span><span class="h">Wyprawy</span><span class="n">3 wyprawy</span></a>
-    </nav>
-  </section>
-
   <section class="sec" id="nowe" aria-labelledby="h-nowe">
     <div class="sec-head">
       <h2 id="h-nowe" data-ghost="W tym tygodniu">Nowe w tym tygodniu</h2>
@@ -941,10 +956,25 @@ body{margin:0}
     </div>
   </section>
 
+  <section class="sec" id="przepisy" aria-labelledby="h-przepisy" data-recipes="">
+    <div class="sec-head">
+      <h2 id="h-przepisy" data-ghost="Przepisy">Przepisy</h2>
+      <a href="https://lowca-smakow.netlify.app/przepisy/">Wszystkie przepisy →</a>
+    </div>
+    <div class="chips" role="group" aria-label="Filtruj przepisy">
+      <button type="button" class="chip" data-filter="all" aria-pressed="true">Wszystkie</button>
+      <button type="button" class="chip" data-filter="kiszonki" aria-pressed="false">Kiszonki</button><button type="button" class="chip" data-filter="staropolskie" aria-pressed="false">Staropolskie</button><button type="button" class="chip" data-filter="podroze" aria-pressed="false">Z podróży</button><button type="button" class="chip" data-filter="codzien" aria-pressed="false">Na co dzień</button><button type="button" class="chip" data-filter="sezonowe" aria-pressed="false">Sezonowe</button>
+    </div>
+    <div class="rail">
+      <a href="https://lowca-smakow.netlify.app/przepisy/slimaki-w-szarym-sosie.html" class="ov ov-tile" data-cat="staropolskie"><img class="fill" src="https://images.unsplash.com/photo-1549413468-24b18ebf5d9c?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimaki zapiekane z masłem ziołowym w ceramicznym naczyniu" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Staropolskie</span><span class="tag">70 min</span></span><span class="h">Ślimaki w szarym sosie</span><span class="pills"><span class="no">P01</span></span></span></a><a href="https://lowca-smakow.netlify.app/przepisy/birria-tacos.html" class="ov ov-tile" data-cat="podroze"><img class="fill" src="https://images.unsplash.com/photo-1585803518902-58a3ef005b51?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Tacos de birria z cebulą i kolendrą, obok miska consommé" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Z podróży</span><span class="tag">Meksyk</span></span><span class="h">Birria tacos</span><span class="pills"><span class="no">P02</span></span></span></a><a href="https://lowca-smakow.netlify.app/przepisy/ogorki-kiszone.html" class="ov ov-tile" data-cat="kiszonki"><img class="fill" src="https://images.unsplash.com/photo-1462536546956-beef6399d8cf?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Małe ogórki w durszlaku obok pęczka koperku" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Kiszonki</span><span class="tag">3–7 dni</span></span><span class="h">Ogórki kiszone babci</span><span class="pills"><span class="no">P03</span></span></span></a><a href="https://lowca-smakow.netlify.app/przepisy/papa-a-la-huancaina.html" class="ov ov-tile" data-cat="podroze"><img class="fill" src="https://images.unsplash.com/photo-1633959639799-6d3f66e05710?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Pieczone ziemniaki z natką pietruszki na talerzu" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Z podróży</span><span class="tag">Peru</span></span><span class="h">Papa a la huancaína</span><span class="pills"><span class="no">P04</span></span></span></a>
+    </div>
+    <p class="meta" aria-live="polite" data-recipes-empty="" hidden="">Wkrótce więcej przepisów w tej kategorii.</p>
+  </section>
+
   <section class="bleed dark" id="staropolska" aria-labelledby="h-staro">
     <div class="bleed-in">
       <div class="sec-head">
-        <h2 id="h-staro" data-ghost="Staropolska">Kuchnia staropolska</h2>
+        <h2 id="h-staro">Kuchnia staropolska</h2>
         <a href="https://lowca-smakow.netlify.app/historie/kim-byl-czerniecki.html">Cała seria →</a>
       </div>
       <div class="feature">
@@ -963,10 +993,18 @@ body{margin:0}
     </div>
   </section>
 
-  <section class="regions" id="regiony" aria-labelledby="h-regiony" data-regions="">
-    <div class="map" role="group" aria-label="Mapa województw">
-      <svg class="pl-map" viewBox="0 0 600 567" xmlns="http://www.w3.org/2000/svg">
-        <path class="tile" d="M137,297L145,297L145,299L147,298L147,300L151,301L151,303L153,304L151,307L151,309L159,311L159,313L161,317L165,317L170,320L176,319L176,318L179,317L180,318L185,317L185,312L188,311L192,310L200,312L206,318L206,322L203,324L205,333L211,332L214,334L216,332L217,333L214,337L218,342L217,349L220,354L212,357L209,355L208,357L205,358L207,360L206,364L207,365L204,367L203,372L205,374L198,376L198,381L197,382L195,380L193,383L196,385L192,388L193,389L192,391L193,393L193,394L189,394L188,395L190,397L187,401L185,401L188,403L186,404L187,410L180,411L176,418L177,420L175,425L170,423L169,425L165,427L164,430L167,432L169,439L172,441L173,443L172,445L174,448L172,449L171,447L170,449L165,449L165,451L163,450L154,461L147,456L145,448L138,439L135,438L134,433L130,433L129,435L124,429L125,427L128,423L130,424L131,421L134,422L136,419L136,415L139,414L133,406L126,405L126,408L124,409L119,406L116,411L113,411L112,411L113,409L112,404L104,405L101,397L95,399L88,395L84,395L79,392L75,395L74,389L69,384L68,380L70,378L69,375L66,374L64,375L63,371L61,372L61,374L59,374L59,372L56,371L56,372L54,371L52,372L51,374L53,374L53,376L52,381L53,386L43,386L42,384L46,379L52,361L52,357L55,348L54,344L51,338L53,338L54,335L57,334L58,332L64,328L65,330L68,329L72,332L73,327L75,327L75,324L76,322L82,323L82,322L88,327L88,330L90,327L92,327L93,323L95,323L95,319L102,317L101,314L104,309L102,308L106,302L111,300L110,298L112,298L110,296L112,295L118,298L123,299L122,304L125,304L128,307L133,304L135,298Z" data-region="Dolnośląskie" role="button" tabindex="0" aria-label="Dolnośląskie" aria-pressed="false"><title>Dolnośląskie</title></path>
+  <section class="sec maps" id="mapy" aria-labelledby="h-mapy" data-tabs="">
+    <div class="sec-head">
+      <h2 id="h-mapy">Smaki na mapie</h2>
+      <div class="tabs" role="tablist" aria-label="Mapa">
+        <button type="button" role="tab" id="tab-regiony" aria-controls="regiony" aria-selected="true">Polska</button>
+        <button type="button" role="tab" id="tab-swiat" aria-controls="swiat" aria-selected="false" tabindex="-1">Świat</button>
+      </div>
+    </div>
+    <section class="regions" id="regiony" role="tabpanel" aria-labelledby="tab-regiony" data-regions="">
+      <div class="map" role="group" aria-label="Mapa województw">
+        <svg class="pl-map" viewBox="0 0 600 567" xmlns="http://www.w3.org/2000/svg">
+          <path class="tile" d="M137,297L145,297L145,299L147,298L147,300L151,301L151,303L153,304L151,307L151,309L159,311L159,313L161,317L165,317L170,320L176,319L176,318L179,317L180,318L185,317L185,312L188,311L192,310L200,312L206,318L206,322L203,324L205,333L211,332L214,334L216,332L217,333L214,337L218,342L217,349L220,354L212,357L209,355L208,357L205,358L207,360L206,364L207,365L204,367L203,372L205,374L198,376L198,381L197,382L195,380L193,383L196,385L192,388L193,389L192,391L193,393L193,394L189,394L188,395L190,397L187,401L185,401L188,403L186,404L187,410L180,411L176,418L177,420L175,425L170,423L169,425L165,427L164,430L167,432L169,439L172,441L173,443L172,445L174,448L172,449L171,447L170,449L165,449L165,451L163,450L154,461L147,456L145,448L138,439L135,438L134,433L130,433L129,435L124,429L125,427L128,423L130,424L131,421L134,422L136,419L136,415L139,414L133,406L126,405L126,408L124,409L119,406L116,411L113,411L112,411L113,409L112,404L104,405L101,397L95,399L88,395L84,395L79,392L75,395L74,389L69,384L68,380L70,378L69,375L66,374L64,375L63,371L61,372L61,374L59,374L59,372L56,371L56,372L54,371L52,372L51,374L53,374L53,376L52,381L53,386L43,386L42,384L46,379L52,361L52,357L55,348L54,344L51,338L53,338L54,335L57,334L58,332L64,328L65,330L68,329L72,332L73,327L75,327L75,324L76,322L82,323L82,322L88,327L88,330L90,327L92,327L93,323L95,323L95,319L102,317L101,314L104,309L102,308L106,302L111,300L110,298L112,298L110,296L112,295L118,298L123,299L122,304L125,304L128,307L133,304L135,298Z" data-region="Dolnośląskie" role="button" tabindex="0" aria-label="Dolnośląskie" aria-pressed="false"><title>Dolnośląskie</title></path>
         <path class="tile" d="M273,111L273,111L276,112L279,110L276,116L278,120L285,120L287,122L287,121L298,121L303,122L304,123L303,125L305,126L303,129L305,131L307,140L309,141L310,139L315,139L319,142L318,143L323,143L323,146L330,145L333,146L333,149L335,149L335,151L333,153L333,156L336,156L338,164L334,167L330,168L331,175L333,177L333,182L332,183L326,180L327,183L324,185L319,185L322,191L320,192L317,195L322,200L322,203L323,203L322,206L323,207L318,206L318,211L314,215L317,216L317,218L315,221L312,221L313,224L311,224L315,226L311,232L307,233L310,235L309,238L301,243L298,242L294,244L287,237L287,240L277,243L277,241L275,237L273,237L271,232L266,231L266,229L262,227L260,229L255,229L255,224L253,223L253,225L248,229L245,229L244,227L237,225L238,222L236,223L232,222L231,223L231,220L231,221L226,219L227,217L225,215L219,212L219,214L216,213L215,214L217,214L213,217L213,213L210,212L210,207L207,207L203,210L200,210L201,205L197,202L197,200L199,198L200,199L203,199L203,186L196,180L191,181L190,179L192,177L192,171L194,170L193,166L196,165L192,163L193,159L192,158L197,156L198,153L192,145L188,144L187,142L195,133L197,126L197,122L199,120L203,119L205,122L207,122L208,121L213,123L212,120L216,121L215,117L218,111L221,113L226,110L224,105L232,108L234,108L236,103L239,105L241,104L242,106L244,105L244,107L247,106L248,107L248,110L257,112L263,110L263,112L265,115Z" data-region="Kujawsko-pomorskie" role="button" tabindex="0" aria-label="Kujawsko-pomorskie" aria-pressed="false"><title>Kujawsko-pomorskie</title></path>
         <path class="tile" d="M465,283L464,281L464,279L470,277L473,274L478,276L481,273L487,275L489,272L491,272L490,274L492,276L495,274L497,274L500,269L502,269L509,274L511,271L511,267L513,264L519,269L522,268L526,270L526,265L528,266L530,265L527,263L531,260L530,259L533,259L533,255L536,253L539,248L543,249L543,253L553,256L557,259L560,258L562,259L561,261L564,264L567,264L571,269L573,277L568,284L570,286L568,288L567,292L570,295L569,297L565,299L563,302L565,305L564,309L564,315L566,319L565,321L567,321L569,323L569,325L572,326L570,330L572,330L573,333L570,341L570,345L574,346L576,352L583,358L583,363L586,366L587,372L589,375L589,378L595,384L600,386L597,389L592,389L589,391L589,395L593,396L592,400L596,400L595,404L596,405L597,412L595,421L591,430L580,431L575,433L573,438L570,439L564,446L562,445L562,442L561,441L556,441L558,437L554,435L553,433L555,431L553,430L547,435L542,432L532,442L510,441L508,440L508,439L513,436L507,436L505,435L502,437L499,434L498,431L496,432L496,429L498,430L499,428L498,425L503,425L503,427L507,424L502,423L506,421L504,421L504,418L502,418L504,415L499,413L496,413L492,411L487,410L485,406L480,405L484,397L481,395L481,393L475,391L469,395L464,395L462,388L460,371L461,369L459,363L459,356L461,351L460,348L463,346L459,345L461,344L462,338L457,334L460,331L462,332L464,327L462,326L461,318L453,318L449,313L451,309L455,311L457,314L457,311L461,310L463,307L464,307L466,304L462,301L462,299L469,296L467,291L462,291L466,287Z" data-region="Lubelskie" role="button" tabindex="0" aria-label="Lubelskie" aria-pressed="false"><title>Lubelskie</title></path>
         <path class="tile" d="M51,338L50,333L51,330L49,327L36,321L35,318L38,314L38,309L33,302L31,296L28,293L29,290L34,285L36,282L35,275L38,269L33,264L35,259L34,257L35,253L27,248L28,246L25,238L25,234L30,228L29,225L31,220L26,215L31,212L34,214L37,213L40,208L40,203L44,199L44,193L46,195L48,193L46,192L48,189L51,192L52,194L55,192L57,195L72,188L70,183L75,184L78,180L85,177L88,180L91,181L94,179L97,179L101,174L100,173L102,172L101,170L104,169L103,167L107,167L111,168L112,171L110,175L110,178L111,185L111,192L108,195L106,195L106,197L108,198L109,205L100,207L101,211L99,211L99,214L104,223L102,224L105,228L106,232L103,234L102,232L101,233L103,237L106,239L105,242L106,246L103,250L104,259L105,261L105,263L102,265L108,269L109,267L112,269L113,271L110,274L113,278L120,277L121,283L119,286L124,287L125,288L127,286L133,287L132,288L136,292L136,296L137,297L135,298L133,304L128,307L125,304L122,304L123,299L118,298L112,295L110,296L112,298L110,298L111,300L106,302L102,308L104,309L101,314L102,317L95,319L95,323L93,323L92,327L90,327L88,330L88,327L82,322L82,323L76,322L75,324L75,327L73,327L72,332L68,329L65,330L64,328L58,332L57,334L54,335L53,338Z" data-region="Lubuskie" role="button" tabindex="0" aria-label="Lubuskie" aria-pressed="false"><title>Lubuskie</title></path>
@@ -982,50 +1020,50 @@ body{margin:0}
         <path class="tile" d="M351,360L351,366L355,367L354,376L353,377L349,374L348,371L344,369L342,376L343,379L342,381L340,382L336,388L333,388L332,385L329,385L327,382L322,385L320,384L318,376L316,374L313,374L314,373L311,371L311,369L307,369L307,372L304,374L301,372L299,373L298,370L295,370L292,366L287,364L285,367L284,366L272,368L267,365L265,360L263,359L263,363L261,363L260,361L242,357L242,347L238,347L239,343L237,339L240,338L241,335L243,335L245,332L243,330L246,329L252,332L255,327L254,321L255,315L253,315L254,313L253,311L255,310L253,309L254,307L257,305L258,299L257,296L259,295L258,293L260,293L260,290L262,290L263,292L268,291L273,293L274,289L278,283L275,279L276,279L275,270L277,268L279,270L282,270L284,267L287,268L289,264L287,263L288,256L293,255L297,256L298,250L294,250L295,243L304,241L308,238L310,238L310,240L311,240L311,242L317,243L319,242L322,243L321,245L323,246L329,248L331,251L334,249L336,251L341,248L343,249L345,246L348,247L350,250L354,251L354,252L357,253L356,258L357,261L361,261L364,265L367,264L368,266L367,270L364,273L369,279L366,281L366,282L369,282L370,284L373,284L375,281L377,283L378,281L380,283L382,287L386,287L388,293L389,293L388,294L385,293L387,294L387,300L391,303L391,307L389,309L383,308L383,306L380,306L375,309L375,311L377,311L378,317L380,319L379,324L383,323L384,328L382,329L381,333L379,333L377,342L374,343L375,347L375,349L374,350L372,348L368,349L367,348L366,349L368,352L366,353L363,353L359,355L353,354L351,355L353,357Z" data-region="Łódzkie" role="button" tabindex="0" aria-label="Łódzkie" aria-pressed="false"><title>Łódzkie</title></path>
         <path class="tile" d="M320,381L321,385L326,382L329,385L332,385L332,388L336,388L337,386L341,389L341,392L339,391L338,393L340,394L336,397L335,395L334,396L335,399L337,401L340,400L340,402L344,403L342,407L347,408L346,410L344,410L339,416L346,418L349,424L346,424L346,426L343,427L343,428L334,427L332,430L330,431L323,430L321,432L321,435L320,434L321,439L317,438L315,444L311,445L318,448L316,451L312,452L313,455L308,456L309,459L307,458L305,464L301,466L299,469L299,474L298,475L299,476L303,475L304,481L301,483L302,485L304,483L308,484L311,492L316,493L317,492L319,496L314,500L317,502L319,502L321,507L314,512L314,515L308,516L306,518L306,522L303,525L303,528L299,528L296,527L294,529L291,529L290,519L288,517L282,517L284,514L282,513L280,502L275,501L274,499L270,497L270,495L266,486L268,484L266,482L266,479L265,478L264,480L262,480L258,476L253,476L251,478L249,476L249,474L245,473L244,471L242,470L241,472L239,471L237,466L234,464L236,460L235,455L240,452L247,452L247,449L254,445L258,446L256,441L257,439L253,436L256,432L254,429L255,428L255,424L258,424L261,426L258,417L261,417L266,418L269,415L267,414L267,411L263,409L261,401L267,397L265,396L263,393L266,392L265,389L269,387L271,381L269,377L272,376L271,373L274,372L272,368L284,366L285,367L287,364L292,366L295,370L298,370L299,373L301,372L304,374L307,372L307,369L311,369L311,371L314,373L313,374L316,374Z" data-region="Śląskie" role="button" tabindex="0" aria-label="Śląskie" aria-pressed="false"><title>Śląskie</title></path>
         <path class="tile" d="M337,386L343,379L342,376L344,369L348,371L349,374L353,377L354,376L355,367L351,366L351,360L353,357L351,355L355,353L359,355L363,353L366,353L368,352L366,349L367,348L368,349L372,348L374,350L375,347L374,343L378,340L382,341L383,342L381,343L384,347L385,351L388,349L394,354L394,359L395,356L400,359L401,356L404,358L407,354L412,358L412,359L415,358L416,353L419,355L417,358L421,361L421,365L433,365L435,369L439,372L443,367L444,368L452,365L454,369L457,369L460,366L461,369L460,371L460,379L464,391L461,402L459,404L458,408L456,407L455,408L448,420L439,422L438,426L429,431L429,432L423,436L422,438L420,436L415,439L409,440L408,441L405,441L401,444L399,442L393,450L390,450L386,452L386,451L377,452L376,450L374,449L376,447L372,444L373,442L369,438L369,437L372,435L368,429L368,425L365,423L359,423L356,421L354,422L350,420L348,421L347,421L346,418L339,416L344,410L346,410L347,408L342,407L344,403L340,402L340,400L337,401L335,399L334,396L335,395L336,397L340,394L339,391L340,392L341,390Z" data-region="Świętokrzyskie" role="button" tabindex="0" aria-label="Świętokrzyskie" aria-pressed="false"><title>Świętokrzyskie</title></path>
-        <g class="pins" aria-hidden="true">
-        <g class="pin" transform="translate(367.9 484.0)"><circle r="7"></circle><circle class="dot" r="2.6"></circle><text y="-13">Małopolskie</text></g>
-        </g>
-      </svg>
-      <p class="map-key" aria-hidden="true"><span class="sw has"></span> Jest odcinek <span class="sw soon"></span> Wkrótce</p>
-    </div>
-    <div class="regions-copy">
-      <p class="counter" aria-hidden="true">01<span>/16</span></p>
-      <p class="kicker">Seria w 16 częściach</p>
-      <h2 id="h-regiony">Smaki regionów</h2>
-      <p class="body">Każde województwo: jeden smak, jego historia i przepis. Zaczynamy od Podhala. Wybierz region na mapie.</p>
-      <div class="chips">
-        <button type="button" class="chip" data-region="Podkarpackie" aria-pressed="false">Podkarpackie</button>
+          <g class="pins" aria-hidden="true">
+          <g class="pin" transform="translate(367.9 484.0)"><circle r="7"></circle><circle class="dot" r="2.6"></circle><text y="-13">Małopolskie</text></g>
+          </g>
+        </svg>
+        <p class="map-key" aria-hidden="true"><span class="sw has"></span> Jest odcinek <span class="sw soon"></span> Wkrótce</p>
+      </div>
+      <div class="regions-copy">
+        <p class="counter" aria-hidden="true">01<span>/16</span></p>
+        <p class="kicker">Seria w 16 częściach</p>
+        <h3 id="h-regiony">Smaki regionów</h3>
+        <p class="body">Każde województwo: jeden smak, jego historia i przepis. Zaczynamy od Podhala. Wybierz region na mapie.</p>
+        <div class="chips">
+          <button type="button" class="chip" data-region="Podkarpackie" aria-pressed="false">Podkarpackie</button>
         <button type="button" class="chip" data-region="Świętokrzyskie" aria-pressed="false">Świętokrzyskie</button>
         <button type="button" class="chip" data-region="Małopolskie" aria-pressed="false">Małopolskie</button>
         <button type="button" class="chip" data-region="Lubelskie" aria-pressed="false">Lubelskie</button>
         <button type="button" class="chip" data-region="Śląskie" aria-pressed="false">Śląskie</button>
         <button type="button" class="chip" data-region="Pomorskie" aria-pressed="false">Pomorskie</button>
         <button type="button" class="chip" data-region="Podlaskie" aria-pressed="false">Podlaskie</button>
-        <a href="#regiony" class="chip" data-regions-more="">+ 9 kolejnych</a>
+          <a href="#regiony" class="chip" data-regions-more="">+ 9 kolejnych</a>
+        </div>
+        <p class="region-pick" aria-live="polite" data-region-out=""></p>
       </div>
-      <p class="region-pick" aria-live="polite" data-region-out=""></p>
-    </div>
-  </section>
+    </section>
 
-  <section class="regions world" id="swiat" aria-labelledby="h-swiat" data-world="">
-    <div class="regions-copy">
-      <p class="counter" aria-hidden="true">04<span> kraje</span></p>
-      <p class="kicker">Z podróży</p>
-      <h2 id="h-swiat">Smaki świata</h2>
-      <p class="body">Jedzenie oglądane tam, gdzie się rodzi: targi, kuchnie i ludzie. Kraje z naszymi reportażami i przepisami są wyróżnione. Obróć glob i wybierz kraj.</p>
-    </div>
-    <div class="world-side">
-      <div class="chips" role="group" aria-label="Kraje">
-        <button type="button" class="chip" data-country="Meksyk" aria-pressed="false">Meksyk</button>
+    <section class="regions world" id="swiat" role="tabpanel" aria-labelledby="tab-swiat" data-world="" hidden="">
+      <div class="regions-copy">
+        <p class="counter" aria-hidden="true">04<span> kraje</span></p>
+        <p class="kicker">Z podróży</p>
+        <h3 id="h-swiat">Smaki świata</h3>
+        <p class="body">Jedzenie oglądane tam, gdzie się rodzi: targi, kuchnie i ludzie. Kraje z naszymi reportażami i przepisami są wyróżnione. Obróć glob i wybierz kraj.</p>
+      </div>
+      <div class="world-side">
+        <div class="chips" role="group" aria-label="Kraje">
+          <button type="button" class="chip" data-country="Meksyk" aria-pressed="false">Meksyk</button>
         <button type="button" class="chip" data-country="Peru" aria-pressed="false">Peru</button>
         <button type="button" class="chip" data-country="Gruzja" aria-pressed="false">Gruzja</button>
         <button type="button" class="chip" data-country="Polska" aria-pressed="false">Polska</button>
+        </div>
+        <div class="world-pick" aria-live="polite" data-world-out=""><p class="meta">Wybierz kraj, żeby zobaczyć historie i przepisy.</p></div>
       </div>
-      <div class="world-pick" aria-live="polite" data-world-out=""><p class="meta">Wybierz kraj, żeby zobaczyć historie i przepisy.</p></div>
-    </div>
-    <div class="map world-map" role="group" aria-label="Mapa świata">
-      <svg class="pl-map w-map" viewBox="0 0 1000 439" xmlns="http://www.w3.org/2000/svg">
-        <path class="tile" d="M670,109L677,109L677,108L678,108L679,105L681,106L684,111L687,108L691,109L692,109L684,112L683,113L685,116L684,120L682,120L683,122L681,125L682,127L676,130L675,132L676,135L673,136L666,137L661,135L663,132L662,129L660,129L658,124L659,122L657,121L658,115L661,116L662,115L662,114L666,112L665,110L667,109L667,108Z" data-country="Afganistan"><title>Afganistan</title></path>
+      <div class="map world-map" role="group" aria-label="Mapa świata">
+        <svg class="pl-map w-map" viewBox="0 0 1000 439" xmlns="http://www.w3.org/2000/svg">
+          <path class="tile" d="M670,109L677,109L677,108L678,108L679,105L681,106L684,111L687,108L691,109L692,109L684,112L683,113L685,116L684,120L682,120L683,122L681,125L682,127L676,130L675,132L676,135L673,136L666,137L661,135L663,132L662,129L660,129L658,124L659,122L657,121L658,115L661,116L662,115L662,114L666,112L665,110L667,109L667,108Z" data-country="Afganistan"><title>Afganistan</title></path>
         <path class="tile" d="M552,97L551,101L549,99L548,93L549,91L551,93L551,96Z" data-country="Albania"><title>Albania</title></path>
         <path class="tile" d="M477,143L477,138L486,134L487,132L490,131L490,128L497,126L497,125L494,116L497,114L504,111L514,111L516,110L522,110L521,118L520,120L520,122L524,127L526,136L526,147L525,148L528,154L529,154L533,158L516,172L509,174L509,171L506,170L505,168Z" data-country="Algieria"><title>Algieria</title></path>
         <path class="tile" d="M537,264L534,268L534,265L536,263ZM535,269L546,268L549,276L554,276L555,273L557,272L558,272L558,274L561,274L562,288L566,287L567,288L567,295L561,295L561,307L564,312L559,314L552,313L551,311L539,312L537,310L532,311L534,301L539,289L536,281L537,278Z" data-country="Angola"><title>Angola</title></path>
@@ -1200,78 +1238,37 @@ body{margin:0}
         <path class="tile" d="M585,329L580,329L577,327L576,323L572,319L570,313L575,314L580,307L584,305L584,306L587,306L591,309L590,322Z" data-country="Zimbabwe"><title>Zimbabwe</title></path>
         <path class="tile" d="M640,155L641,156L646,155L651,148L652,149L652,152L651,152L652,155L651,156L650,161L642,159Z" data-country="Zjednoczone Emiraty Arabskie"><title>Zjednoczone Emiraty Arabskie</title></path>
         <path class="tile" d="M560,47L562,51L559,52L555,50L547,51L547,48L549,47L551,49L553,49L553,47L555,46Z" data-country="Łotwa"><title>Łotwa</title></path>
-        <g class="pins" aria-hidden="true">
-        <g class="pin" transform="translate(222.6 156.6)"><circle r="7"></circle><circle class="dot" r="2.6"></circle><text y="-13">Meksyk</text></g>
+          <g class="pins" aria-hidden="true">
+          <g class="pin" transform="translate(222.6 156.6)"><circle r="7"></circle><circle class="dot" r="2.6"></circle><text y="-13">Meksyk</text></g>
         <g class="pin" transform="translate(291.0 280.6)"><circle r="7"></circle><circle class="dot" r="2.6"></circle><text y="-13">Peru</text></g>
         <g class="pin" transform="translate(607.6 93.0)"><circle r="7"></circle><circle class="dot" r="2.6"></circle><text y="-13">Gruzja</text></g>
         <g class="pin" transform="translate(544.4 62.4)"><circle r="7"></circle><circle class="dot" r="2.6"></circle><text y="-13">Polska</text></g>
-        </g>
-      </svg>
-      <p class="map-key" aria-hidden="true"><span class="sw has"></span> Nasze historie <span class="sw soon"></span> Jeszcze tu nie byliśmy</p>
-    </div>
-  </section>
-
-  <section class="sec" id="przepisy" aria-labelledby="h-przepisy" data-recipes="">
-    <div class="sec-head">
-      <h2 id="h-przepisy" data-ghost="Przepisy">Przepisy</h2>
-      <a href="https://lowca-smakow.netlify.app/przepisy/">Wszystkie przepisy →</a>
-    </div>
-    <div class="chips" role="group" aria-label="Filtruj przepisy">
-      <button type="button" class="chip" data-filter="all" aria-pressed="true">Wszystkie</button>
-      <button type="button" class="chip" data-filter="kiszonki" aria-pressed="false">Kiszonki</button><button type="button" class="chip" data-filter="staropolskie" aria-pressed="false">Staropolskie</button><button type="button" class="chip" data-filter="podroze" aria-pressed="false">Z podróży</button><button type="button" class="chip" data-filter="codzien" aria-pressed="false">Na co dzień</button><button type="button" class="chip" data-filter="sezonowe" aria-pressed="false">Sezonowe</button>
-    </div>
-    <div class="rail">
-      <a href="https://lowca-smakow.netlify.app/przepisy/slimaki-w-szarym-sosie.html" class="ov ov-tile" data-cat="staropolskie"><img class="fill" src="https://images.unsplash.com/photo-1549413468-24b18ebf5d9c?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimaki zapiekane z masłem ziołowym w ceramicznym naczyniu" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Staropolskie</span><span class="tag">70 min</span></span><span class="h">Ślimaki w szarym sosie</span><span class="pills"><span class="no">P01</span></span></span></a><a href="https://lowca-smakow.netlify.app/przepisy/birria-tacos.html" class="ov ov-tile" data-cat="podroze"><img class="fill" src="https://images.unsplash.com/photo-1585803518902-58a3ef005b51?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Tacos de birria z cebulą i kolendrą, obok miska consommé" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Z podróży</span><span class="tag">Meksyk</span></span><span class="h">Birria tacos</span><span class="pills"><span class="no">P02</span></span></span></a><a href="https://lowca-smakow.netlify.app/przepisy/ogorki-kiszone.html" class="ov ov-tile" data-cat="kiszonki"><img class="fill" src="https://images.unsplash.com/photo-1462536546956-beef6399d8cf?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Małe ogórki w durszlaku obok pęczka koperku" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Kiszonki</span><span class="tag">3–7 dni</span></span><span class="h">Ogórki kiszone babci</span><span class="pills"><span class="no">P03</span></span></span></a><a href="https://lowca-smakow.netlify.app/przepisy/papa-a-la-huancaina.html" class="ov ov-tile" data-cat="podroze"><img class="fill" src="https://images.unsplash.com/photo-1633959639799-6d3f66e05710?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Pieczone ziemniaki z natką pietruszki na talerzu" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Z podróży</span><span class="tag">Peru</span></span><span class="h">Papa a la huancaína</span><span class="pills"><span class="no">P04</span></span></span></a>
-    </div>
-    <p class="meta" aria-live="polite" data-recipes-empty="" hidden="">Wkrótce więcej przepisów w tej kategorii.</p>
+          </g>
+        </svg>
+        <p class="map-key" aria-hidden="true"><span class="sw has"></span> Nasze historie <span class="sw soon"></span> Jeszcze tu nie byliśmy</p>
+      </div>
+    </section>
   </section>
 
   <section class="sec shop-sec" id="sklep" aria-labelledby="h-sklep" data-filterable="">
     <div class="sec-head">
-      <h2 id="h-sklep" data-ghost="Spiżarnia">Ze spiżarni Łowcy</h2>
+      <h2 id="h-sklep">Ze spiżarni Łowcy</h2>
       <a href="https://lowca-smakow.netlify.app/sklep/">Cały sklep →</a>
     </div>
     <p class="sec-intro">Mieszanki przypraw, które składamy sami, do przepisów i historii z Łowcy Smaków. Małe partie, bez wzmacniaczy smaku i bez zbędnego cukru.</p>
     <div class="grid products">
-      <article class="product-card" data-cat="polska"><a href="https://lowca-smakow.netlify.app/sklep/staropolska.html" class="p-photo" tabindex="-1" aria-hidden="true"><span class="ph frame tint-mustard ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1589536677029-c0aa1808fba6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Przyprawy rozsypane na drewnianym blacie" decoding="async"></span><span class="p-badge">Polecamy</span></a><div class="p-body"><p class="p-origin">Kuchnia staropolska <span class="heat" title="Ostrość: lekko ostra"><span class="sr-only">Ostrość: lekko ostra</span><span class="on"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span></span></p><h3><a href="https://lowca-smakow.netlify.app/sklep/staropolska.html">Staropolska</a></h3><p class="p-sub">Pieprz, szafran, imbir</p><p class="p-buy"><span class="p-price">od 29&nbsp;zł</span><button type="button" class="btn btn-ink btn-sm" disabled="">Wkrótce w sprzedaży</button></p></div></article><article class="product-card" data-cat="polska"><a href="https://lowca-smakow.netlify.app/sklep/piernikowa-szary-sos.html" class="p-photo" tabindex="-1" aria-hidden="true"><span class="ph frame tint-vermilion ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1641677371014-5d0691ab5c0a?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Gwiazdki anyżu na drewnianym stole" decoding="async"></span></a><div class="p-body"><p class="p-origin">Kuchnia staropolska <span class="heat" title="Ostrość: łagodna"><span class="sr-only">Ostrość: łagodna</span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span></span></p><h3><a href="https://lowca-smakow.netlify.app/sklep/piernikowa-szary-sos.html">Do szarego sosu</a></h3><p class="p-sub">Piernik, goździk, anyż</p><p class="p-buy"><span class="p-price">od 27&nbsp;zł</span><button type="button" class="btn btn-ink btn-sm" disabled="">Wkrótce w sprzedaży</button></p></div></article><article class="product-card" data-cat="kiszenie"><a href="https://lowca-smakow.netlify.app/sklep/do-kiszenia.html" class="p-photo" tabindex="-1" aria-hidden="true"><span class="ph frame tint-ultramarine ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1721934081798-34c4488fdd12?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Trzy łyżki z różnymi przyprawami" decoding="async"></span><span class="p-badge">Nowość</span></a><div class="p-body"><p class="p-origin">Polska <span class="heat" title="Ostrość: łagodna"><span class="sr-only">Ostrość: łagodna</span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span></span></p><h3><a href="https://lowca-smakow.netlify.app/sklep/do-kiszenia.html">Do kiszenia</a></h3><p class="p-sub">Gorczyca, koper, chrzan</p><p class="p-buy"><span class="p-price">od 22&nbsp;zł</span><button type="button" class="btn btn-ink btn-sm" disabled="">Wkrótce w sprzedaży</button></p></div></article><article class="product-card" data-cat="swiat"><a href="https://lowca-smakow.netlify.app/sklep/birria.html" class="p-photo" tabindex="-1" aria-hidden="true"><span class="ph frame tint-sage ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1586770613913-853ae5abb462?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Suszone papryczki chili i czosnek na ciemnej tkaninie" decoding="async"></span></a><div class="p-body"><p class="p-origin">Meksyk, Jalisco <span class="heat" title="Ostrość: ostra"><span class="sr-only">Ostrość: ostra</span><span class="on"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="on"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span></span></p><h3><a href="https://lowca-smakow.netlify.app/sklep/birria.html">Birria</a></h3><p class="p-sub">Guajillo, ancho, kmin</p><p class="p-buy"><span class="p-price">od 32&nbsp;zł</span><button type="button" class="btn btn-ink btn-sm" disabled="">Wkrótce w sprzedaży</button></p></div></article>
+      <article class="product-card" data-cat="polska"><a href="https://lowca-smakow.netlify.app/sklep/staropolska.html" class="p-photo" tabindex="-1" aria-hidden="true"><span class="ph frame tint-mustard ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1589536677029-c0aa1808fba6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Przyprawy rozsypane na drewnianym blacie" decoding="async"></span><span class="p-badge">Polecamy</span></a><div class="p-body"><p class="p-origin"><span class="tags"><span class="tag">Kuchnia staropolska</span></span> <span class="heat" title="Ostrość: lekko ostra"><span class="sr-only">Ostrość: lekko ostra</span><span class="on"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span></span></p><h3><a href="https://lowca-smakow.netlify.app/sklep/staropolska.html">Staropolska</a></h3><p class="p-sub">Pieprz, szafran, imbir</p><p class="p-buy"><span class="p-price">od 29&nbsp;zł</span><button type="button" class="btn btn-ink btn-sm" disabled="">Wkrótce w sprzedaży</button></p></div></article><article class="product-card" data-cat="polska"><a href="https://lowca-smakow.netlify.app/sklep/piernikowa-szary-sos.html" class="p-photo" tabindex="-1" aria-hidden="true"><span class="ph frame tint-vermilion ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1641677371014-5d0691ab5c0a?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Gwiazdki anyżu na drewnianym stole" decoding="async"></span></a><div class="p-body"><p class="p-origin"><span class="tags"><span class="tag">Kuchnia staropolska</span></span> <span class="heat" title="Ostrość: łagodna"><span class="sr-only">Ostrość: łagodna</span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span></span></p><h3><a href="https://lowca-smakow.netlify.app/sklep/piernikowa-szary-sos.html">Do szarego sosu</a></h3><p class="p-sub">Piernik, goździk, anyż</p><p class="p-buy"><span class="p-price">od 27&nbsp;zł</span><button type="button" class="btn btn-ink btn-sm" disabled="">Wkrótce w sprzedaży</button></p></div></article><article class="product-card" data-cat="kiszenie"><a href="https://lowca-smakow.netlify.app/sklep/do-kiszenia.html" class="p-photo" tabindex="-1" aria-hidden="true"><span class="ph frame tint-ultramarine ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1721934081798-34c4488fdd12?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Trzy łyżki z różnymi przyprawami" decoding="async"></span><span class="p-badge">Nowość</span></a><div class="p-body"><p class="p-origin"><span class="tags"><span class="tag">Polska</span></span> <span class="heat" title="Ostrość: łagodna"><span class="sr-only">Ostrość: łagodna</span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span></span></p><h3><a href="https://lowca-smakow.netlify.app/sklep/do-kiszenia.html">Do kiszenia</a></h3><p class="p-sub">Gorczyca, koper, chrzan</p><p class="p-buy"><span class="p-price">od 22&nbsp;zł</span><button type="button" class="btn btn-ink btn-sm" disabled="">Wkrótce w sprzedaży</button></p></div></article><article class="product-card" data-cat="swiat"><a href="https://lowca-smakow.netlify.app/sklep/birria.html" class="p-photo" tabindex="-1" aria-hidden="true"><span class="ph frame tint-sage ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1586770613913-853ae5abb462?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Suszone papryczki chili i czosnek na ciemnej tkaninie" decoding="async"></span></a><div class="p-body"><p class="p-origin"><span class="tags"><span class="tag">Meksyk, Jalisco</span></span> <span class="heat" title="Ostrość: ostra"><span class="sr-only">Ostrość: ostra</span><span class="on"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="on"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span><span class="off"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6-1-3.4z"></path></svg></span></span></p><h3><a href="https://lowca-smakow.netlify.app/sklep/birria.html">Birria</a></h3><p class="p-sub">Guajillo, ancho, kmin</p><p class="p-buy"><span class="p-price">od 32&nbsp;zł</span><button type="button" class="btn btn-ink btn-sm" disabled="">Wkrótce w sprzedaży</button></p></div></article>
     </div>
   </section>
 
   <section class="sec offers-sec" id="warsztaty" aria-labelledby="h-warsztaty">
     <div class="sec-head">
-      <h2 id="h-warsztaty" data-ghost="Warsztaty">Warsztaty</h2>
-      <a href="https://lowca-smakow.netlify.app/warsztaty/">Wszystkie warsztaty →</a>
+      <h2 id="h-warsztaty">Gotuj i podróżuj z nami</h2>
+      <p class="sec-links"><a href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty →</a> <a href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy →</a></p>
     </div>
-    <p class="sec-intro">Gotujemy razem i rozmawiamy o tym, skąd biorą się smaki. Warsztaty kulinarne i wieczory antropologii jedzenia w małych grupach.</p>
-    <div class="grid grid-3 offers">
-      <a href="https://lowca-smakow.netlify.app/warsztaty/pierogi-od-podstaw.html" class="offer-card"><span class="ph frame tint-mustard ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1763570645098-371723617ee9?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ludzie przy stole wspólnie przygotowują jedzenie" decoding="async"><span class="badge" aria-hidden="true"><b>14</b>lis</span></span><span class="offer-body"><span class="tags"><span class="tag">Warsztaty kulinarne</span><span class="tag">4 godziny</span></span><h3>Pierogi od podstaw</h3><span class="when">14 listopada 2026, 11:00 <span class="more-dates">+1 termin</span></span><span class="pills"><span class="price">od 290&nbsp;zł</span><span class="date">do 12 osób</span></span></span></a><a href="https://lowca-smakow.netlify.app/warsztaty/kiszenie-fermentacja.html" class="offer-card"><span class="ph frame tint-vermilion ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1693212454137-0d2909d79b27?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Trzy słoiki z kiszonymi warzywami" decoding="async"><span class="badge" aria-hidden="true"><b>21</b>lis</span></span><span class="offer-body"><span class="tags"><span class="tag">Warsztaty kulinarne</span><span class="tag">3 godziny</span></span><h3>Kiszenie: warsztaty fermentacji</h3><span class="when">21 listopada 2026, 12:00 <span class="more-dates">+1 termin</span></span><span class="pills"><span class="price">od 240&nbsp;zł</span><span class="date">do 14 osób</span></span></span></a><a href="https://lowca-smakow.netlify.app/warsztaty/antropologia-stolu.html" class="offer-card"><span class="ph frame tint-ultramarine ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Ludzie przy wspólnym stole rozmawiają i jedzą" decoding="async"><span class="badge" aria-hidden="true"><b>27</b>lis</span></span><span class="offer-body"><span class="tags"><span class="tag">Antropologia kulinarna</span><span class="tag">2,5 godziny</span></span><h3>Dlaczego jemy to, co jemy? Wieczór antropologii kulinarnej</h3><span class="when">27 listopada 2026, 19:00 <span class="more-dates">+1 termin</span></span><span class="pills"><span class="price">od 160&nbsp;zł</span><span class="date">do 24 osób</span></span></span></a>
-    </div>
-  </section>
-
-  <section class="sec travel-split" id="podroze" aria-labelledby="h-podroze">
-    <div class="travel-panel">
-      <div class="travel-panel-in">
-        <p class="kicker">Reportaże</p>
-        <h2 id="h-podroze">Z podróży</h2>
-        <p class="body">Targi, kuchnie i ludzie: jedzenie oglądane tam, gdzie się rodzi.</p>
-        <a href="https://lowca-smakow.netlify.app/historie/peru-ziemniaki.html" class="btn btn-line">Wszystkie reportaże</a>
-      </div>
-    </div>
-    <div class="travel-list">
-      <a href="https://lowca-smakow.netlify.app/historie/peru-ziemniaki.html" class="travel-item"><span class="vlabel">Peru</span><span class="ph frame tint-sage ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1683543124235-400a2b31cc73?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ziemniaki na straganie targowym" decoding="async"></span><span class="travel-t"><span class="no">№ 008</span><span class="h">Tysiące odmian: w Andach ziemniak to nie jedno warzywo</span><span class="excerpt">Na targu w Cusco ziemniaki leżą w kopcach: żółte, fioletowe, czarne, podłużne, pomarszczone.</span><span class="go" aria-hidden="true"></span></span></a><a href="https://lowca-smakow.netlify.app/historie/meksyk-chile.html" class="travel-item"><span class="vlabel">Meksyk, Jalisco</span><span class="ph frame tint-mustard ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1752627580142-8ea39c4eac64?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Czerwone papryczki chile suszące się na słońcu" decoding="async"></span><span class="travel-t"><span class="no">№ 009</span><span class="h">Jalisco: skąd birria bierze kolor i ogień</span><span class="excerpt">Suszone chile leżą na matach w słońcu, aż skórka stanie się ciemna i twarda.</span><span class="go" aria-hidden="true"></span></span></a><a href="https://lowca-smakow.netlify.app/historie/oaxaca-targ.html" class="travel-item"><span class="vlabel">Meksyk, Oaxaca</span><span class="ph frame tint-vermilion ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1545504573-edac76c6a487?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Kobieta przygotowująca jedzenie na ulicznym targu" decoding="async"></span><span class="travel-t"><span class="no">№ 010</span><span class="h">Dzień na targu: jedzenie, które gotuje się na oczach klienta</span><span class="excerpt">Na targach Meksyku kuchnia nie jest schowana za drzwiami.</span><span class="go" aria-hidden="true"></span></span></a>
-    </div>
-  </section>
-
-  <section class="bleed trips-band" id="wyprawy" aria-labelledby="h-wyprawy">
-    <div class="bleed-in">
-      <div class="sec-head">
-        <h2 id="h-wyprawy" data-ghost="Wyprawy">Wyprawy kulinarne</h2>
-        <a href="https://lowca-smakow.netlify.app/wyprawy/">Wszystkie wyprawy →</a>
-      </div>
-      <p class="sec-intro">Wyprawy kulinarne Łowcy Smaków: małe grupy, długie postoje, kuchnie domowe i targi zamiast restauracji dla turystów.</p>
-      <div class="grid grid-3 offers">
-        <a href="https://lowca-smakow.netlify.app/wyprawy/meksyk-oaxaca.html" class="offer-card"><span class="ph frame tint-ultramarine ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1715353540913-986fb16f6ef4?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Kościół w Oaxace na tle gór" decoding="async"><span class="badge" aria-hidden="true"><b>6</b>mar</span></span><span class="offer-body"><span class="tags"><span class="tag">Meksyk</span><span class="tag">11 dni</span></span><h3>Meksyk: Oaxaca i Puebla</h3><span class="when">6–16 marca 2027 <span class="more-dates">+1 termin</span></span><span class="pills"><span class="price">od 13&nbsp;900&nbsp;zł</span><span class="date">8–12 osób</span></span></span></a><a href="https://lowca-smakow.netlify.app/wyprawy/peru-andy.html" class="offer-card"><span class="ph frame tint-sage ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1583202806174-ab03e16760d5?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Kobieta w tradycyjnym stroju na ulicy w Cusco" decoding="async"><span class="badge" aria-hidden="true"><b>8</b>maj</span></span><span class="offer-body"><span class="tags"><span class="tag">Peru</span><span class="tag">12 dni</span></span><h3>Peru: od Limy po Cusco</h3><span class="when">8–19 maja 2027</span><span class="pills"><span class="price">od 15&nbsp;900&nbsp;zł</span><span class="date">8–12 osób</span></span></span></a><a href="https://lowca-smakow.netlify.app/wyprawy/gruzja-supra.html" class="offer-card"><span class="ph frame tint-mustard ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1790498879720-1faecf186f33?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Chaczapuri z jajkiem i chinkali na drewnianym stole w Tbilisi" decoding="async"><span class="badge" aria-hidden="true"><b>18</b>wrz</span></span><span class="offer-body"><span class="tags"><span class="tag">Gruzja</span><span class="tag">8 dni</span></span><h3>Gruzja: supra i kwewri</h3><span class="when">18–25 września 2027</span><span class="pills"><span class="price">od 6&nbsp;900&nbsp;zł</span><span class="date">8–14 osób</span></span></span></a>
-      </div>
+    <p class="sec-intro">Warsztaty kulinarne i wieczory antropologii jedzenia w małych grupach, a raz na sezon wyprawa tam, gdzie rodzą się smaki.</p>
+    <div class="grid offers offers-4">
+      <a href="https://lowca-smakow.netlify.app/warsztaty/pierogi-od-podstaw.html" class="offer-card"><span class="ph frame tint-mustard ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1763570645098-371723617ee9?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Ludzie przy stole wspólnie przygotowują jedzenie" decoding="async"><span class="badge" aria-hidden="true"><b>14</b>lis</span></span><span class="offer-body"><span class="tags"><span class="tag">Warsztaty kulinarne</span><span class="tag">4 godziny</span></span><h3>Pierogi od podstaw</h3><span class="when">14 listopada 2026, 11:00 <span class="more-dates">+1 termin</span></span><span class="pills"><span class="price">od 290&nbsp;zł</span><span class="date">do 12 osób</span></span></span></a><a href="https://lowca-smakow.netlify.app/warsztaty/kiszenie-fermentacja.html" class="offer-card"><span class="ph frame tint-vermilion ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1693212454137-0d2909d79b27?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Trzy słoiki z kiszonymi warzywami" decoding="async"><span class="badge" aria-hidden="true"><b>21</b>lis</span></span><span class="offer-body"><span class="tags"><span class="tag">Warsztaty kulinarne</span><span class="tag">3 godziny</span></span><h3>Kiszenie: warsztaty fermentacji</h3><span class="when">21 listopada 2026, 12:00 <span class="more-dates">+1 termin</span></span><span class="pills"><span class="price">od 240&nbsp;zł</span><span class="date">do 14 osób</span></span></span></a><a href="https://lowca-smakow.netlify.app/wyprawy/meksyk-oaxaca.html" class="offer-card"><span class="ph frame tint-ultramarine ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1715353540913-986fb16f6ef4?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Kościół w Oaxace na tle gór" decoding="async"><span class="badge" aria-hidden="true"><b>6</b>mar</span></span><span class="offer-body"><span class="tags"><span class="tag">Meksyk</span><span class="tag">11 dni</span></span><h3>Meksyk: Oaxaca i Puebla</h3><span class="when">6–16 marca 2027 <span class="more-dates">+1 termin</span></span><span class="pills"><span class="price">od 13&nbsp;900&nbsp;zł</span><span class="date">8–12 osób</span></span></span></a><a href="https://lowca-smakow.netlify.app/wyprawy/peru-andy.html" class="offer-card"><span class="ph frame tint-sage ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1583202806174-ab03e16760d5?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Kobieta w tradycyjnym stroju na ulicy w Cusco" decoding="async"><span class="badge" aria-hidden="true"><b>8</b>maj</span></span><span class="offer-body"><span class="tags"><span class="tag">Peru</span><span class="tag">12 dni</span></span><h3>Peru: od Limy po Cusco</h3><span class="when">8–19 maja 2027</span><span class="pills"><span class="price">od 15&nbsp;900&nbsp;zł</span><span class="date">8–12 osób</span></span></span></a>
     </div>
   </section>
 
@@ -1304,7 +1301,7 @@ body{margin:0}
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
       <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>
     </nav>
-    <p class="meta credits">Zdjęcia: <a href="https://unsplash.com/@twalton?utm_source=lowca_smakow&amp;utm_medium=referral">Townsend Walton</a>, <a href="https://unsplash.com/@aliphotos_86?utm_source=lowca_smakow&amp;utm_medium=referral">Ali Robins</a>, <a href="https://unsplash.com/@maharram?utm_source=lowca_smakow&amp;utm_medium=referral">Maharram Hasanli</a>, <a href="https://unsplash.com/@enginakyurt?utm_source=lowca_smakow&amp;utm_medium=referral">engin akyurt</a>, <a href="https://unsplash.com/@orlovamaria?utm_source=lowca_smakow&amp;utm_medium=referral">Maria Orlova</a>, <a href="https://unsplash.com/@kwami_heude_50?utm_source=lowca_smakow&amp;utm_medium=referral">Kwami Fattah Al Sissi</a>, <a href="https://unsplash.com/@anshu18?utm_source=lowca_smakow&amp;utm_medium=referral">Anshu A</a>, <a href="https://unsplash.com/@priscilladupreez?utm_source=lowca_smakow&amp;utm_medium=referral">Priscilla Du Preez</a>, <a href="https://unsplash.com/@afcurtis?utm_source=lowca_smakow&amp;utm_medium=referral">Austin Curtis</a>, <a href="https://unsplash.com/@fin777?utm_source=lowca_smakow&amp;utm_medium=referral">Deb Dowd</a>, <a href="https://unsplash.com/@filmijanov?utm_source=lowca_smakow&amp;utm_medium=referral">Kristian Kulijanov</a>, <a href="https://unsplash.com/@newmanphotog?utm_source=lowca_smakow&amp;utm_medium=referral">Timothy Newman</a>, <a href="https://unsplash.com/@artsmarts?utm_source=lowca_smakow&amp;utm_medium=referral">Lindsey Elsey</a>, <a href="https://unsplash.com/@isaozalp?utm_source=lowca_smakow&amp;utm_medium=referral">İsa A. Özalp</a>, <a href="https://unsplash.com/@madelynpao?utm_source=lowca_smakow&amp;utm_medium=referral">Madelyn Batista</a>, <a href="https://unsplash.com/@boudewijn_huysmans?utm_source=lowca_smakow&amp;utm_medium=referral">Boudewijn Huysmans</a>, <a href="https://unsplash.com/@mrasmuson?utm_source=lowca_smakow&amp;utm_medium=referral">Mark Rasmuson</a>, <a href="https://unsplash.com/@jakubzerdzicki?utm_source=lowca_smakow&amp;utm_medium=referral">Jakub Żerdzicki</a>, <a href="https://unsplash.com/@rabbit_in_blue?utm_source=lowca_smakow&amp;utm_medium=referral">Karolina Kołodziejczak</a>, <a href="https://unsplash.com/@diegonacho?utm_source=lowca_smakow&amp;utm_medium=referral">Diego Lozano</a>, <a href="https://unsplash.com/@jonathanpielmayer?utm_source=lowca_smakow&amp;utm_medium=referral">Jonathan Pielmayer</a>, <a href="https://unsplash.com/@markuswinkler?utm_source=lowca_smakow&amp;utm_medium=referral">Markus Winkler</a>, <a href="https://unsplash.com/@maranthi?utm_source=lowca_smakow&amp;utm_medium=referral">stephan de MARANTHI</a>, <a href="https://unsplash.com/@dlerman6?utm_source=lowca_smakow&amp;utm_medium=referral">Daniel Lerman</a> · <a href="https://unsplash.com/?utm_source=lowca_smakow&amp;utm_medium=referral">Unsplash</a></p>
+    <p class="meta credits">Zdjęcia: <a href="https://unsplash.com/@twalton?utm_source=lowca_smakow&amp;utm_medium=referral">Townsend Walton</a>, <a href="https://unsplash.com/@kwami_heude_50?utm_source=lowca_smakow&amp;utm_medium=referral">Kwami Fattah Al Sissi</a>, <a href="https://unsplash.com/@anshu18?utm_source=lowca_smakow&amp;utm_medium=referral">Anshu A</a>, <a href="https://unsplash.com/@afcurtis?utm_source=lowca_smakow&amp;utm_medium=referral">Austin Curtis</a>, <a href="https://unsplash.com/@fin777?utm_source=lowca_smakow&amp;utm_medium=referral">Deb Dowd</a>, <a href="https://unsplash.com/@newmanphotog?utm_source=lowca_smakow&amp;utm_medium=referral">Timothy Newman</a>, <a href="https://unsplash.com/@artsmarts?utm_source=lowca_smakow&amp;utm_medium=referral">Lindsey Elsey</a>, <a href="https://unsplash.com/@isaozalp?utm_source=lowca_smakow&amp;utm_medium=referral">İsa A. Özalp</a>, <a href="https://unsplash.com/@madelynpao?utm_source=lowca_smakow&amp;utm_medium=referral">Madelyn Batista</a>, <a href="https://unsplash.com/@aliphotos_86?utm_source=lowca_smakow&amp;utm_medium=referral">Ali Robins</a>, <a href="https://unsplash.com/@boudewijn_huysmans?utm_source=lowca_smakow&amp;utm_medium=referral">Boudewijn Huysmans</a>, <a href="https://unsplash.com/@orlovamaria?utm_source=lowca_smakow&amp;utm_medium=referral">Maria Orlova</a>, <a href="https://unsplash.com/@mrasmuson?utm_source=lowca_smakow&amp;utm_medium=referral">Mark Rasmuson</a>, <a href="https://unsplash.com/@jakubzerdzicki?utm_source=lowca_smakow&amp;utm_medium=referral">Jakub Żerdzicki</a>, <a href="https://unsplash.com/@maharram?utm_source=lowca_smakow&amp;utm_medium=referral">Maharram Hasanli</a>, <a href="https://unsplash.com/@rabbit_in_blue?utm_source=lowca_smakow&amp;utm_medium=referral">Karolina Kołodziejczak</a>, <a href="https://unsplash.com/@diegonacho?utm_source=lowca_smakow&amp;utm_medium=referral">Diego Lozano</a>, <a href="https://unsplash.com/@jonathanpielmayer?utm_source=lowca_smakow&amp;utm_medium=referral">Jonathan Pielmayer</a>, <a href="https://unsplash.com/@markuswinkler?utm_source=lowca_smakow&amp;utm_medium=referral">Markus Winkler</a> · <a href="https://unsplash.com/?utm_source=lowca_smakow&amp;utm_medium=referral">Unsplash</a></p>
     <p class="meta copyright">© 2026 Savour Ventures OÜ</p>
   </div>
 </footer>
@@ -1342,8 +1339,7 @@ body{margin:0}
     <a class="navlink" href="https://lowca-smakow.netlify.app/historie/">Historie</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/przepisy/">Przepisy</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a>
-    <a class="navlink" href="https://lowca-smakow.netlify.app/#regiony">Smaki regionów</a>
-    <a class="navlink" href="https://lowca-smakow.netlify.app/#swiat">Smaki świata</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#mapy">Mapy smaków</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/sklep/">Sklep</a>
@@ -1404,9 +1400,9 @@ body{margin:0}
       
     </div>
     <div class="grid grid-4">
-      <a href="https://lowca-smakow.netlify.app/przepisy/ogorki-kiszone.html" class="card sm"><div class="ph frame tint-mustard ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1462536546956-beef6399d8cf?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Małe ogórki w durszlaku obok pęczka koperku" decoding="async"></div><p class="kicker">Przepis</p><h3>Ogórki kiszone babci</h3></a>
-      <a href="https://lowca-smakow.netlify.app/historie/pierogi.html" class="card sm"><div class="ph frame tint-vermilion ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ręce nakładające farsz na krążki ciasta na pierogi" decoding="async"></div><p class="kicker">Poniedziałek</p><h3>Pierogi: danie, które każdy region ma za swoje</h3></a>
-      <a href="https://lowca-smakow.netlify.app/historie/bary-mleczne.html" class="card sm"><div class="ph frame tint-ultramarine ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1612966948332-81d747414a8f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Rosół z warzywami w porcelanowej wazie" decoding="async"></div><p class="kicker">Niedziela</p><h3>Skąd się wzięły bary mleczne?</h3></a>
+      <a href="https://lowca-smakow.netlify.app/przepisy/ogorki-kiszone.html" class="card sm"><div class="ph frame tint-mustard ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1462536546956-beef6399d8cf?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Małe ogórki w durszlaku obok pęczka koperku" decoding="async"></div><span class="tags"><span class="tag">Przepis</span></span><h3>Ogórki kiszone babci</h3></a>
+      <a href="https://lowca-smakow.netlify.app/historie/pierogi.html" class="card sm"><div class="ph frame tint-vermilion ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ręce nakładające farsz na krążki ciasta na pierogi" decoding="async"></div><span class="tags"></span><h3>Pierogi: danie, które każdy region ma za swoje</h3></a>
+      <a href="https://lowca-smakow.netlify.app/historie/bary-mleczne.html" class="card sm"><div class="ph frame tint-ultramarine ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1612966948332-81d747414a8f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Rosół z warzywami w porcelanowej wazie" decoding="async"></div><span class="tags"></span><h3>Skąd się wzięły bary mleczne?</h3></a>
     </div>
   </section>
 
@@ -1475,8 +1471,7 @@ body{margin:0}
     <a class="navlink" href="https://lowca-smakow.netlify.app/historie/">Historie</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/przepisy/" aria-current="page">Przepisy</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a>
-    <a class="navlink" href="https://lowca-smakow.netlify.app/#regiony">Smaki regionów</a>
-    <a class="navlink" href="https://lowca-smakow.netlify.app/#swiat">Smaki świata</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#mapy">Mapy smaków</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/sklep/">Sklep</a>
@@ -1583,9 +1578,9 @@ body{margin:0}
       <p class="meta">Dobrane po serii, regionie i składnikach</p>
     </div>
     <div class="grid grid-4">
-      <a href="https://lowca-smakow.netlify.app/historie/ferma-slimakow.html" class="card sm"><div class="ph frame tint-vermilion ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1621447096587-2f9d8fa16953?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimak na zielonych liściach" decoding="async"></div><p class="kicker">Wideo</p><h3>Na fermie ślimaków: kulisy odcinka</h3></a>
-      <a href="https://lowca-smakow.netlify.app/historie/kim-byl-czerniecki.html" class="card sm"><div class="ph frame tint-ultramarine ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1602660187275-7275b639d7ea?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Średniowieczny rękopis na pergaminie" decoding="async"></div><p class="kicker">Historia</p><h3>Kim był Stanisław Czerniecki?</h3></a>
-      <a href="https://lowca-smakow.netlify.app/historie/przyprawy-staropolskie.html" class="card sm"><div class="ph frame tint-sage ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1467688695332-6b486449d78f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Strony dawnej księgi zapisane gotyckim pismem" decoding="async"></div><p class="kicker">Historia</p><h3>Pieprz, szafran, imbir: kuchnia, która pachniała bogactwem</h3></a>
+      <a href="https://lowca-smakow.netlify.app/historie/ferma-slimakow.html" class="card sm"><div class="ph frame tint-vermilion ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1621447096587-2f9d8fa16953?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimak na zielonych liściach" decoding="async"></div><span class="tags"><span class="tag">Wideo</span></span><h3>Na fermie ślimaków: kulisy odcinka</h3></a>
+      <a href="https://lowca-smakow.netlify.app/historie/kim-byl-czerniecki.html" class="card sm"><div class="ph frame tint-ultramarine ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1602660187275-7275b639d7ea?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Średniowieczny rękopis na pergaminie" decoding="async"></div><span class="tags"><span class="tag">Historia</span></span><h3>Kim był Stanisław Czerniecki?</h3></a>
+      <a href="https://lowca-smakow.netlify.app/historie/przyprawy-staropolskie.html" class="card sm"><div class="ph frame tint-sage ratio-43"><img class="fill" src="https://images.unsplash.com/photo-1467688695332-6b486449d78f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Strony dawnej księgi zapisane gotyckim pismem" decoding="async"></div><span class="tags"><span class="tag">Historia</span></span><h3>Pieprz, szafran, imbir: kuchnia, która pachniała bogactwem</h3></a>
     </div>
   </section>
 

@@ -47,6 +47,35 @@
     if (k && root.hasAttribute('data-filterable') && $$('[data-filter]', root).some(function (b) { return b.dataset.filter === k; })) setFilter(root, k);
   });
 
+  // tabs (the maps section: Poland / world). Arrow keys move between tabs; #regiony or #swiat in the address opens that tab
+  $$('[data-tabs]').forEach(function (root) {
+    var tabs = $$('[role="tab"]', root);
+    function show(id, focus) {
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('aria-controls') === id;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        if (on && focus) t.focus();
+      });
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { show(t.getAttribute('aria-controls')); });
+      t.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        show(tabs[(i + d + tabs.length) % tabs.length].getAttribute('aria-controls'), true);
+      });
+    });
+    function fromHash() {
+      var h = location.hash.slice(1);
+      if (tabs.some(function (t) { return t.getAttribute('aria-controls') === h; })) { show(h); root.scrollIntoView(); }
+    }
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+  });
+
   // regions: the map of voivodeships and the chips select the same region
   var regions = $('[data-regions]');
   if (regions) {
