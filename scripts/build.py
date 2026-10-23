@@ -159,7 +159,7 @@ SEARCH = ('<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fi
 MENU = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>')
 NAV = [('Historie', '/#nowe'), ('Przepisy', '/#przepisy'), ('Wideo', '/#staropolska'),
-       ('Podróże', '/#podroze'), ('Smaki regionów', '/#regiony'), ('Sklep', '/przepisy/slimaki-w-szarym-sosie.html#sklep')]
+       ('Podróże', '/#podroze'), ('Smaki regionów', '/#regiony'), ('Smaki świata', '/#swiat'), ('Sklep', '/przepisy/slimaki-w-szarym-sosie.html#sklep')]
 FOOT_NAV = '''<div><a href="/#nowe">Historie</a><a href="/#przepisy">Przepisy</a><a href="/#staropolska">Wideo</a></div>
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
       <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>'''
@@ -514,6 +514,9 @@ def recipe_data_js():
 # Voivodeship outlines for the "Smaki regionów" map, made by scripts/map-paths.py from GUGiK's boundaries.
 with open(os.path.join(ROOT, 'scripts', 'wojewodztwa.json'), encoding='utf-8') as f:
     MAP = json.load(f)
+# Country outlines for the "Smaki świata" map (Natural Earth, public domain), same script.
+with open(os.path.join(ROOT, 'scripts', 'swiat.json'), encoding='utf-8') as f:
+    WORLD = json.load(f)
 CHIPS = ['Podkarpackie', 'Świętokrzyskie', 'Małopolskie', 'Lubelskie', 'Śląskie', 'Pomorskie', 'Podlaskie']
 
 
@@ -629,6 +632,29 @@ def home_page():
         return (f'        <g class="pin" transform="translate({r["x"]} {r["y"]})"><circle r="7"/><circle class="dot" r="2.6"/>'
                 f'<text y="-13">{name}</text></g>')
 
+    # "Smaki świata": countries with stories (articles or recipes) chosen in the CMS
+    by_country = {}
+    for st in (H.get('world') or {}).get('stories', []):
+        href = (f'/historie/{st["article"]}.html' if st.get('article') in A else
+                f'/przepisy/{st["recipe"]}.html' if st.get('recipe') in R else None)
+        if not href or st.get('country') not in WORLD['regions']:
+            print('  ! Smaki świata: skipped', st, file=sys.stderr); continue
+        title = A[st['article']]['title'] if st.get('article') in A else R[st['recipe']]['title']
+        by_country.setdefault(st['country'], []).append([href, st.get('label') or title])
+
+    def country(name, r):
+        st = by_country.get(name)
+        if not st:
+            return f'        <path class="tile" d="{r["d"]}" data-country="{e(name)}"><title>{e(name)}</title></path>'
+        return (f'        <path class="tile has-story" d="{r["d"]}" data-country="{e(name)}" data-stories="{e(json.dumps(st, ensure_ascii=False))}" '
+                f'role="button" tabindex="0" aria-label="{e(name)}: {wpisy(len(st))}"><title>{e(name)}</title></path>')
+
+    countries = '\n'.join(country(n, r) for n, r in WORLD['regions'].items())
+    world_pins = '\n'.join(pin(n, WORLD['regions'][n]) for n in by_country)
+    world_chips = '\n'.join(f'        <button type="button" class="chip" data-country="{e(n)}" aria-pressed="false">{e(n)}</button>' for n in by_country)
+    nk = len(by_country)
+    kraje = 'kraj' if nk == 1 else 'kraje' if nk % 10 in (2, 3, 4) and nk % 100 not in (12, 13, 14) else 'krajów'
+
     regions = MAP['regions']
     tiles = '\n'.join(tile(n, r) for n, r in regions.items())
     pins = '\n'.join(pin(n, regions[n]) for n in stories if n in regions)
@@ -712,6 +738,30 @@ def home_page():
     </div>
   </section>
 
+  <section class="regions world" id="swiat" aria-labelledby="h-swiat" data-world>
+    <div class="regions-copy">
+      <p class="counter" aria-hidden="true">{nk:02d}<span> {kraje}</span></p>
+      <p class="kicker">Z podróży</p>
+      <h2 id="h-swiat">Smaki świata</h2>
+      <p class="body">{e((H.get('world') or {}).get('intro', ''))}</p>
+    </div>
+    <div class="world-side">
+      <div class="chips" role="group" aria-label="Kraje">
+{world_chips}
+      </div>
+      <div class="world-pick" aria-live="polite" data-world-out><p class="meta">Wybierz kraj, żeby zobaczyć historie i przepisy.</p></div>
+    </div>
+    <div class="map world-map" role="group" aria-label="Mapa świata">
+      <svg class="pl-map w-map" viewBox="{WORLD['viewBox']}" xmlns="http://www.w3.org/2000/svg">
+{countries}
+        <g class="pins" aria-hidden="true">
+{world_pins}
+        </g>
+      </svg>
+      <p class="map-key" aria-hidden="true"><span class="sw has"></span> Nasze historie <span class="sw soon"></span> Jeszcze tu nie byliśmy</p>
+    </div>
+  </section>
+
   <section class="sec" id="przepisy" aria-labelledby="h-przepisy" data-recipes>
     <div class="sec-head">
       <h2 id="h-przepisy" data-ghost="Przepisy">Przepisy</h2>
@@ -757,7 +807,7 @@ def home_page():
   </section>
 """
     return shell('Łowca Smaków — antropologia jedzenia', 'Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.',
-                 main, images, body_class='home', home=True)
+                 main, images, body_class='home', home=True, scripts=('/js/globe.js',))
 
 
 def main():

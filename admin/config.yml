@@ -277,6 +277,22 @@ collections:
                   - { label: 'Województwo', name: region, widget: select, options: ['Dolnośląskie', 'Kujawsko-pomorskie', 'Lubelskie', 'Lubuskie', 'Łódzkie', 'Małopolskie', 'Mazowieckie', 'Opolskie', 'Podkarpackie', 'Podlaskie', 'Pomorskie', 'Śląskie', 'Świętokrzyskie', 'Warmińsko-mazurskie', 'Wielkopolskie', 'Zachodniopomorskie'] }
                   - { label: 'Artykuł', name: article, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title] }
                   - { label: 'Krótki opis na mapie', name: label, widget: string }
+          - label: 'Smaki świata (mapa)'
+            name: world
+            widget: object
+            collapsed: true
+            fields:
+              - { label: 'Wstęp', name: intro, widget: text }
+              - label: 'Kraje z historiami'
+                name: stories
+                widget: list
+                summary: '{{fields.country}}: {{fields.label}}'
+                hint: 'Jeden wpis na historię lub przepis; kraj może mieć ich kilka. Kraj z wpisem jest wyróżniony na mapie.'
+                fields:
+                  - { label: 'Kraj', name: country, widget: select, options: ['Afganistan', 'Albania', 'Algieria', 'Angola', 'Arabia Saudyjska', 'Argentyna', 'Armenia', 'Australia', 'Austria', 'Azerbejdżan', 'Bahamy', 'Bangladesz', 'Belgia', 'Belize', 'Benin', 'Bhutan', 'Białoruś', 'Boliwia', 'Bośnia i Hercegowina', 'Botswana', 'Brazylia', 'Brunei', 'Bułgaria', 'Burkina Faso', 'Burundi', 'Chile', 'Chińska Republika Ludowa', 'Chorwacja', 'Cypr', 'Cypr Północny', 'Czad', 'Czarnogóra', 'Czechy', 'Dania', 'Demokratyczna Republika Konga', 'Dominikana', 'Dżibuti', 'Egipt', 'Ekwador', 'Erytrea', 'Estonia', 'Eswatini', 'Etiopia', 'Falklandy', 'Fidżi', 'Filipiny', 'Finlandia', 'Francja', 'Francuskie Terytoria Południowe i Antarktyczne', 'Gabon', 'Gambia', 'Ghana', 'Grecja', 'Grenlandia', 'Gruzja', 'Gujana', 'Gwatemala', 'Gwinea', 'Gwinea Bissau', 'Gwinea Równikowa', 'Haiti', 'Hiszpania', 'Holandia', 'Honduras', 'Indie', 'Indonezja', 'Irak', 'Iran', 'Irlandia', 'Islandia', 'Izrael', 'Jamajka', 'Japonia', 'Jemen', 'Jordania', 'Kambodża', 'Kamerun', 'Kanada', 'Katar', 'Kazachstan', 'Kenia', 'Kirgistan', 'Kolumbia', 'Kongo', 'Korea Południowa', 'Korea Północna', 'Kosowo', 'Kostaryka', 'Kuba', 'Kuwejt', 'Laos', 'Lesotho', 'Liban', 'Liberia', 'Libia', 'Litwa', 'Łotwa', 'Macedonia Północna', 'Madagaskar', 'Malawi', 'Malezja', 'Mali', 'Maroko', 'Mauretania', 'Meksyk', 'Mjanma', 'Mołdawia', 'Mongolia', 'Mozambik', 'Namibia', 'Nepal', 'Niemcy', 'Niger', 'Nigeria', 'Nikaragua', 'Norwegia', 'Nowa Kaledonia', 'Nowa Zelandia', 'Oman', 'Pakistan', 'Palestyna', 'Panama', 'Papua-Nowa Gwinea', 'Paragwaj', 'Peru', 'Polska', 'Południowa Afryka', 'Portoryko', 'Portugalia', 'Republika Chińska', 'Republika Środkowoafrykańska', 'Rosja', 'Rumunia', 'Rwanda', 'Sahara Zachodnia', 'Salwador', 'Senegal', 'Serbia', 'Sierra Leone', 'Słowacja', 'Słowenia', 'Somalia', 'Somaliland', 'Sri Lanka', 'Stany Zjednoczone', 'Sudan', 'Sudan Południowy', 'Surinam', 'Syria', 'Szwajcaria', 'Szwecja', 'Tadżykistan', 'Tajlandia', 'Tanzania', 'Timor Wschodni', 'Togo', 'Trynidad i Tobago', 'Tunezja', 'Turcja', 'Turkmenistan', 'Uganda', 'Ukraina', 'Urugwaj', 'Uzbekistan', 'Vanuatu', 'Wenezuela', 'Węgry', 'Wielka Brytania', 'Wietnam', 'Włochy', 'Wybrzeże Kości Słoniowej', 'Wyspy Salomona', 'Zambia', 'Zimbabwe', 'Zjednoczone Emiraty Arabskie'] }
+                  - { label: 'Artykuł', name: article, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
+                  - { label: 'albo przepis', name: recipe, widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
+                  - { label: 'Krótki opis na mapie', name: label, widget: string }
           - { label: 'Przepisy (kolejność na pasku)', name: recipes, widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true }
           - { label: 'Z podróży', name: travel, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, max: 3 }
           - label: 'Newsletter'

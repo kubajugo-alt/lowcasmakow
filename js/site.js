@@ -1,4 +1,4 @@
-// Łowca Smaków — header, search, region map, recipe filters, newsletter
+// Łowca Smaków — header, search, region and world maps, recipe filters, newsletter
 (function () {
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -98,6 +98,37 @@
         chips.insertBefore(c, more);
       });
       more.remove();
+    });
+  }
+
+  // world map: countries with stories list them; chips select the same country
+  var world = $('[data-world]');
+  if (world) {
+    var wout = $('[data-world-out]', world);
+    var pick = function (name) {
+      $$('[data-country]', world).forEach(function (x) {
+        if (x.classList.contains('has-story') || x.classList.contains('chip')) x.setAttribute('aria-pressed', String(x.dataset.country === name));
+      });
+      var shape = $('path.has-story[data-country="' + name + '"]', world);
+      wout.innerHTML = '';
+      var h = document.createElement('p'); h.className = 'world-name'; h.textContent = name; wout.appendChild(h);
+      if (!shape) {
+        var p = document.createElement('p'); p.className = 'meta'; p.textContent = 'Jeszcze tu nie byliśmy.'; wout.appendChild(p);
+        return;
+      }
+      var list = document.createElement('ul');
+      JSON.parse(shape.dataset.stories).forEach(function (s) {
+        var li = document.createElement('li'), a = document.createElement('a');
+        a.href = s[0]; a.textContent = s[1] + ' →'; li.appendChild(a); list.appendChild(li);
+      });
+      wout.appendChild(list);
+    };
+    $$('[data-country]', world).forEach(function (el) {
+      if (el.classList.contains('has-story') || el.classList.contains('chip')) el.setAttribute('aria-pressed', 'false');
+      el.addEventListener('click', function () { pick(el.dataset.country); });
+      if (el.tagName.toLowerCase() === 'path' && el.classList.contains('has-story')) el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(el.dataset.country); }
+      });
     });
   }
 

@@ -757,3 +757,35 @@ body.home .site-footer{margin-top:0}
 .map-key .sw{width:14px;height:14px;border-radius:3px;border:1px solid #D8CBB3;background:var(--white)}
 .map-key .sw.has{background:var(--mustard);border-color:var(--mustard)}
 .map-key .sw.soon{margin-left:12px}
+
+/* "Smaki świata": copy and the story list on the left, the globe (or the flat map until it loads) on the right */
+.regions.world{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);grid-template-areas:"copy map" "side map";gap:28px 56px;align-items:start;background:#E6EBF4;border-color:#D6DEEC}
+.world .regions-copy{grid-area:copy}
+.world-side{grid-area:side;display:flex;flex-direction:column;gap:18px}
+.world-map{grid-area:map;position:relative;align-self:center;display:flex;flex-direction:column;align-items:center}
+.world .counter span{font-size:32px}
+.w-map .tile{stroke:#C9D3E6;stroke-width:.8}
+.w-map .pin text{font-size:20px}
+.w-map .pin{transform-box:fill-box}
+.world-pick{min-height:96px}
+.world-pick .world-name{font:700 22px/1.2 var(--display)}
+.world-pick ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column}
+.world-pick li a{display:block;padding:10px 0;border-top:1px solid #D6DEEC;font-weight:600;text-decoration:none;color:var(--ink)}
+.world-pick li a:hover{color:var(--vermilion)}
+.world-pick .meta{color:var(--muted)}
+.has-globe>svg,.has-globe>.map-key{display:none}
+.globe{display:block;touch-action:none;cursor:grab;border-radius:50%;filter:drop-shadow(0 26px 30px rgba(20,30,70,.28))}
+.globe:active{cursor:grabbing}
+.globe:focus-visible{outline:3px solid var(--ink);outline-offset:6px}
+.globe-hint{font-size:13px;color:var(--muted);margin-bottom:10px;transition:opacity .4s}
+.globe-hint.done{opacity:0}
+.globe-tip{position:absolute;pointer-events:none;transform:translate(-50%,calc(-100% - 14px));background:var(--ink);color:var(--white);font:600 12.5px/1 var(--sans);padding:7px 10px;border-radius:6px;white-space:nowrap}
+.globe-tip[hidden]{display:none}
+@media (max-width:900px){
+  .regions.world{grid-template-columns:1fr;grid-template-areas:"copy" "map" "side"}
+}
+@media (max-width:720px){
+  .regions.world{gap:18px}
+  .world .regions-copy{display:flex}
+  .world .chips{flex-wrap:wrap;overflow:visible;margin:0;padding:0;order:0}
+}

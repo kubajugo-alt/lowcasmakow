@@ -48,6 +48,36 @@
       }
     ]
   },
+  "world": {
+    "intro": "Jedzenie oglądane tam, gdzie się rodzi: targi, kuchnie i ludzie. Kraje z naszymi reportażami i przepisami są wyróżnione. Obróć glob i wybierz kraj.",
+    "stories": [
+      {
+        "country": "Meksyk",
+        "article": "meksyk-chile",
+        "label": "Jalisco: skąd birria bierze kolor"
+      },
+      {
+        "country": "Meksyk",
+        "article": "oaxaca-targ",
+        "label": "Oaxaca: dzień na targu"
+      },
+      {
+        "country": "Meksyk",
+        "recipe": "birria-tacos",
+        "label": "Przepis: birria tacos"
+      },
+      {
+        "country": "Peru",
+        "article": "peru-ziemniaki",
+        "label": "Andy: tysiące odmian ziemniaka"
+      },
+      {
+        "country": "Peru",
+        "recipe": "papa-a-la-huancaina",
+        "label": "Przepis: papa a la huancaína"
+      }
+    ]
+  },
   "recipes": [
     "slimaki-w-szarym-sosie",
     "birria-tacos",
