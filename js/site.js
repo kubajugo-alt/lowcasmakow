@@ -61,7 +61,7 @@
     });
   });
 
-  // regions: map tiles and chips select the same region
+  // regions: the map of voivodeships and the chips select the same region
   var regions = $('[data-regions]');
   if (regions) {
     var out = $('[data-region-out]', regions);
@@ -80,6 +80,10 @@
           out.textContent = name + ' — odcinek wkrótce.';
         }
       });
+      // map shapes are SVG paths with role="button": make Enter and Space work like a click
+      if (b.tagName.toLowerCase() === 'path') b.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); b.dispatchEvent(new MouseEvent('click', { bubbles: true })); }
+      });
     });
     var more = $('[data-regions-more]', regions);
     if (more) more.addEventListener('click', function (e) {
@@ -90,7 +94,7 @@
         var c = document.createElement('button');
         c.type = 'button'; c.className = 'chip'; c.dataset.region = t.dataset.region; c.textContent = t.dataset.region;
         c.setAttribute('aria-pressed', t.getAttribute('aria-pressed'));
-        c.addEventListener('click', function () { t.click(); });
+        c.addEventListener('click', function () { t.dispatchEvent(new MouseEvent('click', { bubbles: true })); });
         chips.insertBefore(c, more);
       });
       more.remove();

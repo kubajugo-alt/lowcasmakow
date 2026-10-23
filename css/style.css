@@ -129,10 +129,6 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
 .regions-copy{flex:1 1 380px;display:flex;flex-direction:column;gap:20px}
 .regions-copy h2{font-family:var(--serif);font-size:56px;line-height:.98;font-weight:600}
 .region-pick{min-height:24px;font-weight:600}
-.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-.tile{min-height:88px;padding:8px;border:0;background:var(--white);color:var(--ink);font:inherit;font-size:13px;font-weight:500;line-height:1.2;hyphens:manual;cursor:pointer;text-align:center}
-.tile:hover{background:var(--paper);box-shadow:inset 0 0 0 1px var(--ink)}
-.tile[aria-pressed="true"]{background:var(--ink);color:var(--white)}
 
 /* dark bands: the logo's white-on-black version */
 .newsletter{background:var(--night);color:var(--white);padding:64px 56px;display:flex;flex-wrap:wrap;gap:40px;align-items:center;justify-content:space-between}
@@ -311,7 +307,6 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
   .regions-copy .kicker{order:-2}
   .regions .map{flex-basis:100%;order:0}
   .regions .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 -20px;padding:0 20px;order:1}
-  .tile{min-height:60px;font-size:11px;padding:4px}
   .grid-4{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
   .grid-4 .ph{height:170px!important}
   .grid-4 h3{font-size:20px}
@@ -525,7 +520,6 @@ span.frame{display:block;position:relative;flex:none}
 .header-actions .btn{background:var(--ink)}
 .header-actions .btn:hover{background:var(--ink-2)}
 .statement h2 em{color:var(--vermilion)}
-.tile[aria-pressed="true"]{background:var(--vermilion);color:#fff}
 .counter{color:var(--vermilion)}
 .steps .n{color:var(--vermilion)}
 .week .card:nth-child(1) .day em{color:var(--vermilion)}
@@ -745,3 +739,21 @@ body.home .site-footer{margin-top:0}
   .r-title h1{font-size:40px}
   .travel-panel h2{font-size:42px}
 }
+
+/* "Smaki regionów": a map of Poland, one shape per voivodeship */
+.pl-map{display:block;width:100%;height:auto;overflow:visible}
+.pl-map .tile{fill:var(--white);stroke:#D8CBB3;stroke-width:1.2;stroke-linejoin:round;cursor:pointer;transition:fill .15s}
+.pl-map .tile.has-story{fill:var(--mustard)}
+.pl-map .tile:hover{fill:#F6D9CF}
+.pl-map .tile.has-story:hover{fill:#EDB94F}
+.pl-map .tile[aria-pressed="true"]{fill:var(--vermilion)}
+.pl-map .tile:focus{outline:none}
+.pl-map .tile:focus-visible{stroke:var(--ink);stroke-width:2.5}
+.pl-map .pins{pointer-events:none}
+.pl-map .pin circle{fill:var(--white);stroke:var(--ink);stroke-width:1.5}
+.pl-map .pin .dot{fill:var(--ink);stroke:none}
+.pl-map .pin text{font:700 13px var(--display);fill:var(--ink);text-anchor:middle;paint-order:stroke;stroke:var(--white);stroke-width:4px;stroke-linejoin:round}
+.map-key{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--muted)}
+.map-key .sw{width:14px;height:14px;border-radius:3px;border:1px solid #D8CBB3;background:var(--white)}
+.map-key .sw.has{background:var(--mustard);border-color:var(--mustard)}
+.map-key .sw.soon{margin-left:12px}

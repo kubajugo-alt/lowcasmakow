@@ -511,10 +511,9 @@ def recipe_data_js():
 
 # ---------- homepage ----------
 
-REGIONS = ['Zachodnio&shy;pomorskie|Zachodniopomorskie', 'Pomorskie', 'Warmińsko-mazurskie', 'Podlaskie',
-           'Lubuskie', 'Kujawsko-pomorskie', 'Mazowieckie', 'Lubelskie',
-           'Wielkopolskie', 'Łódzkie', 'Święto&shy;krzyskie|Świętokrzyskie', 'Podkarpackie',
-           'Dolnośląskie', 'Opolskie', 'Śląskie', 'Małopolskie']
+# Voivodeship outlines for the "Smaki regionów" map, made by scripts/map-paths.py from GUGiK's boundaries.
+with open(os.path.join(ROOT, 'scripts', 'wojewodztwa.json'), encoding='utf-8') as f:
+    MAP = json.load(f)
 CHIPS = ['Podkarpackie', 'Świętokrzyskie', 'Małopolskie', 'Lubelskie', 'Śląskie', 'Pomorskie', 'Podlaskie']
 
 
@@ -619,13 +618,20 @@ def home_page():
 
     stories = {s['region']: s for s in H['regions'].get('stories', []) if s.get('article') in A}
 
-    def tile(r):
-        label, name = r.split('|') if '|' in r else (r, r)
+    def tile(name, r):
         s = stories.get(name)
         extra = f' data-story="/historie/{s["article"]}.html" data-story-label="{e(s.get("label") or A[s["article"]]["title"])}"' if s else ''
-        return f'        <button type="button" class="tile" data-region="{name}"{extra}>{label}</button>'
+        label = f'{name}, jest odcinek' if s else name
+        return (f'        <path class="tile{" has-story" if s else ""}" d="{r["d"]}" data-region="{name}"{extra} '
+                f'role="button" tabindex="0" aria-label="{label}"><title>{name}</title></path>')
 
-    tiles = '\n'.join(tile(r) for r in REGIONS)
+    def pin(name, r):
+        return (f'        <g class="pin" transform="translate({r["x"]} {r["y"]})"><circle r="7"/><circle class="dot" r="2.6"/>'
+                f'<text y="-13">{name}</text></g>')
+
+    regions = MAP['regions']
+    tiles = '\n'.join(tile(n, r) for n, r in regions.items())
+    pins = '\n'.join(pin(n, regions[n]) for n in stories if n in regions)
     chips = '\n'.join(f'        <button type="button" class="chip" data-region="{c}" aria-pressed="false">{c}</button>' for c in CHIPS)
     issue = [s for s in H.get('issue_list', []) if s in A]
     lead_recipe = f'<a href="/przepisy/{L["recipe"]}.html" class="tag tag-link">Przepis →</a>' if L.get('recipe') in R else ''
@@ -684,10 +690,14 @@ def home_page():
   </section>
 
   <section class="regions" id="regiony" aria-labelledby="h-regiony" data-regions>
-    <div class="map" role="group" aria-label="Mapa województw (schemat)">
-      <div class="tiles">
+    <div class="map" role="group" aria-label="Mapa województw">
+      <svg class="pl-map" viewBox="{MAP['viewBox']}" xmlns="http://www.w3.org/2000/svg">
 {tiles}
-      </div>
+        <g class="pins" aria-hidden="true">
+{pins}
+        </g>
+      </svg>
+      <p class="map-key" aria-hidden="true"><span class="sw has"></span> Jest odcinek <span class="sw soon"></span> Wkrótce</p>
     </div>
     <div class="regions-copy">
       <p class="counter" aria-hidden="true">{len(stories):02d}<span>/16</span></p>

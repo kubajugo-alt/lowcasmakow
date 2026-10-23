@@ -50,7 +50,7 @@ Editors work at **`/admin`** (Decap CMS, in Polish). Three sections:
 
 - **Historie i reportaże**: articles. The body is built from blocks you can add, drag to reorder and remove: *Tekst* (blank line = new paragraph; `**bold**`, `*italic*`, `[link](https://…)`), *Śródtytuł*, *Cytat*, *Zdjęcie* (coloured frame or none), *Grafika* (SVG/PNG/JPG without a frame; text width, wide or small) and *Wideo z YouTube* (paste any YouTube link). An article can also have a YouTube video instead of its main photo.
 - **Przepisy**: recipes with ingredients (amounts scale with the servings stepper; ml convert to glasses and spoons), steps with optional timer minutes, the "Historia w pigułce" box, shop teaser, sources and related stories.
-- **Strona główna**: what the homepage shows and in what order: issue line, lead story, "W tym wydaniu", the week's three stories, the Old Polish band, published regions on the map, recipe rail, travel reports.
+- **Strona główna**: what the homepage shows and in what order: issue line, lead story, the two stories beside it, the week's three stories, the Old Polish band, published regions on the map, recipe rail, travel reports.
 
 Photos and graphics: upload a file (stored in `img/uploads/`, resized on the fly by Netlify's image CDN) or paste a link (e.g. from Unsplash). Each has fields for the alt text and the photographer's credit, which appears in the page footer.
 
@@ -75,7 +75,8 @@ python3 scripts/build.py --local   # rebuild after saving (--local: uploads with
 ## What works
 
 - Header: sticky, burger menu below 1100 px, search (filters the recipe grid; on other pages it goes to the homepage).
-- Homepage: recipe filter chips, a schematic tile map of the 16 voivodeships linked to the region chips, newsletter form (Netlify Forms, so it collects sign-ups once deployed on Netlify).
+- Homepage: recipe filter chips; a map of Poland with the 16 voivodeships (click, tap or Enter selects one, in step with the region chips; regions with a published episode are mustard with a pin); newsletter form (Netlify Forms, so it collects sign-ups once deployed on Netlify).
+- Map outlines: GUGiK's register of boundaries (PRG) via [ppatrzyk/polska-geojson](https://github.com/ppatrzyk/polska-geojson), turned into SVG paths by `scripts/map-paths.py` (writes `scripts/wojewodztwa.json`, which the build reads). Regions with an episode are set in the CMS under *Strona główna → Smaki regionów*.
 - Recipe: ingredient checklist (remembered per browser), servings stepper, unit toggle, step timers, print layout, save (per browser) and share (Web Share API or copy link).
 - Cook mode: one step per screen, progress bars, timer, ← / → keys, Screen Wake Lock ("Ekran nie wygaśnie" shows only when the lock is held).
 
