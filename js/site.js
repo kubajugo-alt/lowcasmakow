@@ -1,4 +1,4 @@
-// Łowca Smaków — header, search, region and world maps, recipe filters, newsletter
+// Łowca Smaków — header, search, region and world maps, recipe filters, newsletter, sign-ups
 (function () {
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -149,6 +149,27 @@
         msg.textContent = 'Dziękujemy! Pierwsza historia już wkrótce w Twojej skrzynce.';
       }).catch(function () {
         msg.textContent = 'Nie udało się zapisać. Spróbuj ponownie za chwilę.';
+      }).then(function () { btn.disabled = false; });
+    });
+  });
+
+  // workshop and trip sign-ups: Netlify Forms ("zapisy"), same as the newsletter
+  $$('[data-booking]').forEach(function (form) {
+    var msg = $('[data-booking-msg]', form);
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = $('button[type="submit"]', form);
+      btn.disabled = true;
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      }).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        form.reset();
+        msg.textContent = 'Dziękujemy! Odpiszemy w ciągu dwóch dni roboczych.';
+      }).catch(function () {
+        msg.textContent = 'Nie udało się wysłać. Spróbuj ponownie za chwilę.';
       }).then(function () { btn.disabled = false; });
     });
   });

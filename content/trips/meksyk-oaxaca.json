@@ -1,0 +1,73 @@
+{
+  "title": "Meksyk: Oaxaca i Puebla",
+  "subtitle": "Mole, kukurydza i mezcal",
+  "country": "Meksyk",
+  "order": 1,
+  "lead": "Jedenaście dni w kuchniach, na targach i w wioskach południowego Meksyku. Gotujemy z kucharkami, które robią mole od pokoleń, i poznajemy kukurydzę od pola po tortillę.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1715353540913-986fb16f6ef4",
+    "alt": "Kościół w Oaxace na tle gór",
+    "credit": "Austin Curtis",
+    "credit_url": "https://unsplash.com/@afcurtis"
+  },
+  "duration": "11 dni",
+  "group": "8–12 osób",
+  "price": 13900,
+  "price_note": "za osobę w pokoju dwuosobowym, bez przelotu",
+  "dates": [
+    {
+      "date": "2027-03-06",
+      "end": "2027-03-16"
+    },
+    {
+      "date": "2027-11-01",
+      "end": "2027-11-11",
+      "note": "W czasie Día de Muertos"
+    }
+  ],
+  "itinerary": [
+    {
+      "title": "Dni 1–2: Meksyk",
+      "text": "Przylot, targ La Merced i pierwsza kolacja: tacos al pastor i lekcja o salsach."
+    },
+    {
+      "title": "Dni 3–4: Puebla",
+      "text": "Mole poblano od podstaw w domu lokalnej kucharki. Talavera i słodycze klasztorne."
+    },
+    {
+      "title": "Dni 5–8: Oaxaca",
+      "text": "Targ Benito Juárez, siedem mole, czekolada mielona na kamieniu, nixtamalizacja kukurydzy w wiosce Zapoteków."
+    },
+    {
+      "title": "Dni 9–10: Dolina mezcalu",
+      "text": "Palenque w Santiago Matatlán: od agawy do butelki. Gotowanie w ziemnym piecu."
+    },
+    {
+      "title": "Dzień 11: Powrót",
+      "text": "Śniadanie na targu i transfer na lotnisko."
+    }
+  ],
+  "includes": [
+    "Noclegi w małych hotelach i domach gościnnych",
+    "Śniadania i większość kolacji",
+    "Warsztaty kulinarne i degustacje",
+    "Transport na miejscu",
+    "Opieka Łowcy Smaków i lokalnego przewodnika"
+  ],
+  "excludes": [
+    "Przelot do Meksyku",
+    "Ubezpieczenie podróżne",
+    "Część obiadów"
+  ],
+  "body": [
+    {
+      "type": "text",
+      "text": "To nie jest wycieczka objazdowa. Zwalniamy, zostajemy dłużej w jednym miejscu i gotujemy z ludźmi, którzy na co dzień karmią swoje rodziny i sąsiadów. O tym, co zobaczymy, pisaliśmy w reportażach z targu w Oaxace i z Jalisco."
+    }
+  ],
+  "related": [
+    "oaxaca-targ",
+    "meksyk-chile",
+    "birria-tacos"
+  ]
+}

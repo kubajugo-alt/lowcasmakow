@@ -695,7 +695,7 @@ body.home .site-footer{margin-top:0}
 .ov-tile .h{font-size:20px}
 
 /* shortcuts: round photos with counts */
-.shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+.shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
 .shortcut{display:flex;flex-direction:column;align-items:center;gap:6px;padding:26px 16px 22px;border-radius:10px;background:var(--panel);text-decoration:none;color:var(--ink);transition:transform .2s,box-shadow .2s}
 .shortcut:hover{color:var(--ink);transform:translateY(-3px);box-shadow:0 14px 30px -20px rgba(18,18,18,.55)}
 .shortcut .ring{position:relative;width:104px;height:104px;border-radius:50%;overflow:hidden;border:4px solid var(--white);box-shadow:0 10px 22px -12px rgba(18,18,18,.6);margin-bottom:8px}
@@ -703,7 +703,8 @@ body.home .site-footer{margin-top:0}
 .shortcut:nth-child(4n+2) .ring{border-color:var(--vermilion)}
 .shortcut:nth-child(4n+3) .ring{border-color:var(--ultramarine)}
 .shortcut:nth-child(4n+4) .ring{border-color:var(--sage)}
-.shortcut .h{font:700 16px/1.2 var(--display)}
+.shortcut .ring img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shortcut .h{font:700 16px/1.2 var(--display);text-align:center}
 .shortcut .n{font-size:13px;color:var(--muted)}
 
 /* rounder frames to match */
@@ -794,3 +795,96 @@ body.home .site-footer{margin-top:0}
 .card:hover :is(h3,h4),.travel-item:hover .h,.issue-item:hover .t,.a-recipe h2 a:hover,.offer-card:hover h3{color:var(--hl)}
 .ov{--hl:var(--mustard)}
 .ov:hover .h,.ov:focus-within .h{color:var(--hl)}
+
+/* ---------- workshops and culinary trips ---------- */
+.sec-intro{max-width:640px;font-size:17px;line-height:1.55;color:var(--ink-2);margin-top:-12px}
+.offers{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:32px}
+.offer-card{display:flex;flex-direction:column;gap:14px;text-decoration:none;color:var(--ink)}
+.offer-card:hover{color:var(--ink)}
+.offer-card .ph{width:100%}
+.offer-body{display:flex;flex-direction:column;gap:10px}
+.offer-card h3{font:700 22px/1.2 var(--display);letter-spacing:-.01em}
+.offer-card .when{font-size:15px;font-weight:600;color:var(--ink-2)}
+.offer-card .more-dates{font-weight:500;color:var(--muted)}
+.price{display:inline-flex;align-items:center;min-height:24px;padding:0 11px;border-radius:999px;background:var(--mustard);color:var(--ink);font:700 12.5px/1 var(--display)}
+.badge{position:absolute;z-index:2;top:20px;left:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;width:62px;height:66px;border-radius:8px;background:var(--white);color:var(--ink);font:600 12px/1 var(--sans);text-transform:uppercase;letter-spacing:.08em;box-shadow:0 8px 18px -10px rgba(0,0,0,.5)}
+.badge b{font:800 26px/1 var(--display);letter-spacing:-.02em;margin-bottom:3px}
+
+/* trips band on the homepage */
+.trips-band{background:var(--night);color:var(--white)}
+.trips-band+.statement{margin-top:-88px}
+.trips-band .sec-head a,.trips-band .sec-intro{color:var(--white)}
+.trips-band .sec-intro{opacity:.9}
+.trips-band .sec-head h2[data-ghost]::before{color:rgba(255,255,255,.09)}
+.trips-band .offer-card,.trips-band .offer-card:hover,.trips-band .offer-card .when{color:var(--white)}
+.trips-band .offer-card .more-dates{color:rgba(255,255,255,.75)}
+.trips-band .date{background:rgba(255,255,255,.18);color:var(--white)}
+.trips-band .frame{box-shadow:0 18px 34px -18px rgba(0,0,0,.6)}
+
+/* listing pages */
+.list-head{display:flex;flex-direction:column;gap:16px;max-width:760px;padding-top:24px;isolation:isolate;overflow-x:clip}
+.list-head h1{position:relative;font:700 clamp(40px,5vw,64px)/1.05 var(--display);letter-spacing:-.02em}
+.list-head h1[data-ghost]::before{content:attr(data-ghost);position:absolute;left:0;bottom:-.06em;z-index:-1;font-size:2.2em;font-weight:800;color:rgba(18,18,18,.055);white-space:nowrap;pointer-events:none}
+.custom{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:start;background:#F7EDD6;border-radius:10px;padding:48px}
+.custom h2{font:700 32px/1.15 var(--display);letter-spacing:-.01em;margin:10px 0 14px}
+
+/* offer page */
+.offer{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);grid-template-areas:"head book" "hero book" "body book";gap:32px 56px;align-items:start}
+.o-head{grid-area:head;display:flex;flex-direction:column;gap:14px;padding-top:16px}
+.o-head h1{font:700 clamp(36px,4.4vw,56px)/1.06 var(--display);letter-spacing:-.02em}
+.o-head .sub{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--ink-2)}
+.o-hero{grid-area:hero;margin:0}
+.o-hero .ph{aspect-ratio:16/10}
+.o-body{grid-area:body;display:flex;flex-direction:column;gap:18px;max-width:720px}
+.o-body>p{font-size:18px;line-height:1.65;color:var(--ink-2)}
+.o-body h2{font:700 28px/1.2 var(--display);letter-spacing:-.01em;margin-top:22px}
+.plan{list-style:none;margin:0;padding:0;counter-reset:plan;display:flex;flex-direction:column}
+.plan li{counter-increment:plan;display:grid;grid-template-columns:56px minmax(0,1fr);column-gap:8px;padding:18px 0;border-top:1px solid var(--line)}
+.plan li::before{content:counter(plan,decimal-leading-zero);grid-row:1/3;font-family:var(--serif);font-style:italic;font-size:34px;line-height:1;color:var(--vermilion)}
+.plan h3{font:700 18px/1.3 var(--display)}
+.plan p{font-size:16px;line-height:1.55;color:var(--ink-2);margin-top:4px}
+.incl{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.incl h2{font-size:20px;margin-top:8px}
+.incl ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.incl li{position:relative;padding-left:28px;font-size:16px;line-height:1.45}
+.incl .yes li::before{content:"✓";position:absolute;left:0;top:0;width:20px;height:20px;border-radius:50%;background:var(--sage);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center}
+.incl .no-list li::before{content:"–";position:absolute;left:4px;color:var(--muted)}
+.o-book{grid-area:book;position:sticky;top:24px;display:flex;flex-direction:column;gap:12px;background:var(--white);border:1px solid var(--line);border-radius:10px;padding:28px;box-shadow:0 20px 40px -30px rgba(18,18,18,.45)}
+.o-price{font:800 34px/1 var(--display);letter-spacing:-.02em}
+.o-price span{font:500 16px var(--sans);color:var(--muted)}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px;margin:8px 0 4px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts dt{font-size:11.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:3px 0 0;font-size:15px;font-weight:600}
+.o-book h2{font:700 18px/1.2 var(--display);margin-top:6px}
+.dates{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.dates li{display:flex;flex-direction:column;gap:2px;padding:10px 14px;border-radius:8px;background:var(--panel)}
+.dates .d{font-weight:600}
+.dates .note{font-size:13px;color:var(--vermilion);font-weight:600}
+.o-book .draft{font-size:12.5px}
+
+/* sign-up form */
+.booking{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.booking label{font-size:13.5px;font-weight:600;margin-top:6px}
+.booking label span{font-weight:400;color:var(--muted)}
+.booking input:not([type=checkbox]),.booking select,.booking textarea{width:100%;min-height:44px;padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:var(--white);font:inherit;font-size:15px;color:var(--ink)}
+.booking textarea{min-height:84px;resize:vertical}
+.booking :is(input,select,textarea):focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+.booking .two{display:grid;grid-template-columns:1fr 110px;gap:12px}
+.booking .two>div{display:flex;flex-direction:column;gap:6px}
+.booking .check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:13.5px;line-height:1.4;margin-top:10px}
+.booking .check input{margin-top:2px;width:16px;height:16px;flex:none}
+.booking .btn{margin-top:10px;width:100%}
+.booking .nl-msg{font-size:14px;color:var(--sage);font-weight:600}
+.custom .booking{background:var(--white);border-radius:10px;padding:24px}
+
+@media (max-width:1100px){
+  .offer{grid-template-columns:1fr;grid-template-areas:"head" "hero" "book" "body"}
+  .o-book{position:static}
+}
+@media (max-width:720px){
+  .custom{grid-template-columns:1fr;padding:28px 20px;gap:20px;margin:0 -20px;border-radius:0}
+  .o-book{padding:22px}
+  .o-head .sub{font-size:21px}
+  .badge{top:14px;left:14px}
+}
+@media (max-width:720px){.trips-band+.statement{margin-top:-56px}}

@@ -15,6 +15,7 @@ import math
 import os
 import re
 import sys
+from datetime import date
 from urllib.parse import quote, urlparse, parse_qs
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +35,9 @@ def load(folder):
 A = dict(sorted(load('articles').items(), key=lambda kv: kv[1].get('number') or 999))
 R = dict(sorted(load('recipes').items(), key=lambda kv: kv[1].get('number') or 99))
 HOME = json.load(open(os.path.join(ROOT, 'content', 'settings', 'home.json'), encoding='utf-8'))
+WS = dict(sorted(load('workshops').items(), key=lambda kv: kv[1].get('order') or 99))
+TR = dict(sorted(load('trips').items(), key=lambda kv: kv[1].get('order') or 99))
+OFERTA = json.load(open(os.path.join(ROOT, 'content', 'settings', 'oferta.json'), encoding='utf-8'))
 CAT = {'kiszonki': 'Kiszonki', 'staropolskie': 'Staropolskie', 'podroze': 'Z podróży',
        'codzien': 'Na co dzień', 'sezonowe': 'Sezonowe'}
 CAT_ANCHOR = {'staropolskie': '/#staropolska', 'podroze': '/#podroze'}
@@ -159,8 +163,9 @@ SEARCH = ('<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fi
 MENU = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>')
 NAV = [('Historie', '/#nowe'), ('Przepisy', '/#przepisy'), ('Wideo', '/#staropolska'),
-       ('Podróże', '/#podroze'), ('Smaki regionów', '/#regiony'), ('Smaki świata', '/#swiat'), ('Sklep', '/przepisy/slimaki-w-szarym-sosie.html#sklep')]
-FOOT_NAV = '''<div><a href="/#nowe">Historie</a><a href="/#przepisy">Przepisy</a><a href="/#staropolska">Wideo</a></div>
+       ('Smaki regionów', '/#regiony'), ('Smaki świata', '/#swiat'), ('Warsztaty', '/warsztaty/'),
+       ('Wyprawy', '/wyprawy/'), ('Sklep', '/przepisy/slimaki-w-szarym-sosie.html#sklep')]
+FOOT_NAV = '''<div><a href="/#nowe">Historie</a><a href="/#przepisy">Przepisy</a><a href="/#staropolska">Wideo</a><a href="/warsztaty/">Warsztaty</a><a href="/wyprawy/">Wyprawy kulinarne</a></div>
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
       <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>'''
 SECTION_NAV = '''<nav class="section-nav" aria-label="Działy">
@@ -169,6 +174,9 @@ SECTION_NAV = '''<nav class="section-nav" aria-label="Działy">
   <a href="#przepisy" class="chip">Przepisy</a>
   <a href="#staropolska" class="chip">Wideo</a>
   <a href="#regiony" class="chip">Regiony</a>
+  <a href="#swiat" class="chip">Świat</a>
+  <a href="#warsztaty" class="chip">Warsztaty</a>
+  <a href="#wyprawy" class="chip">Wyprawy</a>
 </nav>'''
 
 
@@ -520,6 +528,170 @@ with open(os.path.join(ROOT, 'scripts', 'swiat.json'), encoding='utf-8') as f:
 CHIPS = ['Podkarpackie', 'Świętokrzyskie', 'Małopolskie', 'Lubelskie', 'Śląskie', 'Pomorskie', 'Podlaskie']
 
 
+# ---------- workshops and culinary trips ----------
+
+MONTHS = ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia',
+          'września', 'października', 'listopada', 'grudnia']
+MON3 = ['sty', 'lut', 'mar', 'kwi', 'maj', 'cze', 'lip', 'sie', 'wrz', 'paź', 'lis', 'gru']
+KINDS = {'warsztaty': ('Warsztaty', 'warsztat', WS), 'wyprawy': ('Wyprawy kulinarne', 'wyprawa', TR)}
+
+
+def pl_date(d):
+    y, m, dd = (int(x) for x in d.split('-'))
+    return f'{dd} {MONTHS[m - 1]} {y}'
+
+
+def pl_span(d, end=None):
+    """6–16 marca 2027, 28 lutego – 6 marca 2027 or a single day."""
+    if not end or end == d:
+        return pl_date(d)
+    y1, m1, d1 = (int(x) for x in d.split('-'))
+    y2, m2, d2 = (int(x) for x in end.split('-'))
+    if (y1, m1) == (y2, m2):
+        return f'{d1}–{d2} {MONTHS[m1 - 1]} {y1}'
+    return f'{d1} {MONTHS[m1 - 1]}{"" if y1 == y2 else f" {y1}"} – {d2} {MONTHS[m2 - 1]} {y2}'
+
+
+def zl(n):
+    return f'{n:,}'.replace(',', '\u00a0') + '\u00a0zł'
+
+
+def upcoming(o):
+    today = date.today().isoformat()
+    return sorted((d for d in o.get('dates') or [] if (d.get('end') or d['date']) >= today), key=lambda d: d['date'])
+
+
+def offer_label(kind, o):
+    return o.get('kind') or 'Warsztaty' if kind == 'warsztaty' else o.get('country') or 'Wyprawa'
+
+
+def date_badge(d):
+    y, m, dd = (int(x) for x in d['date'].split('-'))
+    return f'<span class="badge" aria-hidden="true"><b>{dd}</b>{MON3[m - 1]}</span>'
+
+
+def offer_card(kind, slug, o, sizes='(max-width:720px) 100vw, 33vw'):
+    nxt = upcoming(o)
+    when = (pl_span(nxt[0]['date'], nxt[0].get('end')) + (f', {nxt[0]["time"]}' if nxt[0].get('time') else '')) if nxt else 'Nowe terminy wkrótce'
+    group = f'<span class="date">{e(o["group"])}</span>' if o.get('group') else ''
+    more = f' <span class="more-dates">+{len(nxt) - 1} {"termin" if len(nxt) == 2 else "terminy"}</span>' if len(nxt) > 1 else ''
+    return (f'<a href="/{kind}/{slug}.html" class="offer-card"><span class="ph frame {T()} ratio-43">{img(o["image"], sizes)}'
+            f'{date_badge(nxt[0]) if nxt else ""}</span>'
+            f'<span class="offer-body">{tags([offer_label(kind, o), o.get("duration")], 2)}'
+            f'<h3>{e(o["title"])}</h3>'
+            f'<span class="when">{e(when)}{more}</span>'
+            f'<span class="pills"><span class="price">od {zl(o["price"])}</span>{group}</span>'
+            f'</span></a>')
+
+
+def booking_form(offer, dates, cta, fid):
+    opts = ''.join(f'<option>{e(x)}</option>' for x in dates) + '<option>Inny termin lub pytanie</option>'
+    termin = (f'<label for="{fid}-t">Termin</label><select id="{fid}-t" name="termin">{opts}</select>'
+              if dates else '<input type="hidden" name="termin" value="Na zamówienie">')
+    return f'''<form class="booking" name="zapisy" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-booking>
+        <input type="hidden" name="form-name" value="zapisy">
+        <input type="hidden" name="oferta" value="{e(offer)}">
+        <p class="sr-only"><label>Nie wypełniaj <input name="bot-field" tabindex="-1"></label></p>
+        {termin}
+        <label for="{fid}-n">Imię i nazwisko</label><input id="{fid}-n" name="imie" required autocomplete="name">
+        <label for="{fid}-e">E-mail</label><input id="{fid}-e" name="email" type="email" required autocomplete="email">
+        <div class="two">
+          <div><label for="{fid}-p">Telefon <span>(opcjonalnie)</span></label><input id="{fid}-p" name="telefon" type="tel" autocomplete="tel"></div>
+          <div><label for="{fid}-o">Liczba osób</label><input id="{fid}-o" name="osoby" type="number" min="1" max="30" value="1" required></div>
+        </div>
+        <label for="{fid}-m">Wiadomość <span>(opcjonalnie)</span></label><textarea id="{fid}-m" name="wiadomosc" rows="3"></textarea>
+        <label class="check"><input type="checkbox" name="zgoda" value="tak" required> Zgadzam się na kontakt w sprawie zapisu.</label>
+        <button type="submit" class="btn btn-ink">{cta}</button>
+        <p class="nl-msg" aria-live="polite" data-booking-msg></p>
+      </form>'''
+
+
+def offer_page(kind, slug, o):
+    _tint[0] = 0
+    section, _, _ = KINDS[kind]
+    trip = kind == 'wyprawy'
+    state = {'dropcap': False, 'images': []}
+    body = '\n      '.join(x for x in (block_html(b, state) for b in o.get('body') or []) if x)
+    nxt = upcoming(o)
+    labels = [pl_span(d['date'], d.get('end')) + (f', godz. {d["time"]}' if d.get('time') else '') for d in nxt]
+    note = lambda d: f'<span class="note">{e(d["note"])}</span>' if d.get('note') else ''
+    dates = ''.join(f'<li><span class="d">{e(lab)}</span>{note(d)}</li>' for lab, d in zip(labels, nxt)) or '<li><span class="d">Nowe terminy wkrótce</span><span class="note">Zapisz się, a damy znać jako pierwszym.</span></li>'
+    facts = [('Gdzie', o.get('country') if trip else o.get('place')), ('Czas', o.get('duration')),
+             ('Grupa', o.get('group')), ('Poziom', o.get('level'))]
+    facts = ''.join(f'<div><dt>{k}</dt><dd>{e(v)}</dd></div>' for k, v in facts if v)
+    steps = o.get('itinerary' if trip else 'program') or []
+    plan = ''.join(f'<li><h3>{e(st["title"])}</h3><p>{e(st.get("text", ""))}</p></li>' for st in steps)
+    inc = ''.join(f'<li>{e(x)}</li>' for x in o.get('includes') or [])
+    exc = ''.join(f'<li>{e(x)}</li>' for x in o.get('excludes') or [])
+    lists = (f'<div class="incl"><div><h2>W cenie</h2><ul class="yes">{inc}</ul></div>'
+             + (f'<div><h2>Poza ceną</h2><ul class="no-list">{exc}</ul></div>' if exc else '') + '</div>') if inc else ''
+    sub = f'<p class="sub">{e(o["subtitle"])}</p>' if o.get('subtitle') else ''
+    rel = [s for s in o.get('related') or [] if s in A or s in R]
+    main = f'''
+  <nav class="crumbs" aria-label="Ścieżka">
+    <a href="/">Strona główna</a><span aria-hidden="true">›</span><a href="/{kind}/">{section}</a><span aria-hidden="true">›</span><span>{e(o['title'])}</span>
+  </nav>
+
+  <article class="offer">
+    <header class="o-head">
+      {tags([offer_label(kind, o), o.get('duration')], 2)}
+      <h1>{e(o['title'])}</h1>
+      {sub}
+      <p class="lead">{e(o['lead'])}</p>
+    </header>
+    <figure class="o-hero"><div class="ph frame {T()}">{img(o['image'], '(max-width:720px) 100vw, 760px', eager=True)}</div></figure>
+    <aside class="o-book" aria-labelledby="h-book">
+      <p class="o-price"><span>od</span> {zl(o['price'])}</p>
+      <p class="meta">{e(o.get('price_note', ''))}</p>
+      <dl class="facts">{facts}</dl>
+      <h2 id="h-book">Terminy</h2>
+      <ul class="dates">{dates}</ul>
+      {booking_form(o['title'], labels, 'Zapytaj o miejsce' if trip else 'Zapisz się', 'b')}
+      <p class="meta draft">Oferta przykładowa: terminy, ceny i program do potwierdzenia przed publikacją.</p>
+    </aside>
+    <div class="o-body">
+      {body}
+      <h2>{'Plan wyprawy' if trip else 'Program'}</h2>
+      <ol class="plan">{plan}</ol>
+      {lists}
+    </div>
+  </article>
+{related(rel, 'Poczytaj przed wyjazdem' if trip else 'Poczytaj przed warsztatami') if rel else ''}'''
+    images = [o['image']] + state['images'] + [ref_image(s) for s in rel]
+    return shell(o['title'], o['lead'], main, images, current='Wyprawy' if trip else 'Warsztaty', body_class='offer-page')
+
+
+def offer_list(kind):
+    _tint[0] = 0
+    section, _, items = KINDS[kind]
+    trip = kind == 'wyprawy'
+    cards = '\n      '.join(offer_card(kind, s, o) for s, o in items.items())
+    intro = OFERTA.get('trips_intro' if trip else 'workshops_intro', '')
+    main = f'''
+  <nav class="crumbs" aria-label="Ścieżka">
+    <a href="/">Strona główna</a><span aria-hidden="true">›</span><span>{section}</span>
+  </nav>
+  <header class="list-head">
+    <h1 data-ghost="{section.split()[0]}">{section}</h1>
+    <p class="lead">{e(intro)}</p>
+  </header>
+  <section class="sec" aria-label="{section}">
+    <div class="grid grid-3 offers">
+      {cards}
+    </div>
+  </section>
+  <section class="custom" aria-labelledby="h-custom">
+    <div>
+      <p class="kicker">Na zamówienie</p>
+      <h2 id="h-custom">{'Wyprawa dla Twojej grupy' if trip else 'Warsztaty dla firm, szkół i przyjaciół'}</h2>
+      <p class="body">{e(OFERTA.get('trips_custom' if trip else 'workshops_custom', ''))}</p>
+    </div>
+    {booking_form(('Wyprawa' if trip else 'Warsztaty') + ' na zamówienie', [], 'Wyślij zapytanie', 'c')}
+  </section>'''
+    return shell(section, intro, main, [o['image'] for o in items.values()], current='Wyprawy' if trip else 'Warsztaty',
+                 body_class='offer-list')
+
+
 GO = '<span class="go" aria-hidden="true"></span>'
 DAYS = {'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'}
 
@@ -599,7 +771,7 @@ def home_page():
     def shortcut(label, href, image, count):
         images.append(image)
         return (f'<a class="shortcut" href="{href}"><span class="ring">{img(image, "120px")}</span>'
-                f'<span class="h">{e(label)}</span><span class="n">{wpisy(count)}</span></a>')
+                f'<span class="h">{e(label)}</span><span class="n">{count if isinstance(count, str) else wpisy(count)}</span></a>')
 
     by_section = lambda sec: [a for a in A.values() if a['section'] == sec]
     shortcuts = []
@@ -610,6 +782,15 @@ def home_page():
             shortcuts.append(shortcut(label, href, items[0]['image'], len(items)))
     if R:
         shortcuts.insert(1, shortcut('Przepisy', '#przepisy', recipe_card_image(next(iter(R.values()))), len(R)))
+    images += [o['image'] for o in list(WS.values())[:3] + list(TR.values())[:3]]
+    if WS:
+        n = sum(len(upcoming(o)) for o in WS.values())
+        shortcuts.append(shortcut('Warsztaty', '/warsztaty/', next(iter(WS.values()))['image'],
+                                  f'{n} {"termin" if n == 1 else "terminy" if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14) else "terminów"}'))
+    if TR:
+        n = len(TR)
+        shortcuts.append(shortcut('Wyprawy', '/wyprawy/', next(iter(TR.values()))['image'],
+                                  f'{n} {"wyprawa" if n == 1 else "wyprawy" if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14) else "wypraw"}'))
 
     op = H['old_polish']
     feat = A[op['feature']]; images.append(feat['image'])
@@ -634,6 +815,9 @@ def home_page():
 
     # "Smaki świata": countries with stories (articles or recipes) chosen in the CMS
     by_country = {}
+    for slug, o in TR.items():
+        if o.get('country') in WORLD['regions']:
+            by_country.setdefault(o['country'], []).append([f'/wyprawy/{slug}.html', f'Wyprawa: {o["title"]}'])
     for st in (H.get('world') or {}).get('stories', []):
         href = (f'/historie/{st["article"]}.html' if st.get('article') in A else
                 f'/przepisy/{st["recipe"]}.html' if st.get('recipe') in R else None)
@@ -777,6 +961,17 @@ def home_page():
     <p class="meta" aria-live="polite" data-recipes-empty hidden>Wkrótce więcej przepisów w tej kategorii.</p>
   </section>
 
+  <section class="sec offers-sec" id="warsztaty" aria-labelledby="h-warsztaty">
+    <div class="sec-head">
+      <h2 id="h-warsztaty" data-ghost="Warsztaty">Warsztaty</h2>
+      <a href="/warsztaty/">Wszystkie warsztaty →</a>
+    </div>
+    <p class="sec-intro">{e(OFERTA.get('workshops_intro', ''))}</p>
+    <div class="grid grid-3 offers">
+      {''.join(offer_card('warsztaty', s, o) for s, o in list(WS.items())[:3])}
+    </div>
+  </section>
+
   <section class="sec travel-split" id="podroze" aria-labelledby="h-podroze">
     <div class="travel-panel">
       <div class="travel-panel-in">
@@ -788,6 +983,19 @@ def home_page():
     </div>
     <div class="travel-list">
       {''.join(travel_card(s) for s in H.get('travel', []) if s in A)}
+    </div>
+  </section>
+
+  <section class="bleed trips-band" id="wyprawy" aria-labelledby="h-wyprawy">
+    <div class="bleed-in">
+      <div class="sec-head">
+        <h2 id="h-wyprawy" data-ghost="Wyprawy">Wyprawy kulinarne</h2>
+        <a href="/wyprawy/">Wszystkie wyprawy →</a>
+      </div>
+      <p class="sec-intro">{e(OFERTA.get('trips_intro', ''))}</p>
+      <div class="grid grid-3 offers">
+        {''.join(offer_card('wyprawy', s, o) for s, o in list(TR.items())[:3])}
+      </div>
     </div>
   </section>
 
@@ -811,20 +1019,25 @@ def home_page():
 
 
 def main():
-    for d in ('historie', 'przepisy'):
+    for d in ('historie', 'przepisy', 'warsztaty', 'wyprawy'):
         os.makedirs(os.path.join(ROOT, d), exist_ok=True)
     # pages for content deleted in the CMS disappear too
-    for d, have in (('historie', A), ('przepisy', R)):
+    for d, have in (('historie', A), ('przepisy', R), ('warsztaty', WS), ('wyprawy', TR)):
         for f in glob.glob(os.path.join(ROOT, d, '*.html')):
-            if os.path.splitext(os.path.basename(f))[0] not in have:
+            name = os.path.splitext(os.path.basename(f))[0]
+            if name not in have and name != 'index':
                 os.remove(f)
+    for kind, (_, _, items) in KINDS.items():
+        open(os.path.join(ROOT, kind, 'index.html'), 'w', encoding='utf-8').write(offer_list(kind))
+        for slug, o in items.items():
+            open(os.path.join(ROOT, kind, f'{slug}.html'), 'w', encoding='utf-8').write(offer_page(kind, slug, o))
     for a in A.values():
         open(os.path.join(ROOT, 'historie', f"{a['slug']}.html"), 'w', encoding='utf-8').write(article_page(a))
     for slug, r in R.items():
         open(os.path.join(ROOT, 'przepisy', f'{slug}.html'), 'w', encoding='utf-8').write(recipe_page(slug, r))
     open(os.path.join(ROOT, 'js', 'recipe-data.js'), 'w', encoding='utf-8').write(recipe_data_js())
     open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8').write(home_page())
-    print(f'index, {len(A)} articles, {len(R)} recipes')
+    print(f'index, {len(A)} articles, {len(R)} recipes, {len(WS)} workshops, {len(TR)} trips')
 
 
 if __name__ == '__main__':

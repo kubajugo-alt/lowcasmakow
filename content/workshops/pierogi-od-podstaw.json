@@ -1,0 +1,66 @@
+{
+  "title": "Pierogi od podstaw",
+  "kind": "Warsztaty kulinarne",
+  "order": 1,
+  "lead": "Ciasto, które się nie rwie, trzy farsze i jedna historia: skąd pierogi wzięły się na polskim stole i dlaczego każdy region lepi je po swojemu.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1763570645098-371723617ee9",
+    "alt": "Ludzie przy stole wspólnie przygotowują jedzenie",
+    "credit": "Kwami Fattah Al Sissi",
+    "credit_url": "https://unsplash.com/@kwami_heude_50"
+  },
+  "place": "Warszawa, pracownia kulinarna (adres podamy po zapisie)",
+  "duration": "4 godziny",
+  "group": "do 12 osób",
+  "level": "Dla początkujących",
+  "price": 290,
+  "price_note": "za osobę, ze składnikami i kolacją",
+  "dates": [
+    {
+      "date": "2026-11-14",
+      "time": "11:00"
+    },
+    {
+      "date": "2026-12-05",
+      "time": "11:00",
+      "note": "Przedświąteczne: z kapustą i grzybami"
+    }
+  ],
+  "program": [
+    {
+      "title": "Skąd przyszły pierogi",
+      "text": "Krótka opowieść o pierożkach od Chin po Podole: kto lepił pierwszy i co mówi o nas farsz."
+    },
+    {
+      "title": "Ciasto",
+      "text": "Mąka, woda, tłuszcz: proporcje, wyrabianie i odpoczynek. Każdy robi swoje."
+    },
+    {
+      "title": "Trzy farsze",
+      "text": "Ruskie, kapusta z grzybami i sezonowy farsz na słodko."
+    },
+    {
+      "title": "Lepienie i gotowanie",
+      "text": "Falbanka, sznureczek i szczypanie widelcem. Gotujemy, okraszamy i siadamy razem do stołu."
+    }
+  ],
+  "includes": [
+    "Wszystkie składniki i fartuch",
+    "Kolacja z tego, co ulepimy",
+    "Przepisy w PDF po warsztatach",
+    "Pudełko pierogów do domu"
+  ],
+  "body": [
+    {
+      "type": "text",
+      "text": "Pierogi wydają się proste, a jednak wokół nich narosło więcej sporów niż wokół niejednej historycznej daty. Na warsztatach uczymy się rzemiosła, ale też patrzymy na pierogi jak antropolog: co mówią o świętach, regionach i rodzinnych zwyczajach."
+    },
+    {
+      "type": "text",
+      "text": "Nie trzeba umieć gotować. Wystarczą chęci i czyste ręce."
+    }
+  ],
+  "related": [
+    "pierogi"
+  ]
+}

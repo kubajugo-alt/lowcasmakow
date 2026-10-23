@@ -1,0 +1,63 @@
+{
+  "title": "Peru: od Limy po Cusco",
+  "subtitle": "Ceviche, ziemniaki i Andy",
+  "country": "Peru",
+  "order": 2,
+  "lead": "Dwanaście dni od oceanu po wysokie Andy. Ceviche w Limie, tysiące odmian ziemniaka w Świętej Dolinie i kuchnia, która łączy Inków, Hiszpanów, Chińczyków i Japończyków.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1583202806174-ab03e16760d5",
+    "alt": "Kobieta w tradycyjnym stroju na ulicy w Cusco",
+    "credit": "Deb Dowd",
+    "credit_url": "https://unsplash.com/@fin777"
+  },
+  "duration": "12 dni",
+  "group": "8–12 osób",
+  "price": 15900,
+  "price_note": "za osobę w pokoju dwuosobowym, bez przelotu",
+  "dates": [
+    {
+      "date": "2027-05-08",
+      "end": "2027-05-19"
+    }
+  ],
+  "itinerary": [
+    {
+      "title": "Dni 1–3: Lima",
+      "text": "Targ Surquillo, ceviche z rybakami z Chorrillos, kuchnia chifa i nikkei."
+    },
+    {
+      "title": "Dni 4–5: Arequipa",
+      "text": "Picanterías i rocoto relleno. Aklimatyzacja przed Andami."
+    },
+    {
+      "title": "Dni 6–10: Święta Dolina i Cusco",
+      "text": "Park ziemniaków w Pisac, chuño suszone mrozem, pachamanca i targ San Pedro."
+    },
+    {
+      "title": "Dni 11–12: Powrót",
+      "text": "Ostatnie śniadanie w Cusco, przelot do Limy."
+    }
+  ],
+  "includes": [
+    "Noclegi",
+    "Śniadania i większość kolacji",
+    "Warsztaty i degustacje",
+    "Przeloty wewnętrzne i transport",
+    "Opieka Łowcy Smaków i lokalnego przewodnika"
+  ],
+  "excludes": [
+    "Przelot do Peru",
+    "Ubezpieczenie podróżne",
+    "Wstęp do Machu Picchu (opcjonalnie)"
+  ],
+  "body": [
+    {
+      "type": "text",
+      "text": "W Andach ziemniak to nie dodatek, tylko cały świat: żółte, fioletowe, czarne, podłużne, pomarszczone. Na tej wyprawie gotujemy z rolnikami, którzy je uprawiają, i z kucharzami z Limy, którzy zrobili z nich kuchnię znaną na całym świecie."
+    }
+  ],
+  "related": [
+    "peru-ziemniaki",
+    "papa-a-la-huancaina"
+  ]
+}

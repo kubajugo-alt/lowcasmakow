@@ -1,0 +1,65 @@
+{
+  "title": "Dlaczego jemy to, co jemy? Wieczór antropologii kulinarnej",
+  "kind": "Antropologia kulinarna",
+  "order": 3,
+  "lead": "Wykład z degustacją: o tym, skąd biorą się smaki, zakazy i rytuały przy stole. Od Czernieckiego po bar mleczny.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1528605248644-14dd04022da1",
+    "alt": "Ludzie przy wspólnym stole rozmawiają i jedzą",
+    "credit": "Priscilla Du Preez",
+    "credit_url": "https://unsplash.com/@priscilladupreez"
+  },
+  "place": "Warszawa (miejsce do potwierdzenia)",
+  "duration": "2,5 godziny",
+  "group": "do 24 osób",
+  "level": "Bez przygotowania",
+  "price": 160,
+  "price_note": "za osobę, z degustacją",
+  "dates": [
+    {
+      "date": "2026-11-27",
+      "time": "19:00"
+    },
+    {
+      "date": "2026-12-11",
+      "time": "19:00"
+    }
+  ],
+  "program": [
+    {
+      "title": "Jedzenie jako język",
+      "text": "Co mówimy o sobie tym, co jemy, a czego nie jemy."
+    },
+    {
+      "title": "Smaki dawnej Polski",
+      "text": "Pieprz, szafran i imbir: kuchnia staropolska, która pachniała bogactwem."
+    },
+    {
+      "title": "Degustacja z komentarzem",
+      "text": "Pięć małych dań, pięć historii. Od szarego sosu po kiszonkę."
+    },
+    {
+      "title": "Rozmowa",
+      "text": "Pytania, wspomnienia i rodzinne przepisy uczestników."
+    }
+  ],
+  "includes": [
+    "Wykład i materiały",
+    "Degustacja pięciu dań",
+    "Lista lektur"
+  ],
+  "body": [
+    {
+      "type": "text",
+      "text": "To spotkanie dla ciekawych, nie dla kucharzy. Opowiadamy o jedzeniu tak, jak antropolodzy opowiadają o świecie: przez zwyczaje, święta, handel i pamięć. Każdy temat ma swój smak na talerzu."
+    },
+    {
+      "type": "text",
+      "text": "Wieczór można też zamówić dla firmy, szkoły lub grupy przyjaciół."
+    }
+  ],
+  "related": [
+    "kim-byl-czerniecki",
+    "przyprawy-staropolskie"
+  ]
+}
