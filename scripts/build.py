@@ -153,7 +153,7 @@ def recipe_card_image(r):
 # ---------- page frame ----------
 
 FONTS = ('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500'
-         '&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap')
+         '&amp;family=Instrument+Sans:wght@400;500;600&amp;family=Poppins:wght@600;700;800&amp;display=swap')
 SEARCH = ('<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
           'stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>')
 MENU = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
@@ -519,6 +519,31 @@ CHIPS = ['Podkarpackie', 'Świętokrzyskie', 'Małopolskie', 'Lubelskie', 'Ślą
 
 
 GO = '<span class="go" aria-hidden="true"></span>'
+DAYS = {'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'}
+
+
+def tags(parts, n=3):
+    """Red tag pills (after alemeksyk.eu)."""
+    seen, out = set(), []
+    for t in parts:
+        t = (t or '').strip()
+        if t and t not in seen and t not in DAYS and not t.startswith(('Odcinek', 'Część', 'Seria')):
+            seen.add(t); out.append(t)
+    return '<span class="tags">' + ''.join(f'<span class="tag">{e(t)}</span>' for t in out[:n]) + '</span>'
+
+
+def article_tags(a, n=3):
+    return tags([a['section']] + a['kicker'].split(' · '), n)
+
+
+def datepill(a):
+    d = a.get('date') or ''
+    return f'<span class="date">{d[8:10]}.{d[5:7]}.{d[:4]}</span>' if len(d) == 10 else ''
+
+
+def wpisy(n):
+    few = n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14)
+    return f'{n} {"wpis" if n == 1 else "wpisy" if few else "wpisów"}'
 
 
 def home_page():
@@ -531,20 +556,13 @@ def home_page():
     def numbered(slug):
         return f'<span class="no">№ {no(slug)}</span>'
 
-    def issue_item(slug):
-        a = A[slug]; images.append(a['image'])
-        return (f'<li><a class="issue-item" href="/historie/{slug}.html"><span class="no">{no(slug)}</span>'
-                f'<span class="issue-t"><span class="kicker">{e(a["section"])}</span><span class="t">{e(a["title"])}</span></span>'
-                f'{framed(img(a["image"], "72px"), "small")}</a></li>')
-
     def week_card(w):
         a = A[w['article']]; images.append(a['image'])
-        label = a['kicker'].split(' · ')[1] if ' · ' in a['kicker'] else a['section']
         return (f'<a href="/historie/{a["slug"]}.html" class="card week-card">'
                 f'<p class="day"><em>{e(w["day"])}</em> <span>{e(w.get("date", ""))}</span></p>'
                 f'<div class="ph frame {T()} ratio-45">{img(a["image"], "(max-width:720px) 100vw, 33vw")}</div>'
-                f'<div class="card-body"><p class="kicker">{numbered(a["slug"])} {e(label)}</p>'
-                f'<h3>{e(a["title"])}</h3><p class="excerpt">{e(first_sentence(a["lead"]))}</p>{GO}</div></a>')
+                f'<div class="card-body">{article_tags(a, 2)}'
+                f'<h3>{e(a["title"])}</h3><p class="excerpt">{e(first_sentence(a["lead"]))}</p><p class="pills">{numbered(a["slug"])}{datepill(a)}</p></div></a>')
 
     def side_article(slug):
         a = A[slug]; images.append(a['image'])
@@ -558,8 +576,9 @@ def home_page():
 
     def recipe_tile(slug):
         r = R[slug]; im = recipe_card_image(r); images.append(im)
-        return (f'<a href="/przepisy/{slug}.html" class="card sm" data-cat="{e(r["category"])}"><div class="ph frame {T()} ratio-45">{img(im, "(max-width:720px) 70vw, 25vw")}</div>'
-                f'<p class="meta"><span class="no">{rno(slug)}</span> {e(CAT.get(r["category"], ""))} · {e(r.get("card_meta", ""))}</p><h3>{e(r["title"])}</h3></a>')
+        return (f'<a href="/przepisy/{slug}.html" class="ov ov-tile" data-cat="{e(r["category"])}">{img(im, "(max-width:720px) 70vw, 25vw")}'
+                f'<span class="ov-body">{tags([CAT.get(r["category"], "")] + (r.get("card_meta") or "").split(" · ")[:1])}'
+                f'<span class="h">{e(r["title"])}</span><span class="pills"><span class="no">{rno(slug)}</span></span></span></a>')
 
     def travel_card(slug):
         a = A[slug]; images.append(a['image'])
@@ -568,6 +587,27 @@ def home_page():
                 f'{framed(img(a["image"], "(max-width:720px) 100vw, 22vw"), "ratio-1")}'
                 f'<span class="travel-t"><span class="no">№ {no(slug)}</span><span class="h">{e(a["title"])}</span>'
                 f'<span class="excerpt">{e(first_sentence(a["lead"]))}</span>{GO}</span></a>')
+
+    def overlay(slug, cls='', sizes='(max-width:720px) 100vw, 30vw'):
+        a = A[slug]; images.append(a['image'])
+        return (f'<article class="ov {cls}">{img(a["image"], sizes)}<div class="ov-body">{article_tags(a)}'
+                f'<h2 class="h"><a class="stretch" href="/historie/{slug}.html">{e(a["title"])}</a></h2>'
+                f'<p class="pills">{numbered(slug)}{datepill(a)}</p></div></article>')
+
+    def shortcut(label, href, image, count):
+        images.append(image)
+        return (f'<a class="shortcut" href="{href}"><span class="ring">{img(image, "120px")}</span>'
+                f'<span class="h">{e(label)}</span><span class="n">{wpisy(count)}</span></a>')
+
+    by_section = lambda sec: [a for a in A.values() if a['section'] == sec]
+    shortcuts = []
+    for label, href, sec in [('Historie', '#nowe', 'Historie'), ('Wideo', '#staropolska', 'Wideo'),
+                             ('Smaki regionów', '#regiony', 'Smaki regionów'), ('Z podróży', '#podroze', 'Z podróży')]:
+        items = by_section(sec)
+        if items:
+            shortcuts.append(shortcut(label, href, items[0]['image'], len(items)))
+    if R:
+        shortcuts.insert(1, shortcut('Przepisy', '#przepisy', recipe_card_image(next(iter(R.values()))), len(R)))
 
     op = H['old_polish']
     feat = A[op['feature']]; images.append(feat['image'])
@@ -588,37 +628,32 @@ def home_page():
     tiles = '\n'.join(tile(r) for r in REGIONS)
     chips = '\n'.join(f'        <button type="button" class="chip" data-region="{c}" aria-pressed="false">{c}</button>' for c in CHIPS)
     issue = [s for s in H.get('issue_list', []) if s in A]
-    lead_recipe = f'<a href="/przepisy/{L["recipe"]}.html" class="btn btn-line">Przejdź do przepisu</a>' if L.get('recipe') in R else ''
+    lead_recipe = f'<a href="/przepisy/{L["recipe"]}.html" class="tag tag-link">Przepis →</a>' if L.get('recipe') in R else ''
 
     main = f"""
-  <section class="lead-grid" aria-label="Historia tygodnia">
-    <article class="lead-story">
-      <div class="lead-photo">
-        <a class="ph frame {T()} lead-img" href="/historie/{lead['slug']}.html" tabindex="-1" aria-hidden="true">{img(lead['image'], '(max-width:720px) 100vw, 66vw', eager=True)}</a>
-      </div>
-      <p class="kicker">{numbered(lead['slug'])} {e(lead['kicker'])}</p>
-      <h1><a href="/historie/{lead['slug']}.html">{e(lead['title'])}</a></h1>
-      <div class="lead-foot">
+  <section class="mosaic" aria-label="Historia tygodnia">
+    <article class="ov ov-lead">
+      {img(lead['image'], '(max-width:720px) 100vw, 66vw', eager=True)}
+      <div class="ov-body">
+        {article_tags(lead)}
+        <h1 class="h"><a class="stretch" href="/historie/{lead['slug']}.html">{e(lead['title'])}</a></h1>
         <p class="lead">{e(L.get('text') or lead['lead'])}</p>
-        <div class="btns">
-          <a href="/historie/{lead['slug']}.html" class="btn btn-ink">Czytaj historię</a>
-          {lead_recipe}
-        </div>
+        <p class="pills">{numbered(lead['slug'])}{datepill(lead)}{lead_recipe}</p>
       </div>
     </article>
-    <aside class="issue" aria-labelledby="h-issue">
-      <h2 id="h-issue" class="label">W tym wydaniu <span>{len(issue):02d}</span></h2>
-      <ol>
-        {''.join(issue_item(s) for s in issue)}
-      </ol>
-      <a class="more" href="#nowe">Wszystkie historie →</a>
-    </aside>
+    {''.join(overlay(s, 'ov-side') for s in issue[:2])}
+  </section>
+
+  <section class="sec shortcuts-sec" aria-labelledby="h-skroty">
+    <div class="sec-head"><h2 id="h-skroty" data-ghost="Na skróty">Na skróty</h2></div>
+    <nav class="shortcuts" aria-label="Działy">
+      {''.join(shortcuts)}
+    </nav>
   </section>
 
   <section class="sec" id="nowe" aria-labelledby="h-nowe">
     <div class="sec-head">
-      <span class="vlabel" aria-hidden="true">Wydanie</span>
-      <h2 id="h-nowe">Nowe w tym tygodniu</h2>
+      <h2 id="h-nowe" data-ghost="W tym tygodniu">Nowe w tym tygodniu</h2>
       <p class="meta">{e(H.get('issue', ''))}</p>
     </div>
     <div class="grid grid-3 week">
@@ -629,8 +664,7 @@ def home_page():
   <section class="bleed dark" id="staropolska" aria-labelledby="h-staro">
     <div class="bleed-in">
       <div class="sec-head">
-        <span class="vlabel" aria-hidden="true">Seria</span>
-      <h2 id="h-staro">{e(op.get('title') or 'Kuchnia staropolska')}</h2>
+        <h2 id="h-staro" data-ghost="Staropolska">{e(op.get('title') or 'Kuchnia staropolska')}</h2>
         <a href="/historie/{(sides or [feat['slug']])[0]}.html">Cała seria →</a>
       </div>
       <div class="feature">
@@ -670,8 +704,7 @@ def home_page():
 
   <section class="sec" id="przepisy" aria-labelledby="h-przepisy" data-recipes>
     <div class="sec-head">
-      <span class="vlabel" aria-hidden="true">Kuchnia</span>
-      <h2 id="h-przepisy">Przepisy</h2>
+      <h2 id="h-przepisy" data-ghost="Przepisy">Przepisy</h2>
       <a href="#przepisy">Wszystkie przepisy →</a>
     </div>
     <div class="chips" role="group" aria-label="Filtruj przepisy">

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <title>Łowca Smaków — makiety do Canvy</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=Instrument+Sans:wght@400;500;600&amp;family=Poppins:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <style>
 /* Łowca Smaków — shared styles
    Black on white like the logo (and its white-on-black twin), fine rules.
@@ -34,6 +34,7 @@
   --mustard:#E3A52A;
   --burgundy:#6B1E24;
   --serif:'Cormorant Garamond','Cormorant',Georgia,'Times New Roman',serif;
+  --display:'Poppins',system-ui,sans-serif;
   --sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -465,9 +466,6 @@ blockquote.pull cite{display:block;margin-top:12px;font-style:normal;font-size:1
 /* small uppercase labels set vertically in the margin */
 .vlabel{font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);color:var(--muted);white-space:nowrap}
 .sec-head{position:relative}
-.sec-head>.vlabel{position:absolute;left:-34px;top:18px}
-.dark .sec-head>.vlabel{color:rgba(255,255,255,.7)}
-.sec-head h2{font-size:52px;font-weight:500}
 
 /* line and arrow: "read more" without words */
 .go{display:flex;align-items:center;gap:10px;margin-top:6px;color:var(--ink)}
@@ -523,6 +521,92 @@ a:hover .go::after{transform:translateX(4px)}
 body.home .site-footer{margin-top:0}
 
 
+/* ---------- after alemeksyk.eu: bold sans headings, red menu bar, a mosaic of photo cards with
+   the title on the picture, red tag pills and grey date pills, ghost words behind section titles,
+   round shortcuts ---------- */
+.sec-head h2,.card h3,.card.row h4,.hero h1,.regions-copy h2,.newsletter h2,.r-title h1,.r-body h2,.cook h1,.lost h1,
+.a-head h1,.a-body h2,.statement h2,.travel-panel h2,.travel-t .h,.dropcap::first-letter{font-family:var(--display);font-weight:700;letter-spacing:-.015em}
+.sec-head h2{font-size:34px}
+.card h3{font-size:22px;line-height:1.2}
+.card.row h4{font-size:18px;line-height:1.25}
+.week .card h3{font-size:22px}
+.regions-copy h2{font-size:44px;line-height:1.05}
+.a-head h1{font-size:clamp(36px,4.6vw,60px);line-height:1.08}
+.a-body h2{font-size:28px;line-height:1.2}
+.r-title h1{font-size:60px;line-height:1.02}
+.r-body h2{font-size:30px}
+.statement h2{font-size:clamp(44px,5.4vw,80px);line-height:1}
+.statement h2 em{font-family:var(--serif);font-weight:500;font-size:1.15em}
+.travel-panel h2{font-size:56px;line-height:1}
+.travel-t .h{font-size:22px;line-height:1.2}
+.dark .feature-main h3{font-size:34px}
+.cook h1{font-size:36px;line-height:1.1}
+
+/* red menu bar */
+.main-nav{max-width:1216px;margin:0 auto 4px;width:calc(100% - 64px);background:var(--vermilion);border:0;border-radius:6px;gap:0;padding:0 8px}
+.main-nav .navlink{color:var(--white);font-family:var(--display);font-weight:600;font-size:14.5px;padding:13px 18px;border:0;margin:0;position:relative}
+.main-nav .navlink+.navlink::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:1px;background:rgba(255,255,255,.35)}
+.main-nav .navlink:hover,.main-nav .navlink[aria-current="page"]{color:var(--white);background:rgba(255,255,255,.18);border:0}
+
+/* ghost words behind section titles */
+.sec-head{border-top:0;padding-top:28px;isolation:isolate;overflow-x:clip}
+.sec-head h2[data-ghost]{position:relative}
+.sec-head h2[data-ghost]::before{content:attr(data-ghost);position:absolute;left:0;bottom:-.08em;z-index:-1;font-size:2.7em;line-height:1;font-weight:800;color:rgba(18,18,18,.055);white-space:nowrap;pointer-events:none}
+.dark .sec-head h2[data-ghost]::before{color:rgba(255,255,255,.08)}
+
+/* pills */
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{display:inline-flex;align-items:center;min-height:22px;padding:0 9px;border-radius:4px;background:var(--vermilion);color:var(--white);font:600 11.5px/1 var(--display);letter-spacing:0;text-transform:none;text-decoration:none}
+.tag-link{background:var(--mustard);color:var(--ink);position:relative;z-index:2}
+.tag-link:hover{background:var(--white);color:var(--ink)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pills .no,.date{display:inline-flex;align-items:center;min-height:22px;padding:0 10px;border-radius:999px;background:var(--panel);color:var(--ink-2);font:500 11.5px/1 var(--sans);letter-spacing:.02em}
+.pills .no{background:var(--ink);color:var(--white)}
+
+/* photo cards with the title on the picture */
+.ov{position:relative;display:block;overflow:hidden;border-radius:10px;background:var(--ph);color:var(--white);text-decoration:none;isolation:isolate;box-shadow:0 14px 30px -20px rgba(18,18,18,.55)}
+.ov>img.fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .5s ease}
+.ov::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.42) 58%,rgba(0,0,0,.82) 100%)}
+.ov:hover>img.fill,.ov:focus-within>img.fill{transform:scale(1.04)}
+.ov-body{position:absolute;left:0;right:0;bottom:0;padding:22px;display:flex;flex-direction:column;gap:10px}
+.ov .h{font:700 21px/1.18 var(--display);letter-spacing:-.01em;color:var(--white)}
+.ov .h a{color:inherit;text-decoration:none}
+.ov .stretch::after{content:"";position:absolute;inset:0;z-index:1}
+.ov .h a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+.ov .lead{color:rgba(255,255,255,.9);font-size:16px;max-width:620px}
+.ov .pills .no{background:rgba(255,255,255,.92);color:var(--ink)}
+.ov .date{background:rgba(255,255,255,.22);color:var(--white);backdrop-filter:blur(4px)}
+.mosaic{display:grid;grid-template-columns:minmax(0,2.45fr) minmax(0,1fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:16px;height:clamp(520px,42vw,640px)}
+.ov-lead{grid-row:1/3}
+.ov-lead .ov-body{padding:36px}
+.ov-lead .h{font-size:clamp(34px,3.6vw,52px);line-height:1.05;max-width:760px}
+
+/* recipes as photo cards */
+.rail .ov-tile{aspect-ratio:4/5}
+.ov-tile .ov-body{padding:18px}
+.ov-tile .h{font-size:20px}
+
+/* shortcuts: round photos with counts */
+.shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+.shortcut{display:flex;flex-direction:column;align-items:center;gap:6px;padding:26px 16px 22px;border-radius:10px;background:var(--panel);text-decoration:none;color:var(--ink);transition:transform .2s,box-shadow .2s}
+.shortcut:hover{color:var(--ink);transform:translateY(-3px);box-shadow:0 14px 30px -20px rgba(18,18,18,.55)}
+.shortcut .ring{position:relative;width:104px;height:104px;border-radius:50%;overflow:hidden;border:4px solid var(--white);box-shadow:0 10px 22px -12px rgba(18,18,18,.6);margin-bottom:8px}
+.shortcut:nth-child(4n+1) .ring{border-color:var(--mustard)}
+.shortcut:nth-child(4n+2) .ring{border-color:var(--vermilion)}
+.shortcut:nth-child(4n+3) .ring{border-color:var(--ultramarine)}
+.shortcut:nth-child(4n+4) .ring{border-color:var(--sage)}
+.shortcut .h{font:700 16px/1.2 var(--display)}
+.shortcut .n{font-size:13px;color:var(--muted)}
+
+/* rounder frames to match */
+.frame{border-radius:8px}
+.frame>img.fill,.frame>iframe.fill{border-radius:3px}
+.week .card-body{display:flex;flex-direction:column;gap:10px}
+.week .day em{font-family:var(--display);font-style:normal;font-weight:700;font-size:26px}
+
+
+
+
 /* Canva pages */
 .tick{width:18px;height:18px;border:1.5px solid var(--ink);border-radius:3px;flex:none}
 body{margin:0}
@@ -564,51 +648,45 @@ body{margin:0}
 
 <main class="wrap" id="tresc">
 
-  <section class="lead-grid" aria-label="Historia tygodnia">
-    <article class="lead-story">
-      <div class="lead-photo">
-        <a class="ph frame tint-sage lead-img" href="https://lowca-smakow.netlify.app/historie/dlaczego-kisimy-ogorki.html" tabindex="-1" aria-hidden="true"><img class="fill" src="https://images.unsplash.com/photo-1627861446476-42fd9925e151?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Słoiki z kiszonymi ogórkami, koperkiem i czosnkiem" fetchpriority="high" decoding="async"></a>
-      </div>
-      <p class="kicker"><span class="no">№ 001</span> Antropologia jedzenia · Seria „Dlaczego jemy?”</p>
-      <h1><a href="https://lowca-smakow.netlify.app/historie/dlaczego-kisimy-ogorki.html">Dlaczego kisimy ogórki?</a></h1>
-      <div class="lead-foot">
+  <section class="mosaic" aria-label="Historia tygodnia">
+    <article class="ov ov-lead">
+      <img class="fill" src="https://images.unsplash.com/photo-1627861446476-42fd9925e151?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Słoiki z kiszonymi ogórkami, koperkiem i czosnkiem" fetchpriority="high" decoding="async">
+      <div class="ov-body">
+        <span class="tags"><span class="tag">Historie</span><span class="tag">Antropologia jedzenia</span></span>
+        <h1 class="h"><a class="stretch" href="https://lowca-smakow.netlify.app/historie/dlaczego-kisimy-ogorki.html">Dlaczego kisimy ogórki?</a></h1>
         <p class="lead">Słoik ogórków w spiżarni to nie tylko smak dzieciństwa. To technologia starsza niż lodówka i jeden z najtrwalszych rytuałów polskiego roku.</p>
-        <div class="btns">
-          <a href="https://lowca-smakow.netlify.app/historie/dlaczego-kisimy-ogorki.html" class="btn btn-ink">Czytaj historię</a>
-          <a href="https://lowca-smakow.netlify.app/przepisy/ogorki-kiszone.html" class="btn btn-line">Przejdź do przepisu</a>
-        </div>
+        <p class="pills"><span class="no">№ 001</span><span class="date">26.10.2026</span><a href="https://lowca-smakow.netlify.app/przepisy/ogorki-kiszone.html" class="tag tag-link">Przepis →</a></p>
       </div>
     </article>
-    <aside class="issue" aria-labelledby="h-issue">
-      <h2 id="h-issue" class="label">W tym wydaniu <span>05</span></h2>
-      <div class="x-ol">
-        <div class="x-li"><a class="issue-item" href="https://lowca-smakow.netlify.app/historie/pierogi.html"><span class="no">002</span><span class="issue-t"><span class="kicker">Historie</span><span class="t">Pierogi: danie, które każdy region ma za swoje</span></span><span class="ph frame tint-mustard small"><img class="fill" src="https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ręce nakładające farsz na krążki ciasta na pierogi" decoding="async"></span></a></div><div class="x-li"><a class="issue-item" href="https://lowca-smakow.netlify.app/historie/podhale-oscypek.html"><span class="no">003</span><span class="issue-t"><span class="kicker">Smaki regionów</span><span class="t">Podhale: smak, który je definiuje</span></span><span class="ph frame tint-vermilion small"><img class="fill" src="https://images.unsplash.com/photo-1792582232028-0d8b0c703797?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Drewniany dom w stylu podhalańskim wśród jesiennych drzew" decoding="async"></span></a></div><div class="x-li"><a class="issue-item" href="https://lowca-smakow.netlify.app/historie/bary-mleczne.html"><span class="no">004</span><span class="issue-t"><span class="kicker">Historie</span><span class="t">Skąd się wzięły bary mleczne?</span></span><span class="ph frame tint-ultramarine small"><img class="fill" src="https://images.unsplash.com/photo-1612966948332-81d747414a8f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Rosół z warzywami w porcelanowej wazie" decoding="async"></span></a></div><div class="x-li"><a class="issue-item" href="https://lowca-smakow.netlify.app/historie/slimaki-wedlug-czernieckiego.html"><span class="no">005</span><span class="issue-t"><span class="kicker">Wideo</span><span class="t">Ślimaki w szarym sosie piernikowym według Czernieckiego</span></span><span class="ph frame tint-sage small"><img class="fill" src="https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimaki w muszlach na żeliwnej patelni" decoding="async"></span></a></div><div class="x-li"><a class="issue-item" href="https://lowca-smakow.netlify.app/historie/peru-ziemniaki.html"><span class="no">008</span><span class="issue-t"><span class="kicker">Z podróży</span><span class="t">Tysiące odmian: w Andach ziemniak to nie jedno warzywo</span></span><span class="ph frame tint-mustard small"><img class="fill" src="https://images.unsplash.com/photo-1683543124235-400a2b31cc73?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ziemniaki na straganie targowym" decoding="async"></span></a></div>
-      </div>
-      <a class="more" href="#nowe">Wszystkie historie →</a>
-    </aside>
+    <article class="ov ov-side"><img class="fill" src="https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ręce nakładające farsz na krążki ciasta na pierogi" decoding="async"><div class="ov-body"><span class="tags"><span class="tag">Historie</span><span class="tag">Antropologia</span></span><h2 class="h"><a class="stretch" href="https://lowca-smakow.netlify.app/historie/pierogi.html">Pierogi: danie, które każdy region ma za swoje</a></h2><p class="pills"><span class="no">№ 002</span><span class="date">20.10.2026</span></p></div></article><article class="ov ov-side"><img class="fill" src="https://images.unsplash.com/photo-1792582232028-0d8b0c703797?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Drewniany dom w stylu podhalańskim wśród jesiennych drzew" decoding="async"><div class="ov-body"><span class="tags"><span class="tag">Smaki regionów</span></span><h2 class="h"><a class="stretch" href="https://lowca-smakow.netlify.app/historie/podhale-oscypek.html">Podhale: smak, który je definiuje</a></h2><p class="pills"><span class="no">№ 003</span><span class="date">22.10.2026</span></p></div></article>
+  </section>
+
+  <section class="sec shortcuts-sec" aria-labelledby="h-skroty">
+    <div class="sec-head"><h2 id="h-skroty" data-ghost="Na skróty">Na skróty</h2></div>
+    <nav class="shortcuts" aria-label="Działy">
+      <a class="shortcut" href="#nowe"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1627861446476-42fd9925e151?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Słoiki z kiszonymi ogórkami, koperkiem i czosnkiem" decoding="async"></span><span class="h">Historie</span><span class="n">5 wpisów</span></a><a class="shortcut" href="#przepisy"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1549413468-24b18ebf5d9c?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimaki zapiekane z masłem ziołowym w ceramicznym naczyniu" decoding="async"></span><span class="h">Przepisy</span><span class="n">4 wpisy</span></a><a class="shortcut" href="#staropolska"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimaki w muszlach na żeliwnej patelni" decoding="async"></span><span class="h">Wideo</span><span class="n">2 wpisy</span></a><a class="shortcut" href="#regiony"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1792582232028-0d8b0c703797?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Drewniany dom w stylu podhalańskim wśród jesiennych drzew" decoding="async"></span><span class="h">Smaki regionów</span><span class="n">1 wpis</span></a><a class="shortcut" href="#podroze"><span class="ring"><img class="fill" src="https://images.unsplash.com/photo-1683543124235-400a2b31cc73?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ziemniaki na straganie targowym" decoding="async"></span><span class="h">Z podróży</span><span class="n">3 wpisy</span></a>
+    </nav>
   </section>
 
   <section class="sec" id="nowe" aria-labelledby="h-nowe">
     <div class="sec-head">
-      <span class="vlabel" aria-hidden="true">Wydanie</span>
-      <h2 id="h-nowe">Nowe w tym tygodniu</h2>
+      <h2 id="h-nowe" data-ghost="W tym tygodniu">Nowe w tym tygodniu</h2>
       <p class="meta">Wydanie nr 01 · 20–26 października 2026</p>
     </div>
     <div class="grid grid-3 week">
-      <a href="https://lowca-smakow.netlify.app/historie/pierogi.html" class="card week-card"><p class="day"><em>Poniedziałek</em> <span>20.10</span></p><div class="ph frame tint-vermilion ratio-45"><img class="fill" src="https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ręce nakładające farsz na krążki ciasta na pierogi" decoding="async"></div><div class="card-body"><p class="kicker"><span class="no">№ 002</span> Antropologia</p><h3>Pierogi: danie, które każdy region ma za swoje</h3><p class="excerpt">Ciasto, farsz, zlepiony brzeg.</p><span class="go" aria-hidden="true"></span></div></a><a href="https://lowca-smakow.netlify.app/historie/podhale-oscypek.html" class="card week-card"><p class="day"><em>Środa</em> <span>22.10</span></p><div class="ph frame tint-ultramarine ratio-45"><img class="fill" src="https://images.unsplash.com/photo-1792582232028-0d8b0c703797?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Drewniany dom w stylu podhalańskim wśród jesiennych drzew" decoding="async"></div><div class="card-body"><p class="kicker"><span class="no">№ 003</span> Smaki regionów</p><h3>Podhale: smak, który je definiuje</h3><p class="excerpt">Wędzony, twardy, w kształcie wrzeciona, z odciśniętym wzorem.</p><span class="go" aria-hidden="true"></span></div></a><a href="https://lowca-smakow.netlify.app/historie/bary-mleczne.html" class="card week-card"><p class="day"><em>Niedziela</em> <span>26.10</span></p><div class="ph frame tint-sage ratio-45"><img class="fill" src="https://images.unsplash.com/photo-1612966948332-81d747414a8f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Rosół z warzywami w porcelanowej wazie" decoding="async"></div><div class="card-body"><p class="kicker"><span class="no">№ 004</span> Gotujemy</p><h3>Skąd się wzięły bary mleczne?</h3><p class="excerpt">Ceraty na stołach, okienko wydawania, pomidorowa za kilka złotych.</p><span class="go" aria-hidden="true"></span></div></a>
+      <a href="https://lowca-smakow.netlify.app/historie/pierogi.html" class="card week-card"><p class="day"><em>Poniedziałek</em> <span>20.10</span></p><div class="ph frame tint-sage ratio-45"><img class="fill" src="https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ręce nakładające farsz na krążki ciasta na pierogi" decoding="async"></div><div class="card-body"><span class="tags"><span class="tag">Historie</span><span class="tag">Antropologia</span></span><h3>Pierogi: danie, które każdy region ma za swoje</h3><p class="excerpt">Ciasto, farsz, zlepiony brzeg.</p><p class="pills"><span class="no">№ 002</span><span class="date">20.10.2026</span></p></div></a><a href="https://lowca-smakow.netlify.app/historie/podhale-oscypek.html" class="card week-card"><p class="day"><em>Środa</em> <span>22.10</span></p><div class="ph frame tint-mustard ratio-45"><img class="fill" src="https://images.unsplash.com/photo-1792582232028-0d8b0c703797?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Drewniany dom w stylu podhalańskim wśród jesiennych drzew" decoding="async"></div><div class="card-body"><span class="tags"><span class="tag">Smaki regionów</span></span><h3>Podhale: smak, który je definiuje</h3><p class="excerpt">Wędzony, twardy, w kształcie wrzeciona, z odciśniętym wzorem.</p><p class="pills"><span class="no">№ 003</span><span class="date">22.10.2026</span></p></div></a><a href="https://lowca-smakow.netlify.app/historie/bary-mleczne.html" class="card week-card"><p class="day"><em>Niedziela</em> <span>26.10</span></p><div class="ph frame tint-vermilion ratio-45"><img class="fill" src="https://images.unsplash.com/photo-1612966948332-81d747414a8f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Rosół z warzywami w porcelanowej wazie" decoding="async"></div><div class="card-body"><span class="tags"><span class="tag">Historie</span><span class="tag">Gotujemy</span></span><h3>Skąd się wzięły bary mleczne?</h3><p class="excerpt">Ceraty na stołach, okienko wydawania, pomidorowa za kilka złotych.</p><p class="pills"><span class="no">№ 004</span><span class="date">26.10.2026</span></p></div></a>
     </div>
   </section>
 
   <section class="bleed dark" id="staropolska" aria-labelledby="h-staro">
     <div class="bleed-in">
       <div class="sec-head">
-        <span class="vlabel" aria-hidden="true">Seria</span>
-      <h2 id="h-staro">Kuchnia staropolska</h2>
+        <h2 id="h-staro" data-ghost="Staropolska">Kuchnia staropolska</h2>
         <a href="https://lowca-smakow.netlify.app/historie/kim-byl-czerniecki.html">Cała seria →</a>
       </div>
       <div class="feature">
         <a href="https://lowca-smakow.netlify.app/historie/slimaki-wedlug-czernieckiego.html" class="card feature-main">
-          <div class="ph frame tint-mustard ratio-1610"><img class="fill" src="https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Ślimaki w muszlach na żeliwnej patelni" decoding="async">
+          <div class="ph frame tint-ultramarine ratio-1610"><img class="fill" src="https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Ślimaki w muszlach na żeliwnej patelni" decoding="async">
             <span class="play"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></span>
           </div>
           <p class="kicker"><span class="no">№ 005</span> Odcinek · Wideo [mm:ss]</p>
@@ -664,8 +742,7 @@ body{margin:0}
 
   <section class="sec" id="przepisy" aria-labelledby="h-przepisy" data-recipes="">
     <div class="sec-head">
-      <span class="vlabel" aria-hidden="true">Kuchnia</span>
-      <h2 id="h-przepisy">Przepisy</h2>
+      <h2 id="h-przepisy" data-ghost="Przepisy">Przepisy</h2>
       <a href="#przepisy">Wszystkie przepisy →</a>
     </div>
     <div class="chips" role="group" aria-label="Filtruj przepisy">
@@ -673,7 +750,7 @@ body{margin:0}
       <button type="button" class="chip" data-filter="kiszonki" aria-pressed="false">Kiszonki</button><button type="button" class="chip" data-filter="staropolskie" aria-pressed="false">Staropolskie</button><button type="button" class="chip" data-filter="podroze" aria-pressed="false">Z podróży</button><button type="button" class="chip" data-filter="codzien" aria-pressed="false">Na co dzień</button><button type="button" class="chip" data-filter="sezonowe" aria-pressed="false">Sezonowe</button>
     </div>
     <div class="rail">
-      <a href="https://lowca-smakow.netlify.app/przepisy/slimaki-w-szarym-sosie.html" class="card sm" data-cat="staropolskie"><div class="ph frame tint-vermilion ratio-45"><img class="fill" src="https://images.unsplash.com/photo-1549413468-24b18ebf5d9c?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimaki zapiekane z masłem ziołowym w ceramicznym naczyniu" decoding="async"></div><p class="meta"><span class="no">P01</span> Staropolskie · 70 min</p><h3>Ślimaki w szarym sosie</h3></a><a href="https://lowca-smakow.netlify.app/przepisy/birria-tacos.html" class="card sm" data-cat="podroze"><div class="ph frame tint-ultramarine ratio-45"><img class="fill" src="https://images.unsplash.com/photo-1585803518902-58a3ef005b51?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Tacos de birria z cebulą i kolendrą, obok miska consommé" decoding="async"></div><p class="meta"><span class="no">P02</span> Z podróży · Meksyk · 4 h</p><h3>Birria tacos</h3></a><a href="https://lowca-smakow.netlify.app/przepisy/ogorki-kiszone.html" class="card sm" data-cat="kiszonki"><div class="ph frame tint-sage ratio-45"><img class="fill" src="https://images.unsplash.com/photo-1462536546956-beef6399d8cf?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Małe ogórki w durszlaku obok pęczka koperku" decoding="async"></div><p class="meta"><span class="no">P03</span> Kiszonki · 3–7 dni</p><h3>Ogórki kiszone babci</h3></a><a href="https://lowca-smakow.netlify.app/przepisy/papa-a-la-huancaina.html" class="card sm" data-cat="podroze"><div class="ph frame tint-mustard ratio-45"><img class="fill" src="https://images.unsplash.com/photo-1633959639799-6d3f66e05710?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Pieczone ziemniaki z natką pietruszki na talerzu" decoding="async"></div><p class="meta"><span class="no">P04</span> Z podróży · Peru · 45 min</p><h3>Papa a la huancaína</h3></a>
+      <a href="https://lowca-smakow.netlify.app/przepisy/slimaki-w-szarym-sosie.html" class="ov ov-tile" data-cat="staropolskie"><img class="fill" src="https://images.unsplash.com/photo-1549413468-24b18ebf5d9c?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimaki zapiekane z masłem ziołowym w ceramicznym naczyniu" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Staropolskie</span><span class="tag">70 min</span></span><span class="h">Ślimaki w szarym sosie</span><span class="pills"><span class="no">P01</span></span></span></a><a href="https://lowca-smakow.netlify.app/przepisy/birria-tacos.html" class="ov ov-tile" data-cat="podroze"><img class="fill" src="https://images.unsplash.com/photo-1585803518902-58a3ef005b51?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Tacos de birria z cebulą i kolendrą, obok miska consommé" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Z podróży</span><span class="tag">Meksyk</span></span><span class="h">Birria tacos</span><span class="pills"><span class="no">P02</span></span></span></a><a href="https://lowca-smakow.netlify.app/przepisy/ogorki-kiszone.html" class="ov ov-tile" data-cat="kiszonki"><img class="fill" src="https://images.unsplash.com/photo-1462536546956-beef6399d8cf?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Małe ogórki w durszlaku obok pęczka koperku" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Kiszonki</span><span class="tag">3–7 dni</span></span><span class="h">Ogórki kiszone babci</span><span class="pills"><span class="no">P03</span></span></span></a><a href="https://lowca-smakow.netlify.app/przepisy/papa-a-la-huancaina.html" class="ov ov-tile" data-cat="podroze"><img class="fill" src="https://images.unsplash.com/photo-1633959639799-6d3f66e05710?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Pieczone ziemniaki z natką pietruszki na talerzu" decoding="async"><span class="ov-body"><span class="tags"><span class="tag">Z podróży</span><span class="tag">Peru</span></span><span class="h">Papa a la huancaína</span><span class="pills"><span class="no">P04</span></span></span></a>
     </div>
     <p class="meta" aria-live="polite" data-recipes-empty="" hidden="">Wkrótce więcej przepisów w tej kategorii.</p>
   </section>
@@ -688,7 +765,7 @@ body{margin:0}
       </div>
     </div>
     <div class="travel-list">
-      <a href="https://lowca-smakow.netlify.app/historie/peru-ziemniaki.html" class="travel-item"><span class="vlabel">Peru</span><span class="ph frame tint-vermilion ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1683543124235-400a2b31cc73?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ziemniaki na straganie targowym" decoding="async"></span><span class="travel-t"><span class="no">№ 008</span><span class="h">Tysiące odmian: w Andach ziemniak to nie jedno warzywo</span><span class="excerpt">Na targu w Cusco ziemniaki leżą w kopcach: żółte, fioletowe, czarne, podłużne, pomarszczone.</span><span class="go" aria-hidden="true"></span></span></a><a href="https://lowca-smakow.netlify.app/historie/meksyk-chile.html" class="travel-item"><span class="vlabel">Meksyk, Jalisco</span><span class="ph frame tint-ultramarine ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1752627580142-8ea39c4eac64?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Czerwone papryczki chile suszące się na słońcu" decoding="async"></span><span class="travel-t"><span class="no">№ 009</span><span class="h">Jalisco: skąd birria bierze kolor i ogień</span><span class="excerpt">Suszone chile leżą na matach w słońcu, aż skórka stanie się ciemna i twarda.</span><span class="go" aria-hidden="true"></span></span></a><a href="https://lowca-smakow.netlify.app/historie/oaxaca-targ.html" class="travel-item"><span class="vlabel">Meksyk, Oaxaca</span><span class="ph frame tint-sage ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1545504573-edac76c6a487?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Kobieta przygotowująca jedzenie na ulicznym targu" decoding="async"></span><span class="travel-t"><span class="no">№ 010</span><span class="h">Dzień na targu: jedzenie, które gotuje się na oczach klienta</span><span class="excerpt">Na targach Meksyku kuchnia nie jest schowana za drzwiami.</span><span class="go" aria-hidden="true"></span></span></a>
+      <a href="https://lowca-smakow.netlify.app/historie/peru-ziemniaki.html" class="travel-item"><span class="vlabel">Peru</span><span class="ph frame tint-sage ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1683543124235-400a2b31cc73?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ziemniaki na straganie targowym" decoding="async"></span><span class="travel-t"><span class="no">№ 008</span><span class="h">Tysiące odmian: w Andach ziemniak to nie jedno warzywo</span><span class="excerpt">Na targu w Cusco ziemniaki leżą w kopcach: żółte, fioletowe, czarne, podłużne, pomarszczone.</span><span class="go" aria-hidden="true"></span></span></a><a href="https://lowca-smakow.netlify.app/historie/meksyk-chile.html" class="travel-item"><span class="vlabel">Meksyk, Jalisco</span><span class="ph frame tint-mustard ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1752627580142-8ea39c4eac64?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Czerwone papryczki chile suszące się na słońcu" decoding="async"></span><span class="travel-t"><span class="no">№ 009</span><span class="h">Jalisco: skąd birria bierze kolor i ogień</span><span class="excerpt">Suszone chile leżą na matach w słońcu, aż skórka stanie się ciemna i twarda.</span><span class="go" aria-hidden="true"></span></span></a><a href="https://lowca-smakow.netlify.app/historie/oaxaca-targ.html" class="travel-item"><span class="vlabel">Meksyk, Oaxaca</span><span class="ph frame tint-vermilion ratio-1"><img class="fill" src="https://images.unsplash.com/photo-1545504573-edac76c6a487?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Kobieta przygotowująca jedzenie na ulicznym targu" decoding="async"></span><span class="travel-t"><span class="no">№ 010</span><span class="h">Dzień na targu: jedzenie, które gotuje się na oczach klienta</span><span class="excerpt">Na targach Meksyku kuchnia nie jest schowana za drzwiami.</span><span class="go" aria-hidden="true"></span></span></a>
     </div>
   </section>
 
@@ -721,7 +798,7 @@ body{margin:0}
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
       <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>
     </nav>
-    <p class="meta credits">Zdjęcia: <a href="https://unsplash.com/@twalton?utm_source=lowca_smakow&amp;utm_medium=referral">Townsend Walton</a>, <a href="https://unsplash.com/@aliphotos_86?utm_source=lowca_smakow&amp;utm_medium=referral">Ali Robins</a>, <a href="https://unsplash.com/@boudewijn_huysmans?utm_source=lowca_smakow&amp;utm_medium=referral">Boudewijn Huysmans</a>, <a href="https://unsplash.com/@orlovamaria?utm_source=lowca_smakow&amp;utm_medium=referral">Maria Orlova</a>, <a href="https://unsplash.com/@mrasmuson?utm_source=lowca_smakow&amp;utm_medium=referral">Mark Rasmuson</a>, <a href="https://unsplash.com/@jakubzerdzicki?utm_source=lowca_smakow&amp;utm_medium=referral">Jakub Żerdzicki</a>, <a href="https://unsplash.com/@maharram?utm_source=lowca_smakow&amp;utm_medium=referral">Maharram Hasanli</a>, <a href="https://unsplash.com/@rabbit_in_blue?utm_source=lowca_smakow&amp;utm_medium=referral">Karolina Kołodziejczak</a>, <a href="https://unsplash.com/@enginakyurt?utm_source=lowca_smakow&amp;utm_medium=referral">engin akyurt</a>, <a href="https://unsplash.com/@diegonacho?utm_source=lowca_smakow&amp;utm_medium=referral">Diego Lozano</a>, <a href="https://unsplash.com/@jonathanpielmayer?utm_source=lowca_smakow&amp;utm_medium=referral">Jonathan Pielmayer</a>, <a href="https://unsplash.com/@markuswinkler?utm_source=lowca_smakow&amp;utm_medium=referral">Markus Winkler</a>, <a href="https://unsplash.com/@maranthi?utm_source=lowca_smakow&amp;utm_medium=referral">stephan de MARANTHI</a>, <a href="https://unsplash.com/@dlerman6?utm_source=lowca_smakow&amp;utm_medium=referral">Daniel Lerman</a> · <a href="https://unsplash.com/?utm_source=lowca_smakow&amp;utm_medium=referral">Unsplash</a></p>
+    <p class="meta credits">Zdjęcia: <a href="https://unsplash.com/@twalton?utm_source=lowca_smakow&amp;utm_medium=referral">Townsend Walton</a>, <a href="https://unsplash.com/@aliphotos_86?utm_source=lowca_smakow&amp;utm_medium=referral">Ali Robins</a>, <a href="https://unsplash.com/@maharram?utm_source=lowca_smakow&amp;utm_medium=referral">Maharram Hasanli</a>, <a href="https://unsplash.com/@enginakyurt?utm_source=lowca_smakow&amp;utm_medium=referral">engin akyurt</a>, <a href="https://unsplash.com/@orlovamaria?utm_source=lowca_smakow&amp;utm_medium=referral">Maria Orlova</a>, <a href="https://unsplash.com/@boudewijn_huysmans?utm_source=lowca_smakow&amp;utm_medium=referral">Boudewijn Huysmans</a>, <a href="https://unsplash.com/@mrasmuson?utm_source=lowca_smakow&amp;utm_medium=referral">Mark Rasmuson</a>, <a href="https://unsplash.com/@jakubzerdzicki?utm_source=lowca_smakow&amp;utm_medium=referral">Jakub Żerdzicki</a>, <a href="https://unsplash.com/@rabbit_in_blue?utm_source=lowca_smakow&amp;utm_medium=referral">Karolina Kołodziejczak</a>, <a href="https://unsplash.com/@diegonacho?utm_source=lowca_smakow&amp;utm_medium=referral">Diego Lozano</a>, <a href="https://unsplash.com/@jonathanpielmayer?utm_source=lowca_smakow&amp;utm_medium=referral">Jonathan Pielmayer</a>, <a href="https://unsplash.com/@markuswinkler?utm_source=lowca_smakow&amp;utm_medium=referral">Markus Winkler</a>, <a href="https://unsplash.com/@maranthi?utm_source=lowca_smakow&amp;utm_medium=referral">stephan de MARANTHI</a>, <a href="https://unsplash.com/@dlerman6?utm_source=lowca_smakow&amp;utm_medium=referral">Daniel Lerman</a> · <a href="https://unsplash.com/?utm_source=lowca_smakow&amp;utm_medium=referral">Unsplash</a></p>
     <p class="meta copyright">© 2026 Savour Ventures OÜ</p>
   </div>
 </footer>

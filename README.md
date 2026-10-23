@@ -14,22 +14,19 @@ Static website for **Łowca Smaków** (food anthropology: where what we eat come
 
 ## Look
 
-Black on white. The masthead uses the single-line wordmark (`img/wordmark.svg`, `img/wordmark-white.svg`, from the supplied Canva PDF); the plate logo (`img/logo.svg`, `img/logo-white.svg`) stays in the footer and favicon. Fine 1 px rules. Photos sit in simple coloured frames that cycle through four inks (mustard, vermilion, ultramarine, sage), with a soft shadow like pinned prints; burgundy is for the Old Polish band. The structure follows highly rated food and culture magazines:
+The masthead uses the single-line wordmark (`img/wordmark.svg`, `img/wordmark-white.svg`, from the supplied Canva PDF); the plate logo (`img/logo.svg`, `img/logo-white.svg`) stays in the footer and favicon. Four inks (mustard, vermilion, ultramarine, sage) plus burgundy for the Old Polish band.
 
-- an issue line above the masthead and a numbered "W tym wydaniu" index beside a very large lead headline (NYT Cooking, The Gourmand);
-- catalogue numbers on every story, `№ 001`, and recipes `P01` (Cereal);
-- Monday / Wednesday / Sunday columns for the week's stories, staggered rather than in a flat row;
-- a full-width band for the Old Polish series (Apartamento, Bon Appétit);
-- a side-scrolling recipe rail.
+After [alemeksyk.eu](https://www.alemeksyk.eu/):
 
-After [kukbuk.pl](https://kukbuk.pl/), the layout is less regular:
+- a vermilion menu bar under the masthead;
+- the lead story in a photo mosaic with two more stories beside it, titles in white on the picture over a dark gradient;
+- red tag pills from each story's section and kicker, and grey date pills (`№ 001`, `26.10.2026`);
+- "Na skróty": round photo shortcuts to the sections, with counts;
+- huge pale words behind each section title (`data-ghost` on the `h2`);
+- recipes as rounded photo cards with the title on the picture;
+- Poppins for headings, Instrument Sans for text, Cormorant Garamond kept for italic accents.
 
-- small uppercase labels set vertically beside the section headings and travel photos;
-- "read more" drawn as a long line ending in an arrow;
-- "Z podróży" as a sticky sage panel beside a zigzag list of stories;
-- the newsletter as a full-width ultramarine block.
-
-Type: Cormorant Garamond for headings, Instrument Sans for text.
+Kept from earlier rounds: photos with text below sit in simple coloured frames with a soft pinned-photo shadow; catalogue numbers `№ 001` / `P01`; staggered Monday / Wednesday / Sunday columns; "Z podróży" as a sticky sage panel beside a zigzag list (after [kukbuk.pl](https://kukbuk.pl/)); the newsletter as a full-width ultramarine block.
 
 ## Content
 

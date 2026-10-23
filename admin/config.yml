@@ -242,7 +242,7 @@ collections:
               - { label: 'Artykuł', name: article, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title] }
               - { label: 'Tekst pod tytułem', name: text, widget: text, required: false, hint: 'Puste = lead artykułu.' }
               - { label: 'Przycisk „Przejdź do przepisu”', name: recipe, widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
-          - { label: 'W tym wydaniu (lista obok)', name: issue_list, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, max: 6 }
+          - { label: 'Obok historii tygodnia (dwie)', name: issue_list, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, max: 2, hint: 'Dwie historie w mozaice obok historii tygodnia.' }
           - label: 'Nowe w tym tygodniu'
             name: week
             widget: list

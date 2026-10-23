@@ -76,7 +76,7 @@ function desktopCss() {
 <meta charset="utf-8">
 <meta name="robots" content="noindex">
 <title>Łowca Smaków — makiety do Canvy</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=Instrument+Sans:wght@400;500;600&amp;family=Poppins:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <style>
 ${desktopCss()}
 /* Canva pages */
