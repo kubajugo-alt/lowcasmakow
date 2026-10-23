@@ -1,0 +1,47 @@
+{
+  "title": "Jalisco: skąd birria bierze kolor i ogień",
+  "number": 9,
+  "section": "Z podróży",
+  "kicker": "Z podróży · Meksyk",
+  "date": "2026-10-18",
+  "lead": "Suszone chile leżą na matach w słońcu, aż skórka stanie się ciemna i twarda. Bez nich nie byłoby birrii, gulaszu, który z regionalnego dania stał się światowym hitem.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1752627580142-8ea39c4eac64",
+    "alt": "Czerwone papryczki chile suszące się na słońcu",
+    "credit": "stephan de MARANTHI",
+    "credit_url": "https://unsplash.com/@maranthi"
+  },
+  "video": "",
+  "place": "Meksyk, Jalisco",
+  "recipe": "birria-tacos",
+  "body": [
+    {
+      "type": "text",
+      "text": "Birria pochodzi z meksykańskiego stanu Jalisco. Tradycyjnie przyrządza się ją z koźliny marynowanej w paście z suszonych papryczek, przypraw i octu, a potem długo dusi. Podaje się ją na uroczystościach: weselach, chrzcinach, świętach."
+    },
+    {
+      "type": "heading",
+      "text": "Chile to nie tylko ostrość"
+    },
+    {
+      "type": "text",
+      "text": "Guajillo daje kolor i owocowy aromat, ancho głęboki, lekko czekoladowy smak, a drobne chile de árbol odpowiadają za ogień. Suszenie zmienia papryczki tak, jak suszenie zmienia winogrona w rodzynki: smak się koncentruje i nabiera nowych tonów."
+    },
+    {
+      "type": "heading",
+      "text": "Od wesela do TikToka"
+    },
+    {
+      "type": "text",
+      "text": "Birria tacos, tortille maczane w tłuszczu z wywaru i smażone z serem, rozsławiły food trucki z Tijuany i Los Angeles. Wywar podawany obok, consommé, służy do maczania. W kilka lat danie z Jalisco trafiło do menu na całym świecie."
+    },
+    {
+      "type": "quote",
+      "text": "Najpierw było święto, potem stragan, a na końcu filmik. Birria przeszła wszystkie etapy."
+    },
+    {
+      "type": "text",
+      "text": "Pod artykułem: nasza wersja z wołowiną, do zrobienia w polskiej kuchni."
+    }
+  ]
+}

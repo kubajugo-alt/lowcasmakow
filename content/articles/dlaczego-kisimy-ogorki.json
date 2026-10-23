@@ -1,0 +1,70 @@
+{
+  "title": "Dlaczego kisimy ogórki?",
+  "number": 1,
+  "section": "Historie",
+  "kicker": "Antropologia jedzenia · Seria „Dlaczego jemy?”",
+  "date": "2026-10-26",
+  "lead": "Słoik ogórków w spiżarni to nie tylko smak dzieciństwa. To technologia starsza niż lodówka, mikrobiologia, której nikt nie musiał rozumieć, żeby ją opanować, i jeden z najtrwalszych rytuałów polskiego roku.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1627861446476-42fd9925e151",
+    "alt": "Słoiki z kiszonymi ogórkami, koperkiem i czosnkiem",
+    "credit": "Townsend Walton",
+    "credit_url": "https://unsplash.com/@twalton"
+  },
+  "video": "",
+  "place": "",
+  "recipe": "ogorki-kiszone",
+  "body": [
+    {
+      "type": "text",
+      "text": "Zanim pojawiły się chłodnie i konserwy, każda jesień stawiała to samo pytanie: jak przetrwać do wiosny? Zboże dało się wysuszyć, mięso uwędzić, a warzywa? Rozwiązaniem okazała się sól, woda i cierpliwość."
+    },
+    {
+      "type": "heading",
+      "text": "Bakterie, które pracują za nas"
+    },
+    {
+      "type": "text",
+      "text": "Kiszenie to fermentacja mlekowa. Bakterie kwasu mlekowego, obecne naturalnie na skórce ogórka, w słonej zalewie mają przewagę nad drobnoustrojami, które powodują psucie. Zjadają cukry z warzyw i wytwarzają kwas mlekowy. Im kwaśniej w słoiku, tym trudniej o pleśń i gnicie. Sól nie konserwuje tu sama: ona tylko wybiera zwycięzcę."
+    },
+    {
+      "type": "text",
+      "text": "Stąd domowe zasady, przekazywane bez tłumaczenia: sól kamienna, nie jodowana; ogórki pod zalewą, nie ponad nią; ciepło na start, chłód na później. Każda z nich ma uzasadnienie w biologii, choć powstała długo przed mikroskopem."
+    },
+    {
+      "type": "photo",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1462536546956-beef6399d8cf",
+        "alt": "Małe ogórki w durszlaku obok pęczka koperku",
+        "credit": "Jonathan Pielmayer",
+        "credit_url": "https://unsplash.com/@jonathanpielmayer"
+      },
+      "frame": "postcard",
+      "caption": ""
+    },
+    {
+      "type": "heading",
+      "text": "Dlaczego koper, chrzan i liść wiśni?"
+    },
+    {
+      "type": "text",
+      "text": "Przyprawy w słoiku to nie dekoracja. Chrzan i liście wiśni czy dębu zawierają garbniki, które pomagają ogórkom zachować jędrność. Czosnek i koper dodają aromatu, który dla wielu z nas jest po prostu „smakiem ogórka”. Proporcje różnią się w każdym domu, i właśnie o te różnice najczęściej toczą się rodzinne spory."
+    },
+    {
+      "type": "quote",
+      "text": "Kiszenie to umowa z czasem: oddajesz mu tydzień, a on zwraca ci zimę."
+    },
+    {
+      "type": "heading",
+      "text": "Od spiżarni do sklepowej półki"
+    },
+    {
+      "type": "text",
+      "text": "Kiszone warzywa jedzą ludzie w całej Europie Środkowo-Wschodniej, a fermentowane przetwory znają kuchnie od Korei po Niemcy. W Polsce kiszonki przetrwały industrializację lepiej niż wiele innych zwyczajów: wciąż kisimy w domach, a ogórki małosolne są latem równie oczywiste jak truskawki."
+    },
+    {
+      "type": "text",
+      "text": "W tym odcinku serii „Dlaczego jemy?” sprawdzamy, co z tej tradycji wynika dla zdrowia, smaku i pamięci. A na koniec: przepis na ogórki babci, z liczbami, które da się powtórzyć."
+    }
+  ]
+}

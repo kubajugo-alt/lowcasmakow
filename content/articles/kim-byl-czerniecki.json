@@ -1,0 +1,47 @@
+{
+  "title": "Kim był Stanisław Czerniecki?",
+  "number": 6,
+  "section": "Historie",
+  "kicker": "Historia · Kuchnia staropolska",
+  "date": "2026-10-21",
+  "lead": "Autor pierwszej książki kucharskiej wydanej po polsku. Kuchmistrz, który karmił magnatów, a swoją wiedzę zostawił w 300 przepisach.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1602660187275-7275b639d7ea",
+    "alt": "Średniowieczny rękopis na pergaminie",
+    "credit": "Boudewijn Huysmans",
+    "credit_url": "https://unsplash.com/@boudewijn_huysmans"
+  },
+  "video": "",
+  "place": "",
+  "recipe": "",
+  "body": [
+    {
+      "type": "text",
+      "text": "O życiu Stanisława Czernieckiego wiemy niewiele. Był kuchmistrzem na dworze Lubomirskich, jednego z najpotężniejszych rodów Rzeczypospolitej, i w tej roli odpowiadał za kuchnię dworu, który podejmował najważniejszych gości epoki."
+    },
+    {
+      "type": "heading",
+      "text": "„Compendium ferculorum”"
+    },
+    {
+      "type": "text",
+      "text": "W 1682 roku w Krakowie ukazała się jego książka „Compendium ferculorum albo zebranie potraw”. Zawiera 300 przepisów, podzielonych na trzy równe części: dania mięsne, rybne oraz potrawy z nabiału i ciasta. To pierwsza drukowana książka kucharska napisana po polsku."
+    },
+    {
+      "type": "text",
+      "text": "Czerniecki pisał dla zawodowców. Jego przepisy są zwięzłe, pełne skrótów myślowych i wskazówek typu „wedle uznania”. Ale w tle widać całą kuchnię baroku: obfitość przypraw, łączenie słodkiego z kwaśnym i zamiłowanie do efektu."
+    },
+    {
+      "type": "quote",
+      "text": "Kuchnia Czernieckiego nie była codziennością. Była teatrem, którego scenografią był stół."
+    },
+    {
+      "type": "heading",
+      "text": "Co po nim zostało"
+    },
+    {
+      "type": "text",
+      "text": "Książka była wznawiana jeszcze w XVIII wieku i przez dekady służyła kucharzom szlacheckim. Dziś jest najważniejszym źródłem wiedzy o tym, jak jadła elita dawnej Polski, i punktem wyjścia dla kucharzy, którzy próbują tę kuchnię odtworzyć."
+    }
+  ]
+}

@@ -26,7 +26,7 @@ Type: Cormorant Garamond for headings, Instrument Sans for text. No accent colou
 
 ## Content
 
-Article copy lives in `scripts/content.py`, recipes (ingredients with scalable quantities, steps, timer minutes) in `js/recipes.js`. Regenerate the homepage, article and recipe pages after editing either:
+Content lives in `content/` as JSON, edited through the CMS (below) or by hand: `content/articles/*.json`, `content/recipes/*.json`, `content/settings/home.json`. Netlify regenerates the pages on every deploy; to do it yourself:
 
 ```sh
 python3 scripts/build.py
@@ -38,6 +38,34 @@ No build step for the site itself: plain HTML, CSS (`css/style.css`) and JS (`js
 
 ```sh
 python3 -m http.server 8000
+```
+
+## CMS (panel redakcji)
+
+Editors work at **`/admin`** (Decap CMS, in Polish). Three sections:
+
+- **Historie i reportaże**: articles. The body is built from blocks you can add, drag to reorder and remove: *Tekst* (blank line = new paragraph; `**bold**`, `*italic*`, `[link](https://…)`), *Śródtytuł*, *Cytat*, *Zdjęcie* (frame: postcard, stamp or none), *Grafika* (SVG/PNG/JPG without a frame; text width, wide or small) and *Wideo z YouTube* (paste any YouTube link). An article can also have a YouTube video instead of its main photo.
+- **Przepisy**: recipes with ingredients (amounts scale with the servings stepper; ml convert to glasses and spoons), steps with optional timer minutes, the "Historia w pigułce" box, shop teaser, sources and related stories.
+- **Strona główna**: what the homepage shows and in what order: issue line, lead story and its pinned stamp, "W tym wydaniu", the week's three stories, the Old Polish band, published regions on the map, recipe rail, travel reports.
+
+Photos and graphics: upload a file (stored in `img/uploads/`, resized on the fly by Netlify's image CDN) or paste a link (e.g. from Unsplash). Each has fields for the alt text and the photographer's credit, which appears in the page footer.
+
+YouTube videos are privacy-friendly: the page shows a photo with a play button and loads the player from `youtube-nocookie.com` only when clicked.
+
+Every save is a commit to `main` on GitHub; Netlify then runs `python3 scripts/build.py` (see `netlify.toml`) and publishes.
+
+### One-time setup
+
+1. **Automatic deploys**: Netlify must build from the GitHub repo (Project configuration → Build & deploy → Continuous deployment → linked to `kubajugo-alt/lowcasmakow`, branch `main`). Without it, CMS saves reach GitHub but not the live site.
+2. **Login**: the CMS signs in with GitHub. Create a GitHub OAuth app (GitHub → Settings → Developer settings → OAuth Apps → New) with *Authorization callback URL* `https://api.netlify.com/auth/done`, then add its Client ID and secret in Netlify (Project configuration → Access & security → OAuth → Install provider → GitHub). Every editor needs a GitHub account with write access to the repo.
+
+### Editing locally
+
+```sh
+npx decap-server &                 # lets /admin edit the files on disk (no login)
+python3 -m http.server 8765 &
+open http://localhost:8765/admin/
+python3 scripts/build.py --local   # rebuild after saving (--local: uploads without the image CDN)
 ```
 
 ## What works

@@ -1,0 +1,132 @@
+{
+  "title": "Ogórki kiszone babci",
+  "number": 3,
+  "category": "kiszonki",
+  "kicker": "Przepis · Kiszonki",
+  "subtitle": "Klasyczne ogórki w solance, z koprem, czosnkiem i chrzanem",
+  "card_meta": "3–7 dni",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1462536546956-beef6399d8cf",
+    "alt": "Małe ogórki w durszlaku obok pęczka koperku",
+    "credit": "Jonathan Pielmayer",
+    "credit_url": "https://unsplash.com/@jonathanpielmayer"
+  },
+  "card_image": null,
+  "video": "",
+  "prep": "30 min",
+  "cook": "3–7 dni",
+  "level": "Łatwa",
+  "servings": 2,
+  "servings_unit": "słoiki",
+  "ingredients": [
+    {
+      "q": 1000,
+      "u": "g",
+      "n": "Ogórki gruntowe, małe i twarde"
+    },
+    {
+      "q": 1000,
+      "u": "ml",
+      "n": "Woda"
+    },
+    {
+      "q": 30,
+      "u": "g",
+      "n": "Sól kamienna niejodowana"
+    },
+    {
+      "q": 4,
+      "u": "ząbki",
+      "n": "Czosnek"
+    },
+    {
+      "q": 2,
+      "u": "szt.",
+      "n": "Baldachy kopru z nasionami"
+    },
+    {
+      "q": 1,
+      "u": "szt.",
+      "n": "Liść chrzanu i kawałek korzenia"
+    },
+    {
+      "q": 2,
+      "u": "szt.",
+      "n": "Liście wiśni lub dębu"
+    },
+    {
+      "q": null,
+      "u": "",
+      "n": "Opcjonalnie: ziele angielskie, gorczyca"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Namocz ogórki",
+      "text": "Umyj ogórki szczoteczką i włóż na dwie godziny do bardzo zimnej wody. Dzięki temu po zakiszeniu zostaną chrupiące.",
+      "minutes": 120,
+      "uses": [
+        "Ogórki"
+      ]
+    },
+    {
+      "title": "Przygotuj solankę",
+      "text": "Zagotuj wodę z solą i odstaw do wystudzenia. Sól musi być niejodowana: jod hamuje pracę bakterii fermentacji mlekowej.",
+      "minutes": null,
+      "uses": [
+        "Woda",
+        "Sól"
+      ]
+    },
+    {
+      "title": "Ułóż ogórki w słojach",
+      "text": "Na dno wyparzonych słoików włóż połowę kopru, czosnku i liści. Ułóż ogórki pionowo, ciasno, a na wierzch resztę przypraw i kawałek chrzanu.",
+      "minutes": null,
+      "uses": [
+        "Czosnek",
+        "Koper",
+        "Chrzan",
+        "Liście wiśni"
+      ]
+    },
+    {
+      "title": "Zalej solanką",
+      "text": "Zalej ogórki letnią solanką tak, by były całkowicie przykryte. Wszystko, co wystaje ponad powierzchnię, może spleśnieć. Zakręć słoiki niezbyt mocno.",
+      "minutes": null,
+      "uses": [
+        "Solanka"
+      ]
+    },
+    {
+      "title": "Poczekaj, aż zaczną pracować",
+      "text": "Postaw słoiki w temperaturze pokojowej, najlepiej na talerzu. Po dniu, dwóch solanka zmętnieje i zacznie lekko musować: to znak, że fermentacja ruszyła. Małosolne są gotowe po 3 dniach.",
+      "minutes": null,
+      "uses": []
+    },
+    {
+      "title": "Przenieś w chłód",
+      "text": "Po 5–7 dniach przenieś słoiki do piwnicy lub lodówki. W chłodzie ogórki dokiszą się powoli i wytrzymają do wiosny.",
+      "minutes": null,
+      "uses": []
+    }
+  ],
+  "aside": {
+    "title": "Dlaczego to działa",
+    "image": {
+      "src": "https://images.unsplash.com/photo-1627861446476-42fd9925e151",
+      "alt": "Słoiki z kiszonymi ogórkami, koperkiem i czosnkiem",
+      "credit": "Townsend Walton",
+      "credit_url": "https://unsplash.com/@twalton"
+    },
+    "text": "Kiszenie to fermentacja mlekowa: bakterie obecne na skórce ogórka zamieniają cukry w kwas mlekowy, który chroni warzywa przed zepsuciem.",
+    "note": "Sól kamienna, nie jodowana, ogórki całkowicie pod zalewą, ciepło na start i chłód na później.",
+    "story": "dlaczego-kisimy-ogorki"
+  },
+  "shop": null,
+  "sources": [],
+  "related": [
+    "dlaczego-kisimy-ogorki",
+    "bary-mleczne",
+    "pierogi"
+  ]
+}

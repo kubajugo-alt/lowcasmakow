@@ -1,0 +1,43 @@
+{
+  "title": "Dzień na targu: jedzenie, które gotuje się na oczach klienta",
+  "number": 10,
+  "section": "Z podróży",
+  "kicker": "Z podróży · Meksyk, Oaxaca",
+  "date": "2026-10-17",
+  "lead": "Na targach Meksyku kuchnia nie jest schowana za drzwiami. Tortille rosną na rozgrzanym comalu, salsę uciera się w kamiennym moździerzu, a kolejka sama mówi, które stoisko jest najlepsze.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1545504573-edac76c6a487",
+    "alt": "Kobieta przygotowująca jedzenie na ulicznym targu",
+    "credit": "Daniel Lerman",
+    "credit_url": "https://unsplash.com/@dlerman6"
+  },
+  "video": "",
+  "place": "Meksyk, Oaxaca",
+  "recipe": "",
+  "body": [
+    {
+      "type": "text",
+      "text": "Spędzamy dzień na lokalnym targu i obserwujemy, jak działa gospodarka straganów. Każde stoisko robi jedną rzecz i robi ją od pokoleń: tortille, mole, tamales, napoje z owoców."
+    },
+    {
+      "type": "heading",
+      "text": "Kukurydza w roli głównej"
+    },
+    {
+      "type": "text",
+      "text": "Podstawą wszystkiego jest kukurydza poddana nixtamalizacji, czyli gotowaniu w wodzie z wapnem. Ten zabieg, znany od czasów prekolumbijskich, zmiękcza ziarno, poprawia jego wartość odżywczą i pozwala zrobić z niego ciasto na tortille."
+    },
+    {
+      "type": "heading",
+      "text": "Targ jako instytucja"
+    },
+    {
+      "type": "text",
+      "text": "Targ to także miejsce spotkań, wymiany plotek i przepisów. Przypomina dawne polskie targi i jarmarki, zanim zastąpiły je supermarkety. Rozmawiamy z kucharkami, które przy jednym stanowisku pracują od trzydziestu lat."
+    },
+    {
+      "type": "quote",
+      "text": "Najlepsza rekomendacja na targu to długa kolejka miejscowych."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "title": "Podhale: smak, który je definiuje",
+  "number": 3,
+  "section": "Smaki regionów",
+  "kicker": "Środa · Smaki regionów · Część 1 z 16",
+  "date": "2026-10-22",
+  "lead": "Wędzony, twardy, w kształcie wrzeciona, z odciśniętym wzorem. Oscypek to ser, który jest jednocześnie produktem, rzemiosłem i znakiem rozpoznawczym całego regionu.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1792582232028-0d8b0c703797",
+    "alt": "Drewniany dom w stylu podhalańskim wśród jesiennych drzew",
+    "credit": "Maharram Hasanli",
+    "credit_url": "https://unsplash.com/@maharram"
+  },
+  "video": "",
+  "place": "",
+  "recipe": "",
+  "body": [
+    {
+      "type": "text",
+      "text": "Zaczynamy serię szesnastu województw od miejsca, gdzie kuchnia jest najściślej związana z krajobrazem. Na Podhalu jedzenie przez wieki wyznaczał rytm wypasu owiec: wiosną w góry, jesienią w doliny."
+    },
+    {
+      "type": "heading",
+      "text": "Ser z bacówki"
+    },
+    {
+      "type": "text",
+      "text": "Oscypek powstaje z mleka owczego, czasem z dodatkiem krowiego. Bacowie podpuszczają mleko, odciskają masę, formują ją w drewnianych foremkach z rzeźbionym wzorem, moczą w solance i wędzą w dymie bacówki. Każdy etap to wiedza przekazywana z pokolenia na pokolenie."
+    },
+    {
+      "type": "text",
+      "text": "Od 2008 roku oscypek ma unijną chronioną nazwę pochodzenia. To znaczy, że prawdziwy może powstać tylko w określonym rejonie, z określonego mleka, w określonym sezonie. Większość tego, co kupujemy na Krupówkach przez cały rok, to w rzeczywistości „ser wędzony”."
+    },
+    {
+      "type": "quote",
+      "text": "Wzór na boku oscypka był kiedyś podpisem bacy. Po nim poznawało się, z której hali pochodzi ser."
+    },
+    {
+      "type": "heading",
+      "text": "Nie tylko ser"
+    },
+    {
+      "type": "text",
+      "text": "Podhale to także kwaśnica na żeberkach, moskole z ziemniaków i żentyca, serwatka pozostała po produkcji sera. To kuchnia oszczędna, oparta na tym, co dawały owce, ziemniaki i kapusta."
+    },
+    {
+      "type": "text",
+      "text": "W karuzeli na Instagramie i w tym artykule pokazujemy jeden dzień w bacówce: od porannego udoju po wieczorne wędzenie."
+    }
+  ]
+}

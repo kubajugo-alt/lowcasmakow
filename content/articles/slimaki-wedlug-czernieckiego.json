@@ -1,0 +1,62 @@
+{
+  "title": "Ślimaki w szarym sosie piernikowym według Czernieckiego",
+  "number": 5,
+  "section": "Wideo",
+  "kicker": "Kuchnia staropolska · Odcinek wideo",
+  "date": "2026-10-24",
+  "lead": "Na fermie ślimaków odtwarzamy przepis z „Compendium ferculorum” z 1682 roku. Sprawdzamy, jak smakowała uczta na dworze magnackim i dlaczego ślimaki zniknęły z polskich stołów.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0",
+    "alt": "Ślimaki w muszlach na żeliwnej patelni",
+    "credit": "Ali Robins",
+    "credit_url": "https://unsplash.com/@aliphotos_86"
+  },
+  "video": "",
+  "place": "",
+  "recipe": "slimaki-w-szarym-sosie",
+  "body": [
+    {
+      "type": "text",
+      "text": "Ślimaki kojarzą się dziś z Francją. Tymczasem w dawnej Polsce jadano je chętnie, zwłaszcza w okresie postu. Kościół nie zaliczał ich do mięsa, więc trafiały na stoły w czasie, gdy wieprzowina i wołowina były zakazane."
+    },
+    {
+      "type": "heading",
+      "text": "Przepis sprzed trzystu lat"
+    },
+    {
+      "type": "text",
+      "text": "Stanisław Czerniecki w swoim „Compendium ferculorum” opisuje dania w języku, który dziś trzeba czytać powoli. Nie podaje gramów ani minut: zakłada, że kucharz wie, co robi. Naszym zadaniem było przełożyć te wskazówki na kuchnię, w której jest termometr i minutnik."
+    },
+    {
+      "type": "text",
+      "text": "Szary sos to jeden z klasycznych sosów kuchni staropolskiej. Słodko-kwaśny, zagęszczany piernikiem, z winem, octem, miodem i bakaliami. Dla współczesnego podniebienia zaskakujący, dla siedemnastowiecznego szlachcica: elegancki."
+    },
+    {
+      "type": "photo",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1621447096587-2f9d8fa16953",
+        "alt": "Ślimak na zielonych liściach",
+        "credit": "Olivier Piau",
+        "credit_url": "https://unsplash.com/@o_piau"
+      },
+      "frame": "postcard",
+      "caption": ""
+    },
+    {
+      "type": "heading",
+      "text": "Na fermie"
+    },
+    {
+      "type": "text",
+      "text": "Polska jest jednym z największych w Europie dostawców ślimaków jadalnych, choć sami jemy ich niewiele. Większość trafia do Francji i Włoch. Odwiedzamy hodowlę, w której ślimaki rosną na grządkach z liśćmi, i rozmawiamy o tym, jak wygląda ten nietypowy biznes."
+    },
+    {
+      "type": "quote",
+      "text": "W XVII wieku ślimak był daniem postnym. Dziś to egzotyka. Zmienił się nie ślimak, tylko my."
+    },
+    {
+      "type": "text",
+      "text": "Pełny przepis, w wersji uwspółcześnionej i z czasami do minutnika, znajdziesz poniżej."
+    }
+  ]
+}

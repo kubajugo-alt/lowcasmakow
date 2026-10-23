@@ -62,7 +62,6 @@
   });
 
   // regions: map tiles and chips select the same region
-  var REGION_STORIES = { 'Małopolskie': ['historie/podhale-oscypek.html', 'Podhale i oscypek'] };
   var regions = $('[data-regions]');
   if (regions) {
     var out = $('[data-region-out]', regions);
@@ -71,11 +70,11 @@
       b.addEventListener('click', function () {
         var name = b.dataset.region;
         $$('[data-region]', regions).forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.region === name)); });
-        var story = REGION_STORIES[name];
+        var tileWithStory = $('.tile[data-region="' + name + '"][data-story]', regions);
         out.innerHTML = '';
-        if (story) {
+        if (tileWithStory) {
           var link = document.createElement('a');
-          link.href = story[0]; link.textContent = name + ': ' + story[1] + ' →';
+          link.href = tileWithStory.dataset.story; link.textContent = name + ': ' + tileWithStory.dataset.storyLabel + ' →';
           out.appendChild(link);
         } else {
           out.textContent = name + ' — odcinek wkrótce.';
@@ -116,6 +115,24 @@
       }).catch(function () {
         msg.textContent = 'Nie udało się zapisać. Spróbuj ponownie za chwilę.';
       }).then(function () { btn.disabled = false; });
+    });
+  });
+
+  // YouTube: show a photo and a play button; load the player (privacy-enhanced mode) only on click
+  $$('[data-yt]').forEach(function (box) {
+    var btn = $('[data-yt-play]', box);
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(box.dataset.yt) + '?autoplay=1&rel=0';
+      f.title = box.dataset.ytTitle || 'Wideo';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      f.allowFullscreen = true;
+      f.className = 'fill';
+      box.classList.add('is-playing');
+      box.innerHTML = '';
+      box.appendChild(f);
+      f.focus();
     });
   });
 })();

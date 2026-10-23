@@ -1,0 +1,76 @@
+{
+  "issue": "Wydanie nr 01 · 20–26 października 2026",
+  "tagline": "Nowe historie w poniedziałki, środy i niedziele",
+  "lead": {
+    "article": "dlaczego-kisimy-ogorki",
+    "text": "Słoik ogórków w spiżarni to nie tylko smak dzieciństwa. To technologia starsza niż lodówka i jeden z najtrwalszych rytuałów polskiego roku.",
+    "recipe": "ogorki-kiszone",
+    "stamp_image": {
+      "src": "https://images.unsplash.com/photo-1462536546956-beef6399d8cf",
+      "alt": "Małe ogórki w durszlaku obok pęczka koperku",
+      "credit": "Jonathan Pielmayer",
+      "credit_url": "https://unsplash.com/@jonathanpielmayer"
+    },
+    "stamp_postmark": "Wydanie 01",
+    "stamp_date": "20.10.2026"
+  },
+  "issue_list": [
+    "pierogi",
+    "podhale-oscypek",
+    "bary-mleczne",
+    "slimaki-wedlug-czernieckiego",
+    "peru-ziemniaki"
+  ],
+  "week": [
+    {
+      "day": "Poniedziałek",
+      "date": "20.10",
+      "article": "pierogi"
+    },
+    {
+      "day": "Środa",
+      "date": "22.10",
+      "article": "podhale-oscypek"
+    },
+    {
+      "day": "Niedziela",
+      "date": "26.10",
+      "article": "bary-mleczne"
+    }
+  ],
+  "old_polish": {
+    "title": "Kuchnia staropolska",
+    "feature": "slimaki-wedlug-czernieckiego",
+    "feature_label": "Odcinek · Wideo [mm:ss]",
+    "side_articles": [
+      "kim-byl-czerniecki",
+      "przyprawy-staropolskie"
+    ],
+    "side_recipe": "slimaki-w-szarym-sosie",
+    "side_recipe_title": "Szary sos piernikowy — wersja współczesna"
+  },
+  "regions": {
+    "intro": "Każde województwo: jeden smak, jego historia i przepis. Zaczynamy od Podhala. Wybierz region na mapie.",
+    "stories": [
+      {
+        "region": "Małopolskie",
+        "article": "podhale-oscypek",
+        "label": "Podhale i oscypek"
+      }
+    ]
+  },
+  "recipes": [
+    "slimaki-w-szarym-sosie",
+    "birria-tacos",
+    "ogorki-kiszone",
+    "papa-a-la-huancaina"
+  ],
+  "travel": [
+    "peru-ziemniaki",
+    "meksyk-chile",
+    "oaxaca-targ"
+  ],
+  "newsletter": {
+    "text": "Antropologia jedzenia prosto do skrzynki, bez spamu. Wypisać się można jednym kliknięciem."
+  }
+}

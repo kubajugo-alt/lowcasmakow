@@ -1,0 +1,291 @@
+# Decap CMS configuration for Łowca Smaków (https://decapcms.org/docs/configuration-options/)
+# Editors work at /admin. Every save is a commit to GitHub; Netlify then runs scripts/build.py and publishes.
+
+backend:
+  name: github
+  repo: kubajugo-alt/lowcasmakow
+  branch: main
+  commit_messages:
+    create: 'CMS: nowy wpis {{collection}} „{{slug}}”'
+    update: 'CMS: zmiana {{collection}} „{{slug}}”'
+    delete: 'CMS: usunięcie {{collection}} „{{slug}}”'
+    uploadMedia: 'CMS: plik {{path}}'
+    deleteMedia: 'CMS: usunięcie pliku {{path}}'
+
+# Edit the local files when running `npx decap-server` next to a local server (see README).
+local_backend: true
+
+locale: pl
+site_url: https://lowca-smakow.netlify.app
+display_url: https://lowca-smakow.netlify.app
+logo_url: /img/logo.svg
+
+# Uploaded photos and graphics land here and are served from /img/uploads/...
+media_folder: img/uploads
+public_folder: /img/uploads
+
+# Polish titles become plain-ASCII addresses: „Żurek na zakwasie” → zurek-na-zakwasie
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+collections:
+
+  # ------------------------------------------------------------------ articles
+  - name: articles
+    label: 'Historie i reportaże'
+    label_singular: 'Historia'
+    description: 'Artykuły, reportaże z podróży i odcinki wideo. Treść składasz z bloków: tekst, śródtytuł, cytat, zdjęcie, grafika, wideo z YouTube.'
+    folder: content/articles
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    identifier_field: title
+    summary: '№ {{number}} · {{title}}'
+    sortable_fields: [number, title, date]
+    view_groups: [{ label: Dział, field: section }]
+    editor: { preview: false }
+    fields:
+      - { label: 'Tytuł', name: title, widget: string }
+      - { label: 'Numer katalogowy', name: number, widget: number, value_type: int, min: 1, hint: 'Pokazywany jako № 012. Kolejny wolny numer.' }
+      - label: 'Dział'
+        name: section
+        widget: select
+        options: ['Historie', 'Smaki regionów', 'Wideo', 'Z podróży']
+      - { label: 'Nadtytuł', name: kicker, widget: string, hint: 'Mała linijka nad tytułem, np. „Historia · Kuchnia staropolska”.' }
+      - { label: 'Data', name: date, widget: datetime, format: 'YYYY-MM-DD', date_format: 'DD.MM.YYYY', time_format: false, picker_utc: true }
+      - { label: 'Lead', name: lead, widget: text, hint: '2–3 zdania pod tytułem. Pierwsze zdanie trafia też na karty na stronie głównej.' }
+      # the same photo fields (file, alt, credit) are reused below via *image_fields
+      - label: 'Zdjęcie główne'
+        name: image
+        widget: object
+        collapsed: false
+        fields: &image_fields
+          - { label: 'Plik', name: src, widget: image, choose_url: true, hint: 'Wgraj plik albo wklej link (np. z Unsplash).' }
+          - { label: 'Opis dla niewidomych (alt)', name: alt, widget: string, required: false, hint: 'Co widać na zdjęciu, jednym zdaniem.' }
+          - { label: 'Autor zdjęcia', name: credit, widget: string, required: false }
+          - { label: 'Link do autora', name: credit_url, widget: string, required: false }
+      - { label: 'Wideo z YouTube (opcjonalnie)', name: video, widget: string, required: false, hint: 'Wklej link do filmu. Zamiast zdjęcia głównego pojawi się zdjęcie z przyciskiem odtwarzania; film ładuje się dopiero po kliknięciu.' }
+      - { label: 'Miejsce (dla reportaży)', name: place, widget: string, required: false, hint: 'np. „Peru” albo „Meksyk, Oaxaca”. Trafia na stempel pocztowy.' }
+      - label: 'Przepis do tego tekstu (opcjonalnie)'
+        name: recipe
+        widget: relation
+        collection: recipes
+        value_field: '{{slug}}'
+        search_fields: [title]
+        display_fields: [title]
+        required: false
+      - label: 'Treść'
+        name: body
+        widget: list
+        label_singular: 'blok'
+        summary: '{{fields.text}}{{fields.caption}}{{fields.url}}'
+        typeKey: type
+        types:
+          - label: 'Tekst'
+            name: text
+            widget: object
+            summary: '{{fields.text}}'
+            fields:
+              - { label: 'Tekst', name: text, widget: text, hint: 'Pusta linia = nowy akapit. **pogrubienie**, *kursywa*, [link](https://…).' }
+          - label: 'Śródtytuł'
+            name: heading
+            widget: object
+            summary: '{{fields.text}}'
+            fields:
+              - { label: 'Śródtytuł', name: text, widget: string }
+          - label: 'Cytat'
+            name: quote
+            widget: object
+            summary: '„{{fields.text}}”'
+            fields:
+              - { label: 'Cytat', name: text, widget: text }
+              - { label: 'Kto to powiedział (opcjonalnie)', name: source, widget: string, required: false }
+          - label: 'Zdjęcie'
+            name: photo
+            widget: object
+            summary: 'Zdjęcie: {{fields.caption}}'
+            fields:
+              - { label: 'Zdjęcie', name: image, widget: object, collapsed: false, fields: *image_fields }
+              - label: 'Oprawa'
+                name: frame
+                widget: select
+                default: postcard
+                options:
+                  - { label: 'Pocztówka (biała ramka)', value: postcard }
+                  - { label: 'Znaczek (perforacja)', value: stamp }
+                  - { label: 'Bez ramki', value: none }
+              - { label: 'Podpis (opcjonalnie)', name: caption, widget: string, required: false }
+          - label: 'Grafika'
+            name: graphic
+            widget: object
+            summary: 'Grafika: {{fields.caption}}'
+            fields:
+              - { label: 'Grafika (SVG, PNG, JPG)', name: image, widget: object, collapsed: false, fields: *image_fields }
+              - label: 'Szerokość'
+                name: width
+                widget: select
+                default: text
+                options:
+                  - { label: 'Jak tekst', value: text }
+                  - { label: 'Szeroka', value: wide }
+                  - { label: 'Mała, wyśrodkowana', value: small }
+              - { label: 'Podpis (opcjonalnie)', name: caption, widget: string, required: false }
+          - label: 'Wideo z YouTube'
+            name: youtube
+            widget: object
+            summary: 'Wideo: {{fields.title}}'
+            fields:
+              - { label: 'Link do filmu', name: url, widget: string, hint: 'np. https://www.youtube.com/watch?v=… albo https://youtu.be/…', pattern: ['(youtube\.com|youtu\.be)', 'To musi być link do YouTube.'] }
+              - { label: 'Tytuł filmu', name: title, widget: string, hint: 'Dla czytników ekranu i przycisku odtwarzania.' }
+              - { label: 'Podpis (opcjonalnie)', name: caption, widget: string, required: false }
+
+  # ------------------------------------------------------------------ recipes
+  - name: recipes
+    label: 'Przepisy'
+    label_singular: 'Przepis'
+    description: 'Przepisy z listą składników (ilości przeliczają się przy zmianie porcji) i krokami z minutnikiem.'
+    folder: content/recipes
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    identifier_field: title
+    summary: 'P{{number}} · {{title}}'
+    sortable_fields: [number, title]
+    view_groups: [{ label: Kategoria, field: category }]
+    editor: { preview: false }
+    fields:
+      - { label: 'Nazwa', name: title, widget: string }
+      - { label: 'Numer', name: number, widget: number, value_type: int, min: 1, hint: 'Pokazywany jako P05.' }
+      - label: 'Kategoria'
+        name: category
+        widget: select
+        options:
+          - { label: 'Kiszonki', value: kiszonki }
+          - { label: 'Staropolskie', value: staropolskie }
+          - { label: 'Z podróży', value: podroze }
+          - { label: 'Na co dzień', value: codzien }
+          - { label: 'Sezonowe', value: sezonowe }
+      - { label: 'Nadtytuł', name: kicker, widget: string, hint: 'np. „Przepis · Z podróży · Meksyk”.' }
+      - { label: 'Podtytuł', name: subtitle, widget: string }
+      - { label: 'Opis na karcie', name: card_meta, widget: string, hint: 'Krótko, np. „Meksyk · 4 h” albo „70 min”.' }
+      - { label: 'Zdjęcie główne', name: image, widget: object, collapsed: false, fields: *image_fields }
+      - { label: 'Inne zdjęcie na karcie (opcjonalnie)', name: card_image, widget: object, required: false, collapsed: true, fields: *image_fields }
+      - { label: 'Wideo z YouTube (opcjonalnie)', name: video, widget: string, required: false, hint: 'Na zdjęciu głównym pojawi się przycisk „Obejrzyj odcinek”.' }
+      - { label: 'Przygotowanie', name: prep, widget: string, hint: 'np. „30 min”.' }
+      - { label: 'Gotowanie', name: cook, widget: string, hint: 'np. „1 h 20 min” albo „3–7 dni”.' }
+      - { label: 'Trudność', name: level, widget: select, options: ['Łatwa', 'Średnia', 'Trudna'] }
+      - { label: 'Na ile porcji są podane ilości', name: servings, widget: number, value_type: int, min: 1, default: 4 }
+      - { label: 'Jednostka porcji', name: servings_unit, widget: select, default: porcje, options: [{ label: 'porcje', value: porcje }, { label: 'słoiki', value: słoiki }] }
+      - label: 'Składniki'
+        name: ingredients
+        widget: list
+        label_singular: 'składnik'
+        summary: '{{fields.q}} {{fields.u}} {{fields.n}}'
+        fields:
+          - { label: 'Ilość', name: q, widget: number, value_type: float, required: false, hint: 'Puste = „do smaku”.' }
+          - { label: 'Jednostka', name: u, widget: string, required: false, hint: 'g, ml, szt., ząbki, łyżeczka…  (ml przeliczają się na szklanki i łyżki)' }
+          - { label: 'Składnik', name: n, widget: string }
+      - label: 'Kroki'
+        name: steps
+        widget: list
+        label_singular: 'krok'
+        summary: '{{fields.title}}'
+        fields:
+          - { label: 'Tytuł kroku', name: title, widget: string }
+          - { label: 'Opis', name: text, widget: text }
+          - { label: 'Minutnik (minuty, opcjonalnie)', name: minutes, widget: number, value_type: int, required: false }
+          - { label: 'Składniki w tym kroku (tryb gotowania)', name: uses, widget: list, required: false, hint: 'Krótkie nazwy, oddzielone przecinkami.' }
+      - label: 'Historia w pigułce'
+        name: aside
+        widget: object
+        collapsed: true
+        fields:
+          - { label: 'Nagłówek', name: title, widget: string, default: 'Historia w pigułce' }
+          - { label: 'Zdjęcie', name: image, widget: object, fields: *image_fields }
+          - { label: 'Tekst', name: text, widget: text }
+          - { label: 'Dopisek', name: note, widget: text, required: false }
+          - { label: 'Pełna historia', name: story, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
+      - label: 'Sklep (opcjonalnie)'
+        name: shop
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: 'Zdjęcie', name: image, widget: object, fields: *image_fields }
+          - { label: 'Etykieta', name: label, widget: string, default: 'Sklep · wkrótce' }
+          - { label: 'Produkt', name: title, widget: string }
+      - { label: 'Źródła', name: sources, widget: list, required: false, field: { label: 'Źródło', name: source, widget: string, hint: '*kursywa* dla tytułów' } }
+      - { label: 'Z tej samej opowieści', name: related, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, required: false, max: 3 }
+
+  # ------------------------------------------------------------------ homepage
+  - name: settings
+    label: 'Strona główna'
+    description: 'Co i w jakiej kolejności pokazuje strona główna.'
+    editor: { preview: false }
+    files:
+      - name: home
+        label: 'Strona główna'
+        file: content/settings/home.json
+        format: json
+        fields:
+          - { label: 'Linia wydania (pasek na górze)', name: issue, widget: string, hint: 'np. „Wydanie nr 02 · 27 października – 2 listopada 2026”.' }
+          - { label: 'Hasło na pasku', name: tagline, widget: string }
+          - label: 'Historia tygodnia'
+            name: lead
+            widget: object
+            fields:
+              - { label: 'Artykuł', name: article, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title] }
+              - { label: 'Tekst pod tytułem', name: text, widget: text, required: false, hint: 'Puste = lead artykułu.' }
+              - { label: 'Przycisk „Przejdź do przepisu”', name: recipe, widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
+              - { label: 'Znaczek w rogu', name: stamp_image, widget: object, required: false, collapsed: true, fields: *image_fields }
+              - { label: 'Stempel: napis', name: stamp_postmark, widget: string, required: false }
+              - { label: 'Stempel: data', name: stamp_date, widget: string, required: false }
+          - { label: 'W tym wydaniu (lista obok)', name: issue_list, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, max: 6 }
+          - label: 'Nowe w tym tygodniu'
+            name: week
+            widget: list
+            summary: '{{fields.day}} {{fields.date}}'
+            max: 3
+            fields:
+              - { label: 'Dzień', name: day, widget: select, options: ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'] }
+              - { label: 'Data', name: date, widget: string, hint: 'np. 27.10' }
+              - { label: 'Artykuł', name: article, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title] }
+          - label: 'Pas „Kuchnia staropolska”'
+            name: old_polish
+            widget: object
+            collapsed: true
+            fields:
+              - { label: 'Tytuł pasa', name: title, widget: string }
+              - { label: 'Główny materiał', name: feature, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title] }
+              - { label: 'Nadtytuł głównego materiału', name: feature_label, widget: string }
+              - { label: 'Artykuły z boku', name: side_articles, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, max: 3 }
+              - { label: 'Przepis z boku', name: side_recipe, widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
+              - { label: 'Tytuł przepisu z boku', name: side_recipe_title, widget: string, required: false }
+          - label: 'Smaki regionów'
+            name: regions
+            widget: object
+            collapsed: true
+            fields:
+              - { label: 'Wstęp', name: intro, widget: text }
+              - label: 'Opublikowane regiony'
+                name: stories
+                widget: list
+                summary: '{{fields.region}}: {{fields.label}}'
+                fields:
+                  - { label: 'Województwo', name: region, widget: select, options: ['Dolnośląskie', 'Kujawsko-pomorskie', 'Lubelskie', 'Lubuskie', 'Łódzkie', 'Małopolskie', 'Mazowieckie', 'Opolskie', 'Podkarpackie', 'Podlaskie', 'Pomorskie', 'Śląskie', 'Świętokrzyskie', 'Warmińsko-mazurskie', 'Wielkopolskie', 'Zachodniopomorskie'] }
+                  - { label: 'Artykuł', name: article, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title] }
+                  - { label: 'Krótki opis na mapie', name: label, widget: string }
+          - { label: 'Przepisy (kolejność na pasku)', name: recipes, widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true }
+          - { label: 'Z podróży', name: travel, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, max: 3 }
+          - label: 'Newsletter'
+            name: newsletter
+            widget: object
+            collapsed: true
+            fields:
+              - { label: 'Tekst', name: text, widget: text }
