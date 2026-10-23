@@ -40,6 +40,7 @@ HOME = json.load(open(os.path.join(ROOT, 'content', 'settings', 'home.json'), en
 WS = dict(sorted(load('workshops').items(), key=lambda kv: kv[1].get('order') or 99))
 TR = dict(sorted(load('trips').items(), key=lambda kv: kv[1].get('order') or 99))
 OFERTA = json.load(open(os.path.join(ROOT, 'content', 'settings', 'oferta.json'), encoding='utf-8'))
+FEST = json.load(open(os.path.join(ROOT, 'content', 'settings', 'festiwal.json'), encoding='utf-8'))
 PR = dict(sorted(load('products').items(), key=lambda kv: kv[1].get('order') or 99))
 SHOP = json.load(open(os.path.join(ROOT, 'content', 'settings', 'sklep.json'), encoding='utf-8'))
 # the cart and checkout are Snipcart's (https://snipcart.com); with no public API key set in the CMS
@@ -234,8 +235,8 @@ MENU = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill
         'stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>')
 NAV = [('Historie', '/historie/'), ('Przepisy', '/przepisy/'), ('Wideo', '/#staropolska'),
        ('Mapy smaków', '/#mapy'), ('Warsztaty', '/warsztaty/'),
-       ('Wyprawy', '/wyprawy/'), ('Sklep', '/sklep/')]
-FOOT_NAV = '''<div><a href="/historie/">Historie</a><a href="/przepisy/">Przepisy</a><a href="/#staropolska">Wideo</a><a href="/warsztaty/">Warsztaty</a><a href="/wyprawy/">Wyprawy kulinarne</a><a href="/sklep/">Sklep</a></div>
+       ('Wyprawy', '/wyprawy/'), ('Sklep', '/sklep/'), ('Festiwal', '/festiwal/')]
+FOOT_NAV = '''<div><a href="/historie/">Historie</a><a href="/przepisy/">Przepisy</a><a href="/#staropolska">Wideo</a><a href="/warsztaty/">Warsztaty</a><a href="/wyprawy/">Wyprawy kulinarne</a><a href="/sklep/">Sklep</a><a href="/festiwal/">Festiwal</a></div>
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
       <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>'''
 SECTION_NAV = '''<nav class="section-nav" aria-label="Działy">
@@ -246,6 +247,7 @@ SECTION_NAV = '''<nav class="section-nav" aria-label="Działy">
   <a href="#mapy" class="chip">Mapy</a>
   <a href="#sklep" class="chip">Sklep</a>
   <a href="#warsztaty" class="chip">Warsztaty i wyprawy</a>
+  <a href="#festiwal" class="chip">Festiwal</a>
 </nav>'''
 
 
@@ -1068,7 +1070,7 @@ def home_page():
                 f'<h2 class="h"><a class="stretch" href="/historie/{slug}.html">{e(a["title"])}</a></h2>'
                 f'<p class="pills">{datepill(a)}</p></div></article>')
 
-    images += [o['image'] for o in list(WS.values())[:2] + list(TR.values())[:2] + list(PR.values())[:4]]
+    images += [o['image'] for o in list(WS.values())[:2] + list(TR.values())[:2] + list(PR.values())[:4]] + [FEST.get('image')]
 
     op = H['old_polish']
     feat = A[op['feature']]; images.append(feat['image'])
@@ -1273,6 +1275,18 @@ def home_page():
     </div>
   </section>
 
+  <section class="sec fest-teaser" id="festiwal" aria-labelledby="h-fest">
+    <a class="ov ov-banner" href="/festiwal/">
+      {img(FEST.get('image'), '(max-width:720px) 100vw, 1216px')}
+      <span class="ov-body">
+        {tags(['Festiwal kulinarny', fest_when()])}
+        <h2 class="h" id="h-fest">{e(FEST['title'])}</h2>
+        <span class="lead">{e(FEST.get('lead', ''))}</span>
+        <span class="pills"><span class="tag tag-link">Zobacz, co planujemy →</span></span>
+      </span>
+    </a>
+  </section>
+
   <section class="statement" id="newsletter" aria-labelledby="h-nl">
     <h2 id="h-nl">Jedna historia.<br>Jeden przepis.<br><em>Co tydzień.</em></h2>
     <form class="nl-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-newsletter>
@@ -1375,6 +1389,8 @@ def search_index():
             out.append({'t': o['title'], 'u': f'/{kind}/{slug}.html', 'k': 'Wyprawa' if kind == 'wyprawy' else 'Warsztaty',
                         's': o.get('subtitle') or o.get('kind') or '', 'i': thumb(o['image']),
                         'x': ' '.join([o['lead'], o.get('country') or o.get('place') or '', text(o.get('body'))])})
+    out.append({'t': FEST['title'], 'u': '/festiwal/', 'k': 'Festiwal', 's': fest_when(), 'i': thumb(FEST.get('image')),
+                'x': ' '.join([FEST.get('lead', ''), FEST.get('intro', ''), ' '.join(a['title'] + ' ' + a.get('text', '') for a in FEST.get('attractions') or [])])})
     for slug, p in PR.items():
         out.append({'t': p['title'], 'u': f'/sklep/{slug}.html', 'k': 'Sklep', 's': p.get('subtitle', ''), 'i': thumb(p['image']),
                     'x': ' '.join([p.get('lead', ''), p.get('origin', ''), p.get('ingredients', ''), SHOP_CATS.get(p.get('category'), '')])})
@@ -1483,10 +1499,116 @@ def styleguide_page():
                  head='\n<meta name="robots" content="noindex">')
 
 
+# ---------- the festival: /festiwal/ (content/settings/festiwal.json) ----------
+
+def fest_when():
+    return pl_span(FEST['date_start'], FEST.get('date_end')) if FEST.get('date_start') else (FEST.get('when') or '')
+
+
+def fest_form(name, title, intro, fields, cta, ok, fid):
+    return f'''<form class="booking fest-form" name="{name}" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-booking data-ok="{e(ok)}">
+        <h3>{title}</h3>
+        <p class="body">{e(intro)}</p>
+        <input type="hidden" name="form-name" value="{name}">
+        <p class="sr-only"><label>Nie wypełniaj <input name="bot-field" tabindex="-1"></label></p>
+        {fields.replace('{fid}', fid)}
+        <label class="check"><input type="checkbox" name="zgoda" value="tak" required> Zgadzam się na kontakt w sprawie festiwalu.</label>
+        <button type="submit" class="btn btn-ink">{cta}</button>
+        <p class="nl-msg" aria-live="polite" data-booking-msg></p>
+      </form>'''
+
+
+def festival_page():
+    _tint[0] = 0
+    F = FEST
+    when, place = fest_when(), F.get('place') or ''
+    facts = [('Kiedy', when + ('' if F.get('date_start') else ' · dokładne daty wkrótce')),
+             ('Gdzie', place or 'Ogłosimy wkrótce'), ('Bilety', F.get('tickets') or 'Start sprzedaży ogłosimy z programem'),
+             ('Dla kogo', F.get('audience') or 'Dla wszystkich, którzy lubią jeść i pytać, skąd to się wzięło')]
+    facts = ''.join(f'<div><dt>{k}</dt><dd>{e(v)}</dd></div>' for k, v in facts)
+    def attraction(a):
+        inner = (f'<span class="ph frame {T()} ratio-43">{img(a.get("image"), "(max-width:720px) 100vw, 33vw")}</span>'
+                 f'<span class="fest-t"><h3>{e(a["title"])}</h3><span class="excerpt">{e(a.get("text", ""))}</span></span>')
+        return f'<a href="{e(a["link"])}" class="offer-card fest-card">{inner}</a>' if a.get('link') else f'<div class="offer-card fest-card">{inner}</div>'
+    attractions = '\n      '.join(attraction(a) for a in F.get('attractions') or [])
+    if F.get('program'):
+        program = '<ol class="plan">' + ''.join(f'<li><h3>{e(d.get("day", ""))}</h3><p>{e(d.get("text", ""))}</p></li>' for d in F['program']) + '</ol>'
+    else:
+        program = f'<p class="fest-soon">{e(F.get("program_note") or "Program ogłosimy wkrótce.")}</p>'
+    faq = ''.join(f'<details><summary>{e(q["q"])}</summary><p>{e(q["a"])}</p></details>' for q in F.get('faq') or [])
+    notify = fest_form('festiwal-powiadomienia', 'Powiadom mnie', 'Jedna wiadomość, gdy ogłosimy daty, miejsce i bilety. Bez spamu.',
+                       '<label for="{fid}-e">E-mail</label><input id="{fid}-e" name="email" type="email" required autocomplete="email">',
+                       'Powiadom mnie', 'Dziękujemy! Damy znać, gdy ruszy sprzedaż biletów.', 'fn')
+    exhibit = fest_form('festiwal-wystawcy', 'Zostań wystawcą', F.get('exhibitors') or '',
+                        '<label for="{fid}-n">Imię i nazwisko</label><input id="{fid}-n" name="imie" required autocomplete="name">'
+                        '<label for="{fid}-f">Firma lub marka</label><input id="{fid}-f" name="firma" autocomplete="organization">'
+                        '<label for="{fid}-e">E-mail</label><input id="{fid}-e" name="email" type="email" required autocomplete="email">'
+                        '<label for="{fid}-k">Co przywieziesz?</label><select id="{fid}-k" name="kategoria"><option>Produkty regionalne</option>'
+                        '<option>Kuchnia na żywo / food truck</option><option>Napoje</option><option>Warsztaty lub wykład</option><option>Partnerstwo</option><option>Inne</option></select>'
+                        '<label for="{fid}-m">Kilka słów o sobie</label><textarea id="{fid}-m" name="wiadomosc" rows="3"></textarea>',
+                        'Wyślij zgłoszenie', 'Dziękujemy! Odezwiemy się z warunkami udziału.', 'fw')
+    main = f'''
+  <nav class="crumbs" aria-label="Ścieżka">
+    <a href="/">Strona główna</a><span aria-hidden="true">›</span><span>Festiwal</span>
+  </nav>
+
+  <article class="ov ov-hero">
+    {img(F.get('image'), '(max-width:720px) 100vw, 1216px', eager=True)}
+    <div class="ov-body">
+      {tags(['Festiwal kulinarny', when])}
+      <h1 class="h">{e(F['title'])}</h1>
+      <p class="lead">{e(F.get('lead', ''))}</p>
+      <p class="pills"><span class="date">{e(when)}</span>{f'<span class="date">{e(place)}</span>' if place else ''}<a class="tag tag-link" href="#powiadom">Powiadom mnie →</a></p>
+    </div>
+  </article>
+
+  <section class="sec fest-about" aria-labelledby="h-fest-about">
+    <h2 id="h-fest-about" class="sr-only">Najważniejsze informacje</h2>
+    <dl class="facts fest-facts">{facts}</dl>
+    <p class="fest-intro">{e(F.get('intro', ''))}</p>
+    {'<p class="meta draft">Wersja robocza: daty, miejsce, program i ceny do potwierdzenia.</p>' if F.get('draft') else ''}
+  </section>
+
+  <section class="sec" aria-labelledby="h-fest-co">
+    <div class="sec-head"><h2 id="h-fest-co" data-ghost="Festiwal">Co będzie się działo</h2></div>
+    <div class="grid offers fest-grid">
+      {attractions}
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-fest-prog">
+    <div class="sec-head"><h2 id="h-fest-prog">Program</h2></div>
+    {program}
+  </section>
+
+  <section class="sec fest-forms" id="powiadom" aria-labelledby="h-fest-forms">
+    <h2 id="h-fest-forms" class="sr-only">Zapisy</h2>
+    {notify}
+    {exhibit}
+  </section>
+
+  <section class="sec" aria-labelledby="h-fest-faq">
+    <div class="sec-head"><h2 id="h-fest-faq">Pytania</h2></div>
+    <div class="faq">{faq}</div>
+  </section>'''
+    ld = [crumbs_ld([('Strona główna', '/'), ('Festiwal', '/festiwal/')])]
+    if F.get('date_start'):  # Google needs a full date for an event
+        ev = {'@type': 'Festival', 'name': F['title'], 'description': F.get('lead', ''), 'startDate': F['date_start'],
+              'endDate': F.get('date_end') or F['date_start'], 'eventStatus': 'https://schema.org/EventScheduled',
+              'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode', 'organizer': ORG,
+              'image': [abs_image(F.get('image'), 1200, 675)]}
+        if place:
+            ev['location'] = {'@type': 'Place', 'name': place, 'address': {'@type': 'PostalAddress', 'addressLocality': place.split(',')[0], 'addressCountry': 'PL'}}
+        ld.append(ev)
+    images = [F.get('image')] + [a.get('image') for a in F.get('attractions') or []]
+    return shell(F['title'], F.get('lead', ''), main, images, current='Festiwal', body_class='festival', path='/festiwal/',
+                 image=F.get('image'), og_type='website', ld=ld)
+
+
 def write_sitemap():
     """sitemap.xml with every public page, and robots.txt pointing to it."""
     today = date.today().isoformat()
-    urls = [('/', today), ('/sklep/', today), ('/warsztaty/', today), ('/wyprawy/', today)]
+    urls = [('/', today), ('/festiwal/', today), ('/sklep/', today), ('/warsztaty/', today), ('/wyprawy/', today)]
     if os.path.exists(os.path.join(ROOT, 'historie', 'index.html')):
         urls += [('/historie/', today), ('/przepisy/', today)]
     urls += [(f'/historie/{s}.html', a.get('date') or today) for s, a in A.items()]
@@ -1513,6 +1635,8 @@ def main():
     open(os.path.join(ROOT, 'sklep', 'index.html'), 'w', encoding='utf-8').write(shop_page())
     for kind in ('historie', 'przepisy'):
         open(os.path.join(ROOT, kind, 'index.html'), 'w', encoding='utf-8').write(listing_page(kind))
+    os.makedirs(os.path.join(ROOT, 'festiwal'), exist_ok=True)
+    open(os.path.join(ROOT, 'festiwal', 'index.html'), 'w', encoding='utf-8').write(festival_page())
     os.makedirs(os.path.join(ROOT, 'styl'), exist_ok=True)
     open(os.path.join(ROOT, 'styl', 'index.html'), 'w', encoding='utf-8').write(styleguide_page())
     os.makedirs(os.path.join(ROOT, 'szukaj'), exist_ok=True)

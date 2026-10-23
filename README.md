@@ -58,6 +58,10 @@ Editors work at **`/admin`** (Decap CMS, in Polish). Three sections:
 - **Wyprawy kulinarne**: culinary trips (`content/trips/`), pages at `/wyprawy/<slug>.html` with the day-by-day plan, what is and isn't included and a "Zapytaj o miejsce" form; `/wyprawy/` lists them. A trip's country is highlighted on the "Smaki świata" globe automatically.
 - Sign-ups from every workshop and trip page (and the made-to-order forms) arrive in Netlify → Forms → **zapisy**, with the offer, date, name, e-mail, phone, number of people and message. The placeholder offers say on the page that dates, prices and programme are examples to confirm.
 - **Strona główna → Warsztaty i wyprawy (teksty)**: the intros and the made-to-order texts.
+- **Festiwal Łowcy Smaków** (*Strona główna → Festiwal Łowcy Smaków*, `content/settings/festiwal.json`). The page at `/festiwal/` has a photo header, key facts (when, where, tickets, for whom), attractions, programme, FAQ and two forms. Netlify collects them as Forms **festiwal-powiadomienia** (email) and **festiwal-wystawcy** (exhibitors). The festival also has a banner on the homepage and a "Festiwal" item in the menu and footer.
+  - Until first and last days are entered, the page shows the text date (e.g. "Sierpień 2027").
+  - With exact dates, the page shows them and gives Google `Festival` structured data.
+  - Empty place, tickets or programme fields show "ogłosimy wkrótce".
 - **Strona główna**: what the homepage shows and in what order: tagline, lead story, the two stories beside it, the week's three stories, the Old Polish band, published regions on the map, recipe rail, travel reports.
 
 Photos and graphics: upload a file (stored in `img/uploads/`, resized on the fly by Netlify's image CDN) or paste a link (e.g. from Unsplash). Each has fields for the alt text and the photographer's credit, which appears in the page footer.

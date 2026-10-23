@@ -390,6 +390,48 @@ collections:
     description: 'Co i w jakiej kolejności pokazuje strona główna.'
     editor: { preview: false }
     files:
+      - name: festiwal
+        label: 'Festiwal Łowcy Smaków'
+        file: content/settings/festiwal.json
+        format: json
+        fields:
+          - { label: 'Wersja robocza', name: draft, widget: boolean, default: false, required: false, hint: 'Włączone = dopisek, że daty, miejsce i program są do potwierdzenia.' }
+          - { label: 'Nazwa', name: title, widget: string }
+          - { label: 'Termin (tekst)', name: when, widget: string, hint: 'Pokazywany, dopóki nie ma dokładnych dat, np. „Sierpień 2027”.' }
+          - { label: 'Pierwszy dzień', name: date_start, widget: datetime, format: 'YYYY-MM-DD', date_format: 'DD.MM.YYYY', time_format: false, picker_utc: true, required: false, hint: 'Po wpisaniu strona pokaże dokładne daty, a Google dostanie dane wydarzenia.' }
+          - { label: 'Ostatni dzień', name: date_end, widget: datetime, format: 'YYYY-MM-DD', date_format: 'DD.MM.YYYY', time_format: false, picker_utc: true, required: false }
+          - { label: 'Miejsce', name: place, widget: string, required: false, hint: 'np. „Warszawa, Park Szczęśliwicki”. Puste = „Ogłosimy wkrótce”.' }
+          - { label: 'Bilety', name: tickets, widget: string, required: false }
+          - { label: 'Dla kogo', name: audience, widget: string, required: false }
+          - { label: 'Lead', name: lead, widget: text }
+          - { label: 'Zdjęcie główne', name: image, widget: object, collapsed: false, fields: *image_fields }
+          - { label: 'Wstęp', name: intro, widget: text }
+          - label: 'Atrakcje'
+            name: attractions
+            widget: list
+            summary: '{{fields.title}}'
+            fields:
+              - { label: 'Nazwa', name: title, widget: string }
+              - { label: 'Opis', name: text, widget: text }
+              - { label: 'Zdjęcie', name: image, widget: object, fields: *image_fields }
+              - { label: 'Link (opcjonalnie)', name: link, widget: string, required: false, hint: 'np. /warsztaty/' }
+          - label: 'Program'
+            name: program
+            widget: list
+            required: false
+            summary: '{{fields.day}}'
+            fields:
+              - { label: 'Dzień lub godzina', name: day, widget: string }
+              - { label: 'Co się dzieje', name: text, widget: text }
+          - { label: 'Gdy programu jeszcze nie ma', name: program_note, widget: string }
+          - { label: 'Tekst dla wystawców', name: exhibitors, widget: text }
+          - label: 'Pytania (FAQ)'
+            name: faq
+            widget: list
+            summary: '{{fields.q}}'
+            fields:
+              - { label: 'Pytanie', name: q, widget: string }
+              - { label: 'Odpowiedź', name: a, widget: text }
       - name: sklep
         label: 'Sklep: ustawienia'
         file: content/settings/sklep.json

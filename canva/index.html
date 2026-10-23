@@ -896,6 +896,37 @@ body.home .site-footer{margin-top:0}
 .dark .sec-head h2[data-ghost]::before{color:rgba(255,255,255,.1)}
 .sg-ghost{padding-top:40px}
 
+/* festival (/festiwal/ and the homepage banner): photo cards, facts on the panel, two forms, FAQ */
+.ov-hero{aspect-ratio:21/9;min-height:440px}
+.ov-hero .ov-body{padding:44px}
+.ov-hero .h{font-size:clamp(40px,5.4vw,72px);line-height:1;max-width:900px}
+.ov-hero .lead{font-size:19px;max-width:680px}
+.ov-banner{display:block;aspect-ratio:3/1;min-height:300px}
+.ov-banner .ov-body{padding:40px}
+.ov-banner .h{font-size:clamp(30px,3.6vw,48px);line-height:1.05}
+.ov-banner .lead{display:block;max-width:640px;font-size:17px;color:rgba(255,255,255,.9)}
+.fest-facts{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px 28px;background:var(--panel);border:0;border-radius:10px;padding:26px 28px;margin:0}
+.fest-facts dd{font-size:16px}
+.fest-intro{max-width:760px;font-size:19px;line-height:1.6;color:var(--ink-2)}
+.fest-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fest-t{display:flex;flex-direction:column;gap:6px}
+.fest-t h3{font:700 var(--fs-h3)/1.2 var(--display)}
+.fest-soon{padding:26px 28px;border-radius:10px;background:var(--panel);font-size:17px;font-weight:600}
+.fest-forms{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:28px;align-items:start}
+.fest-form{background:var(--panel);border-radius:10px;padding:30px}
+.fest-form h3{font:700 26px/1.15 var(--display)}
+.fest-form .btn{width:auto;align-self:flex-start;padding:0 30px}
+.faq{display:flex;flex-direction:column;max-width:820px}
+.faq details{border-top:1px solid var(--line);padding:6px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:14px 0;font:700 18px/1.3 var(--display)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:24px;line-height:1;color:var(--muted)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 0 16px;font-size:16px;line-height:1.6;color:var(--ink-2);max-width:680px}
+
+
+
 /* Canva pages */
 .tick{width:18px;height:18px;border:1.5px solid var(--ink);border-radius:3px;flex:none}
 body{margin:0}
@@ -933,6 +964,7 @@ body{margin:0}
     <a class="navlink" href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/sklep/">Sklep</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/festiwal/">Festiwal</a>
   </nav>
   
 </header>
@@ -1278,6 +1310,18 @@ body{margin:0}
     </div>
   </section>
 
+  <section class="sec fest-teaser" id="festiwal" aria-labelledby="h-fest">
+    <a class="ov ov-banner" href="https://lowca-smakow.netlify.app/festiwal/">
+      <img class="fill" src="https://images.unsplash.com/photo-1790324452976-27d6899f7b13?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Ludzie spacerują między stoiskami z jedzeniem na festiwalu w parku" decoding="async">
+      <span class="ov-body">
+        <span class="tags"><span class="tag">Festiwal kulinarny</span><span class="tag">Sierpień 2027</span></span>
+        <h2 class="h" id="h-fest">Festiwal Łowcy Smaków</h2>
+        <span class="lead">Kilka dni jedzenia, rozmów i gotowania na żywo: smaki polskich regionów obok kuchni z drugiego końca świata, z historią podaną razem z talerzem.</span>
+        <span class="pills"><span class="tag tag-link">Zobacz, co planujemy →</span></span>
+      </span>
+    </a>
+  </section>
+
   <section class="statement" id="newsletter" aria-labelledby="h-nl">
     <h2 id="h-nl">Jedna historia.<br>Jeden przepis.<br><em>Co tydzień.</em></h2>
     <form class="nl-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-newsletter="">
@@ -1303,11 +1347,11 @@ body{margin:0}
       <p>Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.</p>
     </div>
     <nav class="foot-nav" aria-label="Stopka">
-      <div><a href="https://lowca-smakow.netlify.app/historie/">Historie</a><a href="https://lowca-smakow.netlify.app/przepisy/">Przepisy</a><a href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a><a href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a><a href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy kulinarne</a><a href="https://lowca-smakow.netlify.app/sklep/">Sklep</a></div>
+      <div><a href="https://lowca-smakow.netlify.app/historie/">Historie</a><a href="https://lowca-smakow.netlify.app/przepisy/">Przepisy</a><a href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a><a href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a><a href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy kulinarne</a><a href="https://lowca-smakow.netlify.app/sklep/">Sklep</a><a href="https://lowca-smakow.netlify.app/festiwal/">Festiwal</a></div>
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
       <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>
     </nav>
-    <p class="meta credits">Zdjęcia: <a href="https://unsplash.com/@twalton?utm_source=lowca_smakow&amp;utm_medium=referral">Townsend Walton</a>, <a href="https://unsplash.com/@kwami_heude_50?utm_source=lowca_smakow&amp;utm_medium=referral">Kwami Fattah Al Sissi</a>, <a href="https://unsplash.com/@anshu18?utm_source=lowca_smakow&amp;utm_medium=referral">Anshu A</a>, <a href="https://unsplash.com/@afcurtis?utm_source=lowca_smakow&amp;utm_medium=referral">Austin Curtis</a>, <a href="https://unsplash.com/@fin777?utm_source=lowca_smakow&amp;utm_medium=referral">Deb Dowd</a>, <a href="https://unsplash.com/@newmanphotog?utm_source=lowca_smakow&amp;utm_medium=referral">Timothy Newman</a>, <a href="https://unsplash.com/@artsmarts?utm_source=lowca_smakow&amp;utm_medium=referral">Lindsey Elsey</a>, <a href="https://unsplash.com/@isaozalp?utm_source=lowca_smakow&amp;utm_medium=referral">İsa A. Özalp</a>, <a href="https://unsplash.com/@madelynpao?utm_source=lowca_smakow&amp;utm_medium=referral">Madelyn Batista</a>, <a href="https://unsplash.com/@aliphotos_86?utm_source=lowca_smakow&amp;utm_medium=referral">Ali Robins</a>, <a href="https://unsplash.com/@boudewijn_huysmans?utm_source=lowca_smakow&amp;utm_medium=referral">Boudewijn Huysmans</a>, <a href="https://unsplash.com/@orlovamaria?utm_source=lowca_smakow&amp;utm_medium=referral">Maria Orlova</a>, <a href="https://unsplash.com/@mrasmuson?utm_source=lowca_smakow&amp;utm_medium=referral">Mark Rasmuson</a>, <a href="https://unsplash.com/@jakubzerdzicki?utm_source=lowca_smakow&amp;utm_medium=referral">Jakub Żerdzicki</a>, <a href="https://unsplash.com/@maharram?utm_source=lowca_smakow&amp;utm_medium=referral">Maharram Hasanli</a>, <a href="https://unsplash.com/@rabbit_in_blue?utm_source=lowca_smakow&amp;utm_medium=referral">Karolina Kołodziejczak</a>, <a href="https://unsplash.com/@diegonacho?utm_source=lowca_smakow&amp;utm_medium=referral">Diego Lozano</a>, <a href="https://unsplash.com/@jonathanpielmayer?utm_source=lowca_smakow&amp;utm_medium=referral">Jonathan Pielmayer</a>, <a href="https://unsplash.com/@markuswinkler?utm_source=lowca_smakow&amp;utm_medium=referral">Markus Winkler</a> · <a href="https://unsplash.com/?utm_source=lowca_smakow&amp;utm_medium=referral">Unsplash</a></p>
+    <p class="meta credits">Zdjęcia: <a href="https://unsplash.com/@twalton?utm_source=lowca_smakow&amp;utm_medium=referral">Townsend Walton</a>, <a href="https://unsplash.com/@kwami_heude_50?utm_source=lowca_smakow&amp;utm_medium=referral">Kwami Fattah Al Sissi</a>, <a href="https://unsplash.com/@anshu18?utm_source=lowca_smakow&amp;utm_medium=referral">Anshu A</a>, <a href="https://unsplash.com/@afcurtis?utm_source=lowca_smakow&amp;utm_medium=referral">Austin Curtis</a>, <a href="https://unsplash.com/@fin777?utm_source=lowca_smakow&amp;utm_medium=referral">Deb Dowd</a>, <a href="https://unsplash.com/@newmanphotog?utm_source=lowca_smakow&amp;utm_medium=referral">Timothy Newman</a>, <a href="https://unsplash.com/@artsmarts?utm_source=lowca_smakow&amp;utm_medium=referral">Lindsey Elsey</a>, <a href="https://unsplash.com/@isaozalp?utm_source=lowca_smakow&amp;utm_medium=referral">İsa A. Özalp</a>, <a href="https://unsplash.com/@madelynpao?utm_source=lowca_smakow&amp;utm_medium=referral">Madelyn Batista</a>, <a href="https://unsplash.com/@kngstm?utm_source=lowca_smakow&amp;utm_medium=referral">XS Xue</a>, <a href="https://unsplash.com/@aliphotos_86?utm_source=lowca_smakow&amp;utm_medium=referral">Ali Robins</a>, <a href="https://unsplash.com/@boudewijn_huysmans?utm_source=lowca_smakow&amp;utm_medium=referral">Boudewijn Huysmans</a>, <a href="https://unsplash.com/@orlovamaria?utm_source=lowca_smakow&amp;utm_medium=referral">Maria Orlova</a>, <a href="https://unsplash.com/@mrasmuson?utm_source=lowca_smakow&amp;utm_medium=referral">Mark Rasmuson</a>, <a href="https://unsplash.com/@jakubzerdzicki?utm_source=lowca_smakow&amp;utm_medium=referral">Jakub Żerdzicki</a>, <a href="https://unsplash.com/@maharram?utm_source=lowca_smakow&amp;utm_medium=referral">Maharram Hasanli</a>, <a href="https://unsplash.com/@rabbit_in_blue?utm_source=lowca_smakow&amp;utm_medium=referral">Karolina Kołodziejczak</a>, <a href="https://unsplash.com/@diegonacho?utm_source=lowca_smakow&amp;utm_medium=referral">Diego Lozano</a>, <a href="https://unsplash.com/@jonathanpielmayer?utm_source=lowca_smakow&amp;utm_medium=referral">Jonathan Pielmayer</a>, <a href="https://unsplash.com/@markuswinkler?utm_source=lowca_smakow&amp;utm_medium=referral">Markus Winkler</a> · <a href="https://unsplash.com/?utm_source=lowca_smakow&amp;utm_medium=referral">Unsplash</a></p>
     <p class="meta copyright">© 2026 Savour Ventures OÜ</p>
   </div>
 </footer>
@@ -1349,6 +1393,7 @@ body{margin:0}
     <a class="navlink" href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/sklep/">Sklep</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/festiwal/">Festiwal</a>
   </nav>
   
 </header>
@@ -1436,7 +1481,7 @@ body{margin:0}
       <p>Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.</p>
     </div>
     <nav class="foot-nav" aria-label="Stopka">
-      <div><a href="https://lowca-smakow.netlify.app/historie/">Historie</a><a href="https://lowca-smakow.netlify.app/przepisy/">Przepisy</a><a href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a><a href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a><a href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy kulinarne</a><a href="https://lowca-smakow.netlify.app/sklep/">Sklep</a></div>
+      <div><a href="https://lowca-smakow.netlify.app/historie/">Historie</a><a href="https://lowca-smakow.netlify.app/przepisy/">Przepisy</a><a href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a><a href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a><a href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy kulinarne</a><a href="https://lowca-smakow.netlify.app/sklep/">Sklep</a><a href="https://lowca-smakow.netlify.app/festiwal/">Festiwal</a></div>
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
       <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>
     </nav>
@@ -1481,6 +1526,7 @@ body{margin:0}
     <a class="navlink" href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy</a>
     <a class="navlink" href="https://lowca-smakow.netlify.app/sklep/">Sklep</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/festiwal/">Festiwal</a>
   </nav>
   
 </header>
@@ -1614,7 +1660,7 @@ body{margin:0}
       <p>Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.</p>
     </div>
     <nav class="foot-nav" aria-label="Stopka">
-      <div><a href="https://lowca-smakow.netlify.app/historie/">Historie</a><a href="https://lowca-smakow.netlify.app/przepisy/">Przepisy</a><a href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a><a href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a><a href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy kulinarne</a><a href="https://lowca-smakow.netlify.app/sklep/">Sklep</a></div>
+      <div><a href="https://lowca-smakow.netlify.app/historie/">Historie</a><a href="https://lowca-smakow.netlify.app/przepisy/">Przepisy</a><a href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a><a href="https://lowca-smakow.netlify.app/warsztaty/">Warsztaty</a><a href="https://lowca-smakow.netlify.app/wyprawy/">Wyprawy kulinarne</a><a href="https://lowca-smakow.netlify.app/sklep/">Sklep</a><a href="https://lowca-smakow.netlify.app/festiwal/">Festiwal</a></div>
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
       <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>
     </nav>

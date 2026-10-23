@@ -187,7 +187,7 @@
         ' – ' + sun.getDate() + ' ' + MONTHS[sun.getMonth()] + ' ' + sun.getFullYear();
   });
 
-  // workshop and trip sign-ups: Netlify Forms ("zapisy"), same as the newsletter
+  // sign-ups (workshops, trips, festival): Netlify Forms, same as the newsletter; data-ok sets the thank-you line
   $$('[data-booking]').forEach(function (form) {
     var msg = $('[data-booking-msg]', form);
     form.addEventListener('submit', function (e) {
@@ -201,7 +201,7 @@
       }).then(function (r) {
         if (!r.ok) throw new Error(r.status);
         form.reset();
-        msg.textContent = 'Dziękujemy! Odpiszemy w ciągu dwóch dni roboczych.';
+        msg.textContent = form.dataset.ok || 'Dziękujemy! Odpiszemy w ciągu dwóch dni roboczych.';
       }).catch(function () {
         msg.textContent = 'Nie udało się wysłać. Spróbuj ponownie za chwilę.';
       }).then(function () { btn.disabled = false; });
