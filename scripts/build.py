@@ -161,28 +161,17 @@ def recipe_card_image(r):
     return r.get('card_image') or r['image']
 
 
-# ---------- the issue line: „Wydanie nr 02 · 26 października – 1 listopada 2026” ----------
+# ---------- "this week": the dates next to "Nowe w tym tygodniu" ----------
 
-def issue_line(today=None):
-    """Counted in weeks (Monday–Sunday) from the first issue's Monday in the CMS; site.js redoes it in the
-    browser, so the line stays current between deploys. A text typed into the CMS wins."""
-    if (HOME.get('issue') or '').strip():
-        return HOME['issue'].strip()
-    start = date.fromisoformat(HOME.get('issue_start') or '2026-10-19')
-    start -= timedelta(days=start.weekday())
+def week_range(today=None):
+    """Monday–Sunday of the current week, e.g. „19–25 października 2026”. site.js redoes it in the browser,
+    so it stays current between deploys."""
     today = today or date.today()
     mon = today - timedelta(days=today.weekday())
-    n = max(1, (mon - start).days // 7 + 1)
     sun = mon + timedelta(days=6)
     if mon.month == sun.month:
-        span = f'{mon.day}–{sun.day} {MONTHS[mon.month - 1]} {sun.year}'
-    else:
-        span = f'{mon.day} {MONTHS[mon.month - 1]}{"" if mon.year == sun.year else f" {mon.year}"} – {sun.day} {MONTHS[sun.month - 1]} {sun.year}'
-    return f'Wydanie nr {n:02d} · {span}'
-
-
-def issue_attrs():
-    return '' if (HOME.get('issue') or '').strip() else f' data-issue-start="{e(HOME.get("issue_start") or "2026-10-19")}"'
+        return f'{mon.day}–{sun.day} {MONTHS[mon.month - 1]} {sun.year}'
+    return f'{mon.day} {MONTHS[mon.month - 1]}{"" if mon.year == sun.year else f" {mon.year}"} – {sun.day} {MONTHS[sun.month - 1]} {sun.year}'
 
 
 # ---------- search engines and link previews ----------
@@ -303,7 +292,7 @@ def shell(title, desc, main, images, current=None, body_class='', body_attrs='',
 <a class="skip" href="#tresc">Przejdź do treści</a>
 
 <header class="site-header">
-  <div class="topbar"><div class="wrap"><span{issue_attrs()}>{e(issue_line())}</span><span class="topbar-r">{e(HOME.get('tagline', ''))}</span></div></div>
+  <div class="topbar"><div class="wrap"><span>{e(HOME.get('tagline', ''))}</span></div></div>
   <div class="wrap masthead">
     <div class="left">
       <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle>
@@ -1172,7 +1161,7 @@ def home_page():
   <section class="sec" id="nowe" aria-labelledby="h-nowe">
     <div class="sec-head">
       <h2 id="h-nowe" data-ghost="W tym tygodniu">Nowe w tym tygodniu</h2>
-      <p class="meta"{issue_attrs()}>{e(issue_line())}</p>
+      <p class="meta" data-week>{e(week_range())}</p>
     </div>
     <div class="grid grid-3 week">
       {''.join(week_card(w) for w in H.get('week', []) if w.get('article') in A)}

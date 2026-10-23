@@ -58,7 +58,7 @@ Editors work at **`/admin`** (Decap CMS, in Polish). Three sections:
 - **Wyprawy kulinarne**: culinary trips (`content/trips/`), pages at `/wyprawy/<slug>.html` with the day-by-day plan, what is and isn't included and a "Zapytaj o miejsce" form; `/wyprawy/` lists them. A trip's country is highlighted on the "Smaki świata" globe automatically.
 - Sign-ups from every workshop and trip page (and the made-to-order forms) arrive in Netlify → Forms → **zapisy**, with the offer, date, name, e-mail, phone, number of people and message. The placeholder offers say on the page that dates, prices and programme are examples to confirm.
 - **Strona główna → Warsztaty i wyprawy (teksty)**: the intros and the made-to-order texts.
-- **Strona główna**: what the homepage shows and in what order: issue line, lead story, the two stories beside it, the week's three stories, the Old Polish band, published regions on the map, recipe rail, travel reports.
+- **Strona główna**: what the homepage shows and in what order: tagline, lead story, the two stories beside it, the week's three stories, the Old Polish band, published regions on the map, recipe rail, travel reports.
 
 Photos and graphics: upload a file (stored in `img/uploads/`, resized on the fly by Netlify's image CDN) or paste a link (e.g. from Unsplash). Each has fields for the alt text and the photographer's credit, which appears in the page footer.
 
@@ -115,7 +115,7 @@ python3 scripts/build.py --local   # rebuild after saving (--local: uploads with
 
 - Header: sticky, burger menu below 1100 px, site search: typing shows the best matches from stories, recipes, workshops, trips and the shop, ignoring Polish accents; Enter opens `/szukaj/?q=…` with every result. The build writes the index to `js/search-index.json`, and `js/search.js` loads it on first use.
 - Listing pages: `/historie/` (newest first, filter by section) and `/przepisy/` (filter by category); `?k=…` opens them filtered, which is what breadcrumbs use.
-- Issue line at the top: counted in Monday–Sunday weeks from *Strona główna → Pierwsze wydanie*, and recomputed in the browser so it's never stale. Typing a line in the CMS overrides it.
+- "Nowe w tym tygodniu" shows the current week's dates (Monday–Sunday), recomputed in the browser so they're never stale.
 - Search engines and link previews: every page has a canonical URL, Open Graph/Twitter tags and breadcrumbs. Structured data per page type:
   - Recipe on recipes;
   - Article on stories (plus VideoObject for episodes);

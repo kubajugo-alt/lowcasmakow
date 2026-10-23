@@ -414,8 +414,6 @@ collections:
         file: content/settings/home.json
         format: json
         fields:
-          - { label: 'Pierwsze wydanie (poniedziałek)', name: issue_start, widget: datetime, format: 'YYYY-MM-DD', date_format: 'DD.MM.YYYY', time_format: false, picker_utc: true, hint: 'Numer i daty wydania na pasku na górze liczą się same, tydzień po tygodniu od tej daty.' }
-          - { label: 'Linia wydania ręcznie (opcjonalnie)', name: issue, widget: string, required: false, hint: 'Zostaw puste, żeby liczyła się sama. Wpisany tekst zastępuje automatyczny.' }
           - { label: 'Hasło na pasku', name: tagline, widget: string }
           - label: 'Historia tygodnia'
             name: lead
