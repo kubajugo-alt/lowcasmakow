@@ -2,18 +2,27 @@
 
 Static website for **Łowca Smaków** (food anthropology: where what we eat comes from, and how to cook it), built from the portal wireframes (Design canvas *Łowca Smaków portal – wireframes*).
 
-| Page | File | Wireframe |
-|---|---|---|
-| Homepage (desktop + mobile, responsive) | `index.html` | Strona główna — desktop / mobile |
-| Recipe | `przepis.html` | Przepis — desktop |
-| Cook mode | `gotowanie.html` | Tryb gotowania — mobile |
-| Not found | `404.html` | — |
+| Page | File |
+|---|---|
+| Homepage (desktop + mobile, responsive) | `index.html` |
+| Articles (11) | `historie/*.html` (generated) |
+| Recipes (4) | `przepisy/*.html` (generated) |
+| Cook mode | `gotowanie.html?r=<recipe-slug>` |
+| Not found | `404.html` |
 
-## Look
+`przepis.html` now redirects to `/przepisy/slimaki-w-szarym-sosie.html` (301 in `netlify.toml`).
 
-Taken from the logo (`img/logo.svg`, `img/logo-white.svg`, traced from the supplied artwork): one black line on white and its white-on-black twin. Off-white paper `#FBFAF7`, ink `#121212`, fine 1 px rules, black bands (newsletter, footer, cook mode) carrying the white logo, and the logo's looping line as a divider. Type: Cormorant Garamond for headings, Instrument Sans for text. No accent colour: the food photography brings the colour.
+## Content
 
-No build step: plain HTML, CSS (`css/style.css`) and JS (`js/`). Open `index.html`, or serve the folder:
+Article copy lives in `scripts/content.py`, recipes (ingredients with scalable quantities, steps, timer minutes) in `js/recipes.js`. Regenerate the article and recipe pages after editing either:
+
+```sh
+python3 scripts/build.py
+```
+
+All text is draft placeholder copy written to fit the topics; every article and recipe page says so on the page. Check facts, quantities and times before publishing.
+
+No build step for the site itself: plain HTML, CSS (`css/style.css`) and JS (`js/`). Open `index.html`, or serve the folder:
 
 ```sh
 python3 -m http.server 8000
@@ -28,4 +37,4 @@ python3 -m http.server 8000
 
 ## Still placeholders (from the wireframe)
 
-The photos are placeholder stock from Unsplash (Unsplash License, loaded from `images.unsplash.com`, photographers credited in each page's footer), picked to match each story's topic. Swap them for the shoot's own photography. Everything in `[square brackets]` is waiting for real content: video, article leads, quantities, step texts, times. Recipe content lives in `js/recipe-data.js`; a step's timer starts working as soon as its `minutes` is a number. Links to stories that don't exist yet point to `#`.
+The photos are placeholder stock from Unsplash (Unsplash License, loaded from `images.unsplash.com`, photographers credited in each page's footer), picked to match each story's topic. Swap them for the shoot's own photography. Still in `[square brackets]`: video lengths and the shop product. Footer pages (O nas, Współpraca, Kontakt, socials) point to `#`.

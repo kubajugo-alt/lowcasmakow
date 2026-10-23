@@ -1,2 +1,7 @@
 [build]
   publish = "."
+
+[[redirects]]
+  from = "/przepis.html"
+  to = "/przepisy/slimaki-w-szarym-sosie.html"
+  status = 301

@@ -62,6 +62,7 @@
   });
 
   // regions: map tiles and chips select the same region
+  var REGION_STORIES = { 'Małopolskie': ['historie/podhale-oscypek.html', 'Podhale i oscypek'] };
   var regions = $('[data-regions]');
   if (regions) {
     var out = $('[data-region-out]', regions);
@@ -70,7 +71,15 @@
       b.addEventListener('click', function () {
         var name = b.dataset.region;
         $$('[data-region]', regions).forEach(function (x) { x.setAttribute('aria-pressed', String(x.dataset.region === name)); });
-        out.textContent = name + ' — odcinek wkrótce.';
+        var story = REGION_STORIES[name];
+        out.innerHTML = '';
+        if (story) {
+          var link = document.createElement('a');
+          link.href = story[0]; link.textContent = name + ': ' + story[1] + ' →';
+          out.appendChild(link);
+        } else {
+          out.textContent = name + ' — odcinek wkrótce.';
+        }
       });
     });
     var more = $('[data-regions-more]', regions);
@@ -109,4 +118,16 @@
       }).then(function () { btn.disabled = false; });
     });
   });
+
+  // line ornaments (taken from the logo) draw themselves in when they scroll into view
+  var draws = $$('svg.draw');
+  if (draws.length && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('can-draw');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('is-drawn'); io.unobserve(en.target); }
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+    draws.forEach(function (d) { io.observe(d); });
+  }
 })();

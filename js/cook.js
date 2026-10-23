@@ -1,6 +1,11 @@
 // Cook mode: one step per screen, big type, timer, keeps the screen awake
 (function () {
-  var R = window.RECIPE, steps = R.steps, i = 0;
+  var slug = new URLSearchParams(location.search).get('r');
+  if (!window.RECIPES[slug]) slug = 'slimaki-w-szarym-sosie';
+  var R = window.RECIPES[slug], steps = R.steps, i = 0;
+  var back = '/przepisy/' + slug + '.html';
+  document.querySelector('[data-close]').href = back;
+  document.title = 'Tryb gotowania — ' + R.title + ' — Łowca Smaków';
   var $ = function (s) { return document.querySelector(s); };
   var bars = $('[data-bars]');
   steps.forEach(function () { bars.appendChild(document.createElement('span')); });
@@ -11,12 +16,13 @@
     $('[data-count]').textContent = 'Krok ' + (i + 1) + ' z ' + steps.length;
     Array.prototype.forEach.call(bars.children, function (b, k) { b.classList.toggle('on', k <= i); });
     $('[data-title]').textContent = s.title;
-    $('[data-desc]').textContent = s.text || '[Opis kroku dużą czcionką — czytelny z odległości blatu.]';
+    $('[data-desc]').textContent = s.text;
     var uses = $('[data-uses]');
+    $('[data-uses-wrap]').hidden = !s.uses.length;
     uses.innerHTML = '';
     s.uses.forEach(function (u) {
       var p = document.createElement('span');
-      p.className = 'pill'; p.textContent = u + ' · [ilość]';
+      p.className = 'pill'; p.textContent = u;
       uses.appendChild(p);
     });
     // timer: rebuilt per step so a running countdown never leaks into the next one
@@ -35,7 +41,7 @@
   }
   $('[data-prev]').addEventListener('click', function () { if (i > 0) { i--; render(); } });
   $('[data-next]').addEventListener('click', function () {
-    if (i === steps.length - 1) { location.href = 'przepis.html'; return; }
+    if (i === steps.length - 1) { location.href = back; return; }
     i++; render();
   });
   document.addEventListener('keydown', function (e) {
