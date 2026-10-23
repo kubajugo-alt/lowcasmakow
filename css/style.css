@@ -98,7 +98,6 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
 
 .card{display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--ink)}
 .card:hover{color:var(--ink)}
-.card:hover h3,.card:hover h4{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
 .card h3{font-family:var(--serif);font-size:28px;line-height:1.08;font-weight:600}
 .card.sm h3{font-size:24px;line-height:1.1}
 .card.row{flex-direction:row;gap:18px;align-items:flex-start}
@@ -366,7 +365,6 @@ blockquote.pull{margin:28px 0;padding:28px 0;border-top:1px solid var(--ink);bor
 .a-recipe .ph{width:120px;height:120px;flex:none;padding:0}
 .a-recipe h2{margin:6px 0 4px;font-size:30px}
 .a-recipe h2 a{text-decoration:none}
-.a-recipe h2 a:hover{text-decoration:underline}
 .related .card h3{font-size:22px}
 
 @media (max-width:1100px){
@@ -401,14 +399,12 @@ body{overflow-x:clip}
 .lead-img{display:block;aspect-ratio:16/10}
 .lead-story h1{font-family:var(--serif);font-size:clamp(56px,7.2vw,112px);line-height:.9;font-weight:600;letter-spacing:-.02em}
 .lead-story h1 a{color:inherit;text-decoration:none}
-.lead-story h1 a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px}
 .lead-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end;border-top:1px solid var(--ink);padding-top:18px}
 .issue{border-top:1px solid var(--ink);padding-top:14px;display:flex;flex-direction:column}
 .issue .label{font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;padding-bottom:14px}
 .issue ol{list-style:none;margin:0;padding:0}
 .issue-item{display:grid;grid-template-columns:44px minmax(0,1fr) 72px;gap:14px;align-items:center;padding:16px 0;border-top:1px solid var(--rule);text-decoration:none;color:var(--ink)}
 .issue-item:hover{color:var(--ink)}
-.issue-item:hover .t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
 .issue-item .no{font-family:var(--serif);font-size:24px;font-style:italic;font-weight:500;letter-spacing:0;font-variant-numeric:lining-nums tabular-nums}
 .issue-t{display:flex;flex-direction:column;gap:4px}
 .issue-t .kicker{font-size:11px;color:var(--muted)}
@@ -602,7 +598,6 @@ a:hover .go::after{transform:translateX(4px)}
 .travel-t{display:flex;flex-direction:column;gap:10px;padding-bottom:4px}
 .travel-t .no{font-size:12px;color:var(--vermilion)}
 .travel-t .h{font-family:var(--serif);font-size:30px;line-height:1.02;font-weight:600}
-.travel-item:hover .h{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
 
 .logo img{height:68px}
 .cook-top .logo img{height:32px}
@@ -686,7 +681,6 @@ body.home .site-footer{margin-top:0}
 .ov .h{font:700 21px/1.18 var(--display);letter-spacing:-.01em;color:var(--white)}
 .ov .h a{color:inherit;text-decoration:none}
 .ov .stretch::after{content:"";position:absolute;inset:0;z-index:1}
-.ov .h a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
 .ov .lead{color:rgba(255,255,255,.9);font-size:16px;max-width:620px}
 .ov .pills .no{background:rgba(255,255,255,.92);color:var(--ink)}
 .ov .date{background:rgba(255,255,255,.22);color:var(--white);backdrop-filter:blur(4px)}
@@ -789,3 +783,14 @@ body.home .site-footer{margin-top:0}
   .world .regions-copy{display:flex}
   .world .chips{flex-wrap:wrap;overflow:visible;margin:0;padding:0;order:0}
 }
+
+/* hover: a story's title turns the colour of its photo's frame (no underline) */
+.card,.travel-item,.issue-item,.a-recipe,.offer-card{--hl:var(--vermilion)}
+:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-mustard){--hl:var(--mustard)}
+:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-vermilion){--hl:var(--vermilion)}
+:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-ultramarine){--hl:var(--ultramarine)}
+:is(.card,.travel-item,.issue-item,.a-recipe,.offer-card):has(.tint-sage){--hl:var(--sage)}
+.card :is(h3,h4),.travel-t .h,.issue-t .t,.a-recipe h2 a,.ov .h,.offer-card h3{transition:color .15s}
+.card:hover :is(h3,h4),.travel-item:hover .h,.issue-item:hover .t,.a-recipe h2 a:hover,.offer-card:hover h3{color:var(--hl)}
+.ov{--hl:var(--mustard)}
+.ov:hover .h,.ov:focus-within .h{color:var(--hl)}
