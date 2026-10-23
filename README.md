@@ -67,7 +67,31 @@ Every save is a commit to `main` on GitHub; Netlify then runs `python3 scripts/b
 1. **Automatic deploys**: Netlify must build from the GitHub repo (Project configuration → Build & deploy → Continuous deployment → linked to `kubajugo-alt/lowcasmakow`, branch `main`). Without it, CMS saves reach GitHub but not the live site.
 2. **Login**: the CMS signs in with GitHub. Create a GitHub OAuth app (GitHub → Settings → Developer settings → OAuth Apps → New) with *Authorization callback URL* `https://api.netlify.com/auth/done`, then add its Client ID and secret in Netlify (Project configuration → Access & security → OAuth → Install provider → GitHub). Every editor needs a GitHub account with write access to the repo.
 
-### Editing locally
+### Shop (Snipcart)
+
+Spice mixes are products in the CMS (*Sklep: mieszanki przypraw*, `content/products/`). The build makes `/sklep/` (all mixes, filter by category), one page per mix at `/sklep/<slug>.html` (sizes, quantity, ingredients, how to use, its story, the recipes it goes with), a strip of four on the homepage, and a "Do koszyka" box on every recipe the mix is linked to.
+
+The cart, checkout, payments, order e-mails, stock, shipping rates, discounts and taxes are [Snipcart](https://snipcart.com)'s. It runs on top of these pages: each "Do koszyka" button carries the product (`snipcart-add-item` with `data-item-*`; every size is listed with its price difference, so Snipcart can check the price of whichever size is in the cart). `js/snipcart.js` is Snipcart's official loader (v3.7.4 pinned in `build.py`); it loads on the first interaction, in Polish because the pages are `lang="pl"`, and the cart takes the site's colours from the CSS variables on `#snipcart`. `js/shop.js` connects the size picker and quantity on product pages to the button.
+
+Until a key is set, the shop shows its products with "Wkrótce w sprzedaży" buttons and no Snipcart code loads.
+
+To open the shop:
+
+1. Create an account at snipcart.com.
+2. In the dashboard:
+   - **Domains & URLs**: add `lowca-smakow.netlify.app` (and the final domain later). Snipcart's crawler checks prices on the product pages, so it must be able to reach them.
+   - **Regional settings**: currency PLN.
+   - **Payment gateway**: Stripe for cards, Apple Pay and Google Pay, or Mollie to also take BLIK and Przelewy24.
+   - **Shipping**: rates by weight. Every size has a weight with its packaging.
+   - **Taxes**: VAT, if applicable.
+   - **Notifications**: the e-mail address that gets new orders.
+3. Copy **Account → API Keys → Public API key** into the CMS: *Strona główna → Sklep: ustawienia → Klucz Snipcart*. Save, and the next build turns the buttons into "Do koszyka" and adds the cart to the header.
+
+Use Snipcart's test key and test payments first, then switch to the live key.
+
+The product ID in Snipcart is the page address (`birria`, `staropolska`…). Once a mix has been sold, don't rename it.
+
+## Editing locally
 
 ```sh
 npx decap-server &                 # lets /admin edit the files on disk (no login)

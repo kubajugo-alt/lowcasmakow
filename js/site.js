@@ -43,7 +43,7 @@
     if (q0 && $('[data-recipes]')) { $('input', search).value = q0; search.hidden = false; search.requestSubmit(); }
   }
 
-  // recipe filter chips
+  // filter chips: recipes on the homepage, spice mixes in the shop
   function setFilter(root, f) {
     $$('[data-filter]', root).forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.filter === f)); });
     var shown = 0;
@@ -52,10 +52,11 @@
       c.hidden = !hit; if (hit) shown++;
     });
     var empty = $('[data-recipes-empty]', root);
-    empty.textContent = 'Wkrótce więcej przepisów w tej kategorii.';
+    if (!empty) return;
+    if (root.hasAttribute('data-recipes')) empty.textContent = 'Wkrótce więcej przepisów w tej kategorii.';
     empty.hidden = !!shown;
   }
-  $$('[data-recipes]').forEach(function (root) {
+  $$('[data-recipes], [data-filterable]').forEach(function (root) {
     $$('[data-filter]', root).forEach(function (b) {
       b.addEventListener('click', function () { setFilter(root, b.dataset.filter); });
     });
@@ -151,6 +152,13 @@
         msg.textContent = 'Nie udało się zapisać. Spróbuj ponownie za chwilę.';
       }).then(function () { btn.disabled = false; });
     });
+  });
+
+  // header cart (Snipcart fills the count): hide the badge while the cart is empty
+  $$('.snipcart-items-count').forEach(function (el) {
+    var set = function () { var t = el.textContent.trim(); el.hidden = !t || t === '0'; };
+    set();
+    new MutationObserver(set).observe(el, { childList: true, characterData: true, subtree: true });
   });
 
   // workshop and trip sign-ups: Netlify Forms ("zapisy"), same as the newsletter

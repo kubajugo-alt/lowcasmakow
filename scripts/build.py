@@ -38,6 +38,12 @@ HOME = json.load(open(os.path.join(ROOT, 'content', 'settings', 'home.json'), en
 WS = dict(sorted(load('workshops').items(), key=lambda kv: kv[1].get('order') or 99))
 TR = dict(sorted(load('trips').items(), key=lambda kv: kv[1].get('order') or 99))
 OFERTA = json.load(open(os.path.join(ROOT, 'content', 'settings', 'oferta.json'), encoding='utf-8'))
+PR = dict(sorted(load('products').items(), key=lambda kv: kv[1].get('order') or 99))
+SHOP = json.load(open(os.path.join(ROOT, 'content', 'settings', 'sklep.json'), encoding='utf-8'))
+# the cart and checkout are Snipcart's (https://snipcart.com); with no public API key set in the CMS
+# the shop shows its products but the buttons say "coming soon" and no Snipcart code loads
+SHOP_KEY = (SHOP.get('snipcart_key') or '').strip()
+SNIPCART_VERSION = '3.7.4'
 CAT = {'kiszonki': 'Kiszonki', 'staropolskie': 'Staropolskie', 'podroze': 'Z podróży',
        'codzien': 'Na co dzień', 'sezonowe': 'Sezonowe'}
 CAT_ANCHOR = {'staropolskie': '/#staropolska', 'podroze': '/#podroze'}
@@ -160,12 +166,16 @@ FONTS = ('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@
          '&amp;family=Instrument+Sans:wght@400;500;600&amp;family=Poppins:wght@600;700;800&amp;display=swap')
 SEARCH = ('<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
           'stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>')
+CART_BTN = ('<button class="icon-btn cart-btn snipcart-checkout" type="button" aria-label="Koszyk">'
+            '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" '
+            'stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/>'
+            '<path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="snipcart-items-count" aria-hidden="true"></span></button>')
 MENU = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>')
 NAV = [('Historie', '/#nowe'), ('Przepisy', '/#przepisy'), ('Wideo', '/#staropolska'),
        ('Smaki regionów', '/#regiony'), ('Smaki świata', '/#swiat'), ('Warsztaty', '/warsztaty/'),
-       ('Wyprawy', '/wyprawy/'), ('Sklep', '/przepisy/slimaki-w-szarym-sosie.html#sklep')]
-FOOT_NAV = '''<div><a href="/#nowe">Historie</a><a href="/#przepisy">Przepisy</a><a href="/#staropolska">Wideo</a><a href="/warsztaty/">Warsztaty</a><a href="/wyprawy/">Wyprawy kulinarne</a></div>
+       ('Wyprawy', '/wyprawy/'), ('Sklep', '/sklep/')]
+FOOT_NAV = '''<div><a href="/#nowe">Historie</a><a href="/#przepisy">Przepisy</a><a href="/#staropolska">Wideo</a><a href="/warsztaty/">Warsztaty</a><a href="/wyprawy/">Wyprawy kulinarne</a><a href="/sklep/">Sklep</a></div>
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
       <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>'''
 SECTION_NAV = '''<nav class="section-nav" aria-label="Działy">
@@ -177,12 +187,16 @@ SECTION_NAV = '''<nav class="section-nav" aria-label="Działy">
   <a href="#swiat" class="chip">Świat</a>
   <a href="#warsztaty" class="chip">Warsztaty</a>
   <a href="#wyprawy" class="chip">Wyprawy</a>
+  <a href="#sklep" class="chip">Sklep</a>
 </nav>'''
 
 
 def shell(title, desc, main, images, current=None, body_class='', body_attrs='', scripts=(), home=False):
     nav = '\n'.join(f'    <a class="navlink" href="{h}"{" aria-current=\"page\"" if n == current else ""}>{n}</a>' for n, h in NAV)
     js = '\n'.join(f'<script src="{s}"></script>' for s in ('/js/site.js', *scripts))
+    if SHOP_KEY:
+        js += ('\n<script>window.SnipcartSettings = ' + json.dumps({'publicApiKey': SHOP_KEY, 'loadStrategy': 'on-user-interaction',
+               'currency': 'pln', 'version': SNIPCART_VERSION, 'modalStyle': 'side'}) + ';</script>\n<script src="/js/snipcart.js"></script>')
     return f'''<!doctype html>
 <html lang="pl">
 <head>
@@ -213,6 +227,7 @@ def shell(title, desc, main, images, current=None, body_class='', body_attrs='',
       <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
         {MENU}
       </button>
+      {CART_BTN if SHOP_KEY else ''}
       <a href="#newsletter" class="btn btn-ink">Newsletter</a>
     </div>
   </div>
@@ -401,7 +416,18 @@ def recipe_page(slug, r):
              if vid else '')
     media_attrs = f' data-yt="{e(vid)}" data-yt-title="{e(name)}"' if vid else ''
     shop = ''
-    if r.get('shop'):
+    prods = products_for_recipe(slug)
+    if prods:
+        shop = '\n'.join(f'''
+      <div class="shop shop-live" id="sklep">
+        <a href="/sklep/{ps}.html" tabindex="-1" aria-hidden="true">{framed(img(pp['image'], '64px'), 'small')}</a>
+        <div>
+          <p class="label">Ze spiżarni Łowcy</p>
+          <p class="shop-t"><a href="/sklep/{ps}.html">{e(pp['title'])}</a> <span>{pln(float(pp['price']))}</span></p>
+        </div>
+        {buy_button(ps, pp, 'btn btn-sm btn-light', 'Do koszyka')}
+      </div>''' for ps, pp in prods[:2])
+    elif r.get('shop'):
         sh = r['shop']
         shop = f'''
       <div class="shop" id="sklep">
@@ -497,7 +523,7 @@ def recipe_page(slug, r):
     </div>
   </section>
 {related(r.get('related') or [], 'Z tej samej opowieści', 'Dobrane po serii, regionie i składnikach')}'''
-    images = [r['image'], aside.get('image')] + ([r['shop'].get('image')] if r.get('shop') else []) + \
+    images = [r['image'], aside.get('image')] + [pp['image'] for _, pp in prods[:2]] + ([r['shop'].get('image')] if r.get('shop') and not prods else []) + \
              [ref_image(s) for s in r.get('related') or [] if s in A or s in R]
     return shell(name, r.get('subtitle', ''), main, images, current='Przepisy', body_class='recipe',
                  body_attrs=f' data-recipe="{slug}"', scripts=('/js/recipe-data.js', '/js/recipes.js', '/js/recipe.js'))
@@ -692,6 +718,149 @@ def offer_list(kind):
                  body_class='offer-list')
 
 
+# ---------- shop (spice mixes; cart and checkout by Snipcart) ----------
+
+SHOP_CATS = {'polska': 'Kuchnia polska', 'swiat': 'Kuchnie świata', 'kiszenie': 'Do kiszenia'}
+CHILI = ('<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 3c.8 1 1 2.3.6 3.4 '
+         '1.6 1.1 2.3 3 1.7 5.2C18.4 17 12.6 21 5.5 21 4 21 3 20.2 3.5 19c3.5-.6 7.6-3.4 9.1-8.1.4-1.4 1.3-2.5 2.6-3 .1-1.3-.3-2.6'
+         '-1-3.4z"/></svg>')
+
+
+def pln(x):
+    return (f'{x:.2f}'.replace('.', ',').replace(',00', '')) + '\u00a0zł'
+
+
+def heat(n):
+    n = int(n or 0)
+    label = ['łagodna', 'lekko ostra', 'ostra', 'bardzo ostra'][min(n, 3)]
+    return (f'<span class="heat" title="Ostrość: {label}"><span class="sr-only">Ostrość: {label}</span>'
+            + ''.join(f'<span class="{"on" if k < n else "off"}">{CHILI}</span>' for k in range(3)) + '</span>')
+
+
+def product_image_url(image):
+    src = (image or {}).get('src', '')
+    if src.startswith('https://images.unsplash.com/'):
+        return src.split('?')[0] + '?auto=format&fit=crop&w=400&h=400&q=70'
+    return src
+
+
+def buy_button(slug, p, cls='btn btn-ink', label='Do koszyka'):
+    """Snipcart "add to cart" button. Every size is listed with its price difference, so Snipcart's crawler
+    can check the price of whichever size is in the cart; the product page's size picker sets the chosen one."""
+    if not p.get('available', True):
+        return f'<button type="button" class="{cls}" disabled>Chwilowo niedostępne</button>'
+    if not SHOP_KEY:
+        return f'<button type="button" class="{cls}" disabled>Wkrótce w sprzedaży</button>'
+    sizes = p.get('sizes') or []
+    attrs = {'data-item-id': slug, 'data-item-name': p['title'] + (f' — {p["subtitle"]}' if p.get('subtitle') else ''),
+             'data-item-price': f'{float(p["price"]):.2f}', 'data-item-url': f'/sklep/{slug}.html',
+             'data-item-description': p.get('lead', ''), 'data-item-image': product_image_url(p.get('image')),
+             'data-item-categories': SHOP_CATS.get(p.get('category'), '')}
+    if sizes:
+        attrs['data-item-weight'] = str(sizes[0].get('weight') or 100)
+        attrs['data-item-custom1-name'] = 'Opakowanie'
+        attrs['data-item-custom1-options'] = '|'.join(
+            sz['label'] + (f'[+{float(sz["price_delta"]):.2f}]' if sz.get('price_delta') else '') for sz in sizes)
+        attrs['data-item-custom1-value'] = sizes[0]['label']
+    a = ' '.join(f'{k}="{e(v)}"' for k, v in attrs.items())
+    return f'<button type="button" class="{cls} snipcart-add-item" {a}>{label}</button>'
+
+
+def product_card(slug, p, sizes='(max-width:720px) 50vw, 25vw'):
+    badge = f'<span class="p-badge">{e(p["badge"])}</span>' if p.get('badge') else ''
+    many = len(p.get('sizes') or []) > 1
+    return (f'<article class="product-card" data-cat="{e(p.get("category", ""))}">'
+            f'<a href="/sklep/{slug}.html" class="p-photo" tabindex="-1" aria-hidden="true"><span class="ph frame {T()} ratio-1">{img(p["image"], sizes)}</span>{badge}</a>'
+            f'<div class="p-body"><p class="p-origin">{e(p.get("origin", ""))} {heat(p.get("heat"))}</p>'
+            f'<h3><a href="/sklep/{slug}.html">{e(p["title"])}</a></h3><p class="p-sub">{e(p.get("subtitle", ""))}</p>'
+            f'<p class="p-buy"><span class="p-price">{"od " if many else ""}{pln(float(p["price"]))}</span>'
+            f'{buy_button(slug, p, "btn btn-ink btn-sm")}</p></div></article>')
+
+
+def shop_notice():
+    return '' if SHOP_KEY else f'<p class="shop-notice">{e(SHOP.get("notice") or "Sklep w przygotowaniu.")}</p>'
+
+
+def shop_page():
+    _tint[0] = 0
+    cards = '\n      '.join(product_card(s, p) for s, p in PR.items())
+    used = [c for c in SHOP_CATS if any(p.get('category') == c for p in PR.values())]
+    chips = ''.join(f'<button type="button" class="chip" data-filter="{c}" aria-pressed="false">{SHOP_CATS[c]}</button>' for c in used)
+    main = f'''
+  <nav class="crumbs" aria-label="Ścieżka">
+    <a href="/">Strona główna</a><span aria-hidden="true">›</span><span>Sklep</span>
+  </nav>
+  <header class="list-head">
+    <h1 data-ghost="Spiżarnia">Sklep</h1>
+    <p class="lead">{e(SHOP.get('intro', ''))}</p>
+    {shop_notice()}
+  </header>
+  <section class="sec" aria-label="Mieszanki przypraw" data-filterable>
+    <div class="chips" role="group" aria-label="Filtruj">
+      <button type="button" class="chip" data-filter="all" aria-pressed="true">Wszystkie</button>
+      {chips}
+    </div>
+    <div class="grid products">
+      {cards}
+    </div>
+    <p class="meta" aria-live="polite" data-recipes-empty hidden>Wkrótce więcej mieszanek w tej kategorii.</p>
+  </section>
+  <p class="shop-ship">{e(SHOP.get('shipping', ''))}</p>'''
+    return shell('Sklep', SHOP.get('intro', ''), main, [p['image'] for p in PR.values()], current='Sklep', body_class='shop-page')
+
+
+def product_page(slug, p):
+    _tint[0] = 0
+    state = {'dropcap': False, 'images': []}
+    body = '\n      '.join(x for x in (block_html(b, state) for b in p.get('body') or []) if x)
+    sizes = p.get('sizes') or []
+    base = float(p['price'])
+    picker = ''
+    if len(sizes) > 1:
+        opts = ''.join(
+            f'<label class="size"><input type="radio" name="size" value="{e(sz["label"])}" data-delta="{float(sz.get("price_delta") or 0):.2f}" '
+            f'data-weight="{sz.get("weight") or 100}"{" checked" if k == 0 else ""}><span>{e(sz["label"])}'
+            f'<b>{pln(base + float(sz.get("price_delta") or 0))}</b></span></label>' for k, sz in enumerate(sizes))
+        picker = f'<fieldset class="sizes"><legend>Opakowanie</legend>{opts}</fieldset>'
+    qty = ('<div class="qty"><label for="qty">Ilość</label><div class="stepper"><button type="button" data-qty="-1" aria-label="Mniej">−</button>'
+           '<input id="qty" type="number" min="1" max="20" value="1" inputmode="numeric"><button type="button" data-qty="1" aria-label="Więcej">+</button></div></div>'
+           if p.get('available', True) and SHOP_KEY else '')
+    recs = [r for r in p.get('recipes') or [] if r in R]
+    arts = [a for a in p.get('articles') or [] if a in A]
+    facts = ''.join(f'<div><h2>{h}</h2><p>{e(t)}</p></div>' for h, t in (('Skład', p.get('ingredients')), ('Jak używać', p.get('use'))) if t)
+    badge = f'<span class="p-badge">{e(p["badge"])}</span>' if p.get('badge') else ''
+    main = f'''
+  <nav class="crumbs" aria-label="Ścieżka">
+    <a href="/">Strona główna</a><span aria-hidden="true">›</span><a href="/sklep/">Sklep</a><span aria-hidden="true">›</span><span>{e(p['title'])}</span>
+  </nav>
+
+  <article class="product" data-product data-base="{base:.2f}">
+    <figure class="pr-photo"><div class="ph frame {T()} ratio-1">{img(p['image'], '(max-width:720px) 100vw, 50vw', eager=True)}</div>{badge}</figure>
+    <div class="pr-info">
+      {tags([SHOP_CATS.get(p.get('category'), ''), p.get('origin')], 2)}
+      <h1>{e(p['title'])}</h1>
+      <p class="sub">{e(p.get('subtitle', ''))}</p>
+      <p class="pr-price"><span data-price>{pln(base)}</span> {heat(p.get('heat'))}</p>
+      <p class="lead">{e(p.get('lead', ''))}</p>
+      {picker}
+      <div class="pr-buy">{qty}{buy_button(slug, p, 'btn btn-ink btn-buy')}</div>
+      {shop_notice()}
+      <p class="shop-ship">{e(SHOP.get('shipping', ''))}</p>
+      <div class="pr-facts">{facts}</div>
+    </div>
+    <div class="pr-body">{body}</div>
+  </article>
+{related(recs, 'Ugotuj z tą mieszanką') if recs else ''}
+{related(arts, 'Historia w słoiku') if arts else ''}'''
+    images = [p['image']] + state['images'] + [ref_image(x) for x in recs + arts]
+    return shell(f'{p["title"]}: {p.get("subtitle", "")}', p.get('lead', ''), main, images, current='Sklep',
+                 body_class='product-page', scripts=('/js/shop.js',))
+
+
+def products_for_recipe(slug):
+    return [(s, p) for s, p in PR.items() if slug in (p.get('recipes') or [])]
+
+
 GO = '<span class="go" aria-hidden="true"></span>'
 DAYS = {'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'}
 
@@ -782,11 +951,15 @@ def home_page():
             shortcuts.append(shortcut(label, href, items[0]['image'], len(items)))
     if R:
         shortcuts.insert(1, shortcut('Przepisy', '#przepisy', recipe_card_image(next(iter(R.values()))), len(R)))
-    images += [o['image'] for o in list(WS.values())[:3] + list(TR.values())[:3]]
+    images += [o['image'] for o in list(WS.values())[:3] + list(TR.values())[:3] + list(PR.values())[:4]]
     if WS:
         n = sum(len(upcoming(o)) for o in WS.values())
         shortcuts.append(shortcut('Warsztaty', '/warsztaty/', next(iter(WS.values()))['image'],
                                   f'{n} {"termin" if n == 1 else "terminy" if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14) else "terminów"}'))
+    if PR:
+        n = len(PR)
+        shortcuts.append(shortcut('Sklep', '/sklep/', next(iter(PR.values()))['image'],
+                                  f'{n} {"mieszanka" if n == 1 else "mieszanki" if n % 10 in (2, 3, 4) and n % 100 not in (12, 13, 14) else "mieszanek"}'))
     if TR:
         n = len(TR)
         shortcuts.append(shortcut('Wyprawy', '/wyprawy/', next(iter(TR.values()))['image'],
@@ -961,6 +1134,17 @@ def home_page():
     <p class="meta" aria-live="polite" data-recipes-empty hidden>Wkrótce więcej przepisów w tej kategorii.</p>
   </section>
 
+  <section class="sec shop-sec" id="sklep" aria-labelledby="h-sklep" data-filterable>
+    <div class="sec-head">
+      <h2 id="h-sklep" data-ghost="Spiżarnia">Ze spiżarni Łowcy</h2>
+      <a href="/sklep/">Cały sklep →</a>
+    </div>
+    <p class="sec-intro">{e(SHOP.get('intro', ''))}</p>
+    <div class="grid products">
+      {''.join(product_card(s, p) for s, p in list(PR.items())[:4])}
+    </div>
+  </section>
+
   <section class="sec offers-sec" id="warsztaty" aria-labelledby="h-warsztaty">
     <div class="sec-head">
       <h2 id="h-warsztaty" data-ghost="Warsztaty">Warsztaty</h2>
@@ -1019,14 +1203,17 @@ def home_page():
 
 
 def main():
-    for d in ('historie', 'przepisy', 'warsztaty', 'wyprawy'):
+    for d in ('historie', 'przepisy', 'warsztaty', 'wyprawy', 'sklep'):
         os.makedirs(os.path.join(ROOT, d), exist_ok=True)
     # pages for content deleted in the CMS disappear too
-    for d, have in (('historie', A), ('przepisy', R), ('warsztaty', WS), ('wyprawy', TR)):
+    for d, have in (('historie', A), ('przepisy', R), ('warsztaty', WS), ('wyprawy', TR), ('sklep', PR)):
         for f in glob.glob(os.path.join(ROOT, d, '*.html')):
             name = os.path.splitext(os.path.basename(f))[0]
             if name not in have and name != 'index':
                 os.remove(f)
+    open(os.path.join(ROOT, 'sklep', 'index.html'), 'w', encoding='utf-8').write(shop_page())
+    for slug, pr in PR.items():
+        open(os.path.join(ROOT, 'sklep', f'{slug}.html'), 'w', encoding='utf-8').write(product_page(slug, pr))
     for kind, (_, _, items) in KINDS.items():
         open(os.path.join(ROOT, kind, 'index.html'), 'w', encoding='utf-8').write(offer_list(kind))
         for slug, o in items.items():
@@ -1037,7 +1224,8 @@ def main():
         open(os.path.join(ROOT, 'przepisy', f'{slug}.html'), 'w', encoding='utf-8').write(recipe_page(slug, r))
     open(os.path.join(ROOT, 'js', 'recipe-data.js'), 'w', encoding='utf-8').write(recipe_data_js())
     open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8').write(home_page())
-    print(f'index, {len(A)} articles, {len(R)} recipes, {len(WS)} workshops, {len(TR)} trips')
+    print(f'index, {len(A)} articles, {len(R)} recipes, {len(WS)} workshops, {len(TR)} trips, {len(PR)} products'
+          + ('' if SHOP_KEY else ' (shop: no Snipcart key yet, buttons say "coming soon")'))
 
 
 if __name__ == '__main__':

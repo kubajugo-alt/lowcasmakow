@@ -1,0 +1,39 @@
+{
+  "title": "Chmeli-suneli",
+  "subtitle": "Kozieradka, kolendra, nagietek",
+  "order": 6,
+  "category": "swiat",
+  "origin": "Gruzja",
+  "price": 26,
+  "sizes": [
+    {
+      "label": "Torebka 40 g",
+      "price_delta": 0,
+      "weight": 60
+    },
+    {
+      "label": "Słoik 90 g",
+      "price_delta": 14,
+      "weight": 260
+    }
+  ],
+  "heat": 0,
+  "lead": "Gruzińska klasyka: kozieradka, kolendra, nagietek, koper i cząber. Do fasoli, bakłażana, gulaszu i chaczapuri.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1571995619122-3fa5496ce09f",
+    "alt": "Zielone i brązowe przyprawy w drewnianych miseczkach",
+    "credit": "Maya Karadsheh",
+    "credit_url": "https://unsplash.com/@mayakaradsheh1"
+  },
+  "ingredients": "kozieradka, kolendra, nagietek, koper, cząber, liść laurowy, papryka",
+  "use": "Łyżka do garnka lobio lub czanachi. Najlepiej dodać pod koniec gotowania.",
+  "body": [
+    {
+      "type": "text",
+      "text": "Chmeli-suneli to po gruzińsku „suche zioła”. Każdy dom ma swoją wersję; nasza powstała przy okazji przygotowań do wyprawy do Gruzji."
+    }
+  ],
+  "recipes": [],
+  "articles": [],
+  "available": false
+}

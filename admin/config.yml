@@ -325,12 +325,76 @@ collections:
         types: *blocks
       - { label: 'Poczytaj przed wyjazdem', name: related, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, required: false }
 
+  # ------------------------------------------------------------------ shop
+  - name: products
+    label: 'Sklep: mieszanki przypraw'
+    label_singular: 'Mieszanka'
+    description: 'Produkty w sklepie. Koszyk i płatności obsługuje Snipcart: zamówienia, stany magazynowe, wysyłka i podatki są w panelu Snipcart (app.snipcart.com). Cena tutaj musi się zgadzać z tym, co widzi klient; Snipcart sprawdza ją na stronie produktu.'
+    folder: content/products
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    identifier_field: title
+    summary: '{{title}} · {{price}} zł'
+    sortable_fields: [order, title, price]
+    view_groups: [{ label: Kategoria, field: category }]
+    editor: { preview: false }
+    fields:
+      - { label: 'Nazwa', name: title, widget: string, hint: 'Krótka, np. „Staropolska”. Adres strony powstaje z nazwy i nie powinien się później zmieniać (to też identyfikator produktu w Snipcart).' }
+      - { label: 'Podtytuł', name: subtitle, widget: string, required: false, hint: 'Główne składniki, np. „Pieprz, szafran, imbir”' }
+      - { label: 'Kolejność', name: order, widget: number, value_type: int, min: 1, hint: 'Mniejsza liczba = wyżej; 4 pierwsze są na stronie głównej.' }
+      - label: 'Kategoria'
+        name: category
+        widget: select
+        options:
+          - { label: 'Kuchnia polska', value: polska }
+          - { label: 'Kuchnie świata', value: swiat }
+          - { label: 'Do kiszenia', value: kiszenie }
+      - { label: 'Pochodzenie', name: origin, widget: string, required: false, hint: 'np. „Meksyk, Jalisco” albo „Kuchnia staropolska”' }
+      - { label: 'Plakietka', name: badge, widget: string, required: false, hint: 'np. „Nowość”, „Polecamy”, „Edycja limitowana”' }
+      - { label: 'Cena (zł)', name: price, widget: number, value_type: float, min: 0, step: 0.5, hint: 'Cena najmniejszego opakowania.' }
+      - label: 'Opakowania'
+        name: sizes
+        widget: list
+        summary: '{{fields.label}} (+{{fields.price_delta}} zł)'
+        hint: 'Pierwsze jest domyślne. Dopłata jest doliczana do ceny; waga (z opakowaniem) służy do liczenia wysyłki.'
+        fields:
+          - { label: 'Nazwa', name: label, widget: string, hint: 'np. „Słoik 90 g”' }
+          - { label: 'Dopłata (zł)', name: price_delta, widget: number, value_type: float, min: 0, step: 0.5, default: 0 }
+          - { label: 'Waga do wysyłki (g)', name: weight, widget: number, value_type: int, min: 1 }
+      - { label: 'Ostrość (0–3)', name: heat, widget: number, value_type: int, min: 0, max: 3, default: 0 }
+      - { label: 'Dostępna', name: available, widget: boolean, default: true, hint: 'Wyłącz, gdy chwilowo brak. (Stany magazynowe można też prowadzić w Snipcart.)' }
+      - { label: 'Opis krótki', name: lead, widget: text, hint: '1–2 zdania: na stronie produktu i w koszyku.' }
+      - { label: 'Zdjęcie', name: image, widget: object, collapsed: false, fields: *image_fields }
+      - { label: 'Skład', name: ingredients, widget: text }
+      - { label: 'Jak używać', name: use, widget: text, required: false }
+      - label: 'Historia (opcjonalnie)'
+        name: body
+        widget: list
+        required: false
+        label_singular: 'blok'
+        typeKey: type
+        types: *blocks
+      - { label: 'Pasuje do przepisów', name: recipes, widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, required: false, hint: 'Produkt pojawi się na stronie tych przepisów z przyciskiem „Do koszyka”.' }
+      - { label: 'Powiązane historie', name: articles, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, required: false }
+
   # ------------------------------------------------------------------ homepage
   - name: settings
     label: 'Strona główna'
     description: 'Co i w jakiej kolejności pokazuje strona główna.'
     editor: { preview: false }
     files:
+      - name: sklep
+        label: 'Sklep: ustawienia'
+        file: content/settings/sklep.json
+        format: json
+        fields:
+          - { label: 'Klucz Snipcart (Public API Key)', name: snipcart_key, widget: string, required: false, hint: 'Z panelu Snipcart: Account → API Keys → Public API key. To klucz publiczny, można go tu wkleić. Puste = sklep pokazuje produkty, ale przyciski mówią „Wkrótce w sprzedaży”.' }
+          - { label: 'Wstęp', name: intro, widget: text }
+          - { label: 'Informacja o wysyłce', name: shipping, widget: string, hint: 'Krótko; same stawki ustawia się w Snipcart (Store configuration → Shipping).' }
+          - { label: 'Komunikat, gdy sklep jeszcze nie działa', name: notice, widget: string }
       - name: oferta
         label: 'Warsztaty i wyprawy (teksty)'
         file: content/settings/oferta.json
