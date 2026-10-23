@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /canva/
+Disallow: /gotowanie.html
+
+Sitemap: https://lowca-smakow.netlify.app/sitemap.xml

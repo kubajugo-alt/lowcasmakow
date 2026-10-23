@@ -15,11 +15,13 @@ import math
 import os
 import re
 import sys
-from datetime import date
+from datetime import date, timedelta
 from urllib.parse import quote, urlparse, parse_qs
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOCAL = '--local' in sys.argv
+# the public address: Netlify sets URL during its builds (it follows a custom domain once one is added)
+SITE = (os.environ.get('URL') or 'https://lowca-smakow.netlify.app').rstrip('/')
 e = html.escape
 
 
@@ -160,6 +162,62 @@ def recipe_card_image(r):
     return r.get('card_image') or r['image']
 
 
+# ---------- search engines and link previews ----------
+
+ORG = {'@type': 'Organization', 'name': 'Łowca Smaków', 'url': SITE + '/', 'logo': SITE + '/img/logo.svg'}
+
+
+def abs_image(image, w=1200, h=630):
+    """Absolute URL of a CMS image, cropped for previews and structured data."""
+    src = (image or {}).get('src', '')
+    if src.startswith('https://images.unsplash.com/'):
+        return src.split('?')[0] + f'?auto=format&fit=crop&w={w}&h={h}&q=75'
+    if src.startswith('/'):
+        return SITE + src
+    return src
+
+
+def iso_duration(t):
+    """'30 min' → PT30M, '3 h 30 min' → PT3H30M, '3–7 dni' → P3D (the shortest); None if unreadable."""
+    t = (t or '').replace('–', '-')
+    d = re.match(r'\s*(\d+)(?:-\d+)?\s*dni', t)
+    if d:
+        return f'P{d.group(1)}D'
+    h = re.search(r'(\d+)\s*h', t)
+    m = re.search(r'(\d+)\s*min', t)
+    if not (h or m):
+        return None
+    return 'PT' + (f'{h.group(1)}H' if h else '') + (f'{m.group(1)}M' if m else '')
+
+
+def crumbs_ld(items):
+    return {'@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': k + 1, 'name': name, 'item': SITE + path} for k, (name, path) in enumerate(items)]}
+
+
+def ld_script(objs):
+    out = []
+    for o in objs:
+        o = {'@context': 'https://schema.org', **o}
+        out.append('<script type="application/ld+json">' + json.dumps(o, ensure_ascii=False).replace('</', '<\\/') + '</script>')
+    return '\n'.join(out)
+
+
+def warsaw_offset(day):
+    """UTC offset for Poland on a date: +02:00 from the last Sunday of March to the last Sunday of October."""
+    try:
+        from zoneinfo import ZoneInfo
+        from datetime import datetime
+        off = datetime.fromisoformat(day + 'T12:00').replace(tzinfo=ZoneInfo('Europe/Warsaw')).strftime('%z')
+        return off[:3] + ':' + off[3:]
+    except Exception:  # no time-zone data on this machine
+        d = date.fromisoformat(day)
+        def last_sunday(month):  # March and October both have 31 days
+            x = date(d.year, month, 31)
+            return x - timedelta(days=(x.weekday() + 1) % 7)
+        return '+02:00' if last_sunday(3) <= d < last_sunday(10) else '+01:00'
+
+
 # ---------- page frame ----------
 
 FONTS = ('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500'
@@ -191,7 +249,8 @@ SECTION_NAV = '''<nav class="section-nav" aria-label="Działy">
 </nav>'''
 
 
-def shell(title, desc, main, images, current=None, body_class='', body_attrs='', scripts=(), home=False):
+def shell(title, desc, main, images, current=None, body_class='', body_attrs='', scripts=(), home=False,
+          path='/', image=None, og_type='website', ld=(), head=''):
     nav = '\n'.join(f'    <a class="navlink" href="{h}"{" aria-current=\"page\"" if n == current else ""}>{n}</a>' for n, h in NAV)
     js = '\n'.join(f'<script src="{s}"></script>' for s in ('/js/site.js', *scripts))
     if SHOP_KEY:
@@ -205,6 +264,16 @@ def shell(title, desc, main, images, current=None, body_class='', body_attrs='',
 <title>{e(title)}{"" if home else " — Łowca Smaków"}</title>
 <meta name="description" content="{e(desc)}">
 <meta name="theme-color" content="#FBFAF7">
+<link rel="canonical" href="{SITE}{path}">
+<meta property="og:site_name" content="Łowca Smaków">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:type" content="{og_type}">
+<meta property="og:title" content="{e(title)}">
+<meta property="og:description" content="{e(desc)}">
+<meta property="og:url" content="{SITE}{path}">
+{f'<meta property="og:image" content="{e(abs_image(image))}">{chr(10)}<meta property="og:image:width" content="1200">{chr(10)}<meta property="og:image:height" content="630">{chr(10)}<meta property="og:image:alt" content="{e(image.get("alt") or title)}">' if image and image.get('src') else ''}
+<meta name="twitter:card" content="summary_large_image">
+{ld_script(ld)}{head}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -407,7 +476,16 @@ def article_page(a):
 {related(rel)}'''
     images = [a['image']] + state['images'] + ([recipe_card_image(R[a['recipe']])] if a.get('recipe') in R else []) + \
         [pp['image'] for _, pp in prods[:2]] + [ref_image(s) for s in rel]
-    return shell(a['title'], a['lead'], main, images, body_class='article-page')
+    path = f'/historie/{a["slug"]}.html'
+    art = {'@type': 'Article', 'headline': a['title'], 'description': a['lead'], 'image': [abs_image(a['image'], 1200, 675), abs_image(a['image'], 1200, 1200)],
+           'datePublished': a.get('date'), 'dateModified': a.get('date'), 'author': ORG, 'publisher': ORG,
+           'mainEntityOfPage': SITE + path, 'inLanguage': 'pl', 'articleSection': a['section']}
+    ld = [art, crumbs_ld([('Strona główna', '/'), ('Historie', '/historie/'), (a['title'], path)])]
+    vid = yt_id(a.get('video'))
+    if vid:
+        ld.append({'@type': 'VideoObject', 'name': a['title'], 'description': a['lead'], 'uploadDate': a.get('date'),
+                   'thumbnailUrl': [f'https://i.ytimg.com/vi/{vid}/hqdefault.jpg'], 'embedUrl': f'https://www.youtube-nocookie.com/embed/{vid}'})
+    return shell(a['title'], a['lead'], main, images, body_class='article-page', path=path, image=a['image'], og_type='article', ld=ld)
 
 
 # ---------- recipes ----------
@@ -521,8 +599,27 @@ def recipe_page(slug, r):
 {related(r.get('related') or [], 'Z tej samej opowieści', 'Dobrane po serii, regionie i składnikach')}'''
     images = [r['image'], aside.get('image')] + [pp['image'] for _, pp in prods[:2]] + ([r['shop'].get('image')] if r.get('shop') and not prods else []) + \
              [ref_image(s) for s in r.get('related') or [] if s in A or s in R]
+    path = f'/przepisy/{slug}.html'
+    def ing(i):
+        q = i.get('q')
+        q = '' if q is None else (f'{q:g}'.replace('.', ',') + (f' {i["u"]}' if i.get('u') else '') + ' ')
+        return (q + i['n']).strip() + ('' if i.get('q') is not None else ' (do smaku)')
+    rec = {'@type': 'Recipe', 'name': name, 'description': r.get('subtitle') or r.get('kicker', ''),
+           'image': [abs_image(r['image'], 1200, 1200), abs_image(r['image'], 1200, 900), abs_image(r['image'], 1200, 675)],
+           'author': ORG, 'recipeCategory': CAT.get(r.get('category'), ''), 'recipeCuisine': (r.get('kicker') or '').split(' · ')[-1],
+           'recipeYield': f'{r.get("servings")} {r.get("servings_unit", "")}'.strip(), 'inLanguage': 'pl',
+           'recipeIngredient': [ing(i) for i in r.get('ingredients') or []],
+           'recipeInstructions': [{'@type': 'HowToStep', 'name': st.get('title', ''), 'text': st.get('text', '')} for st in r.get('steps') or []]}
+    for key, field in (('prepTime', 'prep'), ('cookTime', 'cook')):
+        if iso_duration(r.get(field)):
+            rec[key] = iso_duration(r.get(field))
+    if vid:
+        rec['video'] = {'@type': 'VideoObject', 'name': name, 'description': r.get('subtitle') or name,
+                        'thumbnailUrl': [f'https://i.ytimg.com/vi/{vid}/hqdefault.jpg'], 'embedUrl': f'https://www.youtube-nocookie.com/embed/{vid}'}
+    ld = [rec, crumbs_ld([('Strona główna', '/'), ('Przepisy', '/przepisy/'), (name, path)])]
     return shell(name, r.get('subtitle', ''), main, images, current='Przepisy', body_class='recipe',
-                 body_attrs=f' data-recipe="{slug}"', scripts=('/js/recipe-data.js', '/js/recipes.js', '/js/recipe.js'))
+                 body_attrs=f' data-recipe="{slug}"', scripts=('/js/recipe-data.js', '/js/recipes.js', '/js/recipe.js'),
+                 path=path, image=r['image'], og_type='article', ld=ld)
 
 
 def recipe_data_js():
@@ -682,7 +779,20 @@ def offer_page(kind, slug, o):
   </article>
 {related(rel, 'Poczytaj przed wyjazdem' if trip else 'Poczytaj przed warsztatami') if rel else ''}'''
     images = [o['image']] + state['images'] + [pp['image'] for _, pp in prods[:2]] + [ref_image(s) for s in rel]
-    return shell(o['title'], o['lead'], main, images, current='Wyprawy' if trip else 'Warsztaty', body_class='offer-page')
+    path = f'/{kind}/{slug}.html'
+    ld = [crumbs_ld([('Strona główna', '/'), (section, f'/{kind}/'), (o['title'], path)])]
+    if not trip:
+        town = (o.get('place') or 'Warszawa').split(',')[0].split('(')[0].strip()
+        for d in nxt:
+            ld.append({'@type': 'Event', 'name': o['title'], 'description': o['lead'], 'image': [abs_image(o['image'], 1200, 675)],
+                       'startDate': d['date'] + (f'T{d["time"]}:00{warsaw_offset(d["date"])}' if d.get('time') else ''),
+                       'eventStatus': 'https://schema.org/EventScheduled', 'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+                       'location': {'@type': 'Place', 'name': o.get('place') or town,
+                                    'address': {'@type': 'PostalAddress', 'addressLocality': town, 'addressCountry': 'PL'}},
+                       'organizer': ORG, 'offers': {'@type': 'Offer', 'price': o['price'], 'priceCurrency': 'PLN',
+                                                    'availability': 'https://schema.org/InStock', 'url': SITE + path}})
+    return shell(o['title'], o['lead'], main, images, current='Wyprawy' if trip else 'Warsztaty', body_class='offer-page',
+                 path=path, image=o['image'], ld=ld)
 
 
 def offer_list(kind):
@@ -713,7 +823,8 @@ def offer_list(kind):
     {booking_form(('Wyprawa' if trip else 'Warsztaty') + ' na zamówienie', [], 'Wyślij zapytanie', 'c')}
   </section>'''
     return shell(section, intro, main, [o['image'] for o in items.values()], current='Wyprawy' if trip else 'Warsztaty',
-                 body_class='offer-list')
+                 body_class='offer-list', path=f'/{kind}/', image=next(iter(items.values()))['image'] if items else None,
+                 ld=[crumbs_ld([('Strona główna', '/'), (section, f'/{kind}/')])])
 
 
 # ---------- shop (spice mixes; cart and checkout by Snipcart) ----------
@@ -804,7 +915,9 @@ def shop_page():
     <p class="meta" aria-live="polite" data-recipes-empty hidden>Wkrótce więcej mieszanek w tej kategorii.</p>
   </section>
   <p class="shop-ship">{e(SHOP.get('shipping', ''))}</p>'''
-    return shell('Sklep', SHOP.get('intro', ''), main, [p['image'] for p in PR.values()], current='Sklep', body_class='shop-page')
+    return shell('Sklep', SHOP.get('intro', ''), main, [p['image'] for p in PR.values()], current='Sklep', body_class='shop-page',
+                 path='/sklep/', image=next(iter(PR.values()))['image'] if PR else None,
+                 ld=[crumbs_ld([('Strona główna', '/'), ('Sklep', '/sklep/')])])
 
 
 def product_page(slug, p):
@@ -851,8 +964,16 @@ def product_page(slug, p):
 {related(recs, 'Ugotuj z tą mieszanką') if recs else ''}
 {related(arts, 'Historia w słoiku') if arts else ''}'''
     images = [p['image']] + state['images'] + [ref_image(x) for x in recs + arts]
+    path = f'/sklep/{slug}.html'
+    ld = [crumbs_ld([('Strona główna', '/'), ('Sklep', '/sklep/'), (p['title'], path)])]
+    if SHOP_KEY:  # Google wants a price on a Product; until the shop opens there is none to give
+        ld.append({'@type': 'Product', 'name': p['title'], 'description': p.get('lead', ''), 'sku': slug,
+                   'image': [abs_image(p['image'], 1200, 1200)], 'brand': {'@type': 'Brand', 'name': 'Łowca Smaków'},
+                   'category': SHOP_CATS.get(p.get('category'), ''),
+                   'offers': {'@type': 'Offer', 'price': f'{float(p["price"]):.2f}', 'priceCurrency': 'PLN', 'url': SITE + path,
+                              'availability': 'https://schema.org/' + ('InStock' if p.get('available', True) else 'OutOfStock')}})
     return shell(f'{p["title"]}: {p.get("subtitle", "")}', p.get('lead', ''), main, images, current='Sklep',
-                 body_class='product-page', scripts=('/js/shop.js',))
+                 body_class='product-page', scripts=('/js/shop.js',), path=path, image=p['image'], ld=ld)
 
 
 def products_for(recipes=(), articles=(), country=None):
@@ -1226,7 +1347,26 @@ def home_page():
   </section>
 """
     return shell('Łowca Smaków — antropologia jedzenia', 'Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.',
-                 main, images, body_class='home', home=True, scripts=('/js/globe.js',))
+                 main, images, body_class='home', home=True, scripts=('/js/globe.js',), image=lead['image'],
+                 ld=[{'@type': 'WebSite', 'name': 'Łowca Smaków', 'url': SITE + '/', 'inLanguage': 'pl'}, ORG])
+
+
+def write_sitemap():
+    """sitemap.xml with every public page, and robots.txt pointing to it."""
+    today = date.today().isoformat()
+    urls = [('/', today), ('/sklep/', today), ('/warsztaty/', today), ('/wyprawy/', today)]
+    if os.path.exists(os.path.join(ROOT, 'historie', 'index.html')):
+        urls += [('/historie/', today), ('/przepisy/', today)]
+    urls += [(f'/historie/{s}.html', a.get('date') or today) for s, a in A.items()]
+    urls += [(f'/przepisy/{s}.html', today) for s in R]
+    urls += [(f'/warsztaty/{s}.html', today) for s in WS] + [(f'/wyprawy/{s}.html', today) for s in TR]
+    urls += [(f'/sklep/{s}.html', today) for s in PR]
+    body = '\n'.join(f'  <url><loc>{SITE}{u}</loc><lastmod>{min(d, today)}</lastmod></url>' for u, d in urls)
+    open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8').write(
+        f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}\n</urlset>\n')
+    open(os.path.join(ROOT, 'robots.txt'), 'w', encoding='utf-8').write(
+        'User-agent: *\nDisallow: /admin/\nDisallow: /canva/\nDisallow: /gotowanie.html\n\n'
+        f'Sitemap: {SITE}/sitemap.xml\n')
 
 
 def main():
@@ -1251,6 +1391,7 @@ def main():
         open(os.path.join(ROOT, 'przepisy', f'{slug}.html'), 'w', encoding='utf-8').write(recipe_page(slug, r))
     open(os.path.join(ROOT, 'js', 'recipe-data.js'), 'w', encoding='utf-8').write(recipe_data_js())
     open(os.path.join(ROOT, 'index.html'), 'w', encoding='utf-8').write(home_page())
+    write_sitemap()
     print(f'index, {len(A)} articles, {len(R)} recipes, {len(WS)} workshops, {len(TR)} trips, {len(PR)} products'
           + ('' if SHOP_KEY else ' (shop: no Snipcart key yet, buttons say "coming soon")'))
 
