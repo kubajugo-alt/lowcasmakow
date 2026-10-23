@@ -31,7 +31,7 @@ function desktopCss() {
     while (depth && j < css.length) { if (css[j] === '{') depth++; else if (css[j] === '}') depth--; j++; }
     i = j;
   }
-  return out.replace(/url\(\//g, `url(${LIVE}/`);
+  return out.replace(/url\(\//g, `url(${LIVE}/`).replace(/(^|[\s,>])(ul|ol|li)(?=[\s.:,{>])/gm, '$1.x-$2');
 }
 
 (async () => {
@@ -49,7 +49,16 @@ function desktopCss() {
         img.setAttribute('src', src.replace(/^http:\/\/localhost:8765/, LIVE).replace(/([?&](?:amp;)?w=)1800\b/, '$11200'));
       });
       document.querySelectorAll('a[href]').forEach((a) => a.setAttribute('href', abs(a.getAttribute('href'))));
-      document.querySelectorAll('svg.draw').forEach((s) => s.classList.remove('draw'));
+      // Canva's importer scrambles lists and form controls: export them as plain blocks
+      document.querySelectorAll('input[type=checkbox]').forEach((c) => {
+        const box = document.createElement('span'); box.className = 'tick'; c.replaceWith(box);
+      });
+      document.querySelectorAll('ul, ol, li').forEach((el) => {
+        const d = document.createElement('div');
+        d.className = (el.className ? el.className + ' ' : '') + 'x-' + el.tagName.toLowerCase();
+        while (el.firstChild) d.appendChild(el.firstChild);
+        el.replaceWith(d);
+      });
       const wrap = document.createElement('div');
       wrap.className = document.body.className + (cook ? ' cook' : '');
       wrap.innerHTML = document.body.innerHTML;
@@ -71,6 +80,7 @@ function desktopCss() {
 <style>
 ${desktopCss()}
 /* Canva pages */
+.tick{width:18px;height:18px;border:1.5px solid var(--ink);border-radius:3px;flex:none}
 body{margin:0}
 .canva-page{display:block;margin:0 auto 80px;overflow:hidden;background:var(--paper)}
 .canva-page.cook,.canva-page .cook{background:var(--night)}

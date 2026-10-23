@@ -1,6 +1,9 @@
 /* Łowca Smaków — shared styles
-   Look taken from the logo: one black line on white (and its white-on-black twin),
-   a handwritten mark, fine rules, a looping flourish. Colour comes from the food photography. */
+   Black on white like the logo (and its white-on-black twin), fine rules, sharp frames.
+   Editorial structure after the best food and culture magazines: an issue line, a big lead
+   headline beside a numbered index (NYT Cooking, The Gourmand), catalogue numbers on every
+   story (Cereal), full-width black bands (Apartamento), recipe rails (Bon Appétit).
+   Colour comes from the food photography. */
 :root{
   --paper:#FBFAF7;
   --white:#FFFFFF;
@@ -37,9 +40,6 @@ h1,h2,h3,h4,p{margin:0}
 .body{font-size:17px;line-height:1.55;color:var(--ink-2)}
 .wrap{max-width:1280px;margin:0 auto;padding-left:32px;padding-right:32px}
 
-/* the logo's looping line, used as a divider */
-.flourish{display:block;width:220px;height:28px;color:currentColor}
-.flourish path{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round}
 
 /* image placeholders (no photography yet) */
 .ph{position:relative;background-color:var(--ph);background-image:repeating-linear-gradient(135deg,rgba(18,18,18,.06) 0 1px,transparent 1px 12px);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:12px}
@@ -131,7 +131,6 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
 .newsletter h2{font-family:var(--serif);font-size:48px;line-height:1;font-weight:600}
 .newsletter p{font-size:17px;line-height:1.5;color:var(--night-muted)}
 .nl-copy{flex:1 1 420px;display:flex;flex-direction:column;gap:16px}
-.nl-copy .flourish{color:var(--white);margin-bottom:4px}
 .nl-form{flex:1 1 380px;display:flex;flex-direction:column;gap:8px}
 .nl-form label{font-size:14px;font-weight:600}
 .nl-row{display:flex;gap:8px;flex-wrap:wrap}
@@ -345,26 +344,9 @@ main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
 .credits a{color:inherit}
 .watch:disabled{opacity:1}
 
-/* ---------- ornaments from the logo: looping line, plate rings, fork and knife ---------- */
-.sec-head{border-top:0;position:relative;padding-top:34px}
-.sec-head::before{content:"";position:absolute;top:15px;left:62px;right:0;height:1px;background:var(--ink)}
-.sec-head::after{content:"";position:absolute;top:-1px;left:0;width:64px;height:26px;background:url(/img/orn/curl.svg) no-repeat 0 0/64px 26px}
-.site-footer{position:relative}
-.site-footer::before{content:"";position:absolute;left:0;right:0;top:-25px;height:26px;background:url(/img/orn/tendril.svg) repeat-x 0 0/240px 26px}
-.hero .ph::after{content:"";position:absolute;right:-46px;top:-58px;width:160px;height:152px;background:url(/img/orn/plate.svg) no-repeat center/contain;z-index:2;pointer-events:none}
-.regions{background:var(--panel) url(/img/orn/plate-faint.svg) no-repeat right -90px bottom -120px/400px auto}
-.newsletter{background:var(--night) url(/img/orn/plate-night.svg) no-repeat right -70px top -90px/320px auto}
-.steps .n{display:flex;align-items:center;justify-content:center;min-width:64px;width:64px;height:61px;padding:0 3px 2px 0;font-size:32px;line-height:1;background:url(/img/orn/plate.svg) no-repeat center/contain}
-.flourish{color:var(--ink)}
-.hero-copy .flourish{width:180px;height:23px}
-.setting{display:block;width:260px;height:auto;color:var(--white);margin-bottom:8px}
-.can-draw svg.draw path{stroke-dasharray:1 1;stroke-dashoffset:1;opacity:0;transition:stroke-dashoffset 1.8s cubic-bezier(.4,0,.2,1),opacity .2s}
-.can-draw svg.draw.is-drawn path{stroke-dashoffset:0;opacity:1}
-
 /* ---------- article pages ---------- */
 .article{display:flex;flex-direction:column;gap:44px}
 .a-head{position:relative;isolation:isolate;max-width:860px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center;padding-top:40px}
-.a-plate{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:340px;height:auto;color:var(--line);z-index:-1}
 .a-head h1{font-family:var(--serif);font-size:clamp(44px,6vw,80px);line-height:.96;font-weight:600;letter-spacing:-.015em}
 .a-head .lead{max-width:680px}
 .draft{color:var(--muted)}
@@ -372,10 +354,9 @@ p.draft{margin-top:24px;font-size:13px}
 .a-hero .ph{height:min(56vw,600px)}
 .a-body{width:100%;max-width:700px;margin:0 auto;font-size:19px;line-height:1.7;color:var(--ink-2);display:flex;flex-direction:column;gap:22px}
 .a-body h2{font-family:var(--serif);font-size:36px;line-height:1.05;color:var(--ink);font-weight:600;margin-top:18px}
-.dropcap::first-letter{float:left;font-family:var(--serif);font-size:58px;line-height:1;font-weight:600;color:var(--ink);padding:13px 20px 15px;margin:2px 12px 0 -4px;background:url(/img/orn/plate.svg) no-repeat center/contain}
-blockquote.pull{margin:28px 0;display:grid;grid-template-columns:30px 1fr 30px;gap:24px;align-items:center;text-align:center}
+.dropcap::first-letter{float:left;font-family:var(--serif);font-size:86px;line-height:.78;font-weight:600;color:var(--ink);margin:8px 12px 0 0}
+blockquote.pull{margin:28px 0;padding:28px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);text-align:center}
 .pull p{font-family:var(--serif);font-style:italic;font-weight:500;font-size:32px;line-height:1.18;color:var(--ink)}
-.pull svg{width:30px;height:120px;color:var(--ink)}
 .a-fig{margin:14px -90px}
 .a-fig .ph{height:460px}
 .a-recipe{display:flex;gap:20px;align-items:center;border:1px solid var(--line);background:var(--white);padding:16px;margin-top:24px}
@@ -383,31 +364,124 @@ blockquote.pull{margin:28px 0;display:grid;grid-template-columns:30px 1fr 30px;g
 .a-recipe h2{margin:6px 0 4px;font-size:30px}
 .a-recipe h2 a{text-decoration:none}
 .a-recipe h2 a:hover{text-decoration:underline}
-.pill-history{position:relative;overflow:hidden}
-.pill-history>*:not(.pill-plate){position:relative}
-.pill-plate{position:absolute;right:-70px;top:-70px;width:220px;height:auto;color:var(--line)}
 .related .card h3{font-size:22px}
 
 @media (max-width:1100px){
-  .hero .ph::after{right:-30px;top:-40px;width:120px;height:114px}
   .a-fig{margin:14px 0}
 }
 @media (max-width:720px){
-  .hero .ph::after,.site-footer::before{display:none}
-  .sec-head{padding-top:30px}
   .a-head{padding-top:24px}
-  .a-plate{width:240px;top:-4px}
   .a-head h1{font-size:42px}
   .a-hero .ph{height:280px;margin:0 -20px}
   .a-body{font-size:17px}
   .a-body h2{font-size:30px}
   .a-fig{margin:10px -20px}
   .a-fig .ph{height:260px}
-  .pull{grid-template-columns:20px 1fr 20px;gap:14px}
   .pull p{font-size:24px}
-  .pull svg{width:20px;height:80px}
   .a-recipe .ph{width:84px;height:84px}
   .a-recipe h2{font-size:24px}
-  .steps .n{min-width:48px;width:48px;height:46px;font-size:24px}
-  .regions{background-size:280px auto;background-position:right -80px bottom -90px}
+}
+
+
+/* ---------- editorial structure ---------- */
+body{overflow-x:clip}
+.topbar{border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.topbar .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:9px;padding-bottom:9px}
+.no{font-variant-numeric:tabular-nums;font-weight:600;letter-spacing:.06em;color:var(--ink);margin-right:.35em}
+.ratio-45{aspect-ratio:4/5;height:auto!important}
+.ratio-43{aspect-ratio:4/3;height:auto!important}
+.ratio-1610{aspect-ratio:16/10;height:auto!important}
+
+/* lead story + numbered index */
+.lead-grid{display:grid;grid-template-columns:minmax(0,8fr) minmax(0,4fr);gap:56px;align-items:start}
+.lead-story{display:flex;flex-direction:column;gap:18px}
+.lead-img{display:block;aspect-ratio:16/10}
+.lead-story h1{font-family:var(--serif);font-size:clamp(56px,7.2vw,112px);line-height:.9;font-weight:600;letter-spacing:-.02em}
+.lead-story h1 a{color:inherit;text-decoration:none}
+.lead-story h1 a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px}
+.lead-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end;border-top:1px solid var(--ink);padding-top:18px}
+.issue{border-top:1px solid var(--ink);padding-top:14px;display:flex;flex-direction:column}
+.issue .label{font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;padding-bottom:14px}
+.issue ol{list-style:none;margin:0;padding:0}
+.issue-item{display:grid;grid-template-columns:44px minmax(0,1fr) 72px;gap:14px;align-items:center;padding:16px 0;border-top:1px solid var(--rule);text-decoration:none;color:var(--ink)}
+.issue-item:hover{color:var(--ink)}
+.issue-item:hover .t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.issue-item .no{font-family:var(--serif);font-size:24px;font-style:italic;font-weight:500;letter-spacing:0;font-variant-numeric:lining-nums tabular-nums}
+.issue-t{display:flex;flex-direction:column;gap:4px}
+.issue-t .kicker{font-size:11px;color:var(--muted)}
+.issue-t .t{font-family:var(--serif);font-size:21px;line-height:1.1;font-weight:600}
+.issue-item .ph{width:72px;height:72px;padding:0}
+.issue .more{margin-top:14px;font-weight:600;font-size:14px}
+
+/* week: Monday, Wednesday, Sunday */
+.week .card{gap:14px}
+.week .day{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:8px}
+.week .day em{font-family:var(--serif);font-size:30px;font-weight:500}
+.week .day span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.week .card h3{font-size:28px}
+.excerpt{font-size:15px;line-height:1.5;color:var(--ink-2)}
+
+/* full-width black band */
+.bleed{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:80px 0}
+.bleed-in{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;flex-direction:column;gap:28px}
+.dark{background:var(--night);color:var(--white)}
+.dark .sec-head{border-top-color:var(--white)}
+.dark a,.dark .card,.dark .card:hover,.dark .kicker,.dark .no{color:var(--white)}
+.dark .body{color:var(--night-muted)}
+.dark .feature-side .card{border-bottom-color:var(--night-line)}
+.dark .ph{background-color:var(--night-2);background-image:none}
+.dark :focus-visible{outline-color:var(--white)}
+.dark .feature-main h3{font-size:44px}
+
+/* regions counter */
+.counter{font-family:var(--serif);font-size:104px;line-height:.8;font-weight:500;font-variant-numeric:lining-nums tabular-nums}
+.counter span{font-size:40px;color:var(--muted)}
+
+/* recipe rail */
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(250px,1fr);gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+.rail>*{scroll-snap-align:start}
+.rail .card h3{font-size:24px}
+
+/* travel index */
+.caption{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.caption .no{color:var(--ink)}
+
+/* newsletter statement */
+.statement{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:end;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:56px 0}
+.statement h2{font-family:var(--serif);font-size:clamp(52px,7vw,104px);line-height:.92;font-weight:600;letter-spacing:-.015em}
+.statement h2 em{font-weight:500}
+.statement .nl-form{gap:12px}
+.statement .nl-form label{font-size:14px;font-weight:600}
+.statement .nl-row input{border:1px solid var(--ink);color:var(--ink);background:var(--white)}
+.statement .nl-row input::placeholder{color:var(--muted)}
+.statement .nl-row input:focus-visible{outline-color:var(--ink)}
+.statement .nl-row button{background:var(--ink);color:var(--white)}
+.statement .nl-row button:hover{background:var(--ink-2)}
+.statement .nl-msg{color:var(--muted)}
+
+@media (max-width:1100px){
+  .topbar-r{display:none}
+}
+@media (max-width:960px){
+  .lead-grid,.statement{grid-template-columns:1fr;gap:32px}
+}
+@media (max-width:720px){
+  .topbar .wrap{justify-content:center;font-size:11px}
+  .lead-grid{gap:28px}
+  .lead-img{margin:0 -20px}
+  .lead-story h1{font-size:52px}
+  .lead-foot{grid-template-columns:1fr;gap:18px}
+  .lead-foot .btn-line{display:none}
+  .lead-foot .btn{width:100%}
+  .week .card{flex-direction:column;align-items:stretch;gap:12px}
+  .week .ph{width:100%!important;height:auto!important;aspect-ratio:16/10}
+  .week .card h3{font-size:26px}
+  .week .card .meta{display:block}
+  .bleed{padding:48px 0}
+  .bleed-in{padding:0 20px}
+  .dark .feature-main h3{font-size:30px}
+  .counter{font-size:72px}
+  .rail{grid-auto-columns:72%;margin:0 -20px;padding:0 20px 6px;scroll-padding:0 20px}
+  .statement{padding:40px 0}
+  .statement h2{font-size:52px}
 }

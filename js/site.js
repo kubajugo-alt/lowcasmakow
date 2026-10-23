@@ -118,16 +118,4 @@
       }).then(function () { btn.disabled = false; });
     });
   });
-
-  // line ornaments (taken from the logo) draw themselves in when they scroll into view
-  var draws = $$('svg.draw');
-  if (draws.length && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.documentElement.classList.add('can-draw');
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('is-drawn'); io.unobserve(en.target); }
-      });
-    }, { rootMargin: '0px 0px -10% 0px' });
-    draws.forEach(function (d) { io.observe(d); });
-  }
 })();
