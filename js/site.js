@@ -60,6 +60,9 @@
     $$('[data-filter]', root).forEach(function (b) {
       b.addEventListener('click', function () { setFilter(root, b.dataset.filter); });
     });
+    // ?k=kiszonki (from a breadcrumb or a link) opens the listing already filtered
+    var k = new URLSearchParams(location.search).get('k');
+    if (k && root.hasAttribute('data-filterable') && $$('[data-filter]', root).some(function (b) { return b.dataset.filter === k; })) setFilter(root, k);
   });
 
   // regions: the map of voivodeships and the chips select the same region

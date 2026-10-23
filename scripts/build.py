@@ -48,7 +48,6 @@ SHOP_KEY = (SHOP.get('snipcart_key') or '').strip()
 SNIPCART_VERSION = '3.7.4'
 CAT = {'kiszonki': 'Kiszonki', 'staropolskie': 'Staropolskie', 'podroze': 'Z podróży',
        'codzien': 'Na co dzień', 'sezonowe': 'Sezonowe'}
-CAT_ANCHOR = {'staropolskie': '/#staropolska', 'podroze': '/#podroze'}
 UTM = 'utm_source=lowca_smakow&utm_medium=referral'
 
 
@@ -230,10 +229,10 @@ CART_BTN = ('<button class="icon-btn cart-btn snipcart-checkout" type="button" a
             '<path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="snipcart-items-count" aria-hidden="true"></span></button>')
 MENU = ('<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>')
-NAV = [('Historie', '/#nowe'), ('Przepisy', '/#przepisy'), ('Wideo', '/#staropolska'),
+NAV = [('Historie', '/historie/'), ('Przepisy', '/przepisy/'), ('Wideo', '/#staropolska'),
        ('Smaki regionów', '/#regiony'), ('Smaki świata', '/#swiat'), ('Warsztaty', '/warsztaty/'),
        ('Wyprawy', '/wyprawy/'), ('Sklep', '/sklep/')]
-FOOT_NAV = '''<div><a href="/#nowe">Historie</a><a href="/#przepisy">Przepisy</a><a href="/#staropolska">Wideo</a><a href="/warsztaty/">Warsztaty</a><a href="/wyprawy/">Wyprawy kulinarne</a><a href="/sklep/">Sklep</a></div>
+FOOT_NAV = '''<div><a href="/historie/">Historie</a><a href="/przepisy/">Przepisy</a><a href="/#staropolska">Wideo</a><a href="/warsztaty/">Warsztaty</a><a href="/wyprawy/">Wyprawy kulinarne</a><a href="/sklep/">Sklep</a></div>
       <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
       <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>'''
 SECTION_NAV = '''<nav class="section-nav" aria-label="Działy">
@@ -456,7 +455,7 @@ def article_page(a):
         f'<div class="ph frame {T()}">{img(a["image"], "(max-width:720px) 100vw, 1216px", eager=True)}</div>'
     main = f'''
   <nav class="crumbs" aria-label="Ścieżka">
-    <a href="/">Strona główna</a><span aria-hidden="true">›</span><span>{e(a['section'])}</span>
+    <a href="/">Strona główna</a><span aria-hidden="true">›</span><a href="/historie/">Historie</a><span aria-hidden="true">›</span><a href="/historie/?k={quote(a['section'])}">{e(a['section'])}</a>
   </nav>
 
   <article class="article">
@@ -464,7 +463,7 @@ def article_page(a):
       <p class="kicker"><span class="no">№ {no(a['slug'])}</span> {e(a['kicker'])}</p>
       <h1>{e(a['title'])}</h1>
       <p class="lead">{e(a['lead'])}</p>
-      <p class="meta">{mins} min czytania · <span class="draft">Tekst roboczy, do weryfikacji przed publikacją</span></p>
+      <p class="meta">{f'<time datetime="{a["date"]}">{pl_date(a["date"])}</time> · ' if a.get('date') else ''}{mins} min czytania · <span class="draft">Tekst roboczy, do weryfikacji przed publikacją</span></p>
     </header>
     <figure class="a-hero">{hero}</figure>
     <div class="a-body">
@@ -528,10 +527,10 @@ def recipe_page(slug, r):
       <p class="body" style="font-size:15px">{e(aside.get('note', ''))}</p>
       {link}
     </aside>'''
-    crumb = (CAT.get(r['category'], 'Przepisy'), CAT_ANCHOR.get(r['category'], '/#przepisy'))
+    crumb = (CAT.get(r['category'], 'Przepisy'), f"/przepisy/?k={r['category']}")
     main = f'''
   <nav class="crumbs" aria-label="Ścieżka">
-    <a href="/#przepisy">Przepisy</a><span aria-hidden="true">›</span><a href="{crumb[1]}">{e(crumb[0])}</a><span aria-hidden="true">›</span><span aria-current="page">{e(name)}</span>
+    <a href="/przepisy/">Przepisy</a><span aria-hidden="true">›</span><a href="{crumb[1]}">{e(crumb[0])}</a><span aria-hidden="true">›</span><span aria-current="page">{e(name)}</span>
   </nav>
 
   <section class="r-head">
@@ -1270,7 +1269,7 @@ def home_page():
   <section class="sec" id="przepisy" aria-labelledby="h-przepisy" data-recipes>
     <div class="sec-head">
       <h2 id="h-przepisy" data-ghost="Przepisy">Przepisy</h2>
-      <a href="#przepisy">Wszystkie przepisy →</a>
+      <a href="/przepisy/">Wszystkie przepisy →</a>
     </div>
     <div class="chips" role="group" aria-label="Filtruj przepisy">
       <button type="button" class="chip" data-filter="all" aria-pressed="true">Wszystkie</button>
@@ -1351,6 +1350,64 @@ def home_page():
                  ld=[{'@type': 'WebSite', 'name': 'Łowca Smaków', 'url': SITE + '/', 'inLanguage': 'pl'}, ORG])
 
 
+# ---------- listing pages: all stories, all recipes ----------
+
+SECTIONS = ['Historie', 'Smaki regionów', 'Wideo', 'Z podróży']
+
+
+def story_card(slug):
+    a = A[slug]
+    return (f'<a href="/historie/{slug}.html" class="card story-card" data-cat="{e(a["section"])}">'
+            f'<div class="ph frame {T()} ratio-43">{img(a["image"], "(max-width:720px) 100vw, 33vw")}</div>'
+            f'<div class="card-body">{article_tags(a, 2)}<h3>{e(a["title"])}</h3>'
+            f'<p class="excerpt">{e(first_sentence(a["lead"]))}</p><p class="pills"><span class="no">№ {no(slug)}</span>{datepill(a)}</p></div></a>')
+
+
+def recipe_tile_card(slug):
+    r = R[slug]
+    return (f'<a href="/przepisy/{slug}.html" class="ov ov-tile" data-cat="{e(r["category"])}">{img(recipe_card_image(r), "(max-width:720px) 50vw, 25vw")}'
+            f'<span class="ov-body">{tags([CAT.get(r["category"], "")] + (r.get("card_meta") or "").split(" · ")[:1])}'
+            f'<span class="h">{e(r["title"])}</span><span class="pills"><span class="no">{rno(slug)}</span></span></span></a>')
+
+
+def listing_page(kind):
+    _tint[0] = 0
+    if kind == 'historie':
+        title, ghost, intro = 'Historie', 'Historie', 'Antropologia jedzenia, reportaże z podróży i odcinki wideo: wszystkie teksty Łowcy Smaków, od najnowszych.'
+        order = sorted(A, key=lambda s: A[s].get('date') or '', reverse=True)
+        cards = '\n      '.join(story_card(s) for s in order)
+        cats = [(c, c) for c in SECTIONS if any(a['section'] == c for a in A.values())]
+        grid, empty = 'grid grid-3 stories', 'W tym dziale wkrótce nowe teksty.'
+        images = [A[s]['image'] for s in order]
+    else:
+        title, ghost, intro = 'Przepisy', 'Przepisy', 'Każdy przepis z historią: skąd się wziął, jak go ugotować i co podać obok.'
+        cards = '\n      '.join(recipe_tile_card(s) for s in R)
+        cats = [(k, v) for k, v in CAT.items() if any(r['category'] == k for r in R.values())]
+        grid, empty = 'grid recipes-grid', 'Wkrótce więcej przepisów w tej kategorii.'
+        images = [recipe_card_image(r) for r in R.values()]
+    chips = ''.join(f'<button type="button" class="chip" data-filter="{e(k)}" aria-pressed="false">{e(v)}</button>' for k, v in cats)
+    main = f'''
+  <nav class="crumbs" aria-label="Ścieżka">
+    <a href="/">Strona główna</a><span aria-hidden="true">›</span><span>{title}</span>
+  </nav>
+  <header class="list-head">
+    <h1 data-ghost="{ghost}">{title}</h1>
+    <p class="lead">{intro}</p>
+  </header>
+  <section class="sec" aria-label="{title}" data-filterable>
+    <div class="chips" role="group" aria-label="Filtruj">
+      <button type="button" class="chip" data-filter="all" aria-pressed="true">Wszystkie</button>
+      {chips}
+    </div>
+    <div class="{grid}">
+      {cards}
+    </div>
+    <p class="meta" aria-live="polite" data-recipes-empty hidden>{empty}</p>
+  </section>'''
+    return shell(title, intro, main, images, current=title, body_class='list-page', path=f'/{kind}/', image=images[0] if images else None,
+                 ld=[crumbs_ld([('Strona główna', '/'), (title, f'/{kind}/')])])
+
+
 def write_sitemap():
     """sitemap.xml with every public page, and robots.txt pointing to it."""
     today = date.today().isoformat()
@@ -1379,6 +1436,8 @@ def main():
             if name not in have and name != 'index':
                 os.remove(f)
     open(os.path.join(ROOT, 'sklep', 'index.html'), 'w', encoding='utf-8').write(shop_page())
+    for kind in ('historie', 'przepisy'):
+        open(os.path.join(ROOT, kind, 'index.html'), 'w', encoding='utf-8').write(listing_page(kind))
     for slug, pr in PR.items():
         open(os.path.join(ROOT, 'sklep', f'{slug}.html'), 'w', encoding='utf-8').write(product_page(slug, pr))
     for kind, (_, _, items) in KINDS.items():

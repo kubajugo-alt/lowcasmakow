@@ -1002,3 +1002,12 @@ body.home .site-footer{margin-top:0}
   .shop-live{grid-template-columns:auto minmax(0,1fr)}
   .shop-live .btn{grid-column:1/-1}
 }
+
+/* listing pages: all stories, all recipes */
+[data-filterable] [hidden]{display:none!important}
+.stories{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:40px 32px}
+.story-card .card-body{display:flex;flex-direction:column;gap:10px}
+.story-card h3{font:700 22px/1.2 var(--display);letter-spacing:-.01em}
+.recipes-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
+.recipes-grid .ov-tile{aspect-ratio:4/5}
+@media (max-width:720px){.recipes-grid{grid-template-columns:1fr 1fr;gap:12px}.recipes-grid .ov-tile .h{font-size:16px}.recipes-grid .ov-body{padding:12px}}
