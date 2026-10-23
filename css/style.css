@@ -888,3 +888,10 @@ body.home .site-footer{margin-top:0}
   .badge{top:14px;left:14px}
 }
 @media (max-width:720px){.trips-band+.statement{margin-top:-56px}}
+
+/* hover: every linked photo zooms in slightly, like the mosaic cards (scale 1.04).
+   The clip shrinks by the same amount, so the zoomed photo stays exactly inside its coloured frame. */
+.frame>img.fill{clip-path:inset(0 round 3px);transition:transform .5s ease,clip-path .5s ease}
+:is(a,.a-recipe):is(:hover,:focus-visible) .frame>img.fill{transform:scale(1.04);clip-path:inset(1.923% round 3px)}
+.shortcut .ring img{transition:transform .5s ease}
+.shortcut:is(:hover,:focus-visible) .ring img{transform:scale(1.08)}
