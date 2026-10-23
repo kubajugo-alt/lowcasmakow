@@ -1,5 +1,8 @@
 /* Łowca Smaków — shared styles
-   Black on white like the logo (and its white-on-black twin), fine rules, sharp frames.
+   Black on white like the logo (and its white-on-black twin), fine rules.
+   Photos as a travel journal: postcards (white border, soft shadow) and postage stamps
+   (perforated edge) with ink postmarks. Colour comes in as stamp inks: mustard, vermilion,
+   ultramarine, sage, and burgundy for the Old Polish band.
    Editorial structure after the best food and culture magazines: an issue line, a big lead
    headline beside a numbered index (NYT Cooking, The Gourmand), catalogue numbers on every
    story (Cereal), full-width black bands (Apartamento), recipe rails (Bon Appétit).
@@ -18,6 +21,11 @@
   --night-2:#2A2A2A;
   --night-line:#4A4A4A;
   --night-muted:#B5B3AE;
+  --vermilion:#C2411C;
+  --ultramarine:#2B4796;
+  --sage:#4F6B43;
+  --mustard:#E3A52A;
+  --burgundy:#6B1E24;
   --serif:'Cormorant Garamond','Cormorant',Georgia,'Times New Roman',serif;
   --sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
 }
@@ -468,7 +476,6 @@ body{overflow-x:clip}
 @media (max-width:720px){
   .topbar .wrap{justify-content:center;font-size:11px}
   .lead-grid{gap:28px}
-  .lead-img{margin:0 -20px}
   .lead-story h1{font-size:52px}
   .lead-foot{grid-template-columns:1fr;gap:18px}
   .lead-foot .btn-line{display:none}
@@ -485,3 +492,82 @@ body{overflow-x:clip}
   .statement{padding:40px 0}
   .statement h2{font-size:52px}
 }
+
+/* ---------- photos as postcards and stamps ---------- */
+.postcard{background:#fff;padding:0;box-shadow:0 1px 1px rgba(18,18,18,.06),0 14px 30px -18px rgba(18,18,18,.45)}
+.postcard>img.fill{inset:10px;width:calc(100% - 20px);height:calc(100% - 20px)}
+.dark .postcard{background:#fff;box-shadow:none}
+.stamp-wrap{display:block;flex:none;filter:drop-shadow(0 1px .5px rgba(18,18,18,.28)) drop-shadow(0 8px 10px rgba(18,18,18,.12))}
+.dark .stamp-wrap{filter:none}
+.stamp{--r:5px;display:block;position:relative;background:#fff;padding:0;
+  -webkit-mask:radial-gradient(var(--r),#0000 97%,#000) round calc(-1.5*var(--r)) calc(-1.5*var(--r))/calc(3*var(--r)) calc(3*var(--r)),linear-gradient(#000 0 0) no-repeat 50%/calc(100% - 3*var(--r)) calc(100% - 3*var(--r));
+          mask:radial-gradient(var(--r),#0000 97%,#000) round calc(-1.5*var(--r)) calc(-1.5*var(--r))/calc(3*var(--r)) calc(3*var(--r)),linear-gradient(#000 0 0) no-repeat 50%/calc(100% - 3*var(--r)) calc(100% - 3*var(--r))}
+.stamp>img.fill{inset:calc(2.6*var(--r));width:calc(100% - 5.2*var(--r));height:calc(100% - 5.2*var(--r))}
+.stamp.small{--r:3px}
+.stamped{position:relative;display:block}
+.postmark{position:absolute;z-index:2;right:-16px;bottom:-18px;width:96px;height:96px;border-radius:50%;border:1.5px solid rgba(18,18,18,.78);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-align:center;
+  font:600 9px/1.15 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:rgba(18,18,18,.82);
+  transform:rotate(-14deg);pointer-events:none}
+.postmark::before{content:"";position:absolute;inset:5px;border:1px solid rgba(18,18,18,.45);border-radius:50%}
+.postmark span:first-child{max-width:70px;border-bottom:1px solid rgba(18,18,18,.45);padding-bottom:3px}
+.travel-card{gap:16px}
+.travel-card .ph{width:100%}
+.travel-card:hover .stamp-wrap{transform:rotate(-1.2deg)}
+.stamp-wrap{transition:transform .25s}
+.lead-photo{position:relative}
+.lead-stamp{position:absolute;z-index:2;top:-22px;right:-26px;width:124px;transform:rotate(6deg)}
+.lead-stamp .postmark{right:auto;left:-44px;bottom:-30px;width:84px;height:84px;font-size:8px}
+.issue-item .stamp{width:72px;height:72px}
+.card.row .stamp{width:120px;height:120px}
+.a-recipe .stamp{width:120px;height:120px}
+.shop .stamp{width:64px;height:64px}
+.shop .stamp-wrap{filter:none}
+.feature-main .postcard>img.fill{inset:12px;width:calc(100% - 24px);height:calc(100% - 24px)}
+@media (prefers-reduced-motion:reduce){.stamp-wrap{transition:none}}
+@media (max-width:720px){
+  .lead-stamp{top:-14px;right:-6px;width:86px}
+  .lead-stamp .postmark{left:-36px;bottom:-24px;width:70px;height:70px;font-size:7px}
+  .postcard>img.fill{inset:7px;width:calc(100% - 14px);height:calc(100% - 14px)}
+  .card.row .stamp,.a-recipe .stamp{width:96px;height:96px}
+  .postmark{right:-6px;bottom:-14px;width:84px;height:84px}
+  .a-hero .ph{margin:0}
+  .r-media>.ph{margin:0}
+}
+
+/* ---------- colour: stamp inks ---------- */
+.tint-mustard{background:var(--mustard)}
+.tint-vermilion{background:var(--vermilion)}
+.tint-ultramarine{background:var(--ultramarine)}
+.tint-sage{background:var(--sage)}
+.postmark{--pm:var(--vermilion);border-color:var(--pm);color:var(--pm)}
+.postmark::before,.postmark span:first-child{border-color:color-mix(in srgb,var(--pm) 60%,transparent)}
+.stamped:has(.tint-vermilion) .postmark,.stamped:has(.tint-mustard) .postmark{--pm:var(--ultramarine)}
+.topbar{background:var(--mustard);border-bottom:0;color:var(--ink)}
+.no,.issue-item .no,.caption .no{color:var(--vermilion)}
+.dark .no{color:var(--mustard)}
+.btn-accent,.btn-ink,.tool.primary,.statement .nl-row button{background:var(--vermilion);color:#fff}
+.btn-accent:hover,.btn-ink:hover,.tool.primary:hover,.statement .nl-row button:hover{background:#9E3415;color:#fff}
+.tool.primary{border-color:var(--vermilion)}
+.header-actions .btn{background:var(--ink)}
+.header-actions .btn:hover{background:var(--ink-2)}
+.statement h2 em{color:var(--vermilion)}
+.tile[aria-pressed="true"]{background:var(--vermilion);color:#fff}
+.counter{color:var(--vermilion)}
+.steps .n{color:var(--vermilion)}
+.week .card:nth-child(1) .day em{color:var(--vermilion)}
+.week .card:nth-child(2) .day em{color:var(--ultramarine)}
+.week .card:nth-child(3) .day em{color:var(--sage)}
+.dark{background:var(--burgundy)}
+.dark .sec-head{border-top-color:rgba(255,255,255,.6)}
+.dark .feature-side .card{border-bottom-color:rgba(255,255,255,.25)}
+.dark .body{color:#E9D9D5}
+.regions{background:#F3EBDC;border-color:#EADFCB}
+.chip[aria-pressed="true"],.chip.is-active{background:var(--ink);border-color:var(--ink)}
+a:hover{color:var(--vermilion)}
+.card:hover,.issue-item:hover{color:var(--ink)}
+.dark .card:hover{color:#fff}
+.shop{background:var(--ultramarine)}
+.postmark{background:color-mix(in srgb,var(--paper) 90%,transparent);right:-22px;top:-22px;bottom:auto;box-shadow:0 1px 2px rgba(18,18,18,.12)}
+.lead-stamp .postmark{left:-40px;top:auto;bottom:-26px}
+@media (max-width:720px){.postmark{right:-8px;top:-14px}.lead-stamp .postmark{left:-30px;top:auto;bottom:-20px}}

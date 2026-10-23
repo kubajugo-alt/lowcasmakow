@@ -134,8 +134,24 @@ def newsletter():
   </section>'''
 
 
+TINTS = ['mustard', 'vermilion', 'ultramarine', 'sage']
+_tint = [0]
+
+
+def stamp(inner, cls=''):
+    """A photo as a postage stamp on coloured paper: perforated edge (CSS mask), wrapped so it can
+    cast a shadow. Paper colours cycle through the stamp inks."""
+    tint = TINTS[_tint[0] % len(TINTS)]
+    _tint[0] += 1
+    return f'<span class="stamp-wrap"><span class="ph stamp tint-{tint} {cls}">{inner}</span></span>'
+
+
+def postmark(place, date):
+    return f'<span class="postmark" aria-hidden="true"><span>{e(place)}</span><span>{e(date)}</span></span>'
+
+
 def card(href, key, kicker, title, sizes='(max-width:720px) 50vw, 25vw'):
-    return (f'<a href="{href}" class="card sm"><div class="ph" style="height:220px">{img(key, sizes)}</div>'
+    return (f'<a href="{href}" class="card sm"><div class="ph postcard ratio-43">{img(key, sizes)}</div>'
             f'<p class="kicker">{e(kicker)}</p><h3>{e(title)}</h3></a>')
 
 
@@ -174,7 +190,7 @@ def body_html(blocks):
         elif kind == 'quote':
             out.append(f'<blockquote class="pull"><p>{e(val)}</p></blockquote>')
         elif kind == 'img':
-            out.append(f'<figure class="a-fig"><div class="ph">{img(val, "(max-width:720px) 100vw, 760px")}</div></figure>')
+            out.append(f'<figure class="a-fig"><div class="ph postcard">{img(val, "(max-width:720px) 100vw, 760px")}</div></figure>')
     return '\n      '.join(out)
 
 
@@ -183,6 +199,7 @@ def words(blocks):
 
 
 def article_page(a):
+    _tint[0] = 0
     mins = max(2, math.ceil((words(a['body']) + len(a['lead'].split())) / 200))
     others = [s for s in A if s != a['slug']]
     same = [s for s in others if A[s]['section'] == a['section']]
@@ -193,7 +210,7 @@ def article_page(a):
         key, meta, title, _ = RECIPE_CARDS[a['recipe']]
         recipe_box = f'''
       <aside class="a-recipe" aria-label="Przepis do tego tekstu">
-        <div class="ph">{img(key, '160px')}</div>
+        {stamp(img(key, '160px'))}
         <div>
           <p class="kicker">Przepis do tego tekstu</p>
           <h2><a href="/przepisy/{a['recipe']}.html">{e(title)}</a></h2>
@@ -212,7 +229,7 @@ def article_page(a):
       <p class="lead">{e(a['lead'])}</p>
       <p class="meta">{mins} min czytania · <span class="draft">Tekst roboczy, do weryfikacji przed publikacją</span></p>
     </header>
-    <figure class="a-hero"><div class="ph">{img(a['img'], '(max-width:720px) 100vw, 1216px', eager=True)}</div></figure>
+    <figure class="a-hero"><div class="ph postcard">{img(a['img'], '(max-width:720px) 100vw, 1216px', eager=True)}</div></figure>
     <div class="a-body">
       {body_html(a['body'])}
       {recipe_box}
@@ -226,6 +243,7 @@ def article_page(a):
 
 
 def recipe_page(slug, r):
+    _tint[0] = 1
     name = RECIPE_CARDS[slug][2]
     video = ('<button type="button" class="watch" disabled title="Wideo wkrótce"><span><svg aria-hidden="true" width="14" height="14" '
              'viewBox="0 0 24 24" fill="#FFFFFF"><path d="M8 5v14l11-7z"/></svg></span>Obejrzyj odcinek · [mm:ss]</button>') if r['video'] else ''
@@ -234,7 +252,7 @@ def recipe_page(slug, r):
         k, label, title = r['shop']
         shop = f'''
       <div class="shop" id="sklep">
-        <div class="ph">{img(k, '64px')}</div>
+        {stamp(img(k, '64px'), 'small')}
         <div>
           <p class="label">{e(label)}</p>
           <p style="font-weight:600">[{e(title)}]</p>
@@ -281,12 +299,12 @@ def recipe_page(slug, r):
   </div>
 
   <section class="r-media">
-    <div class="ph">{img(r['img'], '(max-width:720px) 100vw, 60vw', eager=True)}
+    <div class="ph postcard">{img(r['img'], '(max-width:720px) 100vw, 60vw', eager=True)}
       {video}
     </div>
     <aside class="pill-history" aria-labelledby="h-pigulka">
       <p class="kicker" id="h-pigulka">{e(r['aside_title'])}</p>
-      <div class="ph">{img(r['aside_img'], '(max-width:720px) 100vw, 40vw')}</div>
+      <div class="ph postcard">{img(r['aside_img'], '(max-width:720px) 100vw, 40vw')}</div>
       <p class="serif">{e(a1)}</p>
       <p class="body" style="font-size:15px">{e(a2)}</p>
       <a href="/historie/{r['story']}.html" style="font-weight:600;font-size:15px">Przeczytaj całą historię →</a>
@@ -342,24 +360,25 @@ CHIPS = ['Podkarpackie', 'Świętokrzyskie', 'Małopolskie', 'Lubelskie', 'Ślą
 
 
 def home_page():
+    _tint[0] = 0
     lead = A['dlaczego-kisimy-ogorki']
     issue = ['pierogi', 'podhale-oscypek', 'bary-mleczne', 'slimaki-wedlug-czernieckiego', 'peru-ziemniaki']
     week = [('Poniedziałek', '20.10', 'pierogi'), ('Środa', '22.10', 'podhale-oscypek'), ('Niedziela', '26.10', 'bary-mleczne')]
     side = [('kim-byl-czerniecki', None), ('slimaki-w-szarym-sosie', 'recipe'), ('przyprawy-staropolskie', None)]
     travel = [('peru-ziemniaki', 'Peru'), ('meksyk-chile', 'Meksyk, Jalisco'), ('oaxaca-targ', 'Meksyk, Oaxaca')]
-    keys = [lead['img']]
+    keys = [lead['img'], 'hero2']
 
     def issue_item(slug):
         a = A[slug]; keys.append(a['img'])
         return (f'<li><a class="issue-item" href="/historie/{slug}.html"><span class="no">{NO[slug]}</span>'
                 f'<span class="issue-t"><span class="kicker">{e(a["section"])}</span><span class="t">{e(a["title"])}</span></span>'
-                f'<span class="ph">{img(a["img"], "72px")}</span></a></li>')
+                f'{stamp(img(a["img"], "72px"), "small")}</a></li>')
 
     def week_card(day, date, slug):
         a = A[slug]
         return (f'<a href="/historie/{slug}.html" class="card week-card">'
                 f'<p class="day"><em>{day}</em> <span>{date}</span></p>'
-                f'<div class="ph ratio-45">{img(a["img"], "(max-width:720px) 96px, 33vw")}</div>'
+                f'<div class="ph postcard ratio-45">{img(a["img"], "(max-width:720px) 100vw, 33vw")}</div>'
                 f'<div class="card-body"><p class="kicker">{no(slug)} {e(a["kicker"].split(" · ")[1] if " · " in a["kicker"] else a["section"])}</p>'
                 f'<h3>{e(a["title"])}</h3><p class="excerpt">{e(first_sentence(a["lead"]))}</p></div></a>')
 
@@ -371,17 +390,18 @@ def home_page():
             a = A[slug]; key, href, title = a['img'], f'/historie/{slug}.html', a['title']
             label = f'{no(slug)} Historia'
         keys.append(key)
-        return (f'<a href="{href}" class="card row"><div class="ph">{img(key, "120px")}</div>'
+        return (f'<a href="{href}" class="card row">{stamp(img(key, "120px"))}'
                 f'<div class="card-body"><p class="kicker">{label}</p><h4>{e(title)}</h4></div></a>')
 
     def recipe_tile(slug):
         key, meta, title, cat = RECIPE_CARDS[slug]; keys.append(key)
-        return (f'<a href="/przepisy/{slug}.html" class="card sm" data-cat="{cat}"><div class="ph ratio-45">{img(key, "(max-width:720px) 70vw, 25vw")}</div>'
+        return (f'<a href="/przepisy/{slug}.html" class="card sm" data-cat="{cat}"><div class="ph postcard ratio-45">{img(key, "(max-width:720px) 70vw, 25vw")}</div>'
                 f'<p class="meta"><span class="no">{RNO[slug]}</span> {e(meta)}</p><h3>{e(title)}</h3></a>')
 
     def travel_card(slug, place):
         a = A[slug]; keys.append(a['img'])
-        return (f'<a href="/historie/{slug}.html" class="card"><div class="ph ratio-43">{img(a["img"], "(max-width:720px) 100vw, 33vw")}</div>'
+        return (f'<a href="/historie/{slug}.html" class="card travel-card"><span class="stamped">{stamp(img(a["img"], "(max-width:720px) 100vw, 33vw"), "ratio-43")}'
+                f'{postmark(place.split(",")[0], "10.2026")}</span>'
                 f'<p class="caption"><span class="no">({NO[slug]})</span> {e(place)}</p><h3>{e(a["title"])}</h3></a>')
 
     snails = A['slimaki-wedlug-czernieckiego']; keys.append(snails['img'])
@@ -391,7 +411,10 @@ def home_page():
     main = f"""
   <section class="lead-grid" aria-label="Historia tygodnia">
     <article class="lead-story">
-      <a class="ph lead-img" href="/historie/{lead['slug']}.html" tabindex="-1" aria-hidden="true">{img(lead['img'], '(max-width:720px) 100vw, 66vw', eager=True)}</a>
+      <div class="lead-photo">
+        <a class="ph postcard lead-img" href="/historie/{lead['slug']}.html" tabindex="-1" aria-hidden="true">{img(lead['img'], '(max-width:720px) 100vw, 66vw', eager=True)}</a>
+        <span class="lead-stamp stamped">{stamp(img('hero2', '140px'), 'ratio-45')}{postmark('Wydanie 01', '20.10.2026')}</span>
+      </div>
       <p class="kicker">{no(lead['slug'])} {e(lead['kicker'])}</p>
       <h1><a href="/historie/{lead['slug']}.html">{e(lead['title'])}</a></h1>
       <div class="lead-foot">
@@ -429,7 +452,7 @@ def home_page():
       </div>
       <div class="feature">
         <a href="/historie/{snails['slug']}.html" class="card feature-main">
-          <div class="ph ratio-1610">{img(snails['img'], '(max-width:720px) 100vw, 62vw')}
+          <div class="ph postcard ratio-1610">{img(snails['img'], '(max-width:720px) 100vw, 62vw')}
             <span class="play"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
           </div>
           <p class="kicker">{no(snails['slug'])} Odcinek · Wideo [mm:ss]</p>
