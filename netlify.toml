@@ -5,3 +5,8 @@
   from = "/przepis.html"
   to = "/przepisy/slimaki-w-szarym-sosie.html"
   status = 301
+
+[[headers]]
+  for = "/canva/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

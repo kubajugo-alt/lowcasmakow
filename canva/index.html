@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Łowca Smaków — makiety do Canvy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+/* Łowca Smaków — shared styles
+   Look taken from the logo: one black line on white (and its white-on-black twin),
+   a handwritten mark, fine rules, a looping flourish. Colour comes from the food photography. */
+:root{
+  --paper:#FBFAF7;
+  --white:#FFFFFF;
+  --ink:#121212;
+  --ink-2:#2E2E2E;
+  --muted:#5C5C5C;
+  --line:#D9D6CF;
+  --rule:#E6E3DC;
+  --panel:#F1EFEA;
+  --ph:#ECEAE4;
+  --night:#121212;
+  --night-2:#2A2A2A;
+  --night-line:#4A4A4A;
+  --night-muted:#B5B3AE;
+  --serif:'Cormorant Garamond','Cormorant',Georgia,'Times New Roman',serif;
+  --sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+a{color:var(--ink);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--ink-2)}
+img{max-width:100%;display:block}
+h1,h2,h3,h4,p{margin:0}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:16px;top:-60px;background:var(--ink);color:var(--white);padding:12px 16px;border-radius:999px;z-index:20}
+.skip:focus{top:12px;color:var(--white)}
+
+.serif{font-family:var(--serif)}
+.kicker{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+.meta{font-size:13px;color:var(--muted)}
+.lead{font-size:19px;line-height:1.55;color:var(--ink-2)}
+.body{font-size:17px;line-height:1.55;color:var(--ink-2)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:32px;padding-right:32px}
+
+/* the logo's looping line, used as a divider */
+.flourish{display:block;width:220px;height:28px;color:currentColor}
+.flourish path{fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round}
+
+/* image placeholders (no photography yet) */
+.ph{position:relative;background-color:var(--ph);background-image:repeating-linear-gradient(135deg,rgba(18,18,18,.06) 0 1px,transparent 1px 12px);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:12px}
+.play{position:absolute;width:76px;height:76px;border-radius:999px;background:var(--white);border:1px solid var(--ink);display:flex;align-items:center;justify-content:center}
+.play svg{fill:var(--ink);margin-left:3px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 26px;border-radius:999px;font:inherit;font-weight:600;font-size:15px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:background .15s,color .15s}
+.btn-accent,.btn-ink{background:var(--ink);color:var(--white)}
+.btn-accent:hover,.btn-ink:hover{background:var(--ink-2);color:var(--white)}
+.btn-line{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--ink);color:var(--white)}
+.icon-btn{width:44px;height:44px;border:1px solid var(--line);border-radius:999px;background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
+.icon-btn:hover{border-color:var(--ink)}
+.chip{display:inline-flex;align-items:center;flex:none;min-height:40px;padding:0 16px;border:1px solid var(--line);border-radius:999px;font:inherit;font-size:14px;color:var(--ink);text-decoration:none;background:var(--white);cursor:pointer}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip[aria-pressed="true"],.chip.is-active{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+
+/* header: a centred masthead, like the top of a menu card */
+.site-header{background:var(--paper);position:relative;z-index:10}
+.masthead{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding-top:20px;padding-bottom:16px}
+.masthead .left{display:flex;gap:12px;align-items:center}
+.logo{display:block;color:var(--ink);text-decoration:none}
+.logo img{height:96px;width:auto}
+.header-actions{display:flex;gap:12px;align-items:center;justify-content:flex-end}
+.header-actions .btn{min-height:44px;padding:0 20px;font-size:14px}
+.menu-toggle{display:none}
+.main-nav{display:flex;justify-content:center;gap:36px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.navlink{color:var(--ink);text-decoration:none;font-size:15px;font-weight:500;padding:14px 0;border-bottom:1px solid transparent;margin-bottom:-1px}
+.navlink:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.navlink[aria-current="page"]{border-bottom-color:var(--ink)}
+.search-bar{border-bottom:1px solid var(--line)}
+.search-bar .wrap{padding-top:16px;padding-bottom:16px;display:flex;gap:8px}
+.search-bar input{flex:1;min-height:48px;padding:0 18px;border:1px solid var(--line);border-radius:999px;font:inherit;background:var(--white);color:var(--ink)}
+.section-nav{display:none}
+
+/* sections */
+main.wrap{padding-top:48px;display:flex;flex-direction:column;gap:88px}
+.sec{display:flex;flex-direction:column;gap:28px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-top:1px solid var(--ink);padding-top:18px}
+.sec-head h2{font-family:var(--serif);font-size:40px;line-height:1;font-weight:600;letter-spacing:-.01em}
+.sec-head a{font-weight:600;font-size:15px}
+.grid{display:grid;gap:32px}
+.grid-3{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.grid-4{grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px}
+.grid-travel{grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:28px}
+
+.card{display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--ink)}
+.card:hover{color:var(--ink)}
+.card:hover h3,.card:hover h4{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.card h3{font-family:var(--serif);font-size:28px;line-height:1.08;font-weight:600}
+.card.sm h3{font-size:24px;line-height:1.1}
+.card.row{flex-direction:row;gap:18px;align-items:flex-start}
+.card.row h4{font-family:var(--serif);font-size:24px;line-height:1.1;font-weight:600}
+.card.row .ph{width:120px;height:120px;flex:none}
+.card[hidden]{display:none}
+.card-body{display:flex;flex-direction:column;gap:8px}
+
+/* hero */
+.hero{display:flex;flex-wrap:wrap;gap:48px;align-items:center}
+.hero .ph{flex:7 1 480px;height:540px}
+.hero-copy{flex:5 1 340px;display:flex;flex-direction:column;gap:20px}
+.hero h1{font-family:var(--serif);font-size:72px;line-height:.95;font-weight:600;letter-spacing:-.015em}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* old-polish feature */
+.feature{display:flex;flex-wrap:wrap;gap:32px}
+.feature-main{flex:2 1 520px}
+.feature-main .ph{height:420px}
+.feature-main h3{font-size:40px;line-height:1.02}
+.feature-side{flex:1 1 300px;display:flex;flex-direction:column;gap:0}
+.feature-side .card{padding:20px 0;border-bottom:1px solid var(--rule)}
+.feature-side .card:first-child{padding-top:0}
+
+/* regions */
+.regions{display:flex;flex-wrap:wrap;gap:56px;align-items:center;background:var(--panel);padding:56px;border:1px solid var(--rule)}
+.regions .map{flex:1 1 380px}
+.regions-copy{flex:1 1 380px;display:flex;flex-direction:column;gap:20px}
+.regions-copy h2{font-family:var(--serif);font-size:56px;line-height:.98;font-weight:600}
+.region-pick{min-height:24px;font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.tile{min-height:88px;padding:8px;border:0;background:var(--white);color:var(--ink);font:inherit;font-size:13px;font-weight:500;line-height:1.2;hyphens:manual;cursor:pointer;text-align:center}
+.tile:hover{background:var(--paper);box-shadow:inset 0 0 0 1px var(--ink)}
+.tile[aria-pressed="true"]{background:var(--ink);color:var(--white)}
+
+/* dark bands: the logo's white-on-black version */
+.newsletter{background:var(--night);color:var(--white);padding:64px 56px;display:flex;flex-wrap:wrap;gap:40px;align-items:center;justify-content:space-between}
+.newsletter h2{font-family:var(--serif);font-size:48px;line-height:1;font-weight:600}
+.newsletter p{font-size:17px;line-height:1.5;color:var(--night-muted)}
+.nl-copy{flex:1 1 420px;display:flex;flex-direction:column;gap:16px}
+.nl-copy .flourish{color:var(--white);margin-bottom:4px}
+.nl-form{flex:1 1 380px;display:flex;flex-direction:column;gap:8px}
+.nl-form label{font-size:14px;font-weight:600}
+.nl-row{display:flex;gap:8px;flex-wrap:wrap}
+.nl-row input{flex:1 1 220px;min-height:52px;padding:0 20px;border:1px solid var(--night-line);border-radius:999px;font:inherit;font-size:16px;background:transparent;color:var(--white)}
+.nl-row input::placeholder{color:#8F8D88}
+.nl-row input:focus-visible{outline-color:var(--white);border-color:var(--white)}
+.nl-row button{min-height:52px;padding:0 28px;border:0;border-radius:999px;background:var(--white);color:var(--ink);font:inherit;font-weight:600;font-size:16px;cursor:pointer}
+.nl-row button:hover{background:var(--panel)}
+.nl-row button:focus-visible{outline-color:var(--white)}
+.nl-msg{font-size:15px;min-height:22px;color:var(--night-muted)}
+
+/* footer */
+.site-footer{margin-top:88px;background:var(--night);color:var(--white)}
+.site-footer a{color:var(--white)}
+.site-footer a:focus-visible{outline-color:var(--white)}
+.site-footer .wrap{padding-top:56px;padding-bottom:32px;display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between}
+.foot-about{flex:1 1 300px;display:flex;flex-direction:column;gap:16px}
+.foot-about .logo img{height:120px}
+.foot-about p{font-size:15px;line-height:1.5;color:var(--night-muted);max-width:360px}
+.foot-nav{flex:2 1 420px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;font-size:15px;align-content:start}
+.foot-nav div{display:flex;flex-direction:column;gap:12px}
+.foot-nav a{text-decoration:none}
+.foot-nav a:hover{text-decoration:underline;color:var(--white)}
+.copyright{flex-basis:100%;border-top:1px solid var(--night-line);padding-top:20px}
+.site-footer .meta{color:var(--night-muted)}
+.newsletter+.site-footer,main+.site-footer{margin-top:88px}
+
+/* ---------- recipe page ---------- */
+.crumbs{font-size:14px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap}
+.crumbs a{color:var(--muted)}
+.recipe main.wrap{padding-top:32px;gap:56px}
+.r-head{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end}
+.r-title{flex:3 1 520px;display:flex;flex-direction:column;gap:16px}
+.r-title h1{font-family:var(--serif);font-size:76px;line-height:.95;font-weight:600;letter-spacing:-.015em}
+.r-title .sub{font-family:var(--serif);font-size:24px;font-style:italic;font-weight:500;color:var(--ink-2)}
+.r-stats{flex:2 1 340px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;border-top:1px solid var(--ink);padding-top:14px;margin:0}
+.r-stats dd{margin:4px 0 0;font-weight:600}
+.tools{display:flex;gap:10px;flex-wrap:wrap}
+.tool{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border:1px solid var(--line);border-radius:999px;background:var(--white);color:var(--ink);font:inherit;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer}
+.tool:hover{border-color:var(--ink);color:var(--ink)}
+.tool.primary{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.tool.primary:hover{background:var(--ink-2);color:var(--white)}
+.tool[aria-pressed="true"]{background:var(--ink);color:var(--white);border-color:var(--ink)}
+.tool.sm{min-height:36px}
+.r-media{display:flex;flex-wrap:wrap;gap:32px}
+.r-media>.ph{flex:3 1 520px;height:480px}
+.watch{position:absolute;left:24px;bottom:24px;display:flex;align-items:center;gap:12px;background:var(--white);color:var(--ink);padding:10px 18px 10px 10px;border-radius:999px;font-size:14px;letter-spacing:0;text-transform:none;font-weight:600;border:1px solid var(--ink);font-family:inherit;cursor:pointer}
+.watch span{width:36px;height:36px;border-radius:999px;background:var(--ink);display:flex;align-items:center;justify-content:center}
+.pill-history{flex:2 1 340px;background:var(--panel);border:1px solid var(--rule);padding:32px;display:flex;flex-direction:column;gap:16px}
+.pill-history .ph{height:150px;background-color:#E4E1DA}
+.pill-history .serif{font-size:22px;line-height:1.35;font-weight:500}
+.r-body{display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start;scroll-margin-top:24px}
+.ingredients{flex:1 1 320px;display:flex;flex-direction:column;gap:20px;border-top:1px solid var(--ink);padding-top:18px}
+.ing-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.r-body h2{font-family:var(--serif);font-size:40px;line-height:1;font-weight:600}
+.stepper{display:flex;align-items:center;gap:10px}
+.stepper output{min-width:84px;text-align:center;font-weight:600}
+.step-btn{width:44px;height:44px;border:1px solid var(--ink);border-radius:999px;background:transparent;color:var(--ink);font:inherit;font-size:20px;cursor:pointer}
+.step-btn:hover{background:var(--ink);color:var(--white)}
+.step-btn:disabled{opacity:.35;cursor:default;background:transparent;color:var(--ink)}
+.ing-list{list-style:none;margin:0;padding:0}
+.ing-list li{border-bottom:1px solid var(--rule)}
+.ing-list label{display:flex;align-items:center;gap:14px;min-height:52px;cursor:pointer}
+.ing-list input{width:20px;height:20px;accent-color:var(--ink);flex:none}
+.ing-list .name{flex:1;font-size:16px}
+.ing-list .qty{font-size:15px;color:var(--muted)}
+.ing-list input:checked~span{opacity:.45}
+.ing-list input:checked~.name{text-decoration:line-through}
+.shop{background:var(--night);color:var(--white);padding:20px;display:flex;gap:16px;align-items:center}
+.shop .ph{width:64px;height:64px;flex:none;background-color:var(--night-2);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 1px,transparent 1px 10px);color:var(--night-muted);font-size:10px;padding:4px}
+.shop .label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--night-muted)}
+.method{flex:2 1 520px;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--ink);padding-top:18px}
+.method h2{margin-bottom:16px}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:32px}
+.steps li{display:flex;gap:24px;align-items:flex-start}
+.steps .n{font-family:var(--serif);font-size:56px;line-height:.8;font-weight:500;font-style:italic;color:var(--ink);min-width:48px}
+.steps .txt{flex:1;display:flex;flex-direction:column;gap:10px}
+.steps h3{font-size:19px;font-weight:600}
+.steps p{font-size:17px;line-height:1.6;color:var(--ink-2)}
+.timer[data-running="true"]{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.sources{margin-top:36px;padding:24px;border:1px solid var(--line);background:var(--white);display:flex;flex-direction:column;gap:10px}
+.sources p{font-size:15px;line-height:1.5}
+.newsletter.slim{padding:44px 48px}
+.newsletter.slim h2{font-size:36px;line-height:1.05}
+.newsletter.slim .nl-form{flex:1 1 340px}
+.site-footer.slim .wrap{padding-top:32px;padding-bottom:32px;align-items:center}
+.site-footer.slim .logo img{height:72px}
+
+.tool:disabled,.cook-timer:disabled,.watch:disabled{opacity:.6;cursor:default}
+
+
+
+/* ---------- cook mode ---------- */
+.cook{background:var(--night);color:var(--white);min-height:100vh;min-height:100dvh}
+.cook a{color:var(--white)}
+.cook :focus-visible{outline-color:var(--white)}
+.cook-shell{max-width:560px;margin:0 auto;min-height:100vh;min-height:100dvh;padding:16px 20px 24px;display:flex;flex-direction:column;gap:22px}
+.cook-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cook-top a{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid var(--night-line);border-radius:999px}
+.cook-top .logo img{height:40px}
+.cook-top .logo{border:0;width:auto;height:auto}
+.wake{font-size:13px;color:var(--night-muted);display:flex;align-items:center;gap:6px}
+.cook-step{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--night-muted)}
+.bars{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-top:10px}
+.bars span{height:2px;background:var(--night-line)}
+.bars span.on{background:var(--white)}
+.cook h1{font-family:var(--serif);font-size:44px;line-height:1;font-weight:600}
+.cook-desc{font-size:21px;line-height:1.5;color:#E6E4DF}
+.uses-label{font-size:13px;color:var(--night-muted);margin-bottom:10px}
+.pill{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border:1px solid var(--night-line);border-radius:999px;font-size:15px}
+.cook-timer{display:flex;align-items:center;justify-content:space-between;min-height:64px;padding:0 20px;border:1px solid var(--white);border-radius:999px;background:transparent;color:var(--white);font:inherit;cursor:pointer;width:100%}
+.cook-timer[data-running="true"]{background:var(--white);color:var(--ink)}
+.cook-timer .l{display:flex;align-items:center;gap:10px;font-weight:600;font-size:16px}
+.cook-timer .t{font-family:var(--serif);font-size:30px;font-weight:600}
+.cook-timer[hidden]{display:none}
+.cook-nav{margin-top:auto;display:flex;gap:12px}
+.cook-nav button{min-height:60px;border-radius:999px;font:inherit;font-weight:600;cursor:pointer}
+.cook-prev{flex:1;border:1px solid var(--night-line);background:transparent;color:var(--white);font-size:16px}
+.cook-prev:disabled{opacity:.4;cursor:default}
+.cook-next{flex:2;border:0;background:var(--white);color:var(--ink);font-size:17px}
+
+/* ---------- 404 ---------- */
+.lost{gap:40px!important;min-height:56vh;align-items:center;justify-content:center;text-align:center;padding-top:72px;padding-bottom:72px}
+.lost .hero-copy{max-width:640px;align-items:center}
+.lost h1{font-family:var(--serif);font-size:clamp(44px,8vw,72px);line-height:.98;font-weight:600}
+.lost .btns{justify-content:center}
+
+/* ---------- responsive ---------- */
+
+
+
+
+/* placeholder photography (Unsplash) fills the frame; overlays stay on top */
+.ph>img.fill{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.play,.watch{z-index:1}
+.credits{flex-basis:100%;font-size:12px;line-height:1.6}
+.credits a{color:inherit}
+.watch:disabled{opacity:1}
+
+/* ---------- ornaments from the logo: looping line, plate rings, fork and knife ---------- */
+.sec-head{border-top:0;position:relative;padding-top:34px}
+.sec-head::before{content:"";position:absolute;top:15px;left:62px;right:0;height:1px;background:var(--ink)}
+.sec-head::after{content:"";position:absolute;top:-1px;left:0;width:64px;height:26px;background:url(https://lowca-smakow.netlify.app/img/orn/curl.svg) no-repeat 0 0/64px 26px}
+.site-footer{position:relative}
+.site-footer::before{content:"";position:absolute;left:0;right:0;top:-25px;height:26px;background:url(https://lowca-smakow.netlify.app/img/orn/tendril.svg) repeat-x 0 0/240px 26px}
+.hero .ph::after{content:"";position:absolute;right:-46px;top:-58px;width:160px;height:152px;background:url(https://lowca-smakow.netlify.app/img/orn/plate.svg) no-repeat center/contain;z-index:2;pointer-events:none}
+.regions{background:var(--panel) url(https://lowca-smakow.netlify.app/img/orn/plate-faint.svg) no-repeat right -90px bottom -120px/400px auto}
+.newsletter{background:var(--night) url(https://lowca-smakow.netlify.app/img/orn/plate-night.svg) no-repeat right -70px top -90px/320px auto}
+.steps .n{display:flex;align-items:center;justify-content:center;min-width:64px;width:64px;height:61px;padding:0 3px 2px 0;font-size:32px;line-height:1;background:url(https://lowca-smakow.netlify.app/img/orn/plate.svg) no-repeat center/contain}
+.flourish{color:var(--ink)}
+.hero-copy .flourish{width:180px;height:23px}
+.setting{display:block;width:260px;height:auto;color:var(--white);margin-bottom:8px}
+.can-draw svg.draw path{stroke-dasharray:1 1;stroke-dashoffset:1;opacity:0;transition:stroke-dashoffset 1.8s cubic-bezier(.4,0,.2,1),opacity .2s}
+.can-draw svg.draw.is-drawn path{stroke-dashoffset:0;opacity:1}
+
+/* ---------- article pages ---------- */
+.article{display:flex;flex-direction:column;gap:44px}
+.a-head{position:relative;isolation:isolate;max-width:860px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center;padding-top:40px}
+.a-plate{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:340px;height:auto;color:var(--line);z-index:-1}
+.a-head h1{font-family:var(--serif);font-size:clamp(44px,6vw,80px);line-height:.96;font-weight:600;letter-spacing:-.015em}
+.a-head .lead{max-width:680px}
+.draft{color:var(--muted)}
+p.draft{margin-top:24px;font-size:13px}
+.a-hero .ph{height:min(56vw,600px)}
+.a-body{width:100%;max-width:700px;margin:0 auto;font-size:19px;line-height:1.7;color:var(--ink-2);display:flex;flex-direction:column;gap:22px}
+.a-body h2{font-family:var(--serif);font-size:36px;line-height:1.05;color:var(--ink);font-weight:600;margin-top:18px}
+.dropcap::first-letter{float:left;font-family:var(--serif);font-size:58px;line-height:1;font-weight:600;color:var(--ink);padding:13px 20px 15px;margin:2px 12px 0 -4px;background:url(https://lowca-smakow.netlify.app/img/orn/plate.svg) no-repeat center/contain}
+blockquote.pull{margin:28px 0;display:grid;grid-template-columns:30px 1fr 30px;gap:24px;align-items:center;text-align:center}
+.pull p{font-family:var(--serif);font-style:italic;font-weight:500;font-size:32px;line-height:1.18;color:var(--ink)}
+.pull svg{width:30px;height:120px;color:var(--ink)}
+.a-fig{margin:14px -90px}
+.a-fig .ph{height:460px}
+.a-recipe{display:flex;gap:20px;align-items:center;border:1px solid var(--line);background:var(--white);padding:16px;margin-top:24px}
+.a-recipe .ph{width:120px;height:120px;flex:none;padding:0}
+.a-recipe h2{margin:6px 0 4px;font-size:30px}
+.a-recipe h2 a{text-decoration:none}
+.a-recipe h2 a:hover{text-decoration:underline}
+.pill-history{position:relative;overflow:hidden}
+.pill-history>*:not(.pill-plate){position:relative}
+.pill-plate{position:absolute;right:-70px;top:-70px;width:220px;height:auto;color:var(--line)}
+.related .card h3{font-size:22px}
+
+
+
+
+/* Canva pages */
+body{margin:0}
+.canva-page{display:block;margin:0 auto 80px;overflow:hidden;background:var(--paper)}
+.canva-page.cook,.canva-page .cook{background:var(--night)}
+</style>
+</head>
+<body>
+<section data-document-role="page" data-label="Strona główna" class="canva-page " style="width:1440px">
+<div class="">
+
+
+<header class="site-header">
+  <div class="wrap masthead">
+    <div class="left">
+      <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle="">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      </button>
+    </div>
+    <a href="index.html" class="logo"><img src="https://lowca-smakow.netlify.app/img/logo.svg" alt="Łowca Smaków" width="199" height="96"></a>
+    <div class="header-actions">
+      <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu-toggle="">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      </button>
+      <a href="#newsletter" class="btn btn-ink">Newsletter</a>
+    </div>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Główne menu">
+      <a class="navlink" href="#nowe">Historie</a>
+      <a class="navlink" href="#przepisy">Przepisy</a>
+      <a class="navlink" href="#staropolska">Wideo</a>
+      <a class="navlink" href="#podroze">Podróże</a>
+      <a class="navlink" href="#regiony">Smaki regionów</a>
+      <a class="navlink" href="przepisy/slimaki-w-szarym-sosie.html#sklep">Sklep</a>
+  </nav>
+  
+</header>
+
+
+
+<main class="wrap" id="tresc">
+
+  <section class="hero" aria-label="Historia tygodnia">
+    <div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1627861446476-42fd9925e151?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Słoiki z kiszonymi ogórkami, koperkiem i czosnkiem" fetchpriority="high" decoding="async"></div>
+    <div class="hero-copy">
+      <p class="kicker">Antropologia jedzenia · Seria „Dlaczego jemy?”</p>
+      <h1>Dlaczego kisimy ogórki?</h1>
+      <svg class="flourish" viewBox="0 0 220 28" aria-hidden="true" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"><path pathLength="1" d="M2 18C40 18 70 18 92 16C104 15 112 6 106 4C99 2 96 14 104 20C112 26 124 22 128 14C131 8 124 4 120 10C116 16 126 18 140 18C170 18 196 18 218 18"></path></svg>
+      <p class="lead">Słoik ogórków w spiżarni to nie tylko smak dzieciństwa. To technologia starsza niż lodówka i jeden z najtrwalszych rytuałów polskiego roku.</p>
+      <p class="meta">3 min czytania · Przepis</p>
+      <div class="btns">
+        <a href="historie/dlaczego-kisimy-ogorki.html" class="btn btn-accent">Czytaj historię</a>
+        <a href="przepisy/ogorki-kiszone.html" class="btn btn-line">Przejdź do przepisu</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="nowe" aria-labelledby="h-nowe">
+    <div class="sec-head">
+      <h2 id="h-nowe">Nowe w tym tygodniu</h2>
+      <p class="meta">Poniedziałek · Środa · Niedziela</p>
+    </div>
+    <div class="grid grid-3">
+      <a href="historie/pierogi.html" class="card">
+        <div class="ph" style="height:240px"><img class="fill" src="https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ręce nakładające farsz na krążki ciasta na pierogi" decoding="async"></div>
+        <div class="card-body">
+          <p class="kicker">Poniedziałek · Antropologia</p>
+          <h3>Pierogi: danie, które każdy region ma za swoje</h3>
+          <p class="meta">Odcinek 1 z 12 · Artykuł + wideo</p>
+        </div>
+      </a>
+      <a href="historie/podhale-oscypek.html" class="card">
+        <div class="ph" style="height:240px"><img class="fill" src="https://images.unsplash.com/photo-1792582232028-0d8b0c703797?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Drewniany dom w stylu podhalańskim wśród jesiennych drzew" decoding="async"></div>
+        <div class="card-body">
+          <p class="kicker">Środa · Smaki regionów</p>
+          <h3>Podhale: smak, który je definiuje</h3>
+          <p class="meta">Część 1 z 16</p>
+        </div>
+      </a>
+      <a href="historie/bary-mleczne.html" class="card">
+        <div class="ph" style="height:240px"><img class="fill" src="https://images.unsplash.com/photo-1612966948332-81d747414a8f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Rosół z warzywami w porcelanowej wazie" decoding="async"></div>
+        <div class="card-body">
+          <p class="kicker">Niedziela · Gotujemy</p>
+          <h3>Skąd się wzięły bary mleczne?</h3>
+          <p class="meta">Historia + przepis</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="sec" id="staropolska" aria-labelledby="h-staro">
+    <div class="sec-head">
+      <h2 id="h-staro">Kuchnia staropolska</h2>
+      <a href="historie/kim-byl-czerniecki.html">Cała seria →</a>
+    </div>
+    <div class="feature">
+      <a href="historie/slimaki-wedlug-czernieckiego.html" class="card feature-main">
+        <div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Ślimaki w muszlach na żeliwnej patelni" decoding="async">
+
+      <span class="play"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></span>
+        </div>
+        <p class="kicker">Odcinek · Wideo [mm:ss]</p>
+        <h3>Ślimaki w szarym sosie piernikowym według Czernieckiego</h3>
+        <p class="body">Na fermie ślimaków odtwarzamy przepis z „Compendium ferculorum” z 1682 roku.</p>
+      </a>
+      <div class="feature-side">
+        <a href="historie/kim-byl-czerniecki.html" class="card row">
+          <div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1602660187275-7275b639d7ea?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Średniowieczny rękopis na pergaminie" decoding="async"></div>
+          <div class="card-body"><p class="kicker">Historia</p><h4>Kim był Stanisław Czerniecki?</h4></div>
+        </a>
+        <a href="przepisy/slimaki-w-szarym-sosie.html" class="card row">
+          <div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1768216604497-ecbf03ab5fa0?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Korzenne ciasto z orzechami i lukrem" decoding="async"></div>
+          <div class="card-body"><p class="kicker">Przepis</p><h4>Szary sos piernikowy — wersja współczesna</h4></div>
+        </a>
+        <a href="historie/przyprawy-staropolskie.html" class="card row">
+          <div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1467688695332-6b486449d78f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Strony dawnej księgi zapisane gotyckim pismem" decoding="async"></div>
+          <div class="card-body"><p class="kicker">Historia</p><h4>Pieprz, szafran, imbir: kuchnia, która pachniała bogactwem</h4></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="regions" id="regiony" aria-labelledby="h-regiony" data-regions="">
+    <div class="map" role="group" aria-label="Mapa województw (schemat)">
+      <div class="tiles">
+        <button type="button" class="tile" data-region="Zachodniopomorskie" aria-pressed="false">Zachodnio­pomorskie</button>
+        <button type="button" class="tile" data-region="Pomorskie" aria-pressed="false">Pomorskie</button>
+        <button type="button" class="tile" data-region="Warmińsko-mazurskie" aria-pressed="false">Warmińsko-mazurskie</button>
+        <button type="button" class="tile" data-region="Podlaskie" aria-pressed="false">Podlaskie</button>
+        <button type="button" class="tile" data-region="Lubuskie" aria-pressed="false">Lubuskie</button>
+        <button type="button" class="tile" data-region="Kujawsko-pomorskie" aria-pressed="false">Kujawsko-pomorskie</button>
+        <button type="button" class="tile" data-region="Mazowieckie" aria-pressed="false">Mazowieckie</button>
+        <button type="button" class="tile" data-region="Lubelskie" aria-pressed="false">Lubelskie</button>
+        <button type="button" class="tile" data-region="Wielkopolskie" aria-pressed="false">Wielkopolskie</button>
+        <button type="button" class="tile" data-region="Łódzkie" aria-pressed="false">Łódzkie</button>
+        <button type="button" class="tile" data-region="Świętokrzyskie" aria-pressed="false">Święto­krzyskie</button>
+        <button type="button" class="tile" data-region="Podkarpackie" aria-pressed="false">Podkarpackie</button>
+        <button type="button" class="tile" data-region="Dolnośląskie" aria-pressed="false">Dolnośląskie</button>
+        <button type="button" class="tile" data-region="Opolskie" aria-pressed="false">Opolskie</button>
+        <button type="button" class="tile" data-region="Śląskie" aria-pressed="false">Śląskie</button>
+        <button type="button" class="tile" data-region="Małopolskie" aria-pressed="false">Małopolskie</button>
+      </div>
+    </div>
+    <div class="regions-copy">
+      <p class="kicker">Seria w 16 częściach</p>
+      <h2 id="h-regiony">Smaki regionów</h2>
+      <p class="body">Każde województwo: jeden smak, jego historia i przepis. Wybierz region na mapie.</p>
+      <div class="chips">
+        <button type="button" class="chip" data-region="Podkarpackie" aria-pressed="false">Podkarpackie</button>
+        <button type="button" class="chip" data-region="Świętokrzyskie" aria-pressed="false">Świętokrzyskie</button>
+        <button type="button" class="chip" data-region="Małopolskie" aria-pressed="false">Małopolskie</button>
+        <button type="button" class="chip" data-region="Lubelskie" aria-pressed="false">Lubelskie</button>
+        <button type="button" class="chip" data-region="Śląskie" aria-pressed="false">Śląskie</button>
+        <button type="button" class="chip" data-region="Pomorskie" aria-pressed="false">Pomorskie</button>
+        <button type="button" class="chip" data-region="Podlaskie" aria-pressed="false">Podlaskie</button>
+        <a href="#regiony" class="chip" data-regions-more="">+ 9 kolejnych</a>
+      </div>
+      <p class="region-pick" aria-live="polite" data-region-out=""></p>
+    </div>
+  </section>
+
+  <section class="sec" id="przepisy" aria-labelledby="h-przepisy" data-recipes="">
+    <div class="sec-head">
+      <h2 id="h-przepisy">Przepisy</h2>
+      <a href="#przepisy">Wszystkie przepisy →</a>
+    </div>
+    <div class="chips" role="group" aria-label="Filtruj przepisy">
+      <button type="button" class="chip" data-filter="all" aria-pressed="true">Wszystkie</button>
+      <button type="button" class="chip" data-filter="kiszonki" aria-pressed="false">Kiszonki</button>
+      <button type="button" class="chip" data-filter="staropolskie" aria-pressed="false">Staropolskie</button>
+      <button type="button" class="chip" data-filter="podroze" aria-pressed="false">Z podróży</button>
+      <button type="button" class="chip" data-filter="codzien" aria-pressed="false">Na co dzień</button>
+      <button type="button" class="chip" data-filter="sezonowe" aria-pressed="false">Sezonowe</button>
+    </div>
+    <div class="grid grid-4">
+      <a href="przepisy/slimaki-w-szarym-sosie.html" class="card sm" data-cat="staropolskie">
+        <div class="ph" style="height:300px"><img class="fill" src="https://images.unsplash.com/photo-1549413468-24b18ebf5d9c?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimaki zapiekane z masłem ziołowym w ceramicznym naczyniu" decoding="async"></div>
+        <p class="meta">Staropolskie · 70 min</p>
+        <h3>Ślimaki w szarym sosie</h3>
+      </a>
+      <a href="przepisy/birria-tacos.html" class="card sm" data-cat="podroze">
+        <div class="ph" style="height:300px"><img class="fill" src="https://images.unsplash.com/photo-1585803518902-58a3ef005b51?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Tacos de birria z cebulą i kolendrą, obok miska consommé" decoding="async"></div>
+        <p class="meta">Z podróży · Meksyk · 4 h</p>
+        <h3>Birria tacos</h3>
+      </a>
+      <a href="przepisy/ogorki-kiszone.html" class="card sm" data-cat="kiszonki">
+        <div class="ph" style="height:300px"><img class="fill" src="https://images.unsplash.com/photo-1462536546956-beef6399d8cf?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Małe ogórki w durszlaku obok pęczka koperku" decoding="async"></div>
+        <p class="meta">Kiszonki · 3–7 dni</p>
+        <h3>Ogórki kiszone babci</h3>
+      </a>
+      <a href="przepisy/papa-a-la-huancaina.html" class="card sm" data-cat="podroze">
+        <div class="ph" style="height:300px"><img class="fill" src="https://images.unsplash.com/photo-1633959639799-6d3f66e05710?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Pieczone ziemniaki z natką pietruszki na talerzu" decoding="async"></div>
+        <p class="meta">Z podróży · Peru · 45 min</p>
+        <h3>Papa a la huancaína</h3>
+      </a>
+    </div>
+    <p class="meta" aria-live="polite" data-recipes-empty="" hidden="">Wkrótce więcej przepisów w tej kategorii.</p>
+  </section>
+
+  <section class="sec" id="podroze" aria-labelledby="h-podroze">
+    <div class="sec-head">
+      <h2 id="h-podroze">Z podróży</h2>
+      <a href="historie/peru-ziemniaki.html">Wszystkie reportaże →</a>
+    </div>
+    <div class="grid grid-travel">
+      <a href="historie/peru-ziemniaki.html" class="card">
+        <div class="ph" style="height:260px"><img class="fill" src="https://images.unsplash.com/photo-1683543124235-400a2b31cc73?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ziemniaki na straganie targowym" decoding="async"></div>
+        <p class="kicker">Peru</p>
+        <h3>Tysiące odmian: w Andach ziemniak to nie jedno warzywo</h3>
+      </a>
+      <a href="historie/meksyk-chile.html" class="card">
+        <div class="ph" style="height:260px"><img class="fill" src="https://images.unsplash.com/photo-1752627580142-8ea39c4eac64?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Czerwone papryczki chile suszące się na słońcu" decoding="async"></div>
+        <p class="kicker">Meksyk</p>
+        <h3>Jalisco: skąd birria bierze kolor i ogień</h3>
+      </a>
+      <a href="historie/oaxaca-targ.html" class="card">
+        <div class="ph" style="height:260px"><img class="fill" src="https://images.unsplash.com/photo-1545504573-edac76c6a487?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Kobieta przygotowująca jedzenie na ulicznym targu" decoding="async"></div>
+        <p class="kicker">Meksyk, Oaxaca</p>
+        <h3>Dzień na targu: jedzenie, które gotuje się na oczach klienta</h3>
+      </a>
+    </div>
+  </section>
+
+  <section class="newsletter" id="newsletter" aria-labelledby="h-nl">
+    <div class="nl-copy">
+      <svg class="setting" viewBox="0 0 420 170" aria-hidden="true" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"><g transform="translate(70 5)"><path pathLength="1" d="M8 4V38C8 50 14 56 17 58V152C17 157 23 157 23 152V58C26 56 32 50 32 38V4M14.5 4V34M20 4V34M25.5 4V34"></path></g><g transform="translate(130 0) scale(.8)"><path pathLength="1" d="M100 8C151 8 192 49 192 100C192 151 151 192 100 192C49 192 8 151 8 100C8 49 49 8 110 8.6"></path><path pathLength="1" d="M100 28C140 28 172 60 172 100C172 140 140 172 100 172C60 172 28 140 28 100C28 60 60 28 106 28.3"></path></g><g transform="translate(305 5)"><path pathLength="1" d="M21 4C31 12 33 42 30 70C29 79 25 82 25 87V152C25 157 17 157 17 152V84C13 72 12 32 21 4Z"></path></g><path pathLength="1" d="M2 96C20 96 30 84 26 76C22 68 12 74 16 84C20 94 40 98 70 92"></path><path pathLength="1" d="M348 92C376 98 396 94 400 84C404 74 394 68 390 76C386 84 396 96 418 96"></path><path pathLength="1" d="M262 140C280 150 300 140 318 110"></path></svg>
+      <h2 id="h-nl">Jedna historia. Jeden przepis. Co tydzień.</h2>
+      <p>Antropologia jedzenia prosto do skrzynki — bez spamu.</p>
+    </div>
+    <form class="nl-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-newsletter="">
+      <input type="hidden" name="form-name" value="newsletter">
+      <p class="sr-only"><label>Nie wypełniaj <input name="bot-field" tabindex="-1"></label></p>
+      <label for="nl-email">Adres e-mail</label>
+      <div class="nl-row">
+        <input id="nl-email" name="email" type="email" required="" placeholder="ty@przyklad.pl" autocomplete="email">
+        <button type="submit">Zapisz się</button>
+      </div>
+      <p class="nl-msg" aria-live="polite" data-nl-msg=""></p>
+    </form>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-about">
+      <a href="index.html" class="logo"><img src="https://lowca-smakow.netlify.app/img/logo-white.svg" alt="Łowca Smaków" width="248" height="120"></a>
+      <p>Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Stopka">
+      <div><a href="#nowe">Historie</a><a href="#przepisy">Przepisy</a><a href="#staropolska">Wideo</a></div>
+      <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
+      <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>
+    </nav>
+    <p class="meta credits">Zdjęcia zastępcze: <a href="https://unsplash.com/@twalton?utm_source=lowca_smakow&amp;utm_medium=referral">Townsend Walton</a>, <a href="https://unsplash.com/@jakubzerdzicki?utm_source=lowca_smakow&amp;utm_medium=referral">Jakub Żerdzicki</a>, <a href="https://unsplash.com/@maharram?utm_source=lowca_smakow&amp;utm_medium=referral">Maharram Hasanli</a>, <a href="https://unsplash.com/@rabbit_in_blue?utm_source=lowca_smakow&amp;utm_medium=referral">Karolina Kołodziejczak</a>, <a href="https://unsplash.com/@aliphotos_86?utm_source=lowca_smakow&amp;utm_medium=referral">Ali Robins</a>, <a href="https://unsplash.com/@boudewijn_huysmans?utm_source=lowca_smakow&amp;utm_medium=referral">Boudewijn Huysmans</a>, <a href="https://unsplash.com/@ksyfffka07?utm_source=lowca_smakow&amp;utm_medium=referral">Ksenia Yakovleva</a>, <a href="https://unsplash.com/@mrasmuson?utm_source=lowca_smakow&amp;utm_medium=referral">Mark Rasmuson</a>, <a href="https://unsplash.com/@orlovamaria?utm_source=lowca_smakow&amp;utm_medium=referral">Maria Orlova</a>, <a href="https://unsplash.com/@diegonacho?utm_source=lowca_smakow&amp;utm_medium=referral">Diego Lozano</a>, <a href="https://unsplash.com/@jonathanpielmayer?utm_source=lowca_smakow&amp;utm_medium=referral">Jonathan Pielmayer</a>, <a href="https://unsplash.com/@markuswinkler?utm_source=lowca_smakow&amp;utm_medium=referral">Markus Winkler</a>, <a href="https://unsplash.com/@enginakyurt?utm_source=lowca_smakow&amp;utm_medium=referral">engin akyurt</a>, <a href="https://unsplash.com/@maranthi?utm_source=lowca_smakow&amp;utm_medium=referral">stephan de MARANTHI</a>, <a href="https://unsplash.com/@dlerman6?utm_source=lowca_smakow&amp;utm_medium=referral">Daniel Lerman</a> · <a href="https://unsplash.com/?utm_source=lowca_smakow&amp;utm_medium=referral">Unsplash</a></p>
+    <p class="meta copyright">© 2026 Savour Ventures OÜ</p>
+  </div>
+</footer>
+
+
+
+
+</div>
+</section>
+
+<section data-document-role="page" data-label="Artykuł" class="canva-page article-page" style="width:1440px">
+<div class="article-page">
+
+
+<header class="site-header">
+  <div class="wrap masthead">
+    <div class="left">
+      <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle="">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      </button>
+    </div>
+    <a href="https://lowca-smakow.netlify.app/" class="logo"><img src="https://lowca-smakow.netlify.app/img/logo.svg" alt="Łowca Smaków" width="199" height="96"></a>
+    <div class="header-actions">
+      <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu-toggle="">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Główne menu">
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#nowe">Historie</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#przepisy">Przepisy</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#podroze">Podróże</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#regiony">Smaki regionów</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/przepisy/slimaki-w-szarym-sosie.html#sklep">Sklep</a>
+  </nav>
+  
+</header>
+
+<main class="wrap" id="tresc">
+
+  <nav class="crumbs" aria-label="Ścieżka">
+    <a href="https://lowca-smakow.netlify.app/">Strona główna</a><span aria-hidden="true">›</span><span>Historie</span>
+  </nav>
+
+  <article class="article">
+    <header class="a-head">
+      <svg class="a-plate" viewBox="0 0 210 200" aria-hidden="true" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"><path pathLength="1" d="M100 8C151 8 192 49 192 100C192 151 151 192 100 192C49 192 8 151 8 100C8 49 49 8 110 8.6"></path><path pathLength="1" d="M100 28C140 28 172 60 172 100C172 140 140 172 100 172C60 172 28 140 28 100C28 60 60 28 106 28.3"></path><path pathLength="1" d="M162 162C176 176 190 176 198 166"></path></svg>
+      <p class="kicker">Antropologia jedzenia · Seria „Dlaczego jemy?”</p>
+      <h1>Dlaczego kisimy ogórki?</h1>
+      <p class="lead">Słoik ogórków w spiżarni to nie tylko smak dzieciństwa. To technologia starsza niż lodówka, mikrobiologia, której nikt nie musiał rozumieć, żeby ją opanować, i jeden z najtrwalszych rytuałów polskiego roku.</p>
+      <p class="meta">2 min czytania · <span class="draft">Tekst roboczy, do weryfikacji przed publikacją</span></p>
+    </header>
+    <figure class="a-hero"><div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1627861446476-42fd9925e151?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Słoiki z kiszonymi ogórkami, koperkiem i czosnkiem" fetchpriority="high" decoding="async"></div></figure>
+    <div class="a-body">
+      <p class="dropcap">Zanim pojawiły się chłodnie i konserwy, każda jesień stawiała to samo pytanie: jak przetrwać do wiosny? Zboże dało się wysuszyć, mięso uwędzić, a warzywa? Rozwiązaniem okazała się sól, woda i cierpliwość.</p>
+      <h2>Bakterie, które pracują za nas</h2>
+      <p>Kiszenie to fermentacja mlekowa. Bakterie kwasu mlekowego, obecne naturalnie na skórce ogórka, w słonej zalewie mają przewagę nad drobnoustrojami, które powodują psucie. Zjadają cukry z warzyw i wytwarzają kwas mlekowy. Im kwaśniej w słoiku, tym trudniej o pleśń i gnicie. Sól nie konserwuje tu sama: ona tylko wybiera zwycięzcę.</p>
+      <p>Stąd domowe zasady, przekazywane bez tłumaczenia: sól kamienna, nie jodowana; ogórki pod zalewą, nie ponad nią; ciepło na start, chłód na później. Każda z nich ma uzasadnienie w biologii, choć powstała długo przed mikroskopem.</p>
+      <figure class="a-fig"><div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1462536546956-beef6399d8cf?auto=format&amp;fit=crop&amp;q=70&amp;w=800" alt="Małe ogórki w durszlaku obok pęczka koperku" decoding="async"></div></figure>
+      <h2>Dlaczego koper, chrzan i liść wiśni?</h2>
+      <p>Przyprawy w słoiku to nie dekoracja. Chrzan i liście wiśni czy dębu zawierają garbniki, które pomagają ogórkom zachować jędrność. Czosnek i koper dodają aromatu, który dla wielu z nas jest po prostu „smakiem ogórka”. Proporcje różnią się w każdym domu, i właśnie o te różnice najczęściej toczą się rodzinne spory.</p>
+      <blockquote class="pull"><svg class="pull-fork" viewBox="0 0 40 160" aria-hidden="true" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"><path pathLength="1" d="M8 4V38C8 50 14 56 17 58V152C17 157 23 157 23 152V58C26 56 32 50 32 38V4M14.5 4V34M20 4V34M25.5 4V34"></path></svg><p>Kiszenie to umowa z czasem: oddajesz mu tydzień, a on zwraca ci zimę.</p><svg class="pull-knife" viewBox="0 0 42 160" aria-hidden="true" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"><path pathLength="1" d="M21 4C31 12 33 42 30 70C29 79 25 82 25 87V152C25 157 17 157 17 152V84C13 72 12 32 21 4Z"></path></svg></blockquote>
+      <h2>Od spiżarni do sklepowej półki</h2>
+      <p>Kiszone warzywa jedzą ludzie w całej Europie Środkowo-Wschodniej, a fermentowane przetwory znają kuchnie od Korei po Niemcy. W Polsce kiszonki przetrwały industrializację lepiej niż wiele innych zwyczajów: wciąż kisimy w domach, a ogórki małosolne są latem równie oczywiste jak truskawki.</p>
+      <p>W tym odcinku serii „Dlaczego jemy?” sprawdzamy, co z tej tradycji wynika dla zdrowia, smaku i pamięci. A na koniec: przepis na ogórki babci, z liczbami, które da się powtórzyć.</p>
+      
+      <aside class="a-recipe" aria-label="Przepis do tego tekstu">
+        <div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1462536546956-beef6399d8cf?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Małe ogórki w durszlaku obok pęczka koperku" decoding="async"></div>
+        <div>
+          <p class="kicker">Przepis do tego tekstu</p>
+          <h2><a href="https://lowca-smakow.netlify.app/przepisy/ogorki-kiszone.html">Ogórki kiszone babci</a></h2>
+          <p class="meta">Kiszonki · 3–7 dni</p>
+        </div>
+      </aside>
+    </div>
+  </article>
+
+  <section class="sec related" aria-labelledby="h-related">
+    <div class="sec-head">
+      <h2 id="h-related">Czytaj dalej</h2>
+      
+    </div>
+    <div class="grid grid-4">
+      <a href="https://lowca-smakow.netlify.app/przepisy/ogorki-kiszone.html" class="card sm"><div class="ph" style="height:220px"><img class="fill" src="https://images.unsplash.com/photo-1462536546956-beef6399d8cf?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Małe ogórki w durszlaku obok pęczka koperku" decoding="async"></div><p class="kicker">Przepis</p><h3>Ogórki kiszone babci</h3></a>
+      <a href="https://lowca-smakow.netlify.app/historie/pierogi.html" class="card sm"><div class="ph" style="height:220px"><img class="fill" src="https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ręce nakładające farsz na krążki ciasta na pierogi" decoding="async"></div><p class="kicker">Poniedziałek</p><h3>Pierogi: danie, które każdy region ma za swoje</h3></a>
+      <a href="https://lowca-smakow.netlify.app/historie/bary-mleczne.html" class="card sm"><div class="ph" style="height:220px"><img class="fill" src="https://images.unsplash.com/photo-1612966948332-81d747414a8f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Rosół z warzywami w porcelanowej wazie" decoding="async"></div><p class="kicker">Niedziela</p><h3>Skąd się wzięły bary mleczne?</h3></a>
+    </div>
+  </section>
+
+  <section class="newsletter slim" aria-labelledby="h-nl">
+    <div class="nl-copy">
+      <svg class="flourish" viewBox="0 0 220 28" aria-hidden="true" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"><path pathLength="1" d="M2 18C40 18 70 18 92 16C104 15 112 6 106 4C99 2 96 14 104 20C112 26 124 22 128 14C131 8 124 4 120 10C116 16 126 18 140 18C170 18 196 18 218 18"></path></svg>
+      <h2 id="h-nl">Jedna historia. Jeden przepis. Co tydzień.</h2>
+    </div>
+    <form class="nl-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-newsletter="">
+      <input type="hidden" name="form-name" value="newsletter">
+      <p class="sr-only"><label>Nie wypełniaj <input name="bot-field" tabindex="-1"></label></p>
+      <label for="nl2" class="sr-only">Adres e-mail</label>
+      <div class="nl-row">
+        <input id="nl2" name="email" type="email" required="" placeholder="ty@przyklad.pl" autocomplete="email">
+        <button type="submit">Zapisz się</button>
+      </div>
+      <p class="nl-msg" aria-live="polite" data-nl-msg=""></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer slim">
+  <div class="wrap">
+    <a href="https://lowca-smakow.netlify.app/" class="logo"><img src="https://lowca-smakow.netlify.app/img/logo-white.svg" alt="Łowca Smaków" width="149" height="72"></a>
+    <p class="meta">© 2026 Savour Ventures OÜ</p>
+    <p class="meta credits">Zdjęcia zastępcze: <a href="https://unsplash.com/@twalton?utm_source=lowca_smakow&amp;utm_medium=referral">Townsend Walton</a>, <a href="https://unsplash.com/@jonathanpielmayer?utm_source=lowca_smakow&amp;utm_medium=referral">Jonathan Pielmayer</a>, <a href="https://unsplash.com/@jakubzerdzicki?utm_source=lowca_smakow&amp;utm_medium=referral">Jakub Żerdzicki</a>, <a href="https://unsplash.com/@rabbit_in_blue?utm_source=lowca_smakow&amp;utm_medium=referral">Karolina Kołodziejczak</a> · <a href="https://unsplash.com/?utm_source=lowca_smakow&amp;utm_medium=referral">Unsplash</a></p>
+  </div>
+</footer>
+
+
+
+
+</div>
+</section>
+
+<section data-document-role="page" data-label="Przepis" class="canva-page recipe" style="width:1440px">
+<div class="recipe">
+
+
+<header class="site-header">
+  <div class="wrap masthead">
+    <div class="left">
+      <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle="">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      </button>
+    </div>
+    <a href="https://lowca-smakow.netlify.app/" class="logo"><img src="https://lowca-smakow.netlify.app/img/logo.svg" alt="Łowca Smaków" width="199" height="96"></a>
+    <div class="header-actions">
+      <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu-toggle="">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Główne menu">
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#nowe">Historie</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#przepisy" aria-current="page">Przepisy</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#staropolska">Wideo</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#podroze">Podróże</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/#regiony">Smaki regionów</a>
+    <a class="navlink" href="https://lowca-smakow.netlify.app/przepisy/slimaki-w-szarym-sosie.html#sklep">Sklep</a>
+  </nav>
+  
+</header>
+
+<main class="wrap" id="tresc">
+
+  <nav class="crumbs" aria-label="Ścieżka">
+    <a href="https://lowca-smakow.netlify.app/#przepisy">Przepisy</a><span aria-hidden="true">›</span><a href="https://lowca-smakow.netlify.app/#staropolska">Kuchnia staropolska</a><span aria-hidden="true">›</span><span aria-current="page">Ślimaki w szarym sosie</span>
+  </nav>
+
+  <section class="r-head">
+    <div class="r-title">
+      <p class="kicker">Przepis · Kuchnia staropolska</p>
+      <h1>Ślimaki w szarym sosie</h1>
+      <p class="sub">Według Stanisława Czernieckiego, „Compendium ferculorum” (1682)</p>
+    </div>
+    <dl class="r-stats">
+      <div><dt class="meta">Przygotowanie</dt><dd>30 min</dd></div>
+      <div><dt class="meta">Gotowanie</dt><dd>40 min</dd></div>
+      <div><dt class="meta" data-servings-label="">Porcje</dt><dd data-servings-stat="">4</dd></div>
+      <div><dt class="meta">Trudność</dt><dd>Średnia</dd></div>
+    </dl>
+  </section>
+
+  <div class="tools">
+    <a href="#skladniki" class="tool primary">Do przepisu ↓</a>
+    <a href="https://lowca-smakow.netlify.app/gotowanie.html?r=slimaki-w-szarym-sosie" class="tool">
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="2"></rect><path d="M11 18h2"></path></svg>
+      Tryb gotowania</a>
+    <button type="button" class="tool" data-print="">
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9V3h12v6"></path><rect x="4" y="9" width="16" height="8" rx="1"></rect><path d="M7 14h10v7H7z"></path></svg>
+      Drukuj</button>
+    <button type="button" class="tool" aria-pressed="false" data-save="">
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"></path></svg>
+      <span>Zapisz</span></button>
+    <button type="button" class="tool" data-share="">
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>
+      <span>Udostępnij</span></button>
+  </div>
+
+  <section class="r-media">
+    <div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0?auto=format&amp;fit=crop&amp;q=70&amp;w=1200" alt="Ślimaki w muszlach na żeliwnej patelni" fetchpriority="high" decoding="async">
+      <button type="button" class="watch" disabled="" title="Wideo wkrótce"><span><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M8 5v14l11-7z"></path></svg></span>Obejrzyj odcinek · [mm:ss]</button>
+    </div>
+    <aside class="pill-history" aria-labelledby="h-pigulka">
+      <svg class="pill-plate" viewBox="0 0 210 200" aria-hidden="true" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"><path pathLength="1" d="M100 8C151 8 192 49 192 100C192 151 151 192 100 192C49 192 8 151 8 100C8 49 49 8 110 8.6"></path><path pathLength="1" d="M100 28C140 28 172 60 172 100C172 140 140 172 100 172C60 172 28 140 28 100C28 60 60 28 106 28.3"></path><path pathLength="1" d="M162 162C176 176 190 176 198 166"></path></svg>
+      <p class="kicker" id="h-pigulka">Historia w pigułce</p>
+      <div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1519884705082-b505c3001e63?auto=format&amp;fit=crop&amp;q=70&amp;w=800" alt="Stara, otwarta księga w ciepłym świetle" decoding="async"></div>
+      <p class="serif">Czerniecki, kuchmistrz na dworze Lubomirskich, wydał w 1682 roku pierwszą książkę kucharską napisaną po polsku. Szary sos, słodko-kwaśny, z piernikiem, był jednym z filarów kuchni szlacheckiej.</p>
+      <p class="body" style="font-size:15px">W dawnej Polsce ślimaki jadano zwłaszcza w poście: Kościół nie zaliczał ich do mięsa. Dziś Polska hoduje je głównie na eksport.</p>
+      <a href="https://lowca-smakow.netlify.app/historie/slimaki-wedlug-czernieckiego.html" style="font-weight:600;font-size:15px">Przeczytaj całą historię →</a>
+    </aside>
+  </section>
+
+  <section class="r-body" id="skladniki">
+    <div class="ingredients">
+      <div class="ing-head">
+        <h2>Składniki</h2>
+        <div class="stepper">
+          <button type="button" class="step-btn" aria-label="Mniej" data-dec="">−</button>
+          <output aria-live="polite" data-servings="">4 porcje</output>
+          <button type="button" class="step-btn" aria-label="Więcej" data-inc="">+</button>
+        </div>
+      </div>
+      <div class="tools" role="group" aria-label="Jednostki">
+        <button type="button" class="tool sm" aria-pressed="true" data-units="metric">Metryczne</button>
+        <button type="button" class="tool sm" aria-pressed="false" data-units="cups">Szklanki i łyżki</button>
+      </div>
+      <ul class="ing-list" data-ingredients=""><li><label><input type="checkbox"><span class="name">Ślimaki winniczki z hodowli, oczyszczone i zblanszowane</span><span class="qty">24 szt.</span></label></li><li><label><input type="checkbox"><span class="name">Cebula</span><span class="qty">1 szt.</span></label></li><li><label><input type="checkbox"><span class="name">Masło</span><span class="qty">30 g</span></label></li><li><label><input type="checkbox"><span class="name">Piernik, pokruszony</span><span class="qty">60 g</span></label></li><li><label><input type="checkbox"><span class="name">Czerwone wino, wytrawne</span><span class="qty">250 ml</span></label></li><li><label><input type="checkbox"><span class="name">Ocet winny</span><span class="qty">30 ml</span></label></li><li><label><input type="checkbox"><span class="name">Miód</span><span class="qty">15 ml</span></label></li><li><label><input type="checkbox"><span class="name">Rodzynki</span><span class="qty">30 g</span></label></li><li><label><input type="checkbox"><span class="name">Migdały w płatkach</span><span class="qty">20 g</span></label></li><li><label><input type="checkbox"><span class="name">Bulion warzywny</span><span class="qty">250 ml</span></label></li><li><label><input type="checkbox"><span class="name">Pieprz, imbir, 2 goździki</span><span class="qty">do smaku</span></label></li></ul>
+      
+      <div class="shop" id="sklep">
+        <div class="ph"><img class="fill" src="https://images.unsplash.com/photo-1611255951322-7ba28f02b2d5?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Słoiczki z rozsypanymi przyprawami" decoding="async"></div>
+        <div>
+          <p class="label">Sklep · wkrótce</p>
+          <p style="font-weight:600">[Mieszanka przypraw „Staropolska”]</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="method">
+      <h2>Przygotowanie</h2>
+      <ol class="steps" data-steps=""><li><span class="n">1</span><div class="txt"><h3>Przygotuj ślimaki</h3><p>Ślimaki z hodowli kupisz już oczyszczone i zblanszowane, mrożone albo w zalewie. Rozmroź je w lodówce, przepłucz zimną wodą i osusz. Jeśli są w muszlach, wyjmij mięso wykałaczką, a muszle umyj: przydadzą się do podania.</p></div></li><li><span class="n">2</span><div class="txt"><h3>Zeszklij cebulę na maśle</h3><p>Cebulę posiekaj drobno. W szerokim rondlu rozgrzej masło i duś cebulę na małym ogniu, aż będzie miękka i szklista, ale nie zrumieniona.</p><button type="button" class="tool sm timer" style="align-self: flex-start;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2M10 2h4"></path></svg><span>Minutnik · 08:00</span></button></div></li><li><span class="n">3</span><div class="txt"><h3>Zrób bazę sosu z wina, octu i bulionu</h3><p>Wlej wino, ocet i bulion, dodaj szczyptę pieprzu i imbiru oraz dwa goździki. Gotuj bez przykrycia, aż płyn zredukuje się mniej więcej o jedną trzecią.</p><button type="button" class="tool sm timer" style="align-self: flex-start;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2M10 2h4"></path></svg><span>Minutnik · 10:00</span></button></div></li><li><span class="n">4</span><div class="txt"><h3>Zagęść piernikiem, dodaj miód i bakalie</h3><p>Wyjmij goździki. Wsyp pokruszony piernik i mieszaj, aż się rozpuści, a sos zgęstnieje i nabierze szarobrązowego koloru. Dodaj miód, rodzynki i migdały.</p></div></li><li><span class="n">5</span><div class="txt"><h3>Duś ślimaki w sosie</h3><p>Włóż ślimaki do sosu i duś pod przykryciem na bardzo małym ogniu, mieszając od czasu do czasu. Zbyt mocny ogień sprawi, że staną się gumowate.</p><button type="button" class="tool sm timer" style="align-self: flex-start;"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2M10 2h4"></path></svg><span>Minutnik · 15:00</span></button></div></li><li><span class="n">6</span><div class="txt"><h3>Dopraw i podawaj</h3><p>Spróbuj i zrównoważ smak: odrobina octu, jeśli sos jest za słodki, łyżeczka miodu, jeśli za kwaśny. Podawaj w muszlach albo na grzance z ciemnego chleba.</p></div></li></ol>
+      <div class="sources"><p class="kicker">Źródła</p><p>Czerniecki S., <i>Compendium ferculorum albo zebranie potraw</i>, Kraków 1682.</p></div>
+      <p class="meta draft">Przepis roboczy: ilości i czasy do sprawdzenia w kuchni przed publikacją.</p>
+    </div>
+  </section>
+
+  <section class="sec related" aria-labelledby="h-related">
+    <div class="sec-head">
+      <h2 id="h-related">Z tej samej opowieści</h2>
+      <p class="meta">Dobrane po serii, regionie i składnikach</p>
+    </div>
+    <div class="grid grid-4">
+      <a href="https://lowca-smakow.netlify.app/historie/ferma-slimakow.html" class="card sm"><div class="ph" style="height:220px"><img class="fill" src="https://images.unsplash.com/photo-1621447096587-2f9d8fa16953?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Ślimak na zielonych liściach" decoding="async"></div><p class="kicker">Wideo</p><h3>Na fermie ślimaków: kulisy odcinka</h3></a>
+      <a href="https://lowca-smakow.netlify.app/historie/kim-byl-czerniecki.html" class="card sm"><div class="ph" style="height:220px"><img class="fill" src="https://images.unsplash.com/photo-1602660187275-7275b639d7ea?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Średniowieczny rękopis na pergaminie" decoding="async"></div><p class="kicker">Historia</p><h3>Kim był Stanisław Czerniecki?</h3></a>
+      <a href="https://lowca-smakow.netlify.app/historie/przyprawy-staropolskie.html" class="card sm"><div class="ph" style="height:220px"><img class="fill" src="https://images.unsplash.com/photo-1467688695332-6b486449d78f?auto=format&amp;fit=crop&amp;q=70&amp;w=480" alt="Strony dawnej księgi zapisane gotyckim pismem" decoding="async"></div><p class="kicker">Historia</p><h3>Pieprz, szafran, imbir: kuchnia, która pachniała bogactwem</h3></a>
+    </div>
+  </section>
+
+  <section class="newsletter slim" aria-labelledby="h-nl">
+    <div class="nl-copy">
+      <svg class="flourish" viewBox="0 0 220 28" aria-hidden="true" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"><path pathLength="1" d="M2 18C40 18 70 18 92 16C104 15 112 6 106 4C99 2 96 14 104 20C112 26 124 22 128 14C131 8 124 4 120 10C116 16 126 18 140 18C170 18 196 18 218 18"></path></svg>
+      <h2 id="h-nl">Jedna historia. Jeden przepis. Co tydzień.</h2>
+    </div>
+    <form class="nl-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-newsletter="">
+      <input type="hidden" name="form-name" value="newsletter">
+      <p class="sr-only"><label>Nie wypełniaj <input name="bot-field" tabindex="-1"></label></p>
+      <label for="nl2" class="sr-only">Adres e-mail</label>
+      <div class="nl-row">
+        <input id="nl2" name="email" type="email" required="" placeholder="ty@przyklad.pl" autocomplete="email">
+        <button type="submit">Zapisz się</button>
+      </div>
+      <p class="nl-msg" aria-live="polite" data-nl-msg=""></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer slim">
+  <div class="wrap">
+    <a href="https://lowca-smakow.netlify.app/" class="logo"><img src="https://lowca-smakow.netlify.app/img/logo-white.svg" alt="Łowca Smaków" width="149" height="72"></a>
+    <p class="meta">© 2026 Savour Ventures OÜ</p>
+    <p class="meta credits">Zdjęcia zastępcze: <a href="https://unsplash.com/@aliphotos_86?utm_source=lowca_smakow&amp;utm_medium=referral">Ali Robins</a>, <a href="https://unsplash.com/@svalenas?utm_source=lowca_smakow&amp;utm_medium=referral">Sergiu Vălenaș</a>, <a href="https://unsplash.com/@diana_pole?utm_source=lowca_smakow&amp;utm_medium=referral">Diana Polekhina</a>, <a href="https://unsplash.com/@o_piau?utm_source=lowca_smakow&amp;utm_medium=referral">Olivier Piau</a>, <a href="https://unsplash.com/@boudewijn_huysmans?utm_source=lowca_smakow&amp;utm_medium=referral">Boudewijn Huysmans</a>, <a href="https://unsplash.com/@mrasmuson?utm_source=lowca_smakow&amp;utm_medium=referral">Mark Rasmuson</a> · <a href="https://unsplash.com/?utm_source=lowca_smakow&amp;utm_medium=referral">Unsplash</a></p>
+  </div>
+</footer>
+
+
+
+
+
+
+</div>
+</section>
+
+<section data-document-role="page" data-label="Tryb gotowania" class="canva-page cook" style="width:560px">
+<div class="cook cook">
+<main class="cook-shell">
+  <div class="cook-top">
+    <a href="https://lowca-smakow.netlify.app/przepisy/slimaki-w-szarym-sosie.html" aria-label="Zamknij tryb gotowania" data-close="">
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </a>
+    <a href="https://lowca-smakow.netlify.app/" class="logo"><img src="https://lowca-smakow.netlify.app/img/logo-white.svg" alt="Łowca Smaków — strona główna" width="83" height="40"></a>
+    <p class="wake" data-wake="" hidden="">
+      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"></path></svg>
+      Ekran nie wygaśnie</p>
+  </div>
+
+  <div>
+    <p class="cook-step" data-count="">Krok 1 z 6</p>
+    <div class="bars" aria-hidden="true" data-bars="" style="grid-template-columns: repeat(6, minmax(0px, 1fr));"><span class="on"></span><span></span><span></span><span></span><span></span><span></span></div>
+  </div>
+
+  <h1 data-title="" aria-live="polite">Przygotuj ślimaki</h1>
+  <p class="cook-desc" data-desc="">Ślimaki z hodowli kupisz już oczyszczone i zblanszowane, mrożone albo w zalewie. Rozmroź je w lodówce, przepłucz zimną wodą i osusz. Jeśli są w muszlach, wyjmij mięso wykałaczką, a muszle umyj: przydadzą się do podania.</p>
+
+  <div data-uses-wrap="">
+    <p class="uses-label">W tym kroku</p>
+    <div class="chips" data-uses=""><span class="pill">Ślimaki winniczki</span></div>
+  </div>
+
+  <button type="button" class="cook-timer" data-timer="" hidden="">
+    <span class="l">
+      <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2M10 2h4"></path></svg>
+      <span data-timer-label="">Uruchom minutnik</span></span>
+    <span class="t" data-timer-time="">[XX:00]</span>
+  </button>
+
+  <div class="cook-nav">
+    <button type="button" class="cook-prev" data-prev="" disabled="">← Wstecz</button>
+    <button type="button" class="cook-next" data-next="">Dalej →</button>
+  </div>
+</main>
+
+
+
+
+
+</div>
+</section>
+</body>
+</html>

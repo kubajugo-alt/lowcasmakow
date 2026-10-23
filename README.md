@@ -38,3 +38,12 @@ python3 -m http.server 8000
 ## Still placeholders (from the wireframe)
 
 The photos are placeholder stock from Unsplash (Unsplash License, loaded from `images.unsplash.com`, photographers credited in each page's footer), picked to match each story's topic. Swap them for the shoot's own photography. Still in `[square brackets]`: video lengths and the shop product. Footer pages (O nas, Współpraca, Kontakt, socials) point to `#`.
+
+## Canva
+
+`canva/index.html` is a self-contained copy of four pages (homepage, an article, a recipe, cook mode) for Canva's "import from URL", which ignores external stylesheets. Each page is rendered in a browser, then saved with the CSS inlined and absolute image links. Rebuild it after design changes, deploy, then re-import `https://lowca-smakow.netlify.app/canva/` in Canva:
+
+```sh
+python3 -m http.server 8765 &
+NODE_PATH=$(npm root -g) node scripts/canva-export.js
+```
