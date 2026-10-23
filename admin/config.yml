@@ -44,14 +44,14 @@ collections:
     delete: true
     slug: '{{slug}}'
     identifier_field: title
-    summary: '№ {{number}} · {{title}}'
+    summary: '{{title}}'
     sortable_fields: [number, title, date]
     view_groups: [{ label: Dział, field: section }]
     editor: { preview: false }
     fields:
       - { label: 'Tytuł', name: title, widget: string }
       - { label: 'Wersja robocza', name: draft, widget: boolean, default: false, required: false, hint: 'Włączone = na stronie widać dopisek, że treść czeka na sprawdzenie. Wyłącz po weryfikacji.' }
-      - { label: 'Numer katalogowy', name: number, widget: number, value_type: int, min: 1, hint: 'Pokazywany jako № 012. Kolejny wolny numer.' }
+      - { label: 'Kolejność', name: number, widget: number, value_type: int, min: 1, hint: 'Porządek na listach (niewidoczny na stronie). Kolejna wolna liczba.' }
       - label: 'Dział'
         name: section
         widget: select
@@ -155,14 +155,14 @@ collections:
     delete: true
     slug: '{{slug}}'
     identifier_field: title
-    summary: 'P{{number}} · {{title}}'
+    summary: '{{title}}'
     sortable_fields: [number, title]
     view_groups: [{ label: Kategoria, field: category }]
     editor: { preview: false }
     fields:
       - { label: 'Nazwa', name: title, widget: string }
       - { label: 'Wersja robocza', name: draft, widget: boolean, default: false, required: false, hint: 'Włączone = na stronie widać dopisek, że przepis czeka na sprawdzenie w kuchni. Wyłącz po weryfikacji.' }
-      - { label: 'Numer', name: number, widget: number, value_type: int, min: 1, hint: 'Pokazywany jako P05.' }
+      - { label: 'Kolejność', name: number, widget: number, value_type: int, min: 1, hint: 'Porządek na listach (niewidoczny na stronie).' }
       - label: 'Kategoria'
         name: category
         widget: select

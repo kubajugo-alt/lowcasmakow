@@ -51,14 +51,6 @@ CAT = {'kiszonki': 'Kiszonki', 'staropolskie': 'Staropolskie', 'podroze': 'Z pod
 UTM = 'utm_source=lowca_smakow&utm_medium=referral'
 
 
-def no(slug):
-    return f"{A[slug].get('number') or 0:03d}"
-
-
-def rno(slug):
-    return f"P{R[slug].get('number') or 0:02d}"
-
-
 # ---------- images, credits, video ----------
 
 def img(image, sizes, eager=False, cls='fill'):
@@ -471,7 +463,7 @@ def article_page(a):
 
   <article class="article">
     <header class="a-head">
-      <p class="kicker"><span class="no">№ {no(a['slug'])}</span> {e(a['kicker'])}</p>
+      <p class="kicker">{e(a['kicker'])}</p>
       <h1>{e(a['title'])}</h1>
       <p class="lead">{e(a['lead'])}</p>
       <p class="meta">{f'<time datetime="{a["date"]}">{pl_date(a["date"])}</time> · ' if a.get('date') else ''}{mins} min czytania{' · <span class="draft">Tekst roboczy, do weryfikacji przed publikacją</span>' if a.get('draft') else ''}</p>
@@ -546,7 +538,7 @@ def recipe_page(slug, r):
 
   <section class="r-head">
     <div class="r-title">
-      <p class="kicker"><span class="no">{rno(slug)}</span> {e(r['kicker'])}</p>
+      <p class="kicker">{e(r['kicker'])}</p>
       <h1>{e(name)}</h1>
       <p class="sub">{e(r.get('subtitle', ''))}</p>
     </div>
@@ -1045,8 +1037,6 @@ def home_page():
     lead = A[L['article']]
     images = [lead['image']]
 
-    def numbered(slug):
-        return f'<span class="no">№ {no(slug)}</span>'
 
     def week_card(w):
         a = A[w['article']]; images.append(a['image'])
@@ -1054,29 +1044,29 @@ def home_page():
                 f'<p class="day"><em>{e(w["day"])}</em> <span>{e(w.get("date") or (a.get("date") or "")[8:10] + "." + (a.get("date") or "")[5:7])}</span></p>'
                 f'<div class="ph frame {T()} ratio-45">{img(a["image"], "(max-width:720px) 100vw, 33vw")}</div>'
                 f'<div class="card-body">{article_tags(a, 2)}'
-                f'<h3>{e(a["title"])}</h3><p class="excerpt">{e(first_sentence(a["lead"]))}</p><p class="pills">{numbered(a["slug"])}{datepill(a)}</p></div></a>')
+                f'<h3>{e(a["title"])}</h3><p class="excerpt">{e(first_sentence(a["lead"]))}</p></div></a>')
 
     def side_article(slug):
         a = A[slug]; images.append(a['image'])
         return (f'<a href="/historie/{slug}.html" class="card row">{framed(img(a["image"], "120px"))}'
-                f'<div class="card-body"><p class="kicker">{numbered(slug)} Historia</p><h4>{e(a["title"])}</h4></div></a>')
+                f'<div class="card-body"><p class="kicker">Historia</p><h4>{e(a["title"])}</h4></div></a>')
 
     def side_recipe(slug, title):
         r = R[slug]; im = recipe_card_image(r); images.append(im)
         return (f'<a href="/przepisy/{slug}.html" class="card row">{framed(img(im, "120px"))}'
-                f'<div class="card-body"><p class="kicker"><span class="no">{rno(slug)}</span> Przepis</p><h4>{e(title or r["title"])}</h4></div></a>')
+                f'<div class="card-body"><p class="kicker">Przepis</p><h4>{e(title or r["title"])}</h4></div></a>')
 
     def recipe_tile(slug):
         r = R[slug]; im = recipe_card_image(r); images.append(im)
         return (f'<a href="/przepisy/{slug}.html" class="ov ov-tile" data-cat="{e(r["category"])}">{img(im, "(max-width:720px) 70vw, 25vw")}'
                 f'<span class="ov-body">{tags([CAT.get(r["category"], "")] + (r.get("card_meta") or "").split(" · ")[:1])}'
-                f'<span class="h">{e(r["title"])}</span><span class="pills"><span class="no">{rno(slug)}</span></span></span></a>')
+                f'<span class="h">{e(r["title"])}</span></span></a>')
 
     def overlay(slug, cls='', sizes='(max-width:720px) 100vw, 30vw'):
         a = A[slug]; images.append(a['image'])
         return (f'<article class="ov {cls}">{img(a["image"], sizes)}<div class="ov-body">{article_tags(a)}'
                 f'<h2 class="h"><a class="stretch" href="/historie/{slug}.html">{e(a["title"])}</a></h2>'
-                f'<p class="pills">{numbered(slug)}{datepill(a)}</p></div></article>')
+                f'<p class="pills">{datepill(a)}</p></div></article>')
 
     images += [o['image'] for o in list(WS.values())[:2] + list(TR.values())[:2] + list(PR.values())[:4]]
 
@@ -1152,7 +1142,7 @@ def home_page():
         {article_tags(lead)}
         <h1 class="h"><a class="stretch" href="/historie/{lead['slug']}.html">{e(lead['title'])}</a></h1>
         <p class="lead">{e(L.get('text') or lead['lead'])}</p>
-        <p class="pills">{numbered(lead['slug'])}{datepill(lead)}{lead_recipe}</p>
+        <p class="pills">{datepill(lead)}{lead_recipe}</p>
       </div>
     </article>
     {''.join(overlay(s, 'ov-side') for s in issue[:2])}
@@ -1194,7 +1184,7 @@ def home_page():
           <div class="ph frame {T()} ratio-1610">{img(feat['image'], '(max-width:720px) 100vw, 62vw')}
             <span class="play">{PLAY}</span>
           </div>
-          <p class="kicker">{numbered(feat['slug'])} {e(op.get('feature_label', ''))}</p>
+          <p class="kicker">{e(op.get('feature_label', ''))}</p>
           <h3>{e(feat['title'])}</h3>
           <p class="body">{e(first_sentence(feat['lead']))}</p>
         </a>
@@ -1317,14 +1307,14 @@ def story_card(slug):
     return (f'<a href="/historie/{slug}.html" class="card story-card" data-cat="{e(a["section"])}">'
             f'<div class="ph frame {T()} ratio-43">{img(a["image"], "(max-width:720px) 100vw, 33vw")}</div>'
             f'<div class="card-body">{article_tags(a, 2)}<h3>{e(a["title"])}</h3>'
-            f'<p class="excerpt">{e(first_sentence(a["lead"]))}</p><p class="pills"><span class="no">№ {no(slug)}</span>{datepill(a)}</p></div></a>')
+            f'<p class="excerpt">{e(first_sentence(a["lead"]))}</p><p class="pills">{datepill(a)}</p></div></a>')
 
 
 def recipe_tile_card(slug):
     r = R[slug]
     return (f'<a href="/przepisy/{slug}.html" class="ov ov-tile" data-cat="{e(r["category"])}">{img(recipe_card_image(r), "(max-width:720px) 50vw, 25vw")}'
             f'<span class="ov-body">{tags([CAT.get(r["category"], "")] + (r.get("card_meta") or "").split(" · ")[:1])}'
-            f'<span class="h">{e(r["title"])}</span><span class="pills"><span class="no">{rno(slug)}</span></span></span></a>')
+            f'<span class="h">{e(r["title"])}</span></span></a>')
 
 
 def listing_page(kind):
@@ -1477,7 +1467,7 @@ def styleguide_page():
     </div>
     <div class="sg-row">
       {tags(['Historie', 'Antropologia'])}<span class="tag tag-link">Przepis →</span>
-      <span class="pills"><span class="no">№ 001</span><span class="date">19.10.2026</span></span><span class="price">od 29 zł</span>
+      <span class="pills"><span class="date">19.10.2026</span></span><span class="price">od 29 zł</span>
       <button type="button" class="chip" aria-pressed="true">Wszystkie</button><button type="button" class="chip" aria-pressed="false">Kiszonki</button>
     </div>
   </section>
