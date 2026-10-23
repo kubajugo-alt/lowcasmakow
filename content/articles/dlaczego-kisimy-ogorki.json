@@ -3,7 +3,7 @@
   "number": 1,
   "section": "Historie",
   "kicker": "Antropologia jedzenia · Seria „Dlaczego jemy?”",
-  "date": "2026-10-26",
+  "date": "2026-10-19",
   "lead": "Słoik ogórków w spiżarni to nie tylko smak dzieciństwa. To technologia starsza niż lodówka, mikrobiologia, której nikt nie musiał rozumieć, żeby ją opanować, i jeden z najtrwalszych rytuałów polskiego roku.",
   "image": {
     "src": "https://images.unsplash.com/photo-1627861446476-42fd9925e151",
@@ -66,5 +66,6 @@
       "type": "text",
       "text": "W tym odcinku serii „Dlaczego jemy?” sprawdzamy, co z tej tradycji wynika dla zdrowia, smaku i pamięci. A na koniec: przepis na ogórki babci, z liczbami, które da się powtórzyć."
     }
-  ]
+  ],
+  "draft": true
 }

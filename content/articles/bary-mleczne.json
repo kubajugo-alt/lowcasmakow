@@ -3,7 +3,7 @@
   "number": 4,
   "section": "Historie",
   "kicker": "Niedziela · Gotujemy · Historia + przepis",
-  "date": "2026-10-26",
+  "date": "2026-10-25",
   "lead": "Ceraty na stołach, okienko wydawania, pomidorowa za kilka złotych. Bar mleczny przeżył dwie epoki i ustrój, który miał go zastąpić. Jak to możliwe?",
   "image": {
     "src": "https://images.unsplash.com/photo-1612966948332-81d747414a8f",
@@ -47,5 +47,6 @@
       "type": "text",
       "text": "W niedzielnym odcinku gotujemy rosół i pierogi „jak w barze” i pytamy, czym jest dziś tania, uczciwa kuchnia."
     }
-  ]
+  ],
+  "draft": true
 }

@@ -3,7 +3,7 @@
   "number": 3,
   "section": "Smaki regionów",
   "kicker": "Środa · Smaki regionów · Część 1 z 16",
-  "date": "2026-10-22",
+  "date": "2026-10-21",
   "lead": "Wędzony, twardy, w kształcie wrzeciona, z odciśniętym wzorem. Oscypek to ser, który jest jednocześnie produktem, rzemiosłem i znakiem rozpoznawczym całego regionu.",
   "image": {
     "src": "https://images.unsplash.com/photo-1792582232028-0d8b0c703797",
@@ -47,5 +47,6 @@
       "type": "text",
       "text": "W karuzeli na Instagramie i w tym artykule pokazujemy jeden dzień w bacówce: od porannego udoju po wieczorne wędzenie."
     }
-  ]
+  ],
+  "draft": true
 }

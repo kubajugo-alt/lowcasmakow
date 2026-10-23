@@ -1,5 +1,6 @@
 {
-  "issue": "Wydanie nr 01 · 20–26 października 2026",
+  "issue": "",
+  "issue_start": "2026-10-19",
   "tagline": "Nowe historie w poniedziałki, środy i niedziele",
   "lead": {
     "article": "dlaczego-kisimy-ogorki",
@@ -13,24 +14,24 @@
   "week": [
     {
       "day": "Poniedziałek",
-      "date": "20.10",
+      "date": "",
       "article": "pierogi"
     },
     {
       "day": "Środa",
-      "date": "22.10",
+      "date": "",
       "article": "podhale-oscypek"
     },
     {
       "day": "Niedziela",
-      "date": "26.10",
+      "date": "",
       "article": "bary-mleczne"
     }
   ],
   "old_polish": {
     "title": "Kuchnia staropolska",
     "feature": "slimaki-wedlug-czernieckiego",
-    "feature_label": "Odcinek · Wideo [mm:ss]",
+    "feature_label": "Odcinek wideo",
     "side_articles": [
       "kim-byl-czerniecki",
       "przyprawy-staropolskie"

@@ -161,6 +161,30 @@ def recipe_card_image(r):
     return r.get('card_image') or r['image']
 
 
+# ---------- the issue line: „Wydanie nr 02 · 26 października – 1 listopada 2026” ----------
+
+def issue_line(today=None):
+    """Counted in weeks (Monday–Sunday) from the first issue's Monday in the CMS; site.js redoes it in the
+    browser, so the line stays current between deploys. A text typed into the CMS wins."""
+    if (HOME.get('issue') or '').strip():
+        return HOME['issue'].strip()
+    start = date.fromisoformat(HOME.get('issue_start') or '2026-10-19')
+    start -= timedelta(days=start.weekday())
+    today = today or date.today()
+    mon = today - timedelta(days=today.weekday())
+    n = max(1, (mon - start).days // 7 + 1)
+    sun = mon + timedelta(days=6)
+    if mon.month == sun.month:
+        span = f'{mon.day}–{sun.day} {MONTHS[mon.month - 1]} {sun.year}'
+    else:
+        span = f'{mon.day} {MONTHS[mon.month - 1]}{"" if mon.year == sun.year else f" {mon.year}"} – {sun.day} {MONTHS[sun.month - 1]} {sun.year}'
+    return f'Wydanie nr {n:02d} · {span}'
+
+
+def issue_attrs():
+    return '' if (HOME.get('issue') or '').strip() else f' data-issue-start="{e(HOME.get("issue_start") or "2026-10-19")}"'
+
+
 # ---------- search engines and link previews ----------
 
 ORG = {'@type': 'Organization', 'name': 'Łowca Smaków', 'url': SITE + '/', 'logo': SITE + '/img/logo.svg'}
@@ -283,7 +307,7 @@ def shell(title, desc, main, images, current=None, body_class='', body_attrs='',
 <a class="skip" href="#tresc">Przejdź do treści</a>
 
 <header class="site-header">
-  <div class="topbar"><div class="wrap"><span>{e(HOME.get('issue', ''))}</span><span class="topbar-r">{e(HOME.get('tagline', ''))}</span></div></div>
+  <div class="topbar"><div class="wrap"><span{issue_attrs()}>{e(issue_line())}</span><span class="topbar-r">{e(HOME.get('tagline', ''))}</span></div></div>
   <div class="wrap masthead">
     <div class="left">
       <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle>
@@ -463,7 +487,7 @@ def article_page(a):
       <p class="kicker"><span class="no">№ {no(a['slug'])}</span> {e(a['kicker'])}</p>
       <h1>{e(a['title'])}</h1>
       <p class="lead">{e(a['lead'])}</p>
-      <p class="meta">{f'<time datetime="{a["date"]}">{pl_date(a["date"])}</time> · ' if a.get('date') else ''}{mins} min czytania · <span class="draft">Tekst roboczy, do weryfikacji przed publikacją</span></p>
+      <p class="meta">{f'<time datetime="{a["date"]}">{pl_date(a["date"])}</time> · ' if a.get('date') else ''}{mins} min czytania{' · <span class="draft">Tekst roboczy, do weryfikacji przed publikacją</span>' if a.get('draft') else ''}</p>
     </header>
     <figure class="a-hero">{hero}</figure>
     <div class="a-body">
@@ -592,7 +616,7 @@ def recipe_page(slug, r):
       <h2>Przygotowanie</h2>
       <ol class="steps" data-steps></ol>
       {sources}
-      <p class="meta draft">Przepis roboczy: ilości i czasy do sprawdzenia w kuchni przed publikacją.</p>
+      {'<p class="meta draft">Przepis roboczy: ilości i czasy do sprawdzenia w kuchni przed publikacją.</p>' if r.get('draft') else ''}
     </div>
   </section>
 {related(r.get('related') or [], 'Z tej samej opowieści', 'Dobrane po serii, regionie i składnikach')}'''
@@ -766,7 +790,7 @@ def offer_page(kind, slug, o):
       <h2 id="h-book">Terminy</h2>
       <ul class="dates">{dates}</ul>
       {booking_form(o['title'], labels, 'Zapytaj o miejsce' if trip else 'Zapisz się', 'b')}
-      <p class="meta draft">Oferta przykładowa: terminy, ceny i program do potwierdzenia przed publikacją.</p>
+      {'<p class="meta draft">Oferta przykładowa: terminy, ceny i program do potwierdzenia przed publikacją.</p>' if o.get('draft') else ''}
     </aside>
     <div class="o-body">
       {body}
@@ -1041,7 +1065,7 @@ def home_page():
     def week_card(w):
         a = A[w['article']]; images.append(a['image'])
         return (f'<a href="/historie/{a["slug"]}.html" class="card week-card">'
-                f'<p class="day"><em>{e(w["day"])}</em> <span>{e(w.get("date", ""))}</span></p>'
+                f'<p class="day"><em>{e(w["day"])}</em> <span>{e(w.get("date") or (a.get("date") or "")[8:10] + "." + (a.get("date") or "")[5:7])}</span></p>'
                 f'<div class="ph frame {T()} ratio-45">{img(a["image"], "(max-width:720px) 100vw, 33vw")}</div>'
                 f'<div class="card-body">{article_tags(a, 2)}'
                 f'<h3>{e(a["title"])}</h3><p class="excerpt">{e(first_sentence(a["lead"]))}</p><p class="pills">{numbered(a["slug"])}{datepill(a)}</p></div></a>')
@@ -1192,7 +1216,7 @@ def home_page():
   <section class="sec" id="nowe" aria-labelledby="h-nowe">
     <div class="sec-head">
       <h2 id="h-nowe" data-ghost="W tym tygodniu">Nowe w tym tygodniu</h2>
-      <p class="meta">{e(H.get('issue', ''))}</p>
+      <p class="meta"{issue_attrs()}>{e(issue_line())}</p>
     </div>
     <div class="grid grid-3 week">
       {''.join(week_card(w) for w in H.get('week', []) if w.get('article') in A)}

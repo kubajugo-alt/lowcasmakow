@@ -164,6 +164,21 @@
     new MutationObserver(set).observe(el, { childList: true, characterData: true, subtree: true });
   });
 
+  // issue line: weeks (Monday–Sunday) since the first issue, so it stays current between deploys (same rule as build.py)
+  var MONTHS = ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'];
+  $$('[data-issue-start]').forEach(function (el) {
+    var monday = function (d) { d = new Date(d.getFullYear(), d.getMonth(), d.getDate()); d.setDate(d.getDate() - (d.getDay() + 6) % 7); return d; };
+    var p = el.dataset.issueStart.split('-');
+    var start = monday(new Date(+p[0], +p[1] - 1, +p[2])), mon = monday(new Date());
+    var sun = new Date(mon); sun.setDate(mon.getDate() + 6);
+    var n = Math.max(1, Math.round((mon - start) / 864e5 / 7) + 1);
+    var span = mon.getMonth() === sun.getMonth()
+      ? mon.getDate() + '–' + sun.getDate() + ' ' + MONTHS[mon.getMonth()] + ' ' + sun.getFullYear()
+      : mon.getDate() + ' ' + MONTHS[mon.getMonth()] + (mon.getFullYear() === sun.getFullYear() ? '' : ' ' + mon.getFullYear()) +
+        ' – ' + sun.getDate() + ' ' + MONTHS[sun.getMonth()] + ' ' + sun.getFullYear();
+    el.textContent = 'Wydanie nr ' + (n < 10 ? '0' + n : n) + ' · ' + span;
+  });
+
   // workshop and trip sign-ups: Netlify Forms ("zapisy"), same as the newsletter
   $$('[data-booking]').forEach(function (form) {
     var msg = $('[data-booking-msg]', form);

@@ -3,7 +3,7 @@
   "number": 2,
   "section": "Historie",
   "kicker": "Poniedziałek · Antropologia · Odcinek 1 z 12",
-  "date": "2026-10-20",
+  "date": "2026-10-19",
   "lead": "Ciasto, farsz, zlepiony brzeg. Prostsza konstrukcja trudno sobie wyobrazić, a jednak wokół pierogów narosło więcej sporów niż wokół niejednej historycznej daty.",
   "image": {
     "src": "https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6",
@@ -51,5 +51,6 @@
       "type": "text",
       "text": "W odcinku wideo odwiedzamy kuchnię, w której przed świętami lepi się ich kilkaset. Pytamy, co się zmieniło, a co zostało tak samo od czasów prababci."
     }
-  ]
+  ],
+  "draft": true
 }
