@@ -243,8 +243,6 @@ def warsaw_offset(day):
 
 # ---------- page frame ----------
 
-FONTS = ('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500'
-         '&amp;family=Instrument+Sans:wght@400;500;600&amp;family=Poppins:wght@600;700;800&amp;display=swap')
 SEARCH = ('<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
           'stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>')
 CART_BTN = ('<button class="icon-btn cart-btn snipcart-checkout" type="button" aria-label="Koszyk">'
@@ -298,9 +296,9 @@ def shell(title, desc, main, images, current=None, body_class='', body_attrs='',
 <meta name="twitter:card" content="summary_large_image">
 {ld_script(ld)}{head}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="{FONTS}" rel="stylesheet">
+<link rel="preload" href="/fonts/poppins-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument-sans-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body class="{body_class}"{body_attrs}>
@@ -1371,8 +1369,12 @@ def home_page():
     </form>
   </section>
 """
+    # the lead photo is the largest thing on screen: start fetching it with the HTML, at the size the <img> will pick
+    m = re.search(r'srcset="([^"]+)"', img(lead['image'], '(max-width:720px) 100vw, 66vw', eager=True))
+    lcp = (f'\n<link rel="preload" as="image" imagesrcset="{m.group(1)}" imagesizes="(max-width:720px) 100vw, 66vw" fetchpriority="high">'
+           if m else '')
     return shell('Łowca Smaków — antropologia jedzenia', 'Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.',
-                 main, images, body_class='home', home=True, scripts=('/js/globe.js',), image=lead['image'],
+                 main, images, body_class='home', home=True, scripts=('/js/globe.js',), image=lead['image'], head=lcp,
                  ld=[{'@type': 'WebSite', 'name': 'Łowca Smaków', 'url': SITE + '/', 'inLanguage': 'pl'}, ORG])
 
 

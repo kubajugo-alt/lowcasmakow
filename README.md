@@ -120,6 +120,10 @@ python3 scripts/build.py --local   # rebuild after saving (--local: uploads with
 
 The photos are placeholder stock from Unsplash (Unsplash License, loaded from `images.unsplash.com`, photographers credited in each page's footer), picked to match each story's topic. Swap them for the shoot's own photography. Still in `[square brackets]`: video lengths and the shop product. Footer pages (O nas, Współpraca, Kontakt, socials) point to `#`.
 
+## Fonts
+
+Cormorant Garamond, Instrument Sans and Poppins (SIL Open Font License) are served from this site, not from Google: `fonts/*.woff2` plus `css/fonts.css`, Latin and Latin Extended only (enough for Polish). Loading fonts from Google's servers sends visitors' IP addresses to Google, which EU courts have found to breach GDPR. Pages preload the two most used files (Poppins 700, Instrument Sans 400). To add a weight, fetch the Google Fonts CSS for it once and add its Latin and Latin Extended `@font-face` blocks and files the same way. The Canva export still links Google Fonts, because only Canva's importer reads it.
+
 ## Canva
 
 `canva/index.html` is a self-contained copy of four pages (homepage, an article, a recipe, cook mode) for Canva's "import from URL", which ignores external stylesheets. Each page is rendered in a browser, then saved with the CSS inlined and absolute image links. Rebuild it after design changes, deploy, then re-import `https://lowca-smakow.netlify.app/canva/` in Canva:
