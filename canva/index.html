@@ -889,6 +889,12 @@ body.home .site-footer{margin-top:0}
 .newsletter .nl-row button:hover{background:var(--white);color:var(--ink)}
 .steps .n,.plan .x-li::before{color:var(--ink)}
 .dates .note{color:var(--ink-2)}
+/* ghost words in the decorative face: Cormorant Garamond italic */
+.sec-head h2[data-ghost]::before,.list-head h1[data-ghost]::before{font-family:var(--serif);font-style:italic;font-weight:500;letter-spacing:-.01em;color:rgba(18,18,18,.075)}
+.sec-head h2[data-ghost]::before{font-size:3.4em;bottom:-.14em}
+.list-head h1[data-ghost]::before{font-size:2.8em;bottom:-.12em}
+.dark .sec-head h2[data-ghost]::before{color:rgba(255,255,255,.1)}
+.sg-ghost{padding-top:40px}
 
 /* Canva pages */
 .tick{width:18px;height:18px;border:1.5px solid var(--ink);border-radius:3px;flex:none}

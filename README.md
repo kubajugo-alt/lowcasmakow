@@ -16,7 +16,7 @@ Static website for **Łowca Smaków** (food anthropology: where what we eat come
 
 The rules live at **`/styl/`** (not indexed), shown with the real components; build new sections from them.
 
-- **Type:** Poppins for headings, Instrument Sans for text. Cormorant Garamond only for numbers (counters, step numbers) and quotes. Sizes are tokens: `--fs-h1` … `--fs-label`.
+- **Type:** Poppins for headings, Instrument Sans for text. Cormorant Garamond, the decorative face, only for numbers (counters, step numbers), quotes and the pale ghost words behind headings (italic). Sizes are tokens: `--fs-h1` … `--fs-label`.
 - **Colour:** the four photo-frame inks (mustard, vermilion, ultramarine, sage) carry the colour and cycle from card to card. Vermilion as `--accent` is for actions only (buttons, links that do something). Section backgrounds are paper, one light panel (`--panel`) or one dark tone (`--dark`: menu, Old Polish band, newsletter, footer). Labels are neutral pills.
 - **Two card types:** the photo card (title on the picture: homepage mosaic, recipes) and the framed card (text below: stories, shop, workshops, trips). Hovering a framed card turns its title the colour of its frame and zooms the photo slightly.
 - **Homepage (8 sections):**
