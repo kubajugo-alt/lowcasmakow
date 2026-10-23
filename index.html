@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Łowca Smaków — antropologia jedzenia</title>
+<meta name="description" content="Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.">
+<meta name="theme-color" content="#F5EFE4">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#tresc">Przejdź do treści</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">Łowca Smaków</a>
+    <nav class="main-nav" id="main-nav" aria-label="Główne menu">
+      <a class="navlink" href="#nowe">Historie</a>
+      <a class="navlink" href="#przepisy">Przepisy</a>
+      <a class="navlink" href="#staropolska">Wideo</a>
+      <a class="navlink" href="#podroze">Podróże</a>
+      <a class="navlink" href="#regiony">Smaki regionów</a>
+      <a class="navlink" href="przepis.html#sklep">Sklep</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+      <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <a href="#newsletter" class="btn btn-ink">Newsletter</a>
+    </div>
+  </div>
+  <form class="search-bar" id="search" role="search" hidden data-search>
+    <div class="wrap">
+      <label for="q" class="sr-only">Szukaj przepisów i historii</label>
+      <input id="q" name="q" type="search" placeholder="Szukaj przepisów, np. „ogórki”" autocomplete="off">
+      <button class="btn btn-ink" type="submit">Szukaj</button>
+    </div>
+  </form>
+</header>
+
+<nav class="section-nav" aria-label="Działy">
+  <a href="#tresc" class="chip is-active">Wszystko</a>
+  <a href="#nowe" class="chip">Historie</a>
+  <a href="#przepisy" class="chip">Przepisy</a>
+  <a href="#staropolska" class="chip">Wideo</a>
+  <a href="#regiony" class="chip">Regiony</a>
+</nav>
+
+<main class="wrap" id="tresc">
+
+  <section class="hero" aria-label="Historia tygodnia">
+    <div class="ph">Zdjęcie główne — reportaż / kadr z odcinka</div>
+    <div class="hero-copy">
+      <p class="kicker">Antropologia jedzenia · Seria „Dlaczego jemy?”</p>
+      <h1>Dlaczego kisimy ogórki?</h1>
+      <p class="lead">[Lead artykułu — 2–3 zdania: pytanie, napięcie, obietnica odpowiedzi popartej źródłami.]</p>
+      <p class="meta">[X] min czytania · Przepis · Wideo [mm:ss]</p>
+      <div class="btns">
+        <a href="#" class="btn btn-accent">Czytaj historię</a>
+        <a href="#przepisy" class="btn btn-line">Przejdź do przepisu</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="nowe" aria-labelledby="h-nowe">
+    <div class="sec-head">
+      <h2 id="h-nowe">Nowe w tym tygodniu</h2>
+      <p class="meta">Poniedziałek · Środa · Niedziela</p>
+    </div>
+    <div class="grid grid-3">
+      <a href="#" class="card">
+        <div class="ph" style="height:240px">Reel · antropologia</div>
+        <div class="card-body">
+          <p class="kicker">Poniedziałek · Antropologia</p>
+          <h3>[Tytuł odcinka z serii 12 odcinków o polskiej kulturze jedzenia]</h3>
+          <p class="meta">Artykuł + wideo</p>
+        </div>
+      </a>
+      <a href="#regiony" class="card">
+        <div class="ph" style="height:240px">Karuzela · region</div>
+        <div class="card-body">
+          <p class="kicker">Środa · Smaki regionów</p>
+          <h3>[Region] — smak, który go definiuje</h3>
+          <p class="meta">Część [n] z 16</p>
+        </div>
+      </a>
+      <a href="#" class="card">
+        <div class="ph" style="height:240px">Wideo · gotowanie</div>
+        <div class="card-body">
+          <p class="kicker">Niedziela · Gotujemy</p>
+          <h3>Skąd się wzięły bary mleczne?</h3>
+          <p class="meta">Historia + przepis</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="sec" id="staropolska" aria-labelledby="h-staro">
+    <div class="sec-head">
+      <h2 id="h-staro">Kuchnia staropolska</h2>
+      <a href="#">Cała seria →</a>
+    </div>
+    <div class="feature">
+      <a href="przepis.html" class="card feature-main">
+        <div class="ph">
+          <span class="play"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </div>
+        <p class="kicker">Odcinek · Wideo [mm:ss]</p>
+        <h3>Ślimaki w szarym sosie piernikowym według Czernieckiego</h3>
+        <p class="body">Na fermie ślimaków odtwarzamy przepis z „Compendium ferculorum” z 1682 roku.</p>
+      </a>
+      <div class="feature-side">
+        <a href="#" class="card row">
+          <div class="ph">Ryc.</div>
+          <div class="card-body"><p class="kicker">Historia</p><h4>Kim był Stanisław Czerniecki?</h4></div>
+        </a>
+        <a href="przepis.html" class="card row">
+          <div class="ph">Danie</div>
+          <div class="card-body"><p class="kicker">Przepis</p><h4>Szary sos piernikowy — wersja współczesna</h4></div>
+        </a>
+        <a href="#" class="card row">
+          <div class="ph">Ryc.</div>
+          <div class="card-body"><p class="kicker">Historia</p><h4>[Kolejny temat staropolski]</h4></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="regions" id="regiony" aria-labelledby="h-regiony" data-regions>
+    <div class="map" role="group" aria-label="Mapa województw (schemat)">
+      <div class="tiles">
+        <button type="button" class="tile" data-region="Zachodniopomorskie">Zachodnio&shy;pomorskie</button>
+        <button type="button" class="tile" data-region="Pomorskie">Pomorskie</button>
+        <button type="button" class="tile" data-region="Warmińsko-mazurskie">Warmińsko-mazurskie</button>
+        <button type="button" class="tile" data-region="Podlaskie">Podlaskie</button>
+        <button type="button" class="tile" data-region="Lubuskie">Lubuskie</button>
+        <button type="button" class="tile" data-region="Kujawsko-pomorskie">Kujawsko-pomorskie</button>
+        <button type="button" class="tile" data-region="Mazowieckie">Mazowieckie</button>
+        <button type="button" class="tile" data-region="Lubelskie">Lubelskie</button>
+        <button type="button" class="tile" data-region="Wielkopolskie">Wielkopolskie</button>
+        <button type="button" class="tile" data-region="Łódzkie">Łódzkie</button>
+        <button type="button" class="tile" data-region="Świętokrzyskie">Święto&shy;krzyskie</button>
+        <button type="button" class="tile" data-region="Podkarpackie">Podkarpackie</button>
+        <button type="button" class="tile" data-region="Dolnośląskie">Dolnośląskie</button>
+        <button type="button" class="tile" data-region="Opolskie">Opolskie</button>
+        <button type="button" class="tile" data-region="Śląskie">Śląskie</button>
+        <button type="button" class="tile" data-region="Małopolskie">Małopolskie</button>
+      </div>
+    </div>
+    <div class="regions-copy">
+      <p class="kicker">Seria w 16 częściach</p>
+      <h2 id="h-regiony">Smaki regionów</h2>
+      <p class="body">Każde województwo: jeden smak, jego historia i przepis. Wybierz region na mapie.</p>
+      <div class="chips">
+        <button type="button" class="chip" data-region="Podkarpackie" aria-pressed="false">Podkarpackie</button>
+        <button type="button" class="chip" data-region="Świętokrzyskie" aria-pressed="false">Świętokrzyskie</button>
+        <button type="button" class="chip" data-region="Małopolskie" aria-pressed="false">Małopolskie</button>
+        <button type="button" class="chip" data-region="Lubelskie" aria-pressed="false">Lubelskie</button>
+        <button type="button" class="chip" data-region="Śląskie" aria-pressed="false">Śląskie</button>
+        <button type="button" class="chip" data-region="Pomorskie" aria-pressed="false">Pomorskie</button>
+        <button type="button" class="chip" data-region="Podlaskie" aria-pressed="false">Podlaskie</button>
+        <a href="#regiony" class="chip" data-regions-more>+ 9 kolejnych</a>
+      </div>
+      <p class="region-pick" aria-live="polite" data-region-out></p>
+    </div>
+  </section>
+
+  <section class="sec" id="przepisy" aria-labelledby="h-przepisy" data-recipes>
+    <div class="sec-head">
+      <h2 id="h-przepisy">Przepisy</h2>
+      <a href="#przepisy">Wszystkie przepisy →</a>
+    </div>
+    <div class="chips" role="group" aria-label="Filtruj przepisy">
+      <button type="button" class="chip" data-filter="all" aria-pressed="true">Wszystkie</button>
+      <button type="button" class="chip" data-filter="kiszonki" aria-pressed="false">Kiszonki</button>
+      <button type="button" class="chip" data-filter="staropolskie" aria-pressed="false">Staropolskie</button>
+      <button type="button" class="chip" data-filter="podroze" aria-pressed="false">Z podróży</button>
+      <button type="button" class="chip" data-filter="codzien" aria-pressed="false">Na co dzień</button>
+      <button type="button" class="chip" data-filter="sezonowe" aria-pressed="false">Sezonowe</button>
+    </div>
+    <div class="grid grid-4">
+      <a href="przepis.html" class="card sm" data-cat="staropolskie">
+        <div class="ph" style="height:300px">Zdjęcie dania</div>
+        <p class="meta">Staropolskie · [XX] min</p>
+        <h3>Ślimaki w szarym sosie</h3>
+      </a>
+      <a href="#" class="card sm" data-cat="podroze">
+        <div class="ph" style="height:300px">Zdjęcie dania</div>
+        <p class="meta">Z podróży · Meksyk · [XX] min</p>
+        <h3>Birria tacos</h3>
+      </a>
+      <a href="#" class="card sm" data-cat="kiszonki">
+        <div class="ph" style="height:300px">Zdjęcie dania</div>
+        <p class="meta">Kiszonki · [XX] dni</p>
+        <h3>Ogórki kiszone babci</h3>
+      </a>
+      <a href="#" class="card sm" data-cat="podroze">
+        <div class="ph" style="height:300px">Zdjęcie dania</div>
+        <p class="meta">Z podróży · Peru · [XX] min</p>
+        <h3>[Danie z peruwiańskich ziemniaków]</h3>
+      </a>
+    </div>
+    <p class="meta" aria-live="polite" data-recipes-empty hidden>Wkrótce więcej przepisów w tej kategorii.</p>
+  </section>
+
+  <section class="sec" id="podroze" aria-labelledby="h-podroze">
+    <div class="sec-head">
+      <h2 id="h-podroze">Z podróży</h2>
+      <a href="#">Mapa podróży →</a>
+    </div>
+    <div class="grid grid-travel">
+      <a href="#" class="card">
+        <div class="ph" style="height:260px">Reportaż z targu</div>
+        <p class="kicker">Peru</p>
+        <h3>[Tytuł reportażu o ziemniakach]</h3>
+      </a>
+      <a href="#" class="card">
+        <div class="ph" style="height:260px">Reportaż z targu</div>
+        <p class="kicker">Meksyk</p>
+        <h3>[Tytuł reportażu]</h3>
+      </a>
+      <a href="#" class="card">
+        <div class="ph" style="height:260px">Reportaż z targu</div>
+        <p class="kicker">[Destynacja]</p>
+        <h3>[Tytuł reportażu]</h3>
+      </a>
+    </div>
+  </section>
+
+  <section class="newsletter" id="newsletter" aria-labelledby="h-nl">
+    <div class="nl-copy">
+      <h2 id="h-nl">Jedna historia. Jeden przepis. Co tydzień.</h2>
+      <p>Antropologia jedzenia prosto do skrzynki — bez spamu.</p>
+    </div>
+    <form class="nl-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-newsletter>
+      <input type="hidden" name="form-name" value="newsletter">
+      <p class="sr-only"><label>Nie wypełniaj <input name="bot-field" tabindex="-1"></label></p>
+      <label for="nl-email">Adres e-mail</label>
+      <div class="nl-row">
+        <input id="nl-email" name="email" type="email" required placeholder="ty@przyklad.pl" autocomplete="email">
+        <button type="submit">Zapisz się</button>
+      </div>
+      <p class="nl-msg" aria-live="polite" data-nl-msg></p>
+    </form>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-about">
+      <a href="index.html" class="logo">Łowca Smaków</a>
+      <p>Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Stopka">
+      <div><a href="#nowe">Historie</a><a href="#przepisy">Przepisy</a><a href="#staropolska">Wideo</a></div>
+      <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
+      <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>
+    </nav>
+    <p class="meta copyright">© 2026 Savour Ventures OÜ</p>
+  </div>
+</footer>
+
+<script src="js/site.js"></script>
+</body>
+</html>
