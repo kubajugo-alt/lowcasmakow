@@ -4,15 +4,7 @@
   "lead": {
     "article": "dlaczego-kisimy-ogorki",
     "text": "Słoik ogórków w spiżarni to nie tylko smak dzieciństwa. To technologia starsza niż lodówka i jeden z najtrwalszych rytuałów polskiego roku.",
-    "recipe": "ogorki-kiszone",
-    "stamp_image": {
-      "src": "https://images.unsplash.com/photo-1462536546956-beef6399d8cf",
-      "alt": "Małe ogórki w durszlaku obok pęczka koperku",
-      "credit": "Jonathan Pielmayer",
-      "credit_url": "https://unsplash.com/@jonathanpielmayer"
-    },
-    "stamp_postmark": "Wydanie 01",
-    "stamp_date": "20.10.2026"
+    "recipe": "ogorki-kiszone"
   },
   "issue_list": [
     "pierogi",

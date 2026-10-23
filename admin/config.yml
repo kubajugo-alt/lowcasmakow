@@ -69,7 +69,7 @@ collections:
           - { label: 'Autor zdjęcia', name: credit, widget: string, required: false }
           - { label: 'Link do autora', name: credit_url, widget: string, required: false }
       - { label: 'Wideo z YouTube (opcjonalnie)', name: video, widget: string, required: false, hint: 'Wklej link do filmu. Zamiast zdjęcia głównego pojawi się zdjęcie z przyciskiem odtwarzania; film ładuje się dopiero po kliknięciu.' }
-      - { label: 'Miejsce (dla reportaży)', name: place, widget: string, required: false, hint: 'np. „Peru” albo „Meksyk, Oaxaca”. Trafia na stempel pocztowy.' }
+      - { label: 'Miejsce (dla reportaży)', name: place, widget: string, required: false, hint: 'np. „Peru” albo „Meksyk, Oaxaca”. Pokazywane pod zdjęciem w „Z podróży”.' }
       - label: 'Przepis do tego tekstu (opcjonalnie)'
         name: recipe
         widget: relation
@@ -113,10 +113,9 @@ collections:
               - label: 'Oprawa'
                 name: frame
                 widget: select
-                default: postcard
+                default: frame
                 options:
-                  - { label: 'Pocztówka (biała ramka)', value: postcard }
-                  - { label: 'Znaczek (perforacja)', value: stamp }
+                  - { label: 'Kolorowa ramka', value: frame }
                   - { label: 'Bez ramki', value: none }
               - { label: 'Podpis (opcjonalnie)', name: caption, widget: string, required: false }
           - label: 'Grafika'
@@ -243,9 +242,6 @@ collections:
               - { label: 'Artykuł', name: article, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title] }
               - { label: 'Tekst pod tytułem', name: text, widget: text, required: false, hint: 'Puste = lead artykułu.' }
               - { label: 'Przycisk „Przejdź do przepisu”', name: recipe, widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false }
-              - { label: 'Znaczek w rogu', name: stamp_image, widget: object, required: false, collapsed: true, fields: *image_fields }
-              - { label: 'Stempel: napis', name: stamp_postmark, widget: string, required: false }
-              - { label: 'Stempel: data', name: stamp_date, widget: string, required: false }
           - { label: 'W tym wydaniu (lista obok)', name: issue_list, widget: relation, collection: articles, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, max: 6 }
           - label: 'Nowe w tym tygodniu'
             name: week

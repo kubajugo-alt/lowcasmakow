@@ -14,15 +14,22 @@ Static website for **Łowca Smaków** (food anthropology: where what we eat come
 
 ## Look
 
-Black on white like the logo (`img/logo.svg`, `img/logo-white.svg`, traced from the supplied artwork), fine 1 px rules and sharp-edged photos. The structure follows highly rated food and culture magazines:
+Black on white. The masthead uses the single-line wordmark (`img/wordmark.svg`, `img/wordmark-white.svg`, from the supplied Canva PDF); the plate logo (`img/logo.svg`, `img/logo-white.svg`) stays in the footer and favicon. Fine 1 px rules. Photos sit in simple coloured frames that cycle through four inks (mustard, vermilion, ultramarine, sage), with a soft shadow like pinned prints; burgundy is for the Old Polish band. The structure follows highly rated food and culture magazines:
 
 - an issue line above the masthead and a numbered "W tym wydaniu" index beside a very large lead headline (NYT Cooking, The Gourmand);
 - catalogue numbers on every story, `№ 001`, and recipes `P01` (Cereal);
-- Monday / Wednesday / Sunday columns for the week's stories;
-- a full-width black band for the Old Polish series (Apartamento, Bon Appétit);
-- a side-scrolling recipe rail and a large-type newsletter statement.
+- Monday / Wednesday / Sunday columns for the week's stories, staggered rather than in a flat row;
+- a full-width band for the Old Polish series (Apartamento, Bon Appétit);
+- a side-scrolling recipe rail.
 
-Type: Cormorant Garamond for headings, Instrument Sans for text. No accent colour: the food photography brings the colour.
+After [kukbuk.pl](https://kukbuk.pl/), the layout is less regular:
+
+- small uppercase labels set vertically beside the section headings and travel photos;
+- "read more" drawn as a long line ending in an arrow;
+- "Z podróży" as a sticky sage panel beside a zigzag list of stories;
+- the newsletter as a full-width ultramarine block.
+
+Type: Cormorant Garamond for headings, Instrument Sans for text.
 
 ## Content
 
@@ -44,9 +51,9 @@ python3 -m http.server 8000
 
 Editors work at **`/admin`** (Decap CMS, in Polish). Three sections:
 
-- **Historie i reportaże**: articles. The body is built from blocks you can add, drag to reorder and remove: *Tekst* (blank line = new paragraph; `**bold**`, `*italic*`, `[link](https://…)`), *Śródtytuł*, *Cytat*, *Zdjęcie* (frame: postcard, stamp or none), *Grafika* (SVG/PNG/JPG without a frame; text width, wide or small) and *Wideo z YouTube* (paste any YouTube link). An article can also have a YouTube video instead of its main photo.
+- **Historie i reportaże**: articles. The body is built from blocks you can add, drag to reorder and remove: *Tekst* (blank line = new paragraph; `**bold**`, `*italic*`, `[link](https://…)`), *Śródtytuł*, *Cytat*, *Zdjęcie* (coloured frame or none), *Grafika* (SVG/PNG/JPG without a frame; text width, wide or small) and *Wideo z YouTube* (paste any YouTube link). An article can also have a YouTube video instead of its main photo.
 - **Przepisy**: recipes with ingredients (amounts scale with the servings stepper; ml convert to glasses and spoons), steps with optional timer minutes, the "Historia w pigułce" box, shop teaser, sources and related stories.
-- **Strona główna**: what the homepage shows and in what order: issue line, lead story and its pinned stamp, "W tym wydaniu", the week's three stories, the Old Polish band, published regions on the map, recipe rail, travel reports.
+- **Strona główna**: what the homepage shows and in what order: issue line, lead story, "W tym wydaniu", the week's three stories, the Old Polish band, published regions on the map, recipe rail, travel reports.
 
 Photos and graphics: upload a file (stored in `img/uploads/`, resized on the fly by Netlify's image CDN) or paste a link (e.g. from Unsplash). Each has fields for the alt text and the photographer's credit, which appears in the page footer.
 
