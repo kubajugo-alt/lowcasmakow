@@ -1,0 +1,61 @@
+{
+  "title": "Gruzja: supra i kwewri",
+  "subtitle": "Chinkali, chaczapuri i wino z amfor",
+  "country": "Gruzja",
+  "order": 3,
+  "lead": "Osiem dni przy gruzińskim stole: od Tbilisi po Kachetię. Lepimy chinkali, pieczemy chaczapuri i uczymy się, jak tamada prowadzi suprę.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1790498879720-1faecf186f33",
+    "alt": "Chaczapuri z jajkiem i chinkali na drewnianym stole w Tbilisi",
+    "credit": "Kristian Kulijanov",
+    "credit_url": "https://unsplash.com/@filmijanov"
+  },
+  "duration": "8 dni",
+  "group": "8–14 osób",
+  "price": 6900,
+  "price_note": "za osobę w pokoju dwuosobowym, bez przelotu",
+  "dates": [
+    {
+      "date": "2027-09-18",
+      "end": "2027-09-25",
+      "note": "W czasie winobrania"
+    }
+  ],
+  "itinerary": [
+    {
+      "title": "Dni 1–3: Tbilisi",
+      "text": "Targ Dezerter, łaźnie siarkowe i pierwsza supra. Chinkali od podstaw."
+    },
+    {
+      "title": "Dni 4–6: Kachetia",
+      "text": "Winobranie, wino z kwewri, chleb z pieca tone i churczchele."
+    },
+    {
+      "title": "Dzień 7: Mccheta",
+      "text": "Kuchnia klasztorna i warsztat chaczapuri."
+    },
+    {
+      "title": "Dzień 8: Powrót",
+      "text": "Śniadanie i transfer na lotnisko."
+    }
+  ],
+  "includes": [
+    "Noclegi w domach gościnnych",
+    "Pełne wyżywienie",
+    "Warsztaty i degustacje wina",
+    "Transport na miejscu",
+    "Opieka Łowcy Smaków"
+  ],
+  "excludes": [
+    "Przelot do Gruzji",
+    "Ubezpieczenie podróżne"
+  ],
+  "body": [
+    {
+      "type": "text",
+      "text": "Supra to coś więcej niż uczta: to rytuał z własnymi zasadami, toastami i mistrzem ceremonii. Jedziemy na winobranie, kiedy w Kachetii każdy dom ma pełne kwewri i drzwi otwarte dla gości."
+    }
+  ],
+  "related": [],
+  "draft": true
+}

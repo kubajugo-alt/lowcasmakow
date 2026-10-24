@@ -1,0 +1,109 @@
+{
+  "draft": true,
+  "title": "Festiwal Łowcy Smaków",
+  "when": "Sierpień 2027",
+  "date_start": "",
+  "date_end": "",
+  "place": "",
+  "lead": "Kilka dni jedzenia, rozmów i gotowania na żywo: smaki polskich regionów obok kuchni z drugiego końca świata, z historią podaną razem z talerzem.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1790324452976-27d6899f7b13",
+    "alt": "Ludzie spacerują między stoiskami z jedzeniem na festiwalu w parku",
+    "credit": "XS Xue",
+    "credit_url": "https://unsplash.com/@kngstm"
+  },
+  "intro": "Festiwal to Łowca Smaków poza ekranem. Spotykamy się z producentami, kucharkami i kucharzami, których poznaliśmy w podróżach i w regionach, i pokazujemy, skąd wzięło się to, co jemy. Dokładne daty, miejsce i program ogłosimy wkrótce: zapisz się, a damy znać jako pierwszym.",
+  "attractions": [
+    {
+      "title": "Targ smaków",
+      "text": "Producenci z polskich regionów: sery, wędliny, kiszonki, miody i pieczywo, prosto od tych, którzy je robią.",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1545504573-edac76c6a487",
+        "alt": "Kobieta przygotowująca jedzenie na ulicznym targu",
+        "credit": "Daniel Lerman",
+        "credit_url": "https://unsplash.com/@dlerman6"
+      },
+      "link": "/#regiony"
+    },
+    {
+      "title": "Kuchnie świata na żywo",
+      "text": "Goście z Meksyku, Peru i Gruzji gotują przy otwartych stanowiskach: birria, ceviche, chinkali.",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1585803518902-58a3ef005b51",
+        "alt": "Tacos de birria z cebulą i kolendrą, obok miska consommé",
+        "credit": "Diego Lozano",
+        "credit_url": "https://unsplash.com/@diegonacho"
+      },
+      "link": "/wyprawy/"
+    },
+    {
+      "title": "Warsztaty",
+      "text": "Pierogi, kiszenie, przyprawy: krótkie warsztaty w małych grupach, z zapisami na miejscu i online.",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1763570645098-371723617ee9",
+        "alt": "Ludzie przy stole wspólnie przygotowują jedzenie",
+        "credit": "Kwami Fattah Al Sissi",
+        "credit_url": "https://unsplash.com/@kwami_heude_50"
+      },
+      "link": "/warsztaty/"
+    },
+    {
+      "title": "Antropologia jedzenia",
+      "text": "Rozmowy i wykłady o tym, dlaczego jemy to, co jemy: od Czernieckiego po bar mleczny.",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1602660187275-7275b639d7ea",
+        "alt": "Średniowieczny rękopis na pergaminie",
+        "credit": "Boudewijn Huysmans",
+        "credit_url": "https://unsplash.com/@boudewijn_huysmans"
+      },
+      "link": "/historie/"
+    },
+    {
+      "title": "Kolacja pod gołym niebem",
+      "text": "Długi stół i menu z kilku kuchni naraz. Liczba miejsc ograniczona, bilety osobno.",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1758810743752-c496cb015b25",
+        "alt": "Nakryty stół w plenerze z kwiatami",
+        "credit": "Bruno Ngarukiye",
+        "credit_url": "https://unsplash.com/@itsbrunoagain"
+      },
+      "link": ""
+    },
+    {
+      "title": "Strefa rodzinna",
+      "text": "Kiszenie, lepienie i degustacje dla dzieci: jedzenie, które można dotknąć, powąchać i zrobić samemu.",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1693212454137-0d2909d79b27",
+        "alt": "Trzy słoiki z kiszonymi warzywami",
+        "credit": "Anshu A",
+        "credit_url": "https://unsplash.com/@anshu18"
+      },
+      "link": ""
+    }
+  ],
+  "program": [],
+  "program_note": "Program ogłosimy wiosną 2027.",
+  "exhibitors": "Robisz coś dobrego do jedzenia? Szukamy producentów, małych manufaktur, kucharzy i restauracji z regionów i z kuchni świata. Napisz kilka słów o sobie, a odezwiemy się z warunkami udziału.",
+  "faq": [
+    {
+      "q": "Kiedy i gdzie odbędzie się festiwal?",
+      "a": "W sierpniu 2027. Dokładne daty i miejsce ogłosimy wkrótce: zapisz się na powiadomienia, a damy znać jako pierwszym."
+    },
+    {
+      "q": "Ile kosztują bilety?",
+      "a": "Ceny i start sprzedaży biletów podamy razem z programem. Część wydarzeń, np. targ, będzie dostępna bez biletu."
+    },
+    {
+      "q": "Czy mogę przyjść z dziećmi?",
+      "a": "Tak. Planujemy strefę rodzinną z warsztatami i degustacjami dla dzieci."
+    },
+    {
+      "q": "Czy będą dania wegetariańskie?",
+      "a": "Tak, przy każdej strefie kuchni chcemy mieć opcje wegetariańskie; szczegóły w programie."
+    },
+    {
+      "q": "Jak zostać wystawcą lub partnerem?",
+      "a": "Wypełnij formularz „Zostań wystawcą” poniżej. Odpowiemy z warunkami udziału."
+    }
+  ]
+}

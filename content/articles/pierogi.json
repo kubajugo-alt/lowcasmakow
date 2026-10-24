@@ -1,0 +1,56 @@
+{
+  "title": "Pierogi: danie, które każdy region ma za swoje",
+  "number": 2,
+  "section": "Historie",
+  "kicker": "Poniedziałek · Antropologia · Odcinek 1 z 12",
+  "date": "2026-10-19",
+  "lead": "Ciasto, farsz, zlepiony brzeg. Prostsza konstrukcja trudno sobie wyobrazić, a jednak wokół pierogów narosło więcej sporów niż wokół niejednej historycznej daty.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1766309593183-8f77e6ee51d6",
+    "alt": "Ręce nakładające farsz na krążki ciasta na pierogi",
+    "credit": "Jakub Żerdzicki",
+    "credit_url": "https://unsplash.com/@jakubzerdzicki"
+  },
+  "video": "",
+  "place": "",
+  "recipe": "",
+  "body": [
+    {
+      "type": "text",
+      "text": "Otwieramy cykl dwunastu odcinków o polskiej kulturze jedzenia od dania, które wydaje się oczywiste. Pierogi z kapustą i grzybami na Wigilię, ruskie na co dzień, z jagodami latem: mamy dla nich kalendarz, choć rzadko o nim myślimy."
+    },
+    {
+      "type": "heading",
+      "text": "Skąd przyszły?"
+    },
+    {
+      "type": "text",
+      "text": "Pierożki z nadzieniem znają kuchnie od Chin po Włochy, a pytanie, kto był pierwszy, nie ma dobrej odpowiedzi. Ciekawsze jest to, jak pierogi się zakorzeniły: tanie, sycące, pozwalające wykorzystać resztki i to, co akurat urodziło pole."
+    },
+    {
+      "type": "heading",
+      "text": "Ruskie, czyli skąd?"
+    },
+    {
+      "type": "text",
+      "text": "Nazwa „ruskie” nie odnosi się do Rosji, lecz do historycznej Rusi Czerwonej, okolic Lwowa i Przemyśla. Farsz z ziemniaków i twarogu to danie pogranicza, które przeszło do kuchni całego kraju. Takich historii, ukrytych w nazwach, jest w polskim jedzeniu więcej."
+    },
+    {
+      "type": "quote",
+      "text": "Pierogi lepi się razem. To danie, które wymaga stołu pełnego ludzi."
+    },
+    {
+      "type": "heading",
+      "text": "Rytuał lepienia"
+    },
+    {
+      "type": "text",
+      "text": "Najwięcej o pierogach mówi sposób ich robienia. Lepienie to praca zbiorowa: ktoś wałkuje, ktoś wycina, ktoś zlepia, a dzieci uczą się zaginać brzeg „w ząbki”. W wielu domach to jedyny moment w roku, kiedy trzy pokolenia gotują razem."
+    },
+    {
+      "type": "text",
+      "text": "W odcinku wideo odwiedzamy kuchnię, w której przed świętami lepi się ich kilkaset. Pytamy, co się zmieniło, a co zostało tak samo od czasów prababci."
+    }
+  ],
+  "draft": true
+}

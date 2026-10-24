@@ -1,0 +1,170 @@
+{
+  "title": "Ślimaki w szarym sosie",
+  "number": 1,
+  "category": "staropolskie",
+  "kicker": "Przepis · Kuchnia staropolska",
+  "subtitle": "Według Stanisława Czernieckiego, „Compendium ferculorum” (1682)",
+  "card_meta": "70 min",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0",
+    "alt": "Ślimaki w muszlach na żeliwnej patelni",
+    "credit": "Ali Robins",
+    "credit_url": "https://unsplash.com/@aliphotos_86"
+  },
+  "card_image": {
+    "src": "https://images.unsplash.com/photo-1549413468-24b18ebf5d9c",
+    "alt": "Ślimaki zapiekane z masłem ziołowym w ceramicznym naczyniu",
+    "credit": "Maria Orlova",
+    "credit_url": "https://unsplash.com/@orlovamaria"
+  },
+  "video": "",
+  "prep": "30 min",
+  "cook": "40 min",
+  "level": "Średnia",
+  "servings": 4,
+  "servings_unit": "porcje",
+  "ingredients": [
+    {
+      "q": 24,
+      "u": "szt.",
+      "n": "Ślimaki winniczki z hodowli, oczyszczone i zblanszowane"
+    },
+    {
+      "q": 1,
+      "u": "szt.",
+      "n": "Cebula"
+    },
+    {
+      "q": 30,
+      "u": "g",
+      "n": "Masło"
+    },
+    {
+      "q": 60,
+      "u": "g",
+      "n": "Piernik, pokruszony"
+    },
+    {
+      "q": 250,
+      "u": "ml",
+      "n": "Czerwone wino, wytrawne"
+    },
+    {
+      "q": 30,
+      "u": "ml",
+      "n": "Ocet winny"
+    },
+    {
+      "q": 15,
+      "u": "ml",
+      "n": "Miód"
+    },
+    {
+      "q": 30,
+      "u": "g",
+      "n": "Rodzynki"
+    },
+    {
+      "q": 20,
+      "u": "g",
+      "n": "Migdały w płatkach"
+    },
+    {
+      "q": 250,
+      "u": "ml",
+      "n": "Bulion warzywny"
+    },
+    {
+      "q": null,
+      "u": "",
+      "n": "Pieprz, imbir, 2 goździki"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Przygotuj ślimaki",
+      "text": "Ślimaki z hodowli kupisz już oczyszczone i zblanszowane, mrożone albo w zalewie. Rozmroź je w lodówce, przepłucz zimną wodą i osusz. Jeśli są w muszlach, wyjmij mięso wykałaczką, a muszle umyj: przydadzą się do podania.",
+      "minutes": null,
+      "uses": [
+        "Ślimaki winniczki"
+      ]
+    },
+    {
+      "title": "Zeszklij cebulę na maśle",
+      "text": "Cebulę posiekaj drobno. W szerokim rondlu rozgrzej masło i duś cebulę na małym ogniu, aż będzie miękka i szklista, ale nie zrumieniona.",
+      "minutes": 8,
+      "uses": [
+        "Cebula",
+        "Masło"
+      ]
+    },
+    {
+      "title": "Zrób bazę sosu z wina, octu i bulionu",
+      "text": "Wlej wino, ocet i bulion, dodaj szczyptę pieprzu i imbiru oraz dwa goździki. Gotuj bez przykrycia, aż płyn zredukuje się mniej więcej o jedną trzecią.",
+      "minutes": 10,
+      "uses": [
+        "Czerwone wino",
+        "Ocet winny",
+        "Bulion"
+      ]
+    },
+    {
+      "title": "Zagęść piernikiem, dodaj miód i bakalie",
+      "text": "Wyjmij goździki. Wsyp pokruszony piernik i mieszaj, aż się rozpuści, a sos zgęstnieje i nabierze szarobrązowego koloru. Dodaj miód, rodzynki i migdały.",
+      "minutes": null,
+      "uses": [
+        "Piernik",
+        "Miód",
+        "Rodzynki",
+        "Migdały"
+      ]
+    },
+    {
+      "title": "Duś ślimaki w sosie",
+      "text": "Włóż ślimaki do sosu i duś pod przykryciem na bardzo małym ogniu, mieszając od czasu do czasu. Zbyt mocny ogień sprawi, że staną się gumowate.",
+      "minutes": 15,
+      "uses": [
+        "Ślimaki winniczki"
+      ]
+    },
+    {
+      "title": "Dopraw i podawaj",
+      "text": "Spróbuj i zrównoważ smak: odrobina octu, jeśli sos jest za słodki, łyżeczka miodu, jeśli za kwaśny. Podawaj w muszlach albo na grzance z ciemnego chleba.",
+      "minutes": null,
+      "uses": [
+        "Pieprz, imbir"
+      ]
+    }
+  ],
+  "aside": {
+    "title": "Historia w pigułce",
+    "image": {
+      "src": "https://images.unsplash.com/photo-1519884705082-b505c3001e63",
+      "alt": "Stara, otwarta księga w ciepłym świetle",
+      "credit": "Sergiu Vălenaș",
+      "credit_url": "https://unsplash.com/@svalenas"
+    },
+    "text": "Czerniecki, kuchmistrz na dworze Lubomirskich, wydał w 1682 roku pierwszą książkę kucharską napisaną po polsku. Szary sos, słodko-kwaśny, z piernikiem, był jednym z filarów kuchni szlacheckiej.",
+    "note": "W dawnej Polsce ślimaki jadano zwłaszcza w poście: Kościół nie zaliczał ich do mięsa. Dziś Polska hoduje je głównie na eksport.",
+    "story": "slimaki-wedlug-czernieckiego"
+  },
+  "shop": {
+    "image": {
+      "src": "https://images.unsplash.com/photo-1611255951322-7ba28f02b2d5",
+      "alt": "Słoiczki z rozsypanymi przyprawami",
+      "credit": "Diana Polekhina",
+      "credit_url": "https://unsplash.com/@diana_pole"
+    },
+    "label": "Sklep · wkrótce",
+    "title": "Mieszanka przypraw „Staropolska”"
+  },
+  "sources": [
+    "Czerniecki S., <i>Compendium ferculorum albo zebranie potraw</i>, Kraków 1682."
+  ],
+  "related": [
+    "ferma-slimakow",
+    "kim-byl-czerniecki",
+    "przyprawy-staropolskie"
+  ],
+  "draft": true
+}

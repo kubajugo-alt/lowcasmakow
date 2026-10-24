@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Szukaj — Łowca Smaków</title>
+<meta name="description" content="Szukaj w historiach, przepisach, warsztatach, wyprawach i sklepie Łowcy Smaków.">
+<meta name="theme-color" content="#FBFAF7">
+<link rel="canonical" href="https://lowca-smakow.netlify.app/szukaj/">
+<meta property="og:site_name" content="Łowca Smaków">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Szukaj">
+<meta property="og:description" content="Szukaj w historiach, przepisach, warsztatach, wyprawach i sklepie Łowcy Smaków.">
+<meta property="og:url" content="https://lowca-smakow.netlify.app/szukaj/">
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/poppins-normal-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/instrument-sans-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="search-results">
+<a class="skip" href="#tresc">Przejdź do treści</a>
+
+<header class="site-header">
+  <div class="topbar"><div class="wrap"><span>Nowe historie w poniedziałki, środy i niedziele</span></div></div>
+  <div class="wrap masthead">
+    <div class="left">
+      <button class="icon-btn" type="button" aria-label="Szukaj" aria-expanded="false" aria-controls="search" data-search-toggle>
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+    </div>
+    <a href="/" class="logo"><img src="/img/wordmark.svg" alt="Łowca Smaków" width="226" height="69"></a>
+    <div class="header-actions">
+      <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      
+      <a href="#newsletter" class="btn btn-ink">Newsletter</a>
+    </div>
+  </div>
+  <nav class="main-nav" id="main-nav" aria-label="Główne menu">
+    <a class="navlink" href="/historie/">Historie</a>
+    <a class="navlink" href="/przepisy/">Przepisy</a>
+    <a class="navlink" href="/#staropolska">Wideo</a>
+    <a class="navlink" href="/#mapy">Mapy smaków</a>
+    <a class="navlink" href="/warsztaty/">Warsztaty</a>
+    <a class="navlink" href="/wyprawy/">Wyprawy</a>
+    <a class="navlink" href="/sklep/">Sklep</a>
+    <a class="navlink" href="/festiwal/">Festiwal</a>
+  </nav>
+  <form class="search-bar" id="search" role="search" action="/szukaj/" hidden data-search>
+    <div class="wrap">
+      <label for="q" class="sr-only">Szukaj w historiach, przepisach, warsztatach, wyprawach i sklepie</label>
+      <input id="q" name="q" type="search" placeholder="Szukaj, np. „ogórki”, „Meksyk”, „pierogi”" autocomplete="off"
+             role="combobox" aria-expanded="false" aria-controls="search-live" aria-autocomplete="list">
+      <button class="btn btn-ink" type="submit">Szukaj</button>
+    </div>
+    <div class="wrap search-live" id="search-live" role="listbox" aria-label="Wyniki" hidden></div>
+  </form>
+</header>
+
+<main class="wrap" id="tresc">
+
+  <nav class="crumbs" aria-label="Ścieżka">
+    <a href="/">Strona główna</a><span aria-hidden="true">›</span><span>Szukaj</span>
+  </nav>
+  <header class="list-head">
+    <h1 data-ghost="Szukaj">Szukaj</h1>
+  </header>
+  <section class="sec search-page" aria-labelledby="h-results" data-search-page>
+    <form class="search-form" action="/szukaj/" role="search">
+      <label for="q2" class="sr-only">Czego szukasz?</label>
+      <input id="q2" name="q" type="search" placeholder="np. ogórki, Meksyk, szafran" autocomplete="off">
+      <button class="btn btn-ink" type="submit">Szukaj</button>
+    </form>
+    <h2 id="h-results" class="results-h" aria-live="polite" data-results-h></h2>
+    <ol class="results" data-results></ol>
+  </section>
+
+  <section class="newsletter slim" id="newsletter" aria-labelledby="h-nl">
+    <div class="nl-copy">
+      <h2 id="h-nl">Jedna historia. Jeden przepis. Co tydzień.</h2>
+    </div>
+    <form class="nl-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-newsletter>
+      <input type="hidden" name="form-name" value="newsletter">
+      <p class="sr-only"><label>Nie wypełniaj <input name="bot-field" tabindex="-1"></label></p>
+      <label for="nl2" class="sr-only">Adres e-mail</label>
+      <div class="nl-row">
+        <input id="nl2" name="email" type="email" required placeholder="ty@przyklad.pl" autocomplete="email">
+        <button type="submit">Zapisz się</button>
+      </div>
+      <p class="nl-msg" aria-live="polite" data-nl-msg></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-about">
+      <a href="/" class="logo"><img src="/img/logo-white.svg" alt="Łowca Smaków" width="248" height="120"></a>
+      <p>Antropologia jedzenia: skąd się wzięło to, co jemy — i jak to ugotować.</p>
+    </div>
+    <nav class="foot-nav" aria-label="Stopka">
+      <div><a href="/historie/">Historie</a><a href="/przepisy/">Przepisy</a><a href="/#staropolska">Wideo</a><a href="/warsztaty/">Warsztaty</a><a href="/wyprawy/">Wyprawy kulinarne</a><a href="/sklep/">Sklep</a><a href="/festiwal/">Festiwal</a></div>
+      <div><a href="#">O nas</a><a href="#">Współpraca i media kit</a><a href="#">Wydarzenia</a></div>
+      <div><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Kontakt</a></div>
+    </nav>
+    
+    <p class="meta copyright">© 2026 Savour Ventures OÜ</p>
+  </div>
+</footer>
+
+<script src="/js/site.js"></script>
+<script src="/js/search.js"></script>
+</body>
+</html>

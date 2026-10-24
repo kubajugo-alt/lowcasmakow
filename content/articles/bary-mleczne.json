@@ -1,0 +1,52 @@
+{
+  "title": "Skąd się wzięły bary mleczne?",
+  "number": 4,
+  "section": "Historie",
+  "kicker": "Niedziela · Gotujemy · Historia + przepis",
+  "date": "2026-10-25",
+  "lead": "Ceraty na stołach, okienko wydawania, pomidorowa za kilka złotych. Bar mleczny przeżył dwie epoki i ustrój, który miał go zastąpić. Jak to możliwe?",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1612966948332-81d747414a8f",
+    "alt": "Rosół z warzywami w porcelanowej wazie",
+    "credit": "Karolina Kołodziejczak",
+    "credit_url": "https://unsplash.com/@rabbit_in_blue"
+  },
+  "video": "",
+  "place": "",
+  "recipe": "",
+  "body": [
+    {
+      "type": "text",
+      "text": "Pierwszy bar mleczny otworzył w Warszawie w 1896 roku Stanisław Dłużewski, ziemianin, który chciał sprzedawać w mieście mleko i nabiał ze swojego majątku. Proste, tanie dania na bazie nabiału szybko znalazły klientów wśród urzędników i studentów."
+    },
+    {
+      "type": "heading",
+      "text": "Stołówka dla wszystkich"
+    },
+    {
+      "type": "text",
+      "text": "Prawdziwy rozkwit przyszedł po wojnie. W PRL-u bary mleczne były dotowane przez państwo i miały karmić pracowników tanio i szybko. W czasach kartek na mięso menu oparte na mące, jajkach, twarogu i warzywach okazało się praktyczną koniecznością."
+    },
+    {
+      "type": "text",
+      "text": "Pierogi, naleśniki, leniwe, zupy mleczne, kotlet jajeczny: kanon baru mlecznego to dziś zapis kuchni niedoboru, w którym pomysłowość zastępowała składniki."
+    },
+    {
+      "type": "quote",
+      "text": "Bar mleczny to jedyne miejsce, gdzie przy jednym stole jedzą student, emeryt i prawnik z biura obok."
+    },
+    {
+      "type": "heading",
+      "text": "Po 1989 roku"
+    },
+    {
+      "type": "text",
+      "text": "Po transformacji większość barów zniknęła, ale nie wszystkie. Część dań wciąż jest dotowana, a kilka warszawskich i krakowskich barów stało się miejscami kultowymi. Nowe pokolenie traktuje je z mieszanką sentymentu i ciekawości."
+    },
+    {
+      "type": "text",
+      "text": "W niedzielnym odcinku gotujemy rosół i pierogi „jak w barze” i pytamy, czym jest dziś tania, uczciwa kuchnia."
+    }
+  ],
+  "draft": true
+}

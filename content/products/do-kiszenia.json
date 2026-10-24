@@ -1,0 +1,44 @@
+{
+  "title": "Do kiszenia",
+  "subtitle": "Gorczyca, koper, chrzan",
+  "order": 3,
+  "category": "kiszenie",
+  "origin": "Polska",
+  "badge": "Nowość",
+  "price": 22,
+  "sizes": [
+    {
+      "label": "Torebka na 3 słoiki",
+      "price_delta": 0,
+      "weight": 80
+    },
+    {
+      "label": "Zapas na sezon (10 słoików)",
+      "price_delta": 39,
+      "weight": 280
+    }
+  ],
+  "heat": 0,
+  "lead": "Wszystko, czego potrzebują ogórki poza solą i wodą: nasiona gorczycy i kopru, suszony chrzan, czosnek i liść laurowy.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1721934081798-34c4488fdd12",
+    "alt": "Trzy łyżki z różnymi przyprawami",
+    "credit": "İsa A. Özalp",
+    "credit_url": "https://unsplash.com/@isaozalp"
+  },
+  "ingredients": "gorczyca, nasiona kopru, suszony chrzan, czosnek granulowany, liść laurowy, ziele angielskie, pieprz",
+  "use": "Dwie łyżki na litrowy słoik, na dno, pod ogórki. Solanka: łyżka soli na szklankę wody.",
+  "body": [
+    {
+      "type": "text",
+      "text": "Kiszenie to technologia starsza niż lodówka. Ta mieszanka powstała razem z warsztatami fermentacji: sprawdziliśmy ją na kilkudziesięciu słoikach."
+    }
+  ],
+  "recipes": [
+    "ogorki-kiszone"
+  ],
+  "articles": [
+    "dlaczego-kisimy-ogorki"
+  ],
+  "available": true
+}

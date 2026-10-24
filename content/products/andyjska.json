@@ -1,0 +1,43 @@
+{
+  "title": "Andyjska",
+  "subtitle": "Ají amarillo, huacatay",
+  "order": 5,
+  "category": "swiat",
+  "origin": "Peru",
+  "price": 34,
+  "sizes": [
+    {
+      "label": "Torebka 40 g",
+      "price_delta": 0,
+      "weight": 60
+    },
+    {
+      "label": "Słoik 90 g",
+      "price_delta": 14,
+      "weight": 260
+    }
+  ],
+  "heat": 2,
+  "lead": "Żółte chile ají amarillo i suszona mięta peruwiańska huacatay. Do ziemniaków, kurczaka i sosu huancaína.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1715554408457-47b02a5ee97b",
+    "alt": "Żółta papryczka na czarnym tle",
+    "credit": "HisArt Photos",
+    "credit_url": "https://unsplash.com/@hisartphotos"
+  },
+  "ingredients": "ají amarillo, huacatay, czosnek, kmin rzymski, sól",
+  "use": "Łyżeczka do sosu na 4 porcje ziemniaków; do marynaty łyżka na 500 g kurczaka.",
+  "body": [
+    {
+      "type": "text",
+      "text": "W Andach ziemniak to cały świat. Ta mieszanka to smak, który towarzyszył nam na targach w Cusco."
+    }
+  ],
+  "recipes": [
+    "papa-a-la-huancaina"
+  ],
+  "articles": [
+    "peru-ziemniaki"
+  ],
+  "available": true
+}

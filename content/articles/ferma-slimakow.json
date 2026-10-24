@@ -1,0 +1,44 @@
+{
+  "body": [
+    {
+      "type": "text",
+      "text": "Ślimaki hodowane na fermach to najczęściej ślimak szary, gatunek, który dobrze znosi warunki hodowlane. Dziko żyjący winniczek jest w Polsce pod częściową ochroną, a jego zbiór wymaga zezwoleń."
+    },
+    {
+      "type": "heading",
+      "text": "Sezon na grządkach"
+    },
+    {
+      "type": "text",
+      "text": "Ślimaki rosną od wiosny do jesieni na zielonych poletkach, osłoniętych siatką przed ptakami i ucieczką. Potrzebują wilgoci, cienia i świeżych roślin. Na zimę zapadają w sen, zamykając muszlę wapiennym wieczkiem."
+    },
+    {
+      "type": "text",
+      "text": "Większość polskiej produkcji wyjeżdża na eksport. Hodowcy, z którymi rozmawialiśmy, liczą, że krajowi klienci przekonają się do ślimaków, tak jak kiedyś do owoców morza."
+    },
+    {
+      "type": "quote",
+      "text": "Hodowla ślimaków uczy jednego: pośpiech niczego tu nie przyspieszy."
+    },
+    {
+      "type": "text",
+      "text": "Odcinek, w którym gotujemy ślimaki według Czernieckiego, znajdziesz w serii „Kuchnia staropolska”."
+    }
+  ],
+  "section": "Wideo",
+  "place": "",
+  "number": 11,
+  "recipe": "",
+  "date": "2026-10-24",
+  "kicker": "Wideo · Kulisy odcinka",
+  "title": "Na fermie ślimaków: kulisy odcinka",
+  "video": "",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1621447096587-2f9d8fa16953",
+    "alt": "Ślimak na zielonych liściach",
+    "credit": "Olivier Piau",
+    "credit_url": "https://unsplash.com/@o_piau"
+  },
+  "lead": "Jak wygląda hodowla zwierzęcia, które porusza się z prędkością kilku metrów na godzinę? Spędziliśmy dzień wśród grządek, siatek i bardzo cierpliwych ludzi.",
+  "draft": true
+}

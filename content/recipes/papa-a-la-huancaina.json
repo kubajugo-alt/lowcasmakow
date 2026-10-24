@@ -1,0 +1,141 @@
+{
+  "title": "Papa a la huancaína",
+  "number": 4,
+  "category": "podroze",
+  "kicker": "Przepis · Z podróży · Peru",
+  "subtitle": "Ziemniaki z kremowym sosem z sera i żółtej papryczki ají amarillo",
+  "card_meta": "Peru · 45 min",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1633959639799-6d3f66e05710",
+    "alt": "Pieczone ziemniaki z natką pietruszki na talerzu",
+    "credit": "Markus Winkler",
+    "credit_url": "https://unsplash.com/@markuswinkler"
+  },
+  "card_image": null,
+  "video": "",
+  "prep": "15 min",
+  "cook": "30 min",
+  "level": "Łatwa",
+  "servings": 4,
+  "servings_unit": "porcje",
+  "ingredients": [
+    {
+      "q": 1000,
+      "u": "g",
+      "n": "Ziemniaki o żółtym miąższu"
+    },
+    {
+      "q": 3,
+      "u": "szt.",
+      "n": "Papryczki ají amarillo (lub 2 łyżki pasty)"
+    },
+    {
+      "q": 200,
+      "u": "g",
+      "n": "Queso fresco (lub feta wymieszana z ricottą)"
+    },
+    {
+      "q": 120,
+      "u": "ml",
+      "n": "Mleko odparowane (skondensowane niesłodzone)"
+    },
+    {
+      "q": 4,
+      "u": "szt.",
+      "n": "Krakersy solone"
+    },
+    {
+      "q": 0.5,
+      "u": "szt.",
+      "n": "Cebula"
+    },
+    {
+      "q": 1,
+      "u": "ząbek",
+      "n": "Czosnek"
+    },
+    {
+      "q": 30,
+      "u": "ml",
+      "n": "Olej roślinny"
+    },
+    {
+      "q": 2,
+      "u": "szt.",
+      "n": "Jajka"
+    },
+    {
+      "q": null,
+      "u": "",
+      "n": "Do podania: czarne oliwki, liście sałaty"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Ugotuj ziemniaki",
+      "text": "Ugotuj ziemniaki w mundurkach w osolonej wodzie, aż będą miękkie, ale nie rozpadające się. Ostudź i obierz.",
+      "minutes": 20,
+      "uses": [
+        "Ziemniaki"
+      ]
+    },
+    {
+      "title": "Podsmaż ají, cebulę i czosnek",
+      "text": "Papryczki oczyść z nasion. Podsmaż je na oleju z pokrojoną cebulą i czosnkiem, aż zmiękną. Ostudź.",
+      "minutes": 5,
+      "uses": [
+        "Ají amarillo",
+        "Cebula",
+        "Czosnek",
+        "Olej"
+      ]
+    },
+    {
+      "title": "Zblenduj sos",
+      "text": "Zmiksuj podsmażone warzywa z serem, mlekiem i krakersami na gęsty, aksamitny, intensywnie żółty sos. Jeśli jest za gęsty, dolej odrobinę mleka.",
+      "minutes": null,
+      "uses": [
+        "Queso fresco",
+        "Mleko",
+        "Krakersy"
+      ]
+    },
+    {
+      "title": "Ugotuj jajka",
+      "text": "Ugotuj jajka na twardo, przelej zimną wodą, obierz i pokrój w ćwiartki.",
+      "minutes": 10,
+      "uses": [
+        "Jajka"
+      ]
+    },
+    {
+      "title": "Podawaj na zimno",
+      "text": "Ułóż liście sałaty na półmisku, na nich grube plastry ziemniaków. Polej obficie sosem, udekoruj jajkiem i oliwkami. Podawaj schłodzone, jako przystawkę.",
+      "minutes": null,
+      "uses": [
+        "Oliwki",
+        "Sałata"
+      ]
+    }
+  ],
+  "aside": {
+    "title": "Historia w pigułce",
+    "image": {
+      "src": "https://images.unsplash.com/photo-1683543124235-400a2b31cc73",
+      "alt": "Ziemniaki na straganie targowym",
+      "credit": "engin akyurt",
+      "credit_url": "https://unsplash.com/@enginakyurt"
+    },
+    "text": "Ziemniak pochodzi z Andów, a w Peru uprawia się dziś kilka tysięcy jego odmian.",
+    "note": "Papa a la huancaína, nazwana od miasta Huancayo, to jedna z najpopularniejszych przystawek peruwiańskiej kuchni.",
+    "story": "peru-ziemniaki"
+  },
+  "shop": null,
+  "sources": [],
+  "related": [
+    "peru-ziemniaki",
+    "meksyk-chile",
+    "oaxaca-targ"
+  ],
+  "draft": true
+}

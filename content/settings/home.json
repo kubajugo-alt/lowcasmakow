@@ -1,0 +1,94 @@
+{
+  "tagline": "Nowe historie w poniedziałki, środy i niedziele",
+  "lead": {
+    "article": "dlaczego-kisimy-ogorki",
+    "text": "Słoik ogórków w spiżarni to nie tylko smak dzieciństwa. To technologia starsza niż lodówka i jeden z najtrwalszych rytuałów polskiego roku.",
+    "recipe": "ogorki-kiszone"
+  },
+  "issue_list": [
+    "pierogi",
+    "podhale-oscypek"
+  ],
+  "week": [
+    {
+      "day": "Poniedziałek",
+      "date": "",
+      "article": "pierogi"
+    },
+    {
+      "day": "Środa",
+      "date": "",
+      "article": "podhale-oscypek"
+    },
+    {
+      "day": "Niedziela",
+      "date": "",
+      "article": "bary-mleczne"
+    }
+  ],
+  "old_polish": {
+    "title": "Kuchnia staropolska",
+    "feature": "slimaki-wedlug-czernieckiego",
+    "feature_label": "Odcinek wideo",
+    "side_articles": [
+      "kim-byl-czerniecki",
+      "przyprawy-staropolskie"
+    ],
+    "side_recipe": "slimaki-w-szarym-sosie",
+    "side_recipe_title": "Szary sos piernikowy — wersja współczesna"
+  },
+  "regions": {
+    "intro": "Każde województwo: jeden smak, jego historia i przepis. Zaczynamy od Podhala. Wybierz region na mapie.",
+    "stories": [
+      {
+        "region": "Małopolskie",
+        "article": "podhale-oscypek",
+        "label": "Podhale i oscypek"
+      }
+    ]
+  },
+  "world": {
+    "intro": "Jedzenie oglądane tam, gdzie się rodzi: targi, kuchnie i ludzie. Kraje z naszymi reportażami i przepisami są wyróżnione. Obróć glob i wybierz kraj.",
+    "stories": [
+      {
+        "country": "Meksyk",
+        "article": "meksyk-chile",
+        "label": "Jalisco: skąd birria bierze kolor"
+      },
+      {
+        "country": "Meksyk",
+        "article": "oaxaca-targ",
+        "label": "Oaxaca: dzień na targu"
+      },
+      {
+        "country": "Meksyk",
+        "recipe": "birria-tacos",
+        "label": "Przepis: birria tacos"
+      },
+      {
+        "country": "Peru",
+        "article": "peru-ziemniaki",
+        "label": "Andy: tysiące odmian ziemniaka"
+      },
+      {
+        "country": "Peru",
+        "recipe": "papa-a-la-huancaina",
+        "label": "Przepis: papa a la huancaína"
+      }
+    ]
+  },
+  "recipes": [
+    "slimaki-w-szarym-sosie",
+    "birria-tacos",
+    "ogorki-kiszone",
+    "papa-a-la-huancaina"
+  ],
+  "travel": [
+    "peru-ziemniaki",
+    "meksyk-chile",
+    "oaxaca-targ"
+  ],
+  "newsletter": {
+    "text": "Antropologia jedzenia prosto do skrzynki, bez spamu. Wypisać się można jednym kliknięciem."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "title": "Birria",
+  "subtitle": "Guajillo, ancho, kmin",
+  "order": 4,
+  "category": "swiat",
+  "origin": "Meksyk, Jalisco",
+  "price": 32,
+  "sizes": [
+    {
+      "label": "Torebka 40 g",
+      "price_delta": 0,
+      "weight": 60
+    },
+    {
+      "label": "Słoik 90 g",
+      "price_delta": 14,
+      "weight": 260
+    }
+  ],
+  "heat": 2,
+  "lead": "Suszone chile guajillo i ancho, kmin, meksykańskie oregano i cynamon. Baza do birrii, ale też do gulaszu i pieczonej dyni.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1586770613913-853ae5abb462",
+    "alt": "Suszone papryczki chili i czosnek na ciemnej tkaninie",
+    "credit": "Madelyn Batista",
+    "credit_url": "https://unsplash.com/@madelynpao"
+  },
+  "ingredients": "chile guajillo, chile ancho, chile de árbol, kmin rzymski, oregano meksykańskie, cynamon, goździki, sól",
+  "use": "Trzy łyżki zalej szklanką gorącego bulionu na 15 minut, zblenduj z pomidorami i octem: to gotowa marynata na kilogram mięsa.",
+  "body": [
+    {
+      "type": "text",
+      "text": "W Jalisco birria to danie świąteczne. Mieszankę złożyliśmy po podróży do Meksyku, żeby nie trzeba było szukać trzech rodzajów chile w polskich sklepach."
+    }
+  ],
+  "recipes": [
+    "birria-tacos"
+  ],
+  "articles": [
+    "meksyk-chile"
+  ],
+  "available": true
+}

@@ -1,0 +1,59 @@
+{
+  "title": "Pieprz, szafran, imbir: kuchnia, która pachniała bogactwem",
+  "number": 7,
+  "section": "Historie",
+  "kicker": "Historia · Kuchnia staropolska",
+  "date": "2026-10-23",
+  "lead": "Szlachecki stół w XVII wieku był ostrzejszy i bardziej korzenny, niż dziś sobie wyobrażamy. Przyprawy nie tylko doprawiały potrawy: pokazywały, kogo stać na import z drugiego końca świata.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1467688695332-6b486449d78f",
+    "alt": "Strony dawnej księgi zapisane gotyckim pismem",
+    "credit": "Mark Rasmuson",
+    "credit_url": "https://unsplash.com/@mrasmuson"
+  },
+  "video": "",
+  "place": "",
+  "recipe": "",
+  "body": [
+    {
+      "type": "text",
+      "text": "Cudzoziemcy odwiedzający Rzeczpospolitą często dziwili się ilości przypraw w polskich daniach. Pieprz, imbir, gałka muszkatołowa, cynamon, goździki i szafran trafiały do sosów, mięs, ryb i ciast, często wszystkie naraz."
+    },
+    {
+      "type": "heading",
+      "text": "Kolor jako luksus"
+    },
+    {
+      "type": "text",
+      "text": "Kuchnia staropolska kochała kolorowe sosy. Żółty barwiono szafranem, najdroższą przyprawą świata. Ciemne sosy zawdzięczały barwę piernikowi, powidłom albo palonemu cukrowi. Kolor na talerzu był komunikatem: ten dom stać na wszystko."
+    },
+    {
+      "type": "photo",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1611255951322-7ba28f02b2d5",
+        "alt": "Słoiczki z rozsypanymi przyprawami",
+        "credit": "Diana Polekhina",
+        "credit_url": "https://unsplash.com/@diana_pole"
+      },
+      "frame": "frame",
+      "caption": ""
+    },
+    {
+      "type": "heading",
+      "text": "Dlaczego to się skończyło?"
+    },
+    {
+      "type": "text",
+      "text": "Z czasem przyprawy staniały, a to, co dostępne dla wszystkich, przestaje być wyznacznikiem statusu. W XVIII wieku na dworach zaczęła królować kuchnia francuska, delikatniejsza i oszczędniejsza w korzeniach. Staropolskie smaki przetrwały głównie w świątecznych piernikach i wigilijnych potrawach."
+    },
+    {
+      "type": "quote",
+      "text": "Piernik na święta to ostatni ślad kuchni, w której przyprawa była walutą."
+    },
+    {
+      "type": "text",
+      "text": "W kolejnych odcinkach serii odtwarzamy dania, w których te smaki grają główną rolę, zaczynając od szarego sosu piernikowego."
+    }
+  ],
+  "draft": true
+}

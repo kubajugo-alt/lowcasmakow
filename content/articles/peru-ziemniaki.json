@@ -1,0 +1,55 @@
+{
+  "title": "Tysiące odmian: w Andach ziemniak to nie jedno warzywo",
+  "number": 8,
+  "section": "Z podróży",
+  "kicker": "Z podróży · Peru",
+  "date": "2026-10-19",
+  "lead": "Na targu w Cusco ziemniaki leżą w kopcach: żółte, fioletowe, czarne, podłużne, pomarszczone. Dla Peruwiańczyka pytanie „jaki ziemniak?” jest równie ważne jak dla nas „jakie jabłko?”.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1683543124235-400a2b31cc73",
+    "alt": "Ziemniaki na straganie targowym",
+    "credit": "engin akyurt",
+    "credit_url": "https://unsplash.com/@enginakyurt"
+  },
+  "video": "",
+  "place": "Peru",
+  "recipe": "papa-a-la-huancaina",
+  "body": [
+    {
+      "type": "text",
+      "text": "Ziemniak pochodzi z Andów. Udomowiono go w okolicach jeziora Titicaca kilka tysięcy lat temu i dopiero w XVI wieku Hiszpanie przywieźli go do Europy. W Peru uprawia się dziś kilka tysięcy odmian, wiele z nich wyłącznie na wysokogórskich poletkach."
+    },
+    {
+      "type": "heading",
+      "text": "Chuño, czyli liofilizacja sprzed wieków"
+    },
+    {
+      "type": "text",
+      "text": "Andyjscy rolnicy od stuleci przetwarzają ziemniaki w chuño. Bulwy zostawia się na noc na mrozie, za dnia suszy na słońcu, a wodę wyciska się, depcząc je stopami. Tak przygotowane mogą przetrwać latami. To ta sama logika, która w Polsce kazała kisić ogórki: przechować plon na trudny czas."
+    },
+    {
+      "type": "photo",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1633959639799-6d3f66e05710",
+        "alt": "Pieczone ziemniaki z natką pietruszki na talerzu",
+        "credit": "Markus Winkler",
+        "credit_url": "https://unsplash.com/@markuswinkler"
+      },
+      "frame": "frame",
+      "caption": ""
+    },
+    {
+      "type": "heading",
+      "text": "Na talerzu"
+    },
+    {
+      "type": "text",
+      "text": "Najsłynniejsze danie z ziemniaków to papa a la huancaína: ugotowane ziemniaki polane kremowym sosem z sera i żółtej papryczki ají amarillo. Proste, jaskrawe, podawane na zimno jako przystawka. Przepis znajdziesz pod artykułem."
+    },
+    {
+      "type": "quote",
+      "text": "Europa dostała od Andów ziemniaka. Andy zatrzymały dla siebie tysiące jego odmian."
+    }
+  ],
+  "draft": true
+}

@@ -1,2 +1,14 @@
 [build]
   publish = "."
+  # Rebuilds the pages from content/ (what the CMS edits). Standard-library Python only.
+  command = "python3 scripts/build.py"
+[[redirects]]
+  from = "/przepis.html"
+  to = "/przepisy/slimaki-w-szarym-sosie.html"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/canva/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"

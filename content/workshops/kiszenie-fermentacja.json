@@ -1,0 +1,63 @@
+{
+  "title": "Kiszenie: warsztaty fermentacji",
+  "kind": "Warsztaty kulinarne",
+  "order": 2,
+  "lead": "Ogórki, kapusta, buraki i coś mniej oczywistego. Uczymy się kisić tak, jak robiły to nasze babcie, i rozumieć, co dzieje się w słoiku.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1693212454137-0d2909d79b27",
+    "alt": "Trzy słoiki z kiszonymi warzywami",
+    "credit": "Anshu A",
+    "credit_url": "https://unsplash.com/@anshu18"
+  },
+  "place": "Warszawa, pracownia kulinarna (adres podamy po zapisie)",
+  "duration": "3 godziny",
+  "group": "do 14 osób",
+  "level": "Dla wszystkich",
+  "price": 240,
+  "price_note": "za osobę, z dwoma słoikami do domu",
+  "dates": [
+    {
+      "date": "2026-11-21",
+      "time": "12:00"
+    },
+    {
+      "date": "2027-01-16",
+      "time": "12:00"
+    }
+  ],
+  "program": [
+    {
+      "title": "Dlaczego kisimy",
+      "text": "Technologia starsza niż lodówka: sól, czas i bakterie kwasu mlekowego."
+    },
+    {
+      "title": "Solanka i proporcje",
+      "text": "Ile soli, jaka woda, jaka temperatura. Najczęstsze błędy i jak ich uniknąć."
+    },
+    {
+      "title": "Trzy kiszonki",
+      "text": "Ogórki, kapusta i kwas buraczany. Każdy przygotowuje własne słoiki."
+    },
+    {
+      "title": "Degustacja",
+      "text": "Kiszonki w różnym wieku: od tygodnia do pół roku. Porównujemy smak i chrupkość."
+    }
+  ],
+  "includes": [
+    "Warzywa, przyprawy i słoiki",
+    "Dwa słoiki do zabrania",
+    "Degustacja kiszonek",
+    "Ściąga z proporcjami"
+  ],
+  "body": [
+    {
+      "type": "text",
+      "text": "Słoik ogórków w spiżarni to nie tylko smak dzieciństwa. Na warsztatach zaglądamy do środka: co robią bakterie, dlaczego czosnek i chrzan nie są tylko dla smaku i jak kisić bezpiecznie w małym mieszkaniu."
+    }
+  ],
+  "related": [
+    "dlaczego-kisimy-ogorki",
+    "ogorki-kiszone"
+  ],
+  "draft": true
+}

@@ -1,0 +1,45 @@
+{
+  "title": "Staropolska",
+  "subtitle": "Pieprz, szafran, imbir",
+  "order": 1,
+  "category": "polska",
+  "origin": "Kuchnia staropolska",
+  "badge": "Polecamy",
+  "price": 29,
+  "sizes": [
+    {
+      "label": "Torebka 40 g",
+      "price_delta": 0,
+      "weight": 60
+    },
+    {
+      "label": "Słoik 90 g",
+      "price_delta": 14,
+      "weight": 260
+    }
+  ],
+  "heat": 1,
+  "lead": "Mieszanka, którą pachniały szlacheckie kuchnie XVII wieku: pieprz, szafran, imbir i gałka muszkatołowa. Do mięs, sosów i kaszy.",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1589536677029-c0aa1808fba6",
+    "alt": "Przyprawy rozsypane na drewnianym blacie",
+    "credit": "Timothy Newman",
+    "credit_url": "https://unsplash.com/@newmanphotog"
+  },
+  "ingredients": "pieprz czarny, imbir, gałka muszkatołowa, cynamon, goździki, szafran (1%), sól morska",
+  "use": "Łyżeczka na 500 g mięsa lub do garnka sosu. Dodaj pod koniec duszenia, żeby szafran nie stracił koloru.",
+  "body": [
+    {
+      "type": "text",
+      "text": "W „Compendium ferculorum” Stanisław Czerniecki nie żałował przypraw: pieprz, szafran i imbir były znakiem zamożności domu. Odtworzyliśmy proporcje z jego przepisów, trochę je łagodząc dla dzisiejszych podniebień."
+    }
+  ],
+  "recipes": [
+    "slimaki-w-szarym-sosie"
+  ],
+  "articles": [
+    "przyprawy-staropolskie",
+    "kim-byl-czerniecki"
+  ],
+  "available": true
+}

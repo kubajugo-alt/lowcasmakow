@@ -1,0 +1,173 @@
+{
+  "title": "Birria tacos",
+  "number": 2,
+  "category": "podroze",
+  "kicker": "Przepis · Z podróży · Meksyk",
+  "subtitle": "Wołowina duszona w paście z trzech rodzajów suszonych chile, z consommé do maczania",
+  "card_meta": "Meksyk · 4 h",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1585803518902-58a3ef005b51",
+    "alt": "Tacos de birria z cebulą i kolendrą, obok miska consommé",
+    "credit": "Diego Lozano",
+    "credit_url": "https://unsplash.com/@diegonacho"
+  },
+  "card_image": null,
+  "video": "",
+  "prep": "30 min",
+  "cook": "3 h 30 min",
+  "level": "Średnia",
+  "servings": 4,
+  "servings_unit": "porcje",
+  "ingredients": [
+    {
+      "q": 1000,
+      "u": "g",
+      "n": "Pręga lub łopatka wołowa (tradycyjnie: koźlina)"
+    },
+    {
+      "q": 4,
+      "u": "szt.",
+      "n": "Suszone chile guajillo"
+    },
+    {
+      "q": 2,
+      "u": "szt.",
+      "n": "Suszone chile ancho"
+    },
+    {
+      "q": 2,
+      "u": "szt.",
+      "n": "Suszone chile de árbol"
+    },
+    {
+      "q": 2,
+      "u": "szt.",
+      "n": "Pomidory"
+    },
+    {
+      "q": 1,
+      "u": "szt.",
+      "n": "Cebula"
+    },
+    {
+      "q": 4,
+      "u": "ząbki",
+      "n": "Czosnek"
+    },
+    {
+      "q": 15,
+      "u": "ml",
+      "n": "Ocet jabłkowy"
+    },
+    {
+      "q": 1,
+      "u": "łyżeczka",
+      "n": "Kumin, oregano (najlepiej meksykańskie)"
+    },
+    {
+      "q": 1,
+      "u": "szt.",
+      "n": "Laska cynamonu i 2 liście laurowe"
+    },
+    {
+      "q": 1000,
+      "u": "ml",
+      "n": "Bulion wołowy"
+    },
+    {
+      "q": 12,
+      "u": "szt.",
+      "n": "Tortille kukurydziane"
+    },
+    {
+      "q": 150,
+      "u": "g",
+      "n": "Ser oaxaca lub mozzarella"
+    },
+    {
+      "q": null,
+      "u": "",
+      "n": "Do podania: cebula, kolendra, limonka"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Podpraż i namocz chile",
+      "text": "Usuń z papryczek ogonki i nasiona. Praż je kilkanaście sekund z każdej strony na suchej patelni, aż zapachną, a potem zalej gorącą wodą i odstaw do zmięknięcia.",
+      "minutes": 20,
+      "uses": [
+        "Chile guajillo",
+        "Chile ancho",
+        "Chile de árbol"
+      ]
+    },
+    {
+      "title": "Zblenduj marynatę",
+      "text": "Zmiksuj odsączone chile z pomidorami, połową cebuli, czosnkiem, octem, kuminem, oregano i szklanką bulionu na gładką, ceglastoczerwoną pastę.",
+      "minutes": null,
+      "uses": [
+        "Pomidory",
+        "Cebula",
+        "Czosnek",
+        "Ocet",
+        "Kumin, oregano"
+      ]
+    },
+    {
+      "title": "Obsmaż mięso",
+      "text": "Pokrój mięso na duże kawałki, posól i obsmaż partiami w garnku z grubym dnem, aż się zrumieni.",
+      "minutes": null,
+      "uses": [
+        "Wołowina"
+      ]
+    },
+    {
+      "title": "Duś w marynacie",
+      "text": "Zalej mięso marynatą i resztą bulionu, dodaj cynamon i liście laurowe. Duś pod przykryciem na małym ogniu, aż mięso będzie się rozpadać pod widelcem.",
+      "minutes": 180,
+      "uses": [
+        "Marynata",
+        "Bulion",
+        "Cynamon, liście laurowe"
+      ]
+    },
+    {
+      "title": "Rozdrobnij mięso, odbierz tłuszcz",
+      "text": "Wyjmij mięso i rozdrobnij je widelcami. Z powierzchni wywaru zbierz czerwony tłuszcz do miseczki. Wywar dopraw solą: to consommé do maczania.",
+      "minutes": null,
+      "uses": [
+        "Wołowina"
+      ]
+    },
+    {
+      "title": "Smaż tacos i podawaj",
+      "text": "Zanurz tortillę w tłuszczu, połóż na gorącej patelni, posyp serem i mięsem, złóż na pół i smaż z obu stron do chrupkości. Podawaj z miską consommé, cebulą, kolendrą i limonką.",
+      "minutes": 3,
+      "uses": [
+        "Tortille",
+        "Ser",
+        "Cebula, kolendra, limonka"
+      ]
+    }
+  ],
+  "aside": {
+    "title": "Historia w pigułce",
+    "image": {
+      "src": "https://images.unsplash.com/photo-1752627580142-8ea39c4eac64",
+      "alt": "Czerwone papryczki chile suszące się na słońcu",
+      "credit": "stephan de MARANTHI",
+      "credit_url": "https://unsplash.com/@maranthi"
+    },
+    "text": "Birria to świąteczny gulasz z meksykańskiego stanu Jalisco, tradycyjnie z koźliny marynowanej w paście z suszonych papryczek.",
+    "note": "Wersja w tortillach, smażonych w tłuszczu z wywaru, rozsławiły food trucki z Tijuany i Los Angeles.",
+    "story": "meksyk-chile"
+  },
+  "shop": null,
+  "sources": [],
+  "related": [
+    "meksyk-chile",
+    "oaxaca-targ",
+    "peru-ziemniaki"
+  ],
+  "draft": true
+}
