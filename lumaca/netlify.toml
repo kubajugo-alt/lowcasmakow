@@ -1,7 +1,6 @@
 # Lumaca: a separate Netlify project built from the lumaca/ folder of this repository.
-# In Netlify: Base directory = lumaca, build command and publish directory below.
+# When linking the repository in Netlify, set Base directory = lumaca; build command and publish directory are below.
 [build]
-  base = "lumaca"
   publish = "."
   # Rebuilds the pages from content/ (what the CMS edits). Standard-library Python only.
   command = "python3 scripts/build.py"
