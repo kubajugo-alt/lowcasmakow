@@ -50,8 +50,9 @@ and open the contact form with the product filled in. With the key, they add to 
 - "Rocznik 2026" and the numbered Christmas series (a decision listed in the plan).
 - One phone number for everything (the site uses +48 501 501 130).
 - Allergens: molluscs on every jar; whether the court-bouillon contains celery and the wine sulphites.
-- Photos: the jar and Lio photos are the real product shots with the new black label rendered on by AI (Higgsfield),
-  i.e. mock-ups until the new labels are printed and photographed. Served dishes are cropped from the pro bono team's
-  draft visuals; the owners' photo (Grażyna and Tomasz Nawroccy) is missing; occasions use Unsplash photos.
+- Photos: every photo with a jar (product shots, hero, sets, recipe and dish photos) was made with AI (Higgsfield) from the
+  real product shots and the pro bono team's draft visuals, with the new black label. They are mock-ups until the
+  new labels are printed and photographed. The owners' photo (Grażyna and Tomasz Nawroccy) is missing; three
+  occasion and kitchen photos come from Unsplash.
 - Terms of sale and privacy policy texts (the old site had lorem ipsum).
 - EN and FR versions (product names in three languages are on the B2B page for now).

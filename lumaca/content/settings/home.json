@@ -4,7 +4,7 @@
   "hero_badge": "gotowe w 5 minut",
   "hero_image": {
     "src": "/img/uploads/podanie-stol-dania.jpg",
-    "alt": "Makaron ze ślimakami w pesto, kieliszek białego wina i babeczki ze ślimakami na drewnianym stole"
+    "alt": "Słoiki Lumaca z czarną etykietą obok grzanek, makaronu w pesto, bulionu i babeczek ze ślimakami"
   },
   "bestsellers_title": "Najczęściej wybierane",
   "how_title": "Jak to podać",
@@ -16,10 +16,8 @@
       "text": "Grzanki ze ślimakami i kieliszek białego wytrawnego.",
       "link": "/sklep/zestaw-wieczor-z-winem.html",
       "image": {
-        "src": "https://images.unsplash.com/photo-1781714534090-cf7afbbf8484",
-        "alt": "Kieliszki wina i deska przekąsek przy kominku",
-        "credit": "Bruno Dias",
-        "credit_url": "https://unsplash.com/@onurbdias"
+        "src": "/img/uploads/zestaw-wieczor-z-winem.jpg",
+        "alt": "Dwa słoiki Lumaca, grzanki ze ślimakami i białe wino przy świecach"
       }
     },
     {
@@ -49,10 +47,8 @@
       "text": "Zapomniany staropolski przysmak wraca na świąteczny stół.",
       "link": "/sklep/zestaw-swiateczny-rocznik-2026.html",
       "image": {
-        "src": "https://images.unsplash.com/photo-1549413468-24b18ebf5d9c",
-        "alt": "Ślimaki w maśle czosnkowym i kieliszek szampana",
-        "credit": "Maria Orlova",
-        "credit_url": "https://unsplash.com/@orlovamaria"
+        "src": "/img/uploads/zestaw-swiateczny.jpg",
+        "alt": "Zestaw świąteczny: cztery słoiki Lumaca w czarnym pudełku ze złotą wstążką"
       }
     }
   ],

@@ -94,9 +94,9 @@ p { margin: 0 0 1em; }
 /* hero */
 .hero { position: relative; background: var(--ink); min-height: min(78vh, 720px); display: flex; align-items: center; overflow: hidden; }
 .hero-photo { position: absolute; inset: 0; margin: 0; }
-.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
-.hero-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(27,26,24,.9) 0%, rgba(27,26,24,.55) 45%, rgba(27,26,24,0) 75%); }
-.hero-in { position: relative; z-index: 1; width: 100%; padding-top: 56px; padding-bottom: 56px; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 30% 50%; }
+.hero-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(270deg, rgba(27,26,24,.85) 0%, rgba(27,26,24,.45) 40%, rgba(27,26,24,0) 65%); }
+.hero-in { position: relative; z-index: 1; width: 100%; padding-top: 56px; padding-bottom: 56px; display: flex; justify-content: flex-end; }
 .hero-card { max-width: 520px; background: rgba(27,26,24,.92); text-align: center; padding: 44px 40px 36px; }
 .hero-mark { margin: 0 auto 16px; width: 96px; height: auto; }
 .hero-card h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: .2em; }
@@ -350,4 +350,12 @@ p { margin: 0 0 1em; }
   .products.three .pc-body h3 { font-size: 1.05rem; }
   .products.three .pc-occ { display: none; }
   .products.three .pc-buy { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 720px) {
+  .hero { display: block; min-height: 0; }
+  .hero-photo { position: relative; aspect-ratio: 16 / 10; }
+  .hero-photo img { object-position: 20% 50%; }
+  .hero-photo::after { display: none; }
+  .hero-in { padding-top: 0; padding-bottom: 28px; margin-top: -36px; }
+  .hero-card { max-width: none; width: 100%; }
 }

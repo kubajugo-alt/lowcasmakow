@@ -27,5 +27,9 @@
   ],
   "weight": 450,
   "name_en": "Lio – freeze-dried snail meat",
-  "name_fr": "Lio – chair d’escargot lyophilisée"
+  "name_fr": "Lio – chair d’escargot lyophilisée",
+  "dish_image": {
+    "src": "/img/uploads/podanie-risotto.jpg",
+    "alt": "Risotto z mięsem ślimaka i torebka Lio"
+  }
 }
