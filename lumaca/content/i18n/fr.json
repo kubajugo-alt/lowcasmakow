@@ -38,7 +38,8 @@
     "cta_btn": "Demande professionnelle",
     "form_ok": "Merci ! Nous vous répondrons sous deux jours ouvrés.",
     "send": "Envoyer",
-    "lang_name": "Français"
+    "lang_name": "Français",
+    "rate_note": "Prix en euros convertis au taux de la Banque nationale de Pologne du {date} (1 EUR = {rate} PLN) ; prix définitifs en PLN."
   },
   "home": {
     "title": "Lumaca : escargots prêts à servir",

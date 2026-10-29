@@ -38,7 +38,8 @@
     "cta_btn": "Trade enquiry",
     "form_ok": "Thank you! We will reply within two working days.",
     "send": "Send",
-    "lang_name": "English"
+    "lang_name": "English",
+    "rate_note": "Euro prices converted at the National Bank of Poland rate of {date} (1 EUR = {rate} PLN); final prices in PLN."
   },
   "home": {
     "title": "Lumaca: snails, ready for the table",

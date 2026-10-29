@@ -18,5 +18,7 @@
   "shop_notice": "Sklep online uruchamiamy przed sezonem świątecznym. Do tego czasu zamówienia przyjmujemy telefonicznie i mailowo.",
   "newsletter_title": "Przepis miesiąca i darmowa dostawa",
   "newsletter_text": "Zapisz się, a wyślemy Ci przepis i kod na darmową dostawę pierwszego zamówienia. Piszemy raz na dwa tygodnie: przepisy, gdzie nas spotkać, zestawy na okazje.",
-  "lowca_url": "https://lowca-smakow.netlify.app"
+  "lowca_url": "https://lowca-smakow.netlify.app",
+  "eur_rate": 4.3951,
+  "eur_rate_date": "2026-10-29"
 }

@@ -381,3 +381,5 @@ p { margin: 0 0 1em; }
 .social { display: flex; gap: 10px; margin: 8px 0 0; }
 .social a { display: inline-flex; width: 40px; height: 40px; align-items: center; justify-content: center; border: 1px solid rgba(201,163,90,.5); border-radius: 50%; color: var(--gold-light); }
 .social a:hover { background: var(--gold); color: var(--ink); }
+.price small { font: 400 .8rem/1 var(--sans); color: var(--muted); margin-left: 4px; }
+.rate-note { margin-top: 28px; }

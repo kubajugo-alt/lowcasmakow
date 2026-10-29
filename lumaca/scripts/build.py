@@ -91,6 +91,20 @@ def hreflang(path):
 # the cart and checkout are Snipcart's (https://snipcart.com); with no public API key set in the CMS
 # the shop shows its products but the buttons say "coming soon" and no Snipcart code loads
 SHOP_KEY = (S.get('snipcart_key') or '').strip()
+
+
+def eur_rate():
+    """EUR/PLN mid rate from the National Bank of Poland at build time; the CMS value if NBP can't be reached."""
+    try:
+        from urllib.request import urlopen
+        with urlopen('https://api.nbp.pl/api/exchangerates/rates/a/eur/?format=json', timeout=6) as r:
+            x = json.load(r)['rates'][0]
+            return float(x['mid']), x['effectiveDate']
+    except Exception:
+        return float(S.get('eur_rate') or 4.3), S.get('eur_rate_date') or ''
+
+
+EUR, EUR_DATE = eur_rate()
 SNIPCART_VERSION = '3.7.4'
 CATS = {'sloiki': 'Słoiki', 'zestawy': 'Zestawy', 'liofilizaty': 'Liofilizaty'}
 UTM = 'utm_source=lumaca&utm_medium=referral'
@@ -149,6 +163,18 @@ def md(text):
         else:
             out.append(f'<p>{inline(block)}</p>')
     return '\n'.join(out)
+
+
+def eur(x, lang):
+    v = float(x) / EUR
+    return f'€{v:.2f}' if lang == 'en' else f'{v:.2f}'.replace('.', ',') + '\u00a0€'
+
+
+def rate_note(lang):
+    y, m, d = (EUR_DATE or '----').split('-') if EUR_DATE else ('', '', '')
+    date = f'{int(d)} {["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][int(m) - 1]} {y}' if lang == 'en' and EUR_DATE else (
+        f'{d}/{m}/{y}' if EUR_DATE else '')
+    return I18N[lang]['ui']['rate_note'].format(date=date, rate=f'{EUR:.4f}'.replace('.', ',') if lang == 'fr' else f'{EUR:.4f}')
 
 
 def pln(x):
@@ -1054,7 +1080,7 @@ def i_card(slug, p, lang, sizes='(max-width:720px) 50vw, 25vw'):
     <p class="kind">{e(q["kind"])}</p>
     <h3><a href="{link}">{e(q["title"])}</a></h3>
     <p class="pc-occ">{e(q.get("occasion", ""))}</p>
-    <p class="pc-buy"><span class="price">{pln(p["price"])}</span><a class="btn btn-ink btn-sm" href="{link}">{e(U["order"]) if p.get("available", True) else e(q.get("badge") or U["unavailable"])}</a></p>
+    <p class="pc-buy"><span class="price">{eur(p["price"], lang)} <small>{pln(p["price"])}</small></span><a class="btn btn-ink btn-sm" href="{link}">{e(U["order"]) if p.get("available", True) else e(q.get("badge") or U["unavailable"])}</a></p>
   </div>
 </article>'''
 
@@ -1086,7 +1112,7 @@ def i_home(lang):
   </div>
 </section>
 <section class="wrap sec"><div class="sec-head"><h2 class="sec-title">{e(H["best"])}</h2><a class="more" href="{P["shop"]}">{e(U["all_products"])}</a></div>
-  <div class="grid products">{"".join(i_card(s, p, lang) for s, p in jars)}</div></section>
+  <div class="grid products">{"".join(i_card(s, p, lang) for s, p in jars)}</div><p class="muted small-text rate-note">{e(rate_note(lang))}</p></section>
 <section class="wrap sec"><div class="sec-head"><h2 class="sec-title">{e(H["how"])}</h2><a class="more" href="{P["how"]}">{e(U["how"])}</a></div>
   <p class="sec-lead">{e(H["how_text"])}</p>{i_three_ways(lang)}</section>
 <section class="wrap sec kitchen">
@@ -1111,6 +1137,7 @@ def i_shop(lang):
   <header class="page-head"><h1>{e(SH["title"])}</h1><p class="lead">{e(SH["lead"])}</p>
     <p class="notice">{e(SH["notice"])} <a href="{P["trade"]}#enquiry">{e(U["cta_btn"])}</a></p></header>
   {groups}
+  <p class="muted small-text rate-note">{e(rate_note(lang))}</p>
 </div>'''
     write(P['shop'], shell_i18n(lang, SH['title'], SH['lead'], main, P['shop'], current='shop', image=HOME['hero_image']))
 
@@ -1140,7 +1167,7 @@ def i_product(slug, p, lang):
     <div class="pr-info">
       <div class="label-card"><p class="kind">{e(q["kind"])}</p><h1>{e(q["title"])}</h1>
         {f'<p class="badge-inline">{e(q["badge"])}</p>' if q.get('badge') else ''}
-        <p class="pr-price">{pln(p["price"])}</p><p class="small-text">{e(U["retail"])}</p></div>
+        <p class="pr-price">{eur(p["price"], lang)}</p><p class="small-text">{pln(p["price"])} · {e(U["retail"])}</p></div>
       <p class="lead">{e(q["lead"])}</p>
       <div class="pr-buy">{btn}</div>
       <dl class="pr-quick">
@@ -1152,6 +1179,7 @@ def i_product(slug, p, lang):
   </article>
   {ways_html}
   {f'<section class="facts"><h2>{e(U["facts"])}</h2><dl>{facts_html}</dl></section>' if facts_html else ''}
+  <p class="muted small-text rate-note">{e(rate_note(lang))}</p>
 </div>'''
     path = product_path(slug, lang)
     write(path, shell_i18n(lang, name, q['lead'], main, path, current='shop', image=dish or p['image'], og_type='product', body_class='product-page'))

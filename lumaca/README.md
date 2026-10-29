@@ -35,6 +35,8 @@ The structure and wording follow the marketing plan ("Lumaca – plan marketingo
   page in the other language, and every translated page carries hreflang links. Page texts: `content/i18n/{en,fr}.json`
   (CMS: English / Français); product texts: the `en` and `fr` blocks in each product. The French should be checked by a
   native speaker before SIAL or print, as the plan recommends.
+- **Euro prices** on the EN and FR pages: the PLN price converted at the National Bank of Poland mid rate, fetched
+  at every build (fallback: the rate saved in the CMS), with a note on the rate and date. Final prices stay in PLN.
 - **Social media**: Facebook (facebook.com/lumaca.eco) and Instagram (@lumaca_helix_snails), from the old site, as icons
   in the footer and on the contact pages, in all three languages.
 

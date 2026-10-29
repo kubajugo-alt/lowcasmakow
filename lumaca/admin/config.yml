@@ -225,6 +225,8 @@ collections:
           - {name: company, label: 'Firma'}
           - {name: facebook, label: 'Facebook (link)', required: false}
           - {name: instagram, label: 'Instagram (link)', required: false}
+          - {name: eur_rate, label: 'Kurs EUR (zapasowy; przy publikacji pobierany z NBP)', widget: number, value_type: float, step: 0.0001}
+          - {name: eur_rate_date, label: 'Data kursu EUR (zapasowa)'}
           - {name: snipcart_key, label: 'Snipcart: publiczny klucz API', required: false, hint: 'Pusty = przyciski „Zamów” prowadzą do formularza kontaktowego.'}
           - {name: free_shipping_from, label: 'Darmowa dostawa od (zł)', widget: number, value_type: int}
           - {name: shipping, label: 'Dostawa (krótko)', widget: text}
@@ -519,6 +521,9 @@ collections:
           label: send
         - name: lang_name
           label: lang_name
+        - name: rate_note
+          label: rate_note (keep {date} and {rate})
+          widget: text
         collapsed: true
     - name: fr
       label: Français
