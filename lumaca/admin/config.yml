@@ -1,0 +1,549 @@
+# Decap CMS configuration for Lumaca (https://decapcms.org/docs/configuration-options/)
+# The site lives in the lumaca/ folder of the Łowca Smaków repository; paths below are relative to the repository root.
+# Every save is a commit to GitHub; Netlify (base directory lumaca/) then runs scripts/build.py and publishes.
+
+backend:
+  name: github
+  repo: kubajugo-alt/lowcasmakow
+  branch: main
+  commit_messages:
+    create: 'Lumaca CMS: nowy wpis {{collection}} „{{slug}}”'
+    update: 'Lumaca CMS: zmiana {{collection}} „{{slug}}”'
+    delete: 'Lumaca CMS: usunięcie {{collection}} „{{slug}}”'
+    uploadMedia: 'Lumaca CMS: plik {{path}}'
+    deleteMedia: 'Lumaca CMS: usunięcie pliku {{path}}'
+
+local_backend: true
+locale: pl
+logo_url: /img/logo-badge.png
+
+media_folder: lumaca/img/uploads
+public_folder: /img/uploads
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: '-'
+
+collections:
+
+  - name: products
+    label: 'Sklep: produkty'
+    label_singular: 'Produkt'
+    description: 'Słoiki, zestawy i liofilizaty. Nazwa dania na pierwszym planie („w zielonym pesto”), słowo „Ślimaki” jako rodzaj.'
+    folder: lumaca/content/products
+    create: true
+    extension: json
+    format: json
+    identifier_field: title
+    summary: '{{kind}} {{title}} · {{price}} zł'
+    sortable_fields: ['order', 'title', 'price']
+    fields:
+      - {name: title, label: 'Nazwa dania', hint: 'np. „w bulionie królewskim”, „Zestaw świąteczny”'}
+      - {name: kind, label: 'Rodzaj', default: 'Ślimaki', hint: 'np. „Ślimaki”, „Zestaw”, „Liofilizowane mięso ślimaka”'}
+      - {name: category, label: 'Kategoria', widget: select, options: [{label: 'Słoiki', value: sloiki}, {label: 'Zestawy', value: zestawy}, {label: 'Liofilizaty', value: liofilizaty}]}
+      - {name: order, label: 'Kolejność', widget: number, value_type: int, default: 10}
+      - {name: price, label: 'Cena brutto (zł)', widget: number, value_type: float, step: 0.1}
+      - {name: available, label: 'Dostępny', widget: boolean, default: true}
+      - {name: bestseller, label: 'Na stronie głównej (najczęściej wybierane, max 3)', widget: boolean, default: false}
+      - {name: badge, label: 'Znaczek', required: false, hint: 'np. „Wkrótce”, „Numerowana seria”'}
+      - {name: stripe, label: 'Kolor paska smaku', widget: color, default: '#C9A35A'}
+      - {name: lead, label: 'Opis (najpierw korzyść, potem fakty)', widget: text}
+      - name: image
+        label: 'Zdjęcie słoika (kwadrat)'
+        widget: object
+        fields: &image
+          - {name: src, label: 'Plik', widget: image, required: false}
+          - {name: alt, label: 'Opis zdjęcia (dla niewidomych i Google)', required: false}
+          - {name: credit, label: 'Autor zdjęcia', required: false}
+          - {name: credit_url, label: 'Link do autora', required: false}
+      - {name: dish_image, label: 'Zdjęcie podanego dania (obok słoika)', widget: object, required: false, fields: *image}
+      - {name: occasion, label: 'Na okazję', required: false}
+      - {name: ready_in_5, label: 'Gotowe w 5 minut: jak', widget: text, required: false}
+      - {name: pairing, label: 'Do tego (wino, dodatki)', required: false}
+      - name: ways
+        label: '3 sposoby podania'
+        widget: list
+        required: false
+        fields:
+          - {name: title, label: 'Sposób'}
+          - {name: text, label: 'Jak', widget: text}
+          - {name: recipe, label: 'Przepis', widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], required: false}
+      - {name: net_weight, label: 'Waga netto', default: '250 g, w tym 100 g mięsa ślimaka'}
+      - {name: ingredients, label: 'Skład', widget: text, required: false}
+      - {name: allergens, label: 'Alergeny', required: false}
+      - {name: storage, label: 'Przechowywanie', widget: text, required: false}
+      - {name: shelf_life, label: 'Trwałość', required: false}
+      - {name: video, label: 'Wideo z przepisem (link)', required: false}
+      - {name: recipes, label: 'Przepisy z tym słoikiem', widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, required: false}
+      - {name: weight, label: 'Waga paczki w gramach (do wysyłki)', widget: number, value_type: int, default: 450}
+      - {name: name_en, label: 'Nazwa EN (dla firm)', required: false}
+      - {name: name_fr, label: 'Nazwa FR (dla firm)', required: false}
+      - name: en
+        label: 'English version'
+        widget: object
+        collapsed: true
+        required: false
+        fields: &product_lang
+          - {name: kind, label: 'Kind (e.g. Snails)', required: false}
+          - {name: title, label: 'Dish name', required: false}
+          - {name: badge, label: 'Badge', required: false}
+          - {name: lead, label: 'Description', widget: text, required: false}
+          - {name: occasion, label: 'Occasion', required: false}
+          - {name: ready_in_5, label: 'Ready in 5 minutes', widget: text, required: false}
+          - {name: pairing, label: 'Serve with', required: false}
+          - {name: ways, label: '3 ways to serve', widget: list, required: false, fields: [{name: title, label: 'Way'}, {name: text, label: 'How', widget: text}]}
+          - {name: net_weight, label: 'Net weight', required: false}
+          - {name: ingredients, label: 'Ingredients', widget: text, required: false}
+          - {name: allergens, label: 'Allergens', required: false}
+          - {name: storage, label: 'Storage', widget: text, required: false}
+          - {name: shelf_life, label: 'Shelf life', required: false}
+      - {name: fr, label: 'Version française', widget: object, collapsed: true, required: false, fields: *product_lang}
+
+  - name: recipes
+    label: 'Przepisy'
+    label_singular: 'Przepis'
+    folder: lumaca/content/recipes
+    create: true
+    extension: json
+    format: json
+    summary: '{{title}} · {{time}}'
+    sortable_fields: ['order', 'title']
+    fields:
+      - {name: title, label: 'Tytuł'}
+      - {name: order, label: 'Kolejność', widget: number, value_type: int, default: 10}
+      - {name: way, label: 'Sposób', hint: 'np. „Na grzance”, „Z makaronem”, „W babeczce”'}
+      - {name: time, label: 'Czas', hint: 'np. „5 min”'}
+      - {name: servings, label: 'Porcje (liczba)', widget: number, value_type: int, default: 2, hint: 'Na tyle porcji są podane ilości; strona przelicza je dla innej liczby.'}
+      - {name: servings_unit, label: 'Jednostka porcji', widget: select, options: ['osoby', 'babeczki'], default: 'osoby'}
+      - {name: product, label: 'Słoik', widget: relation, collection: products, value_field: '{{slug}}', search_fields: [title], display_fields: ['{{kind}} {{title}}']}
+      - {name: image, label: 'Zdjęcie dania', widget: object, fields: *image}
+      - {name: lead, label: 'Wstęp', widget: text}
+      - name: ingredients
+        label: 'Składniki'
+        label_singular: 'Składnik'
+        widget: list
+        summary: '{{q}} {{u}} {{n}}'
+        hint: 'Pierwszy składnik to słoik Lumaca. Ilość puste = „do smaku”.'
+        fields:
+          - {name: q, label: 'Ilość', widget: number, value_type: float, required: false}
+          - {name: u, label: 'Jednostka', widget: select, required: false, options: ['', 'słoik', 'g', 'ml', 'szt.', 'ząbek', 'garść', 'łyżka', 'listek']}
+          - {name: n, label: 'Składnik'}
+      - name: steps
+        label: 'Kroki'
+        label_singular: 'Krok'
+        widget: list
+        summary: '{{title}}'
+        fields:
+          - {name: title, label: 'Krótki tytuł'}
+          - {name: text, label: 'Opis', widget: text}
+          - {name: minutes, label: 'Minutnik (minuty)', widget: number, value_type: int, required: false, hint: 'Zostaw puste, jeśli krok nie potrzebuje minutnika.'}
+      - {name: tip, label: 'Wskazówka', widget: text, required: false}
+      - {name: wine, label: 'Do wina', required: false}
+
+  - name: articles
+    label: 'Artykuły'
+    label_singular: 'Artykuł'
+    description: 'Poradniki i historie. Treść w Markdown: ## śródtytuł, **pogrubienie**, [link](/sklep/...).'
+    folder: lumaca/content/articles
+    create: true
+    extension: json
+    format: json
+    summary: '{{date}} · {{title}}'
+    sortable_fields: ['date', 'title']
+    fields:
+      - {name: title, label: 'Tytuł'}
+      - {name: date, label: 'Data', widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, format: 'YYYY-MM-DD'}
+      - {name: lead, label: 'Wstęp (też opis dla Google)', widget: text}
+      - {name: image, label: 'Zdjęcie', widget: object, fields: *image}
+      - {name: keywords, label: 'Frazy dla Google', required: false}
+      - {name: body, label: 'Treść', widget: markdown, buttons: [bold, link, heading-two, bulleted-list], editor_components: []}
+      - {name: products, label: 'Produkty obok artykułu', widget: relation, collection: products, value_field: '{{slug}}', search_fields: [title], display_fields: ['{{kind}} {{title}}'], multiple: true, required: false}
+      - {name: recipes, label: 'Przepisy pod artykułem', widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, required: false}
+
+  - name: events
+    label: 'Kalendarz: jarmarki, degustacje, warsztaty'
+    label_singular: 'Wydarzenie'
+    folder: lumaca/content/events
+    create: true
+    extension: json
+    format: json
+    summary: '{{when}} · {{title}}'
+    fields:
+      - {name: title, label: 'Nazwa'}
+      - {name: kind, label: 'Rodzaj', hint: 'Degustacja, Jarmark, Warsztaty, Festiwal'}
+      - {name: order, label: 'Kolejność', widget: number, value_type: int, default: 10}
+      - {name: when, label: 'Kiedy', hint: 'np. „12–14 grudnia 2026”'}
+      - {name: date, label: 'Data (do sortowania)', widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, format: 'YYYY-MM-DD', required: false}
+      - {name: place, label: 'Miejsce'}
+      - {name: city, label: 'Miasto', required: false}
+      - {name: text, label: 'Opis', widget: text, required: false}
+      - {name: url, label: 'Link', required: false}
+
+  - name: places
+    label: 'Gdzie kupić: sklepy i lokale'
+    label_singular: 'Miejsce'
+    folder: lumaca/content/places
+    create: true
+    extension: json
+    format: json
+    identifier_field: name
+    summary: '{{city}} · {{name}}'
+    fields:
+      - {name: name, label: 'Nazwa'}
+      - {name: kind, label: 'Rodzaj', hint: 'Sklep, Restauracja, Winnica, Hotel, Odbiór osobisty'}
+      - {name: order, label: 'Kolejność', widget: number, value_type: int, default: 10}
+      - {name: city, label: 'Miasto'}
+      - {name: address, label: 'Adres', required: false}
+      - {name: text, label: 'Opis', widget: text, required: false}
+      - {name: url, label: 'Link', required: false}
+
+  - name: press
+    label: 'Lumaca w mediach'
+    label_singular: 'Publikacja'
+    folder: lumaca/content/press
+    create: true
+    extension: json
+    format: json
+    summary: '{{date}} · {{outlet}}: {{title}}'
+    fields:
+      - {name: title, label: 'Tytuł'}
+      - {name: outlet, label: 'Medium', hint: 'np. Echo Dnia, Radio Kielce'}
+      - {name: date, label: 'Data', widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, format: 'YYYY-MM-DD'}
+      - {name: url, label: 'Link', required: false}
+
+  - name: pages
+    label: 'Strony informacyjne'
+    label_singular: 'Strona'
+    folder: lumaca/content/pages
+    create: true
+    extension: json
+    format: json
+    fields:
+      - {name: title, label: 'Tytuł'}
+      - {name: order, label: 'Kolejność w stopce', widget: number, value_type: int, default: 10}
+      - {name: body, label: 'Treść', widget: markdown, buttons: [bold, link, heading-two, bulleted-list], editor_components: []}
+
+  - name: settings
+    label: 'Ustawienia i stałe teksty'
+    files:
+      - name: site
+        label: 'Kontakt, sklep, dostawa'
+        file: lumaca/content/settings/site.json
+        fields:
+          - {name: name, label: 'Nazwa'}
+          - {name: tagline, label: 'Hasło'}
+          - {name: description, label: 'Opis marki (stopka, Google)', widget: text}
+          - {name: phone, label: 'Telefon (jeden numer wszędzie)'}
+          - {name: email, label: 'E-mail'}
+          - {name: address, label: 'Adres'}
+          - {name: region, label: 'Gmina / województwo'}
+          - {name: hours, label: 'Godziny'}
+          - {name: vet_number, label: 'Weterynaryjny numer zakładu'}
+          - {name: company, label: 'Firma'}
+          - {name: facebook, label: 'Facebook (link)', required: false}
+          - {name: instagram, label: 'Instagram (link)', required: false}
+          - {name: eur_rate, label: 'Kurs EUR (zapasowy; przy publikacji pobierany z NBP)', widget: number, value_type: float, step: 0.0001}
+          - {name: eur_rate_date, label: 'Data kursu EUR (zapasowa)'}
+          - {name: snipcart_key, label: 'Snipcart: publiczny klucz API', required: false, hint: 'Pusty = przyciski „Zamów” prowadzą do formularza kontaktowego.'}
+          - {name: free_shipping_from, label: 'Darmowa dostawa od (zł)', widget: number, value_type: int}
+          - {name: shipping, label: 'Dostawa (krótko)', widget: text}
+          - {name: payments, label: 'Płatności (krótko)', widget: text}
+          - {name: shop_notice, label: 'Komunikat, gdy sklep online jest wyłączony', widget: text}
+          - {name: newsletter_title, label: 'Newsletter: tytuł'}
+          - {name: newsletter_text, label: 'Newsletter: tekst', widget: text}
+          - {name: lowca_url, label: 'Adres Łowcy Smaków'}
+      - name: home
+        label: 'Strona główna'
+        file: lumaca/content/settings/home.json
+        fields:
+          - {name: hero_title, label: 'Hasło'}
+          - {name: hero_text, label: 'Tekst pod hasłem', widget: text}
+          - {name: hero_badge, label: 'Znaczek', default: 'gotowe w 5 minut'}
+          - {name: hero_image, label: 'Duże zdjęcie podanego dania', widget: object, fields: *image}
+          - {name: bestsellers_title, label: 'Tytuł: najczęściej wybierane'}
+          - {name: how_title, label: 'Tytuł: jak podać'}
+          - {name: how_text, label: 'Tekst: jak podać', widget: text}
+          - {name: occasions_title, label: 'Tytuł: okazje'}
+          - name: occasions
+            label: 'Okazje'
+            widget: list
+            fields:
+              - {name: title, label: 'Okazja'}
+              - {name: text, label: 'Tekst'}
+              - {name: link, label: 'Link'}
+              - {name: image, label: 'Zdjęcie', widget: object, fields: *image}
+          - {name: kitchen_title, label: 'Tytuł: nasza kuchnia'}
+          - {name: kitchen_text, label: 'Tekst: nasza kuchnia', widget: text}
+          - {name: kitchen_image, label: 'Zdjęcie: nasza kuchnia', widget: object, fields: *image}
+          - {name: where_title, label: 'Tytuł: gdzie spróbować'}
+      - name: kuchnia
+        label: 'Nasza kuchnia'
+        file: lumaca/content/settings/kuchnia.json
+        fields:
+          - {name: title, label: 'Tytuł'}
+          - {name: lead, label: 'Wstęp', widget: text}
+          - {name: story, label: 'Opowieść w trzech zdaniach', widget: list, fields: [{name: title, label: 'Zdanie'}, {name: text, label: 'Rozwinięcie', widget: text}]}
+          - {name: grazyna_title, label: 'Grażyna: tytuł'}
+          - {name: grazyna_text, label: 'Grażyna: tekst', widget: text}
+          - {name: grazyna_image, label: 'Grażyna: zdjęcie', widget: object, fields: *image}
+          - {name: facts_title, label: 'Fakty: tytuł'}
+          - {name: facts, label: 'Fakty', widget: list, fields: [{name: title, label: 'Tytuł'}, {name: text, label: 'Tekst', widget: text}]}
+          - {name: lowca_title, label: 'Łowca Smaków: tytuł'}
+          - {name: lowca_text, label: 'Łowca Smaków: tekst', widget: text}
+          - {name: lowca_url, label: 'Łowca Smaków: link'}
+      - name: faq
+        label: 'Pytania i odpowiedzi'
+        file: lumaca/content/settings/faq.json
+        fields:
+          - {name: title, label: 'Tytuł'}
+          - {name: items, label: 'Pytania', widget: list, fields: [{name: q, label: 'Pytanie'}, {name: a, label: 'Odpowiedź', widget: text}]}
+      - name: b2b
+        label: 'Dla gastronomii i firm'
+        file: lumaca/content/settings/b2b.json
+        fields:
+          - {name: title, label: 'Tytuł'}
+          - {name: lead, label: 'Wstęp', widget: text}
+          - {name: segments, label: 'Dla kogo', widget: list, fields: [{name: title, label: 'Tytuł'}, {name: text, label: 'Tekst', widget: text}]}
+          - {name: facts, label: 'Karta techniczna', widget: list, fields: [{name: k, label: 'Cecha'}, {name: v, label: 'Wartość'}]}
+          - {name: chefs_title, label: 'Program: tytuł'}
+          - {name: chefs_text, label: 'Program: tekst', widget: text}
+          - {name: docs_text, label: 'Dokumenty na życzenie', widget: text}
+
+
+  - name: i18n
+    label: 'English / Français: page texts'
+    description: Texts of the English and French pages. Product texts are in each product, under English version / Version française.
+    files:
+    - name: en
+      label: English
+      file: lumaca/content/i18n/en.json
+      fields: &id002
+      - name: home
+        label: Home
+        widget: object
+        fields:
+        - name: title
+          label: Page title
+        - name: hero_title
+          label: Headline
+        - name: hero_badge
+          label: Badge
+        - name: hero_text
+          label: Text
+          widget: text
+        - name: cta_shop
+          label: 'Button: range'
+        - name: cta_trade
+          label: 'Button: trade'
+        - name: best
+          label: Jars title
+        - name: how
+          label: How to serve title
+        - name: how_text
+          label: How to serve text
+          widget: text
+      - name: shop
+        label: Shop
+        widget: object
+        fields:
+        - name: title
+          label: Title
+        - name: lead
+          label: Lead
+          widget: text
+        - name: notice
+          label: Notice
+          widget: text
+      - name: how
+        label: How to serve
+        widget: object
+        fields:
+        - name: title
+          label: Title
+        - name: lead
+          label: Lead
+          widget: text
+        - name: ways
+          label: Three ways
+          widget: list
+          fields: &id001
+          - name: title
+            label: Title
+          - name: text
+            label: Text
+            widget: text
+        - name: faq
+          label: FAQ
+          widget: list
+          fields:
+          - name: q
+            label: Question
+          - name: a
+            label: Answer
+            widget: text
+      - name: kitchen
+        label: Our kitchen
+        widget: object
+        fields:
+        - name: title
+          label: Title
+        - name: lead
+          label: Lead
+          widget: text
+        - name: story
+          label: Story
+          widget: list
+          fields:
+          - name: title
+            label: Sentence
+          - name: text
+            label: Text
+            widget: text
+        - name: owners_kind
+          label: Owners label
+        - name: owners_title
+          label: Owners title
+        - name: owners_text
+          label: Owners text
+          widget: text
+        - name: facts_title
+          label: Facts title
+        - name: facts
+          label: Facts
+          widget: list
+          fields: *id001
+      - name: trade
+        label: Trade
+        widget: object
+        fields:
+        - name: title
+          label: Title
+        - name: lead
+          label: Lead
+          widget: text
+        - name: segments
+          label: Segments
+          widget: list
+          fields: *id001
+        - name: facts
+          label: Technical sheet
+          widget: list
+          fields:
+          - name: k
+            label: Item
+          - name: v
+            label: Value
+        - name: docs
+          label: Documents on request
+          widget: text
+        - name: names_title
+          label: Names title
+        - name: form_title
+          label: Form title
+        - name: form_lead
+          label: Form lead
+      - name: contact
+        label: Contact
+        widget: object
+        fields:
+        - name: title
+          label: Title
+        - name: lead
+          label: Lead
+        - name: hours
+          label: Hours
+        - name: map
+          label: Map link text
+      - name: ui
+        label: Interface words
+        widget: object
+        fields:
+        - name: skip
+          label: skip
+        - name: menu
+          label: menu
+        - name: home
+          label: home
+        - name: shop
+          label: shop
+        - name: how
+          label: how
+        - name: kitchen
+          label: kitchen
+        - name: trade
+          label: trade
+        - name: contact
+          label: contact
+        - name: topbar
+          label: topbar
+        - name: order
+          label: order
+        - name: unavailable
+          label: unavailable
+        - name: retail
+          label: retail
+        - name: serve5
+          label: serve5
+        - name: occasion
+          label: occasion
+        - name: pairing
+          label: pairing
+        - name: ways
+          label: ways
+        - name: facts
+          label: facts
+        - name: net
+          label: net
+        - name: ingredients
+          label: ingredients
+        - name: allergens
+          label: allergens
+        - name: storage
+          label: storage
+        - name: shelf
+          label: shelf
+        - name: cats
+          label: cats
+          widget: object
+          fields:
+          - name: sloiki
+            label: sloiki
+          - name: zestawy
+            label: zestawy
+          - name: liofilizaty
+            label: liofilizaty
+        - name: all_products
+          label: all_products
+        - name: learn_more
+          label: learn_more
+        - name: faq
+          label: faq
+        - name: footer_about
+          label: footer_about
+          widget: text
+        - name: vet
+          label: vet
+        - name: photos
+          label: photos
+        - name: cta_title
+          label: cta_title
+        - name: cta_text
+          label: cta_text
+          widget: text
+        - name: cta_btn
+          label: cta_btn
+        - name: form_ok
+          label: form_ok
+        - name: send
+          label: send
+        - name: lang_name
+          label: lang_name
+        - name: rate_note
+          label: rate_note (keep {date} and {rate})
+          widget: text
+        collapsed: true
+    - name: fr
+      label: Français
+      file: lumaca/content/i18n/fr.json
+      fields: *id002

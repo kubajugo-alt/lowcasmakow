@@ -1,0 +1,63 @@
+{
+  "title": "Spaghetti ze ślimakami w sosie pomidorowym",
+  "order": 5,
+  "time": "10 min",
+  "product": "slimaki-w-sosie-pomidorowym",
+  "image": {
+    "src": "/img/uploads/podanie-spaghetti.jpg",
+    "alt": "Spaghetti ze ślimakami w sosie pomidorowym i słoik Lumaca"
+  },
+  "way": "Z makaronem",
+  "lead": "Gotowy sos ze ślimakami do makaronu na co dzień i od święta.",
+  "ingredients": [
+    {
+      "q": 1,
+      "u": "słoik",
+      "n": "Ślimaki w sosie pomidorowym Lumaca"
+    },
+    {
+      "q": 200,
+      "u": "g",
+      "n": "Spaghetti"
+    },
+    {
+      "q": 30,
+      "u": "g",
+      "n": "Parmezan"
+    },
+    {
+      "q": 5,
+      "u": "listek",
+      "n": "Świeża bazylia"
+    },
+    {
+      "q": null,
+      "u": "",
+      "n": "Sól, pieprz, ewentualnie czosnek"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Ugotuj makaron",
+      "text": "Ugotuj spaghetti al dente w osolonej wodzie.",
+      "minutes": 9
+    },
+    {
+      "title": "Podgrzej sos",
+      "text": "Na patelni podsmaż zawartość słoika przez 3–4 minuty.",
+      "minutes": 4
+    },
+    {
+      "title": "Połącz",
+      "text": "Dodaj odcedzony makaron i wymieszaj z sosem."
+    },
+    {
+      "title": "Podaj",
+      "text": "Dopraw do smaku, posyp parmezanem i bazylią."
+    }
+  ],
+  "tip": "Jeśli lubisz ostrzej, dodaj szczyptę płatków chili razem ze słoikiem.",
+  "wine": "Lekkie czerwone wino.",
+  "servings": 2,
+  "servings_unit": "osoby"
+}

@@ -1,0 +1,55 @@
+{
+  "title": "Zestaw świąteczny",
+  "kind": "Rocznik 2026",
+  "category": "zestawy",
+  "order": 7,
+  "price": 199,
+  "available": true,
+  "bestseller": false,
+  "badge": "Seria limitowana",
+  "stripe": "#C9A35A",
+  "lead": "Cztery słoiki z tegorocznej partii (bulion królewski, olej cytrynowo-pietruszkowy, zielone pesto, sos pomidorowy) i karta „3 sposoby w 5 minut”. Seria limitowana: tyle zestawów, ile pozwala tegoroczna partia. Dostawa gratis.",
+  "image": {
+    "src": "/img/uploads/zestaw-swiateczny.jpg",
+    "alt": "Zestaw świąteczny: cztery słoiki Lumaca w czarnym pudełku ze złotą wstążką"
+  },
+  "occasion": "Prezent, Wigilia i Święta, prezent firmowy",
+  "ready_in_5": "Na każdy słoik trzy sposoby podania w 5 minut, opisane na karcie w zestawie.",
+  "pairing": "Wino białe wytrawne, bagietka, makaron",
+  "net_weight": "4 × 250 g (4 × 100 g mięsa)",
+  "ingredients": "Skład każdego słoika na jego etykiecie i na stronach poszczególnych słoików.",
+  "allergens": "mięczaki (ślimaki), orzechy włoskie, mleko, seler",
+  "storage": "Przed otwarciem w suchym, chłodnym miejscu, w temperaturze pokojowej. Po otwarciu w lodówce do 3 dni.",
+  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "video": "",
+  "recipes": [
+    "grzanki-ze-slimakami",
+    "tagliatelle-ze-slimakami-w-pesto",
+    "babeczki-ze-slimakami"
+  ],
+  "weight": 1800,
+  "en": {
+    "kind": "Vintage 2026",
+    "title": "Christmas set",
+    "badge": "Limited edition",
+    "lead": "Four jars from this year’s batch (court-bouillon, lemon and parsley oil, green pesto, tomato sauce) and a “3 ways in 5 minutes” recipe card. A limited edition: as many sets as this autumn’s batch allows.",
+    "occasion": "Gift, Christmas Eve and the holidays, corporate gift",
+    "ready_in_5": "Three ways to serve each jar in 5 minutes, on the card in the box.",
+    "pairing": "Dry white wine, baguette, pasta",
+    "ingredients": "Ingredients of each jar on its label.",
+    "allergens": "molluscs (snails), walnuts, milk, celery",
+    "net_weight": "4 × 250 g (4 × 100 g of snail meat)"
+  },
+  "fr": {
+    "kind": "Millésime 2026",
+    "title": "Coffret de Noël",
+    "badge": "Série limitée",
+    "lead": "Quatre bocaux de la récolte de cette année (court-bouillon, huile citron-persil, pesto vert, sauce tomate) et une carte « 3 façons en 5 minutes ». Une série limitée : autant de coffrets que le permet la récolte d’automne.",
+    "occasion": "Cadeau, réveillon et fêtes, cadeau d’entreprise",
+    "ready_in_5": "Trois façons de servir chaque bocal en 5 minutes, sur la carte du coffret.",
+    "pairing": "Vin blanc sec, baguette, pâtes",
+    "ingredients": "Composition de chaque bocal sur son étiquette.",
+    "allergens": "mollusques (escargots), noix, lait, céleri",
+    "net_weight": "4 × 250 g (4 × 100 g de chair d’escargot)"
+  }
+}

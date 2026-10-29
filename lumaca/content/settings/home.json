@@ -1,0 +1,58 @@
+{
+  "hero_title": "Ślimaki gotowe do stołu",
+  "hero_text": "Gotowe dania ze ślimaków z polskich hodowli, przyrządzane w małej przetwórni w Świętokrzyskiem. Podgrzej, podaj, zaskocz gości.",
+  "hero_badge": "gotowe w 5 minut",
+  "hero_image": {
+    "src": "/img/uploads/podanie-stol-dania.jpg",
+    "alt": "Słoiki Lumaca z czarną etykietą obok grzanek, makaronu w pesto, bulionu i babeczek ze ślimakami"
+  },
+  "bestsellers_title": "Najczęściej wybierane",
+  "how_title": "Jak to podać",
+  "how_text": "Każdy słoik to gotowe danie: 100 g delikatnego mięsa ślimaka, które przejmuje smak sosu. Trzy sposoby, każdy w 5 minut.",
+  "occasions_title": "Na jaką okazję",
+  "occasions": [
+    {
+      "title": "Wieczór z winem",
+      "text": "Grzanki ze ślimakami i kieliszek białego wytrawnego.",
+      "link": "/sklep/zestaw-wieczor-z-winem.html",
+      "image": {
+        "src": "/img/uploads/zestaw-wieczor-z-winem.jpg",
+        "alt": "Dwa słoiki Lumaca, grzanki ze ślimakami i białe wino przy świecach"
+      }
+    },
+    {
+      "title": "Kolacja dla gości",
+      "text": "Przystawka, o której będzie się mówić do deseru.",
+      "link": "/przepisy/slimaki-w-masle-czosnkowym.html",
+      "image": {
+        "src": "/img/uploads/okazja-kolacja-dla-gosci.jpg",
+        "alt": "Stół nakryty do kolacji z czterema słoikami Lumaca na marmurowej desce"
+      }
+    },
+    {
+      "title": "Prezent",
+      "text": "Zestaw z limitowanej serii: dla kogoś, kto ma już wszystko.",
+      "link": "/zestawy/",
+      "image": {
+        "src": "/img/uploads/okazja-prezent.jpg",
+        "alt": "Słoiki Lumaca i torebka Lio, jeden słoik przewiązany złotą wstążką jak prezent"
+      }
+    },
+    {
+      "title": "Święta",
+      "text": "Zapomniany staropolski przysmak wraca na świąteczny stół.",
+      "link": "/sklep/zestaw-swiateczny-rocznik-2026.html",
+      "image": {
+        "src": "/img/uploads/zestaw-swiateczny.jpg",
+        "alt": "Zestaw świąteczny: cztery słoiki Lumaca w czarnym pudełku ze złotą wstążką"
+      }
+    }
+  ],
+  "kitchen_title": "Nasza kuchnia",
+  "kitchen_text": "Grażyna i Tomasz Nawroccy zaczynali od hodowli ślimaków. Dziś Lumaca to ich mała przetwórnia w Kołomaniu pod Kielcami: kupują ślimaki od polskich hodowców, gotują je według własnych receptur i zamykają w słoikach małymi partiami.",
+  "kitchen_image": {
+    "src": "/img/uploads/grazyna-i-tomasz-nawroccy.jpg",
+    "alt": "Grażyna i Tomasz Nawroccy na stoisku Lumaki podczas Festiwalu Winasera w Sandomierzu"
+  },
+  "where_title": "Gdzie spróbować"
+}

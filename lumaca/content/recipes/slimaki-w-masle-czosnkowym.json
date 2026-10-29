@@ -1,0 +1,62 @@
+{
+  "title": "Ślimaki w maśle czosnkowym",
+  "order": 4,
+  "time": "5 min",
+  "product": "slimaki-w-bulionie-krolewskim",
+  "image": {
+    "src": "/img/uploads/podanie-maslo-czosnkowe.jpg",
+    "alt": "Ślimaki w maśle czosnkowym z natką na patelni, bagietka i słoik Lumaca"
+  },
+  "way": "Klasyka",
+  "lead": "Klasyka kuchni francuskiej i najczęstszy sposób podania ślimaków na naszym stoisku. Z gotowego słoika w pięć minut.",
+  "ingredients": [
+    {
+      "q": 1,
+      "u": "słoik",
+      "n": "Ślimaki w bulionie królewskim Lumaca"
+    },
+    {
+      "q": 60,
+      "u": "g",
+      "n": "Masło"
+    },
+    {
+      "q": 3,
+      "u": "ząbek",
+      "n": "Czosnek"
+    },
+    {
+      "q": 1,
+      "u": "garść",
+      "n": "Natka pietruszki"
+    },
+    {
+      "q": 1,
+      "u": "szt.",
+      "n": "Bagietka do maczania"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Odcedź ślimaki",
+      "text": "Odcedź ślimaki z bulionu. Bulion możesz zachować na zupę albo risotto."
+    },
+    {
+      "title": "Masło i czosnek",
+      "text": "Na patelni rozpuść masło, dodaj przeciśnięty czosnek i smaż pół minuty, aż się zeszkli."
+    },
+    {
+      "title": "Podgrzej ślimaki",
+      "text": "Dodaj ślimaki i podgrzewaj 3 minuty, mieszając.",
+      "minutes": 3
+    },
+    {
+      "title": "Natka i podanie",
+      "text": "Zdejmij z ognia, wsyp posiekaną natkę i od razu podawaj z bagietką."
+    }
+  ],
+  "tip": "Czosnek ma się tylko zeszklić. Przypalony zgorzknieje i zdominuje delikatne mięso.",
+  "wine": "Białe wytrawne, np. chardonnay albo solaris.",
+  "servings": 3,
+  "servings_unit": "osoby"
+}

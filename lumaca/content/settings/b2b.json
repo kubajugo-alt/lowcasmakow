@@ -1,0 +1,59 @@
+{
+  "title": "Dla gastronomii, sklepów i firm",
+  "lead": "Gotowa przystawka, która oszczędza czas kuchni, i produkt regionalny, o który pytają klienci. Dowozimy raz w tygodniu w regionie świętokrzyskim, do Krakowa i Sandomierza.",
+  "segments": [
+    {
+      "title": "Restauracje i bary winne",
+      "text": "Słoik jako gotowa przystawka: z szefem kuchni ustalamy liczbę porcji i koszt porcji. Degustacja u Ciebie w lokalu."
+    },
+    {
+      "title": "Sklepy i delikatesy",
+      "text": "Słoiki i zestawy na półkę, karta „3 sposoby w 5 minut” przy produkcie i degustacja w sklepie."
+    },
+    {
+      "title": "Winnice i sklepy z winem",
+      "text": "Wspólne pakiety „wino i ślimaki”, przystawka do degustacji win i warsztaty „Ślimaki od kuchni”."
+    },
+    {
+      "title": "Hotele i catering",
+      "text": "Przystawka w karcie, babeczki ze ślimakami na bankiety, upominek powitalny i sklepik hotelowy."
+    },
+    {
+      "title": "Prezenty firmowe",
+      "text": "Zestawy świąteczne z limitowanej serii, z kartą przepisów."
+    },
+    {
+      "title": "Private label i eksport",
+      "text": "Produkcja pod Twoją marką i karta produktu po polsku, angielsku i francusku. Zakład zatwierdzony na wszystkie formy sprzedaży."
+    }
+  ],
+  "facts": [
+    {
+      "k": "Format",
+      "v": "słoik 250 g, w tym 100 g mięsa ślimaka"
+    },
+    {
+      "k": "Trwałość",
+      "v": "12 miesięcy w temperaturze pokojowej, bez łańcucha chłodniczego (badania SGS)"
+    },
+    {
+      "k": "Kody i etykiety",
+      "v": "kody EAN, etykiety kontrolowane przez IJHARS"
+    },
+    {
+      "k": "Zakład",
+      "v": "przetwórnia zatwierdzona weterynaryjnie, nr PL26040901"
+    },
+    {
+      "k": "Pochodzenie",
+      "v": "ślimaki gros gris z polskich hodowli, ze świadectwem pochodzenia"
+    },
+    {
+      "k": "Dostawy",
+      "v": "partie od 60 słoików w 2 dni, dowóz raz w tygodniu w regionie"
+    }
+  ],
+  "chefs_title": "Szefowie ze ślimakiem",
+  "chefs_text": "Program dla szefów kuchni z regionu świętokrzyskiego i Krakowa: przekazujemy słoiki do opracowania dania, a danie trafia do karty z nazwą Lumaki i do wspólnej publikacji przepisów. Prowadzimy też warsztaty w szkołach gastronomicznych.",
+  "docs_text": "Na życzenie wyślemy kartę techniczną (waga, zawartość mięsa, alergeny, trwałość, sposób podgrzania, liczba porcji i 5 pomysłów na danie), cennik hurtowy i katalog w wersji PL, EN i FR."
+}
