@@ -149,17 +149,25 @@ def credits(images):
 
 
 def md(text):
-    """Tiny Markdown: paragraphs, ## headings, - lists, **bold**, [links](url)."""
+    """Tiny Markdown: paragraphs, ##/### headings, - lists, - [ ] checklists, | tables |, **bold**, [links](url)."""
     out = []
     for block in re.split(r'\n\s*\n', (text or '').strip()):
         def inline(s):
             s = e(s)
             s = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', s)
             return re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2">\1</a>', s)
-        if block.startswith('## '):
-            out.append(f'<h2>{inline(block[3:])}</h2>')
-        elif all(l.startswith('- ') for l in block.splitlines()):
-            out.append('<ul>' + ''.join(f'<li>{inline(l[2:])}</li>' for l in block.splitlines()) + '</ul>')
+        lines = block.splitlines()
+        if block.startswith(('## ', '### ')):
+            out.append(f'<h2>{inline(block.split(" ", 1)[1])}</h2>')
+        elif all(l.startswith('|') for l in lines):
+            rows = [[c.strip() for c in l.strip().strip('|').split('|')] for l in lines if not re.match(r'^[|\s:-]+$', l)]
+            head = ''.join(f'<th scope="col">{inline(c)}</th>' for c in rows[0])
+            body = ''.join('<tr>' + ''.join(f'<td data-label="{e(rows[0][k])}">{inline(c)}</td>' for k, c in enumerate(r)) + '</tr>' for r in rows[1:])
+            out.append(f'<div class="table-wrap"><table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table></div>')
+        elif all(l.startswith('- [ ] ') for l in lines):
+            out.append('<ul class="checklist">' + ''.join(f'<li>{inline(l[6:])}</li>' for l in lines) + '</ul>')
+        elif all(l.startswith('- ') for l in lines):
+            out.append('<ul>' + ''.join(f'<li>{inline(l[2:])}</li>' for l in lines) + '</ul>')
         else:
             out.append(f'<p>{inline(block)}</p>')
     return '\n'.join(out)
@@ -250,8 +258,9 @@ NAV = [('Sklep', '/sklep/'), ('Zestawy i prezenty', '/zestawy/'), ('Przepisy', '
        ('Gdzie spróbować', '/gdzie-sprobowac/'), ('Dla gastronomii i firm', '/dla-firm/')]
 
 
-def shell(title, desc, main, images=(), current=None, path='/', image=None, og_type='website', ld=(), body_class='', home=False):
+def shell(title, desc, main, images=(), current=None, path='/', image=None, og_type='website', ld=(), body_class='', home=False, data_recipe=''):
     OUT.append(path)
+    body_data = f' data-recipe="{data_recipe}"' if data_recipe else ''
     cur = ' aria-current="page"'
     nav = '\n'.join(f'      <a href="{h}"{cur if n == current else ""}>{n}</a>' for n, h in NAV)
     js = '<script src="/js/site.js" defer></script>'
@@ -287,7 +296,7 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
 <link rel="stylesheet" href="/css/fonts.css">
 <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="{body_class}">
+<body class="{body_class}"{body_data}>
 <a class="skip" href="#tresc">Przejdź do treści</a>
 <header class="site-header">
   <div class="topbar"><div class="wrap">
@@ -519,6 +528,49 @@ def recipe_card(slug, sizes='(max-width:720px) 100vw, 33vw'):
 </article>'''
 
 
+UNITS = {'słoik': ('słoik', 'słoiki', 'słoików', 'słoika'), 'ząbek': ('ząbek', 'ząbki', 'ząbków', 'ząbka'),
+         'garść': ('garść', 'garście', 'garści', 'garści'), 'łyżka': ('łyżka', 'łyżki', 'łyżek', 'łyżki'),
+         'listek': ('listek', 'listki', 'listków', 'listka')}
+SERVINGS = {'osoby': ('osoba', 'osoby', 'osób'), 'babeczki': ('babeczka', 'babeczki', 'babeczek')}
+ICON_TIMER = ('<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+              'stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M10 2h4"/></svg>')
+
+
+def plural(n, forms):
+    m10, m100 = n % 10, n % 100
+    return forms[0] if n == 1 else forms[1] if 2 <= m10 <= 4 and not 12 <= m100 <= 14 else forms[2]
+
+
+def qty(i):
+    """Base quantity as text; js/recipes.js formatQty does the same when servings change."""
+    q, u = i.get('q'), i.get('u') or ''
+    if q is None:
+        return 'do smaku'
+    if q == int(q):
+        n = str(int(q))
+        unit = plural(int(q), UNITS[u]) if u in UNITS else u
+    else:
+        n = {0.25: '¼', 0.5: '½', 0.75: '¾'}.get(q % 1 if q > 1 else q, str(q).replace('.', ','))
+        n = (str(int(q)) if q > 1 else '') + n
+        unit = UNITS[u][3] if u in UNITS else u
+    return (n + ' ' + unit).strip()
+
+
+def ingredient_text(i):
+    return i['n'] if i.get('q') is None else f'{qty(i)} {i["n"]}'
+
+
+def recipe_data_js():
+    data = {slug: {'title': r['title'], 'servings': r['servings'], 'servingsUnit': r.get('servings_unit', 'osoby'),
+                   'ingredients': [{'q': i.get('q'), 'u': i.get('u') or '', 'n': i['n']} for i in r['ingredients']],
+                   'steps': [{'title': s['title'], 'text': s['text'], 'minutes': s.get('minutes')} for s in r['steps']],
+                   'product': r.get('product'), 'productName': full_name(PR[r['product']]) if r.get('product') in PR else ''}
+            for slug, r in R.items()}
+    with open(os.path.join(ROOT, 'js/recipe-data.js'), 'w', encoding='utf-8') as f:
+        f.write('// Generated by scripts/build.py from content/recipes/*.json. Do not edit by hand.\n'
+                'window.RECIPES = ' + json.dumps(data, ensure_ascii=False, separators=(',', ':')) + ';\n')
+
+
 def recipe_page(slug, r):
     p = PR.get(r.get('product'))
     jar = ''
@@ -528,8 +580,21 @@ def recipe_page(slug, r):
       <div><p class="kind">Z tego słoika</p><p class="jb-name"><a href="/sklep/{r["product"]}.html">{e(full_name(p))}</a></p><p class="price">{pln(p["price"])}</p></div>
       {buy_button(r["product"], p, "btn btn-gold btn-sm")}
     </aside>'''
-    ingr = ''.join(f'<li>{e(i)}</li>' for i in r['ingredients'])
-    steps = ''.join(f'<li>{e(s)}</li>' for s in r['steps'])
+    n, unit = r['servings'], r.get('servings_unit', 'osoby')
+    ingr = ''.join(f'<li><label><input type="checkbox"><span class="name">{e(i["n"])}</span><span class="qty">{e(qty(i))}</span></label></li>'
+                   for i in r['ingredients'])
+    steps = []
+    for k, s in enumerate(r['steps']):
+        timer = (f'<button type="button" class="tool sm timer" data-minutes="{s["minutes"]}">{ICON_TIMER}<span>Minutnik · {s["minutes"]} min</span></button>'
+                 if s.get('minutes') else '')
+        steps.append(f'<li><span class="n">{k + 1}</span><div class="txt"><h3>{e(s["title"])}</h3><p>{e(s["text"])}</p>{timer}</div></li>')
+    tools = f'''<div class="tools" role="group" aria-label="Narzędzia przepisu">
+          <a class="tool primary" href="/gotowanie.html?r={slug}"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 13.9A4 4 0 0 1 7 6a5 5 0 0 1 10 0 4 4 0 0 1 1 7.9V20H6z"/><path d="M6 17h12"/></svg><span>Tryb gotowania</span></a>
+          <button type="button" class="tool" data-list hidden><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg><span>Lista zakupów</span></button>
+          <button type="button" class="tool" data-print hidden><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9V3h12v6M6 18H4v-7h16v7h-2M8 14h8v7H8z"/></svg><span>Drukuj</span></button>
+          <button type="button" class="tool" data-save aria-pressed="false" hidden><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span>Zapisz</span></button>
+          <button type="button" class="tool" data-share hidden><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg><span>Udostępnij</span></button>
+        </div>'''
     main = f'''
 <div class="wrap">
   {crumbs([('Strona główna', '/'), ('Przepisy', '/przepisy/'), (r['title'], f'/przepisy/{slug}.html')])}
@@ -539,28 +604,89 @@ def recipe_page(slug, r):
         <p class="kind">{e(r.get("way", ""))}</p>
         <h1>{e(r["title"])}</h1>
         <p class="lead">{e(r["lead"])}</p>
-        <ul class="meta-list"><li><strong>Czas:</strong> {e(r["time"])}</li><li><strong>Porcje:</strong> {e(r["serves"])}</li></ul>
+        <ul class="meta-list"><li><strong>Czas:</strong> {e(r["time"])}</li><li><strong>Porcje:</strong> {n} {plural(n, SERVINGS[unit])}</li><li><strong>Kroki:</strong> {len(r["steps"])}</li></ul>
+        {tools}
       </div>
       <figure class="recipe-photo">{img(r["image"], "(max-width:720px) 100vw, 50vw", True)}</figure>
     </header>
     <div class="recipe-body">
-      <section class="ingredients"><h2>Składniki</h2><ul>{ingr}</ul>{jar}</section>
-      <section class="steps"><h2>Przygotowanie</h2><ol>{steps}</ol>
+      <section class="ingredients" aria-labelledby="h-skladniki">
+        <div class="ing-head"><h2 id="h-skladniki">Składniki</h2>
+          <div class="stepper" data-stepper hidden><button type="button" class="step-btn" data-dec aria-label="Mniej porcji">−</button><output data-servings aria-live="polite">{n} {plural(n, SERVINGS[unit])}</output><button type="button" class="step-btn" data-inc aria-label="Więcej porcji">+</button></div>
+        </div>
+        <p class="ing-note">Odhacz to, co masz w domu. Lista zakupów pobierze resztę.</p>
+        <ul class="ing-list" data-ingredients>{ingr}</ul>{jar}
+      </section>
+      <section class="method" aria-labelledby="h-przygotowanie"><h2 id="h-przygotowanie">Przygotowanie</h2><ol class="steps">{''.join(steps)}</ol>
         {f'<p class="tip"><strong>Wskazówka:</strong> {e(r["tip"])}</p>' if r.get('tip') else ''}
         {f'<p class="tip"><strong>Do wina:</strong> {e(r["wine"])}</p>' if r.get('wine') else ''}
       </section>
     </div>
   </article>
-</div>'''
+</div>
+<script src="/js/recipe-data.js" defer></script>
+<script src="/js/recipes.js" defer></script>
+<script src="/js/recipe.js" defer></script>'''
     path = f'/przepisy/{slug}.html'
     m = re.match(r'(\d+)\s*min', r['time'])
     ld = [crumbs_ld([('Strona główna', '/'), ('Przepisy', '/przepisy/'), (r['title'], path)]),
           {'@type': 'Recipe', 'name': r['title'], 'description': r['lead'], 'image': [abs_image(r['image'], 1200, 900)],
-           'author': {'@type': 'Organization', 'name': 'Lumaca'}, 'recipeYield': r['serves'], 'recipeCategory': 'Przystawka',
-           'recipeCuisine': 'polska', 'recipeIngredient': r['ingredients'],
-           'recipeInstructions': [{'@type': 'HowToStep', 'text': s} for s in r['steps']], **({'totalTime': f'PT{m.group(1)}M'} if m else {})}]
+           'author': {'@type': 'Organization', 'name': 'Lumaca'}, 'recipeYield': f'{n} {plural(n, SERVINGS[unit])}', 'recipeCategory': 'Przystawka',
+           'recipeCuisine': 'polska', 'recipeIngredient': [ingredient_text(i) for i in r['ingredients']],
+           'recipeInstructions': [{'@type': 'HowToStep', 'name': s['title'], 'text': s['text']} for s in r['steps']],
+           **({'totalTime': f'PT{m.group(1)}M'} if m else {})}]
     write(path, shell(r['title'], r['lead'], main, [r['image']] + ([p['image']] if p else []), current='Przepisy', path=path,
-                      image=r['image'], og_type='article', ld=ld))
+                      image=r['image'], og_type='article', ld=ld, body_class='recipe-page', data_recipe=slug))
+
+
+def cook_page():
+    """Cooking view: one step per screen, filled in by js/cook.js from ?r=slug. Not in the sitemap."""
+    first = sorted(R, key=lambda s: R[s].get('order', 99))[0]
+    write('/gotowanie.html', f'''<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tryb gotowania · Lumaca</title>
+<meta name="theme-color" content="#1B1A18">
+<link rel="icon" href="/img/favicon-64.png" type="image/png">
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="cook">
+<main class="cook-shell">
+  <div class="cook-top">
+    <a href="/przepisy/{first}.html" class="cook-close" aria-label="Zamknij tryb gotowania" data-close>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </a>
+    <a href="/" class="logo"><img src="/img/logo-yellow.png" alt="Lumaca, strona główna" width="167" height="24"></a>
+    <p class="wake" data-wake hidden>Ekran nie wygaśnie</p>
+  </div>
+  <div>
+    <p class="cook-recipe" data-recipe-title></p>
+    <p class="cook-step" data-count></p>
+    <div class="bars" aria-hidden="true" data-bars></div>
+  </div>
+  <h1 data-title aria-live="polite"></h1>
+  <p class="cook-desc" data-desc></p>
+  <button type="button" class="cook-timer" data-timer hidden>
+    <span class="l">{ICON_TIMER.replace('width="14" height="14"', 'width="20" height="20"')}<span data-timer-label>Uruchom minutnik</span></span>
+    <span class="t" data-timer-time></span>
+  </button>
+  <details class="cook-ing"><summary>Składniki</summary><ul data-cook-ing></ul></details>
+  <div class="cook-nav">
+    <button type="button" class="cook-prev" data-prev>← Wstecz</button>
+    <button type="button" class="cook-next" data-next>Dalej →</button>
+  </div>
+</main>
+<noscript><p class="cook-noscript">Tryb gotowania potrzebuje JavaScriptu. <a href="/przepisy/">Wróć do przepisów</a>.</p></noscript>
+<script src="/js/recipe-data.js"></script>
+<script src="/js/recipes.js"></script>
+<script src="/js/cook.js"></script>
+</body>
+</html>
+''')
 
 
 def faq_html(hid='faq'):
@@ -1299,6 +1425,8 @@ def main():
     recipes_page()
     for s, r in R.items():
         recipe_page(s, r)
+    recipe_data_js()
+    cook_page()
     kitchen_page()
     where_page()
     b2b_page()

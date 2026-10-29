@@ -24,6 +24,15 @@ The structure and wording follow the marketing plan ("Lumaca – plan marketingo
   `img/logo-badge.png` (round), `img/logo-yellow.png` (snail + name, header), `img/mark-yellow.png` (snail alone), favicons.
   The plan asks to confirm full rights to this logo before registering the trademark.
 
+## Recipes
+
+Each recipe page works like Łowca Smaków's: a servings stepper rescales every quantity (jars always round up to whole
+jars), the ingredient list is a checklist that remembers ticks, steps have built-in timers, and the tools bar has
+**Tryb gotowania** (`/gotowanie.html?r=slug`: one step per screen, big type, timer, screen kept awake), **Lista zakupów**
+(downloads a .txt of the unticked ingredients at the chosen servings, with links to the jar and the recipe), Drukuj
+(print stylesheet), Zapisz and Udostępnij. Recipes are structured in the CMS: ingredients as amount / unit / name,
+steps as title / text / timer minutes; `js/recipe-data.js` is generated from them at build time.
+
 ## Articles and languages
 
 - **Articles** (`/artykuly/`, CMS: Artykuły): seven Polish guides written for the plan's search phrases
@@ -73,3 +82,7 @@ and open the contact form with the product filled in. With the key, they add to 
   (Festiwal Winasera, Sandomierz), a screenshot crop, so a full-resolution original would be better; two occasion photos come from Unsplash.
 - Terms of sale and privacy policy texts (the old site had lorem ipsum).
 - French and English texts: a native-speaker check.
+- Articles (rewritten versions from the "Lumaca — artykuły, nowe wersje" doc): the doc's editorial list still needs the
+  owners: Lio being the same gros gris meat, ~12 tartlets per jar, ingredients vs. a strict Christmas Eve fast, allergens
+  in the sauces, nutrition figures, pick-up hours in Kołomań (9:00–15:00), the early-November deadline for company
+  orders, and Festiwal Winasera 2027.

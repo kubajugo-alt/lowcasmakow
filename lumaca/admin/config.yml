@@ -114,12 +114,30 @@ collections:
       - {name: order, label: 'Kolejność', widget: number, value_type: int, default: 10}
       - {name: way, label: 'Sposób', hint: 'np. „Na grzance”, „Z makaronem”, „W babeczce”'}
       - {name: time, label: 'Czas', hint: 'np. „5 min”'}
-      - {name: serves, label: 'Porcje'}
+      - {name: servings, label: 'Porcje (liczba)', widget: number, value_type: int, default: 2, hint: 'Na tyle porcji są podane ilości; strona przelicza je dla innej liczby.'}
+      - {name: servings_unit, label: 'Jednostka porcji', widget: select, options: ['osoby', 'babeczki'], default: 'osoby'}
       - {name: product, label: 'Słoik', widget: relation, collection: products, value_field: '{{slug}}', search_fields: [title], display_fields: ['{{kind}} {{title}}']}
       - {name: image, label: 'Zdjęcie dania', widget: object, fields: *image}
       - {name: lead, label: 'Wstęp', widget: text}
-      - {name: ingredients, label: 'Składniki', widget: list, field: {name: item, label: 'Składnik'}}
-      - {name: steps, label: 'Kroki', widget: list, field: {name: step, label: 'Krok', widget: text}}
+      - name: ingredients
+        label: 'Składniki'
+        label_singular: 'Składnik'
+        widget: list
+        summary: '{{q}} {{u}} {{n}}'
+        hint: 'Pierwszy składnik to słoik Lumaca. Ilość puste = „do smaku”.'
+        fields:
+          - {name: q, label: 'Ilość', widget: number, value_type: float, required: false}
+          - {name: u, label: 'Jednostka', widget: select, required: false, options: ['', 'słoik', 'g', 'ml', 'szt.', 'ząbek', 'garść', 'łyżka', 'listek']}
+          - {name: n, label: 'Składnik'}
+      - name: steps
+        label: 'Kroki'
+        label_singular: 'Krok'
+        widget: list
+        summary: '{{title}}'
+        fields:
+          - {name: title, label: 'Krótki tytuł'}
+          - {name: text, label: 'Opis', widget: text}
+          - {name: minutes, label: 'Minutnik (minuty)', widget: number, value_type: int, required: false, hint: 'Zostaw puste, jeśli krok nie potrzebuje minutnika.'}
       - {name: tip, label: 'Wskazówka', widget: text, required: false}
       - {name: wine, label: 'Do wina', required: false}
 

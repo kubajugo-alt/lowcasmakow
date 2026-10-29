@@ -2,7 +2,6 @@
   "title": "Risotto z liofilizowanym mięsem ślimaka",
   "order": 6,
   "time": "30 min + 2 h moczenia",
-  "serves": "2 osoby",
   "product": "lio-liofilizowane-mieso-slimaka",
   "image": {
     "src": "/img/uploads/podanie-risotto.jpg",
@@ -11,22 +10,75 @@
   "way": "Dla gotujących",
   "lead": "Lio to baza dla tych, którzy lubią gotować sami. Po namoczeniu odzyskuje smak i konsystencję świeżo ugotowanego mięsa.",
   "ingredients": [
-    "30–40 g Lio",
-    "1 l gorącego bulionu warzywnego albo rosołu",
-    "160 g ryżu arborio",
-    "1 szalotka",
-    "50 ml białego wina wytrawnego",
-    "30 g masła",
-    "40 g parmezanu",
-    "natka pietruszki"
+    {
+      "q": 35,
+      "u": "g",
+      "n": "Lio, liofilizowane mięso ślimaka Lumaca"
+    },
+    {
+      "q": 1000,
+      "u": "ml",
+      "n": "Gorący bulion warzywny albo rosół"
+    },
+    {
+      "q": 160,
+      "u": "g",
+      "n": "Ryż arborio"
+    },
+    {
+      "q": 1,
+      "u": "szt.",
+      "n": "Szalotka"
+    },
+    {
+      "q": 50,
+      "u": "ml",
+      "n": "Białe wino wytrawne"
+    },
+    {
+      "q": 30,
+      "u": "g",
+      "n": "Masło"
+    },
+    {
+      "q": 40,
+      "u": "g",
+      "n": "Parmezan"
+    },
+    {
+      "q": null,
+      "u": "",
+      "n": "Natka pietruszki"
+    }
   ],
   "steps": [
-    "Zalej Lio gorącym bulionem i odstaw na ok. 2 godziny. Odcedź, bulion zachowaj.",
-    "Zeszklij posiekaną szalotkę na połowie masła, dodaj ryż i smaż minutę.",
-    "Wlej wino, a gdy odparuje, dolewaj gorący bulion po chochli, mieszając, przez ok. 18 minut.",
-    "Na ostatnie 3 minuty dodaj mięso ślimaka.",
-    "Zdejmij z ognia, wmieszaj resztę masła i parmezan. Podawaj z natką."
+    {
+      "title": "Namocz Lio",
+      "text": "Zalej Lio gorącym bulionem i odstaw na ok. 2 godziny. Odcedź, bulion zachowaj.",
+      "minutes": 120
+    },
+    {
+      "title": "Szalotka i ryż",
+      "text": "Zeszklij posiekaną szalotkę na połowie masła, dodaj ryż i smaż minutę.",
+      "minutes": 2
+    },
+    {
+      "title": "Wino i bulion",
+      "text": "Wlej wino, a gdy odparuje, dolewaj gorący bulion po chochli, mieszając, przez ok. 18 minut.",
+      "minutes": 18
+    },
+    {
+      "title": "Ślimaki",
+      "text": "Na ostatnie 3 minuty dodaj mięso ślimaka.",
+      "minutes": 3
+    },
+    {
+      "title": "Wykończ",
+      "text": "Zdejmij z ognia, wmieszaj resztę masła i parmezan. Podawaj z natką."
+    }
   ],
   "tip": "Ze 100 g Lio po namoczeniu wychodzi ok. 280 g mięsa, więc jedno opakowanie wystarczy na kilka dań.",
-  "wine": "To samo białe wino, które dodałeś do risotto."
+  "wine": "To samo białe wino, które dodałeś do risotto.",
+  "servings": 2,
+  "servings_unit": "osoby"
 }

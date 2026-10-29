@@ -2,7 +2,6 @@
   "title": "Grzanki ze ślimakami",
   "order": 1,
   "time": "5 min",
-  "serves": "2–3 osoby jako przystawka",
   "product": "slimaki-w-oleju-cytrynowo-pietruszkowym",
   "image": {
     "src": "/img/uploads/podanie-grzanki.jpg",
@@ -11,19 +10,59 @@
   "way": "Na grzance",
   "lead": "Najprostszy sposób na pierwsze spotkanie ze ślimakiem: chrupiąca bagietka, czosnek, natka i ciepłe mięso ślimaka w cytrynowym oleju.",
   "ingredients": [
-    "1 słoik ślimaków w oleju cytrynowo-pietruszkowym",
-    "1 bagietka",
-    "1 ząbek czosnku",
-    "garść natki pietruszki",
-    "ćwiartka cytryny",
-    "świeżo mielony pieprz"
+    {
+      "q": 1,
+      "u": "słoik",
+      "n": "Ślimaki w oleju cytrynowo-pietruszkowym Lumaca"
+    },
+    {
+      "q": 1,
+      "u": "szt.",
+      "n": "Bagietka"
+    },
+    {
+      "q": 1,
+      "u": "ząbek",
+      "n": "Czosnek"
+    },
+    {
+      "q": 1,
+      "u": "garść",
+      "n": "Natka pietruszki"
+    },
+    {
+      "q": 0.25,
+      "u": "szt.",
+      "n": "Cytryna"
+    },
+    {
+      "q": null,
+      "u": "",
+      "n": "Świeżo mielony pieprz"
+    }
   ],
   "steps": [
-    "Pokrój bagietkę ukośnie na kromki i opiecz je na suchej patelni albo w piekarniku, aż się zrumienią.",
-    "Natrzyj ciepłe kromki przekrojonym ząbkiem czosnku.",
-    "Przełóż zawartość słoika na patelnię i podgrzewaj 2–3 minuty, mieszając.",
-    "Nałóż ślimaki z odrobiną oleju na grzanki, posyp natką, skrop cytryną i dopraw pieprzem."
+    {
+      "title": "Opiecz kromki",
+      "text": "Pokrój bagietkę ukośnie na kromki i opiecz je na suchej patelni albo w piekarniku, aż się zrumienią.",
+      "minutes": 3
+    },
+    {
+      "title": "Natrzyj czosnkiem",
+      "text": "Natrzyj ciepłe kromki przekrojonym ząbkiem czosnku."
+    },
+    {
+      "title": "Podgrzej ślimaki",
+      "text": "Przełóż zawartość słoika na patelnię i podgrzewaj 2–3 minuty, mieszając.",
+      "minutes": 3
+    },
+    {
+      "title": "Podaj",
+      "text": "Nałóż ślimaki z odrobiną oleju na grzanki, posyp natką, skrop cytryną i dopraw pieprzem."
+    }
   ],
   "tip": "Olej ze słoika jest pełen smaku: zostaw go na patelni i opiecz w nim kolejną kromkę.",
-  "wine": "Białe wytrawne, np. sauvignon blanc albo solaris z winnic sandomierskich."
+  "wine": "Białe wytrawne, np. sauvignon blanc albo solaris z winnic sandomierskich.",
+  "servings": 3,
+  "servings_unit": "osoby"
 }
