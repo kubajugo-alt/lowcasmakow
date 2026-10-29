@@ -658,12 +658,12 @@ def sets_page():
   </header>
   <div class="grid products two">{"".join(product_card(s, p, "(max-width:720px) 100vw, 50vw") for s, p in sets)}</div>
   <section class="sec enquiry" id="firmy" aria-labelledby="h-gift"><h2 id="h-gift" class="sec-title">Prezenty firmowe</h2>
-    <p>Zestawy dla klientów i pracowników z numerowanej serii rocznika 2026. Przy większych zamówieniach dołączymy kartkę z Twoim logo i życzeniami.</p>
+    <p>Zestawy dla klientów i pracowników z limitowanej serii rocznika 2026. Przy większych zamówieniach dołączymy kartkę z Twoim logo i życzeniami.</p>
     {form("prezenty-firmowe", [("text", "firma", "Firma", True), ("text", "osoba", "Imię i nazwisko", True), ("email", "email", "E-mail", True), ("tel", "telefon", "Telefon", False),
           ("number", "liczba", "Ile zestawów?", False), ("textarea", "wiadomosc", "Termin i szczegóły", False)], "Zapytaj o prezenty", "Dziękujemy! Wyślemy ofertę w ciągu dwóch dni roboczych.")}
   </section>
 </div>'''
-    write('/zestawy/', shell('Zestawy i prezenty ze ślimakami', 'Zestaw świąteczny z numerowanej serii i zestaw na wieczór z winem. Prezenty firmowe na zamówienie.',
+    write('/zestawy/', shell('Zestawy i prezenty ze ślimakami', 'Zestaw świąteczny z limitowanej serii i zestaw na wieczór z winem. Prezenty firmowe na zamówienie.',
                              main, [p['image'] for s, p in sets], current='Zestawy i prezenty', path='/zestawy/',
                              image=sets[0][1]['image'] if sets else None, ld=[crumbs_ld([('Strona główna', '/'), ('Zestawy i prezenty', '/zestawy/')])]))
 

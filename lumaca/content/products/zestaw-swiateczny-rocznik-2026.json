@@ -6,9 +6,9 @@
   "price": 199,
   "available": true,
   "bestseller": false,
-  "badge": "Numerowana seria",
+  "badge": "Seria limitowana",
   "stripe": "#C9A35A",
-  "lead": "Cztery słoiki z tegorocznej partii (bulion królewski, olej cytrynowo-pietruszkowy, zielone pesto, sos pomidorowy) i karta „3 sposoby w 5 minut”. Każdy zestaw ma swój numer. Dostawa gratis.",
+  "lead": "Cztery słoiki z tegorocznej partii (bulion królewski, olej cytrynowo-pietruszkowy, zielone pesto, sos pomidorowy) i karta „3 sposoby w 5 minut”. Seria limitowana: tyle zestawów, ile pozwala tegoroczna partia. Dostawa gratis.",
   "image": {
     "src": "/img/uploads/zestaw-swiateczny.jpg",
     "alt": "Zestaw świąteczny: cztery słoiki Lumaca w czarnym pudełku ze złotą wstążką"

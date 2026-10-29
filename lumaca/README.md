@@ -47,7 +47,7 @@ and open the contact form with the product filled in. With the key, they add to 
 ## To confirm with the owners before going live
 
 - Prices: jars at 49,90 zł (the plan's recommendation; the old shop had 44,90 zł), sets at 199 zł (4 jars) and 99 zł (2 jars).
-- "Rocznik 2026" and the numbered Christmas series (a decision listed in the plan).
+- "Rocznik 2026" and the limited Christmas series (a decision listed in the plan).
 - One phone number for everything (the site uses +48 501 501 130).
 - Allergens: molluscs on every jar; whether the court-bouillon contains celery and the wine sulphites.
 - Photos: every photo with a jar (product shots, hero, sets, recipe and dish photos) was made with AI (Higgsfield) from the
