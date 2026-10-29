@@ -248,6 +248,23 @@ def social():
                     for k, (name, svg) in ICONS.items() if S.get(k))
     return f'<p class="social">{links}</p>' if links else ''
 
+TOP_ICONS = {
+    'phone': '<path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
+    'email': '<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
+}
+
+
+def topbar_contact():
+    """Phone, e-mail and social icons at the top of every page; on phones only the icons show."""
+    def icon(svg, size=15):
+        return f'<svg aria-hidden="true" width="{size}" height="{size}" viewBox="0 0 24 24" fill="currentColor">{svg}</svg>'
+    items = [f'<a href="tel:{tel(S["phone"])}" aria-label="{e(S["phone"])}">{icon(TOP_ICONS["phone"])}<span>{e(S["phone"])}</span></a>',
+             f'<a href="mailto:{e(S["email"])}" aria-label="{e(S["email"])}">{icon(TOP_ICONS["email"])}<span>{e(S["email"])}</span></a>']
+    items += [f'<a href="{e(S[k])}" class="tb-social" aria-label="{name}" title="{name}" rel="noopener" target="_blank">{icon(svg)}</a>'
+              for k, (name, svg) in ICONS.items() if S.get(k)]
+    return '<div class="tb-contact">' + ''.join(items) + '</div>'
+
+
 CART = ('<button class="icon-btn snipcart-checkout" type="button" aria-label="Koszyk">'
         '<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" '
         'stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/>'
@@ -301,7 +318,7 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
 <header class="site-header">
   <div class="topbar"><div class="wrap">
     <span>{e(HOME.get("hero_badge", "").capitalize())} · darmowa dostawa od {pln(S["free_shipping_from"])}</span>
-    <a href="tel:{tel(S["phone"])}">{e(S["phone"])}</a>
+    {topbar_contact()}
   </div></div>
   <div class="wrap bar">
     <a href="/" class="logo"><img src="/img/logo-yellow.png" alt="Lumaca" width="237" height="34"></a>
@@ -1158,7 +1175,7 @@ def shell_i18n(lang, title, desc, main, path, images=(), current=None, image=Non
 <header class="site-header">
   <div class="topbar"><div class="wrap">
     <span>{e(U["topbar"])}</span>
-    <a href="tel:{tel(S["phone"])}">{e(S["phone"])}</a>
+    {topbar_contact()}
   </div></div>
   <div class="wrap bar">
     <a href="{P["home"]}" class="logo"><img src="/img/logo-yellow.png" alt="Lumaca" width="237" height="34"></a>
