@@ -1,0 +1,53 @@
+{
+  "title": "w zielonym pesto",
+  "kind": "Ślimaki",
+  "category": "sloiki",
+  "order": 3,
+  "price": 49.9,
+  "available": true,
+  "bestseller": true,
+  "badge": "",
+  "stripe": "#5E8C4A",
+  "lead": "Mięso ślimaka w pesto ze świeżej bazylii, orzechów włoskich i sera Bursztyn. Wystarczy połączyć z makaronem.",
+  "image": {
+    "src": "/img/uploads/sloik-zielone-pesto.jpg",
+    "alt": "Słoik: ślimaki w zielonym pesto"
+  },
+  "dish_image": {
+    "src": "/img/uploads/podanie-makaron.jpg",
+    "alt": "Tagliatelle ze ślimakami w zielonym pesto i prażonymi orzeszkami"
+  },
+  "occasion": "Obiad w 10 minut, kolacja dla dwojga",
+  "ready_in_5": "Podsmaż zawartość słoika 3–4 minuty i połącz z ugotowanym tagliatelle.",
+  "pairing": "Tagliatelle, parmezan, białe wino",
+  "ways": [
+    {
+      "title": "Na grzance",
+      "text": "Podgrzej zawartość słoika na patelni przez 2–3 minuty i nałóż na opieczoną bagietkę natartą czosnkiem.",
+      "recipe": "grzanki-ze-slimakami"
+    },
+    {
+      "title": "Z makaronem",
+      "text": "Wymieszaj gorący makaron z zawartością słoika podgrzaną na patelni. Na koniec ser i świeży pieprz.",
+      "recipe": "tagliatelle-ze-slimakami-w-pesto"
+    },
+    {
+      "title": "W babeczce",
+      "text": "Nałóż do gotowych kruchych babeczek, posyp serem i zapiecz 5 minut w 200°C.",
+      "recipe": "babeczki-ze-slimakami"
+    }
+  ],
+  "net_weight": "250 g, w tym 100 g mięsa ślimaka",
+  "ingredients": "mięso ślimaka gotowane w bulionie warzywnym z dodatkiem białego wina wytrawnego, świeża bazylia, orzechy włoskie, czosnek, sok z cytryny, sól, ser Bursztyn, olej rzepakowy, pieprz",
+  "allergens": "mięczaki (ślimaki), orzechy włoskie, mleko (ser)",
+  "storage": "Przed otwarciem w suchym, chłodnym miejscu, w temperaturze pokojowej. Po otwarciu w lodówce do 3 dni.",
+  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "video": "",
+  "recipes": [
+    "tagliatelle-ze-slimakami-w-pesto",
+    "babeczki-ze-slimakami"
+  ],
+  "weight": 450,
+  "name_en": "Snails in green pesto",
+  "name_fr": "Escargots au pesto vert"
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Babeczki ze ślimakami",
+  "order": 3,
+  "time": "5 min + pieczenie",
+  "serves": "12 babeczek",
+  "product": "slimaki-w-bulionie-krolewskim",
+  "image": {
+    "src": "/img/uploads/podanie-babeczki.jpg",
+    "alt": "Kruche babeczki zapiekane ze ślimakami i serem"
+  },
+  "way": "W babeczce",
+  "lead": "Ślimaki w kruchych babeczkach to przekąska, którą Lumaca podaje na jarmarkach. W domu wystarczą gotowe spody z piekarni.",
+  "ingredients": [
+    "1 słoik ślimaków w bulionie królewskim (albo w oleju cytrynowo-pietruszkowym)",
+    "12 gotowych kruchych babeczek",
+    "50 g masła",
+    "2 ząbki czosnku",
+    "garść natki pietruszki",
+    "50 g tartego sera, np. gruyère albo ementaler"
+  ],
+  "steps": [
+    "Rozgrzej piekarnik do 200°C.",
+    "Utrzyj miękkie masło z przeciśniętym czosnkiem i posiekaną natką.",
+    "Odcedź ślimaki z bulionu i włóż po kilka do każdej babeczki.",
+    "Na wierzch nałóż odrobinę masła czosnkowego i posyp serem.",
+    "Zapiekaj 5–7 minut, aż ser się roztopi. Podawaj na ciepło."
+  ],
+  "tip": "Bulion ze słoika nie musi się zmarnować: to dobra baza do zupy albo risotto.",
+  "wine": "Białe wytrawne albo musujące."
+}

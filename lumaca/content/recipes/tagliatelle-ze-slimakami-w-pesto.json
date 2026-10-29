@@ -1,0 +1,29 @@
+{
+  "title": "Tagliatelle ze ślimakami w zielonym pesto",
+  "order": 2,
+  "time": "10 min",
+  "serves": "2 osoby",
+  "product": "slimaki-w-zielonym-pesto",
+  "image": {
+    "src": "/img/uploads/podanie-makaron.jpg",
+    "alt": "Tagliatelle ze ślimakami w zielonym pesto i prażonymi orzeszkami"
+  },
+  "way": "Z makaronem",
+  "lead": "Obiad, który robi się sam: makaron gotuje się 8 minut, a w tym czasie ślimaki w pesto są już gotowe.",
+  "ingredients": [
+    "1 słoik ślimaków w zielonym pesto",
+    "200 g tagliatelle",
+    "2 łyżki orzeszków piniowych albo posiekanych orzechów włoskich",
+    "parmezan",
+    "sól, pieprz"
+  ],
+  "steps": [
+    "Ugotuj makaron al dente w osolonej wodzie. Odlej pół szklanki wody z gotowania.",
+    "W tym czasie podsmaż zawartość słoika na patelni przez 3–4 minuty.",
+    "Uprażone na suchej patelni orzeszki odłóż na bok.",
+    "Wrzuć odcedzony makaron na patelnię, dodaj kilka łyżek wody z gotowania i wymieszaj, aż sos oblepi makaron.",
+    "Podawaj z orzeszkami, parmezanem i świeżym pieprzem."
+  ],
+  "tip": "Woda z gotowania makaronu łączy pesto w gładki sos. Dodawaj ją po łyżce.",
+  "wine": "Białe wytrawne o świeżej kwasowości."
+}

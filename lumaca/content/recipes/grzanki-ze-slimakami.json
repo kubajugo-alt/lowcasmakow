@@ -1,0 +1,29 @@
+{
+  "title": "Grzanki ze ślimakami",
+  "order": 1,
+  "time": "5 min",
+  "serves": "2–3 osoby jako przystawka",
+  "product": "slimaki-w-oleju-cytrynowo-pietruszkowym",
+  "image": {
+    "src": "/img/uploads/podanie-grzanki.jpg",
+    "alt": "Grzanki z bagietki ze ślimakami, natką pietruszki i oliwą"
+  },
+  "way": "Na grzance",
+  "lead": "Najprostszy sposób na pierwsze spotkanie ze ślimakiem: chrupiąca bagietka, czosnek, natka i ciepłe mięso ślimaka w cytrynowym oleju.",
+  "ingredients": [
+    "1 słoik ślimaków w oleju cytrynowo-pietruszkowym",
+    "1 bagietka",
+    "1 ząbek czosnku",
+    "garść natki pietruszki",
+    "ćwiartka cytryny",
+    "świeżo mielony pieprz"
+  ],
+  "steps": [
+    "Pokrój bagietkę ukośnie na kromki i opiecz je na suchej patelni albo w piekarniku, aż się zrumienią.",
+    "Natrzyj ciepłe kromki przekrojonym ząbkiem czosnku.",
+    "Przełóż zawartość słoika na patelnię i podgrzewaj 2–3 minuty, mieszając.",
+    "Nałóż ślimaki z odrobiną oleju na grzanki, posyp natką, skrop cytryną i dopraw pieprzem."
+  ],
+  "tip": "Olej ze słoika jest pełen smaku: zostaw go na patelni i opiecz w nim kolejną kromkę.",
+  "wine": "Białe wytrawne, np. sauvignon blanc albo solaris z winnic sandomierskich."
+}

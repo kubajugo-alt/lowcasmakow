@@ -1,0 +1,30 @@
+{
+  "title": "Ślimaki w maśle czosnkowym",
+  "order": 4,
+  "time": "5 min",
+  "serves": "2–3 osoby jako przystawka",
+  "product": "slimaki-w-bulionie-krolewskim",
+  "image": {
+    "src": "https://images.unsplash.com/photo-1549413468-24b18ebf5d9c",
+    "alt": "Ślimaki w maśle czosnkowym z pietruszką, obok kieliszek",
+    "credit": "Maria Orlova",
+    "credit_url": "https://unsplash.com/@orlovamaria"
+  },
+  "way": "Klasyka",
+  "lead": "Klasyka kuchni francuskiej i najczęstszy sposób podania ślimaków na naszym stoisku. Z gotowego słoika w pięć minut.",
+  "ingredients": [
+    "1 słoik ślimaków w bulionie królewskim",
+    "60 g masła",
+    "2–3 ząbki czosnku",
+    "duża garść natki pietruszki",
+    "bagietka do maczania"
+  ],
+  "steps": [
+    "Odcedź ślimaki z bulionu.",
+    "Na patelni rozpuść masło, dodaj przeciśnięty czosnek i smaż pół minuty.",
+    "Dodaj ślimaki i podgrzewaj 3 minuty, mieszając.",
+    "Zdejmij z ognia, wsyp posiekaną natkę i od razu podawaj z bagietką."
+  ],
+  "tip": "Czosnek ma się tylko zeszklić. Przypalony zgorzknieje i zdominuje delikatne mięso.",
+  "wine": "Białe wytrawne, np. chardonnay albo solaris."
+}

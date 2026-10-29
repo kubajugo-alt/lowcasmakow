@@ -1,0 +1,68 @@
+{
+  "hero_title": "Ślimaki gotowe do stołu",
+  "hero_text": "Gotowe dania ze ślimaków z polskich hodowli, przyrządzane w małej przetwórni w Świętokrzyskiem. Podgrzej, podaj, zaskocz gości.",
+  "hero_badge": "gotowe w 5 minut",
+  "hero_image": {
+    "src": "/img/uploads/podanie-stol-dania.jpg",
+    "alt": "Makaron ze ślimakami w pesto, kieliszek białego wina i babeczki ze ślimakami na drewnianym stole"
+  },
+  "bestsellers_title": "Najczęściej wybierane",
+  "how_title": "Jak to podać",
+  "how_text": "Każdy słoik to gotowe danie: 100 g delikatnego mięsa ślimaka, które przejmuje smak sosu. Trzy sposoby, każdy w 5 minut.",
+  "occasions_title": "Na jaką okazję",
+  "occasions": [
+    {
+      "title": "Wieczór z winem",
+      "text": "Grzanki ze ślimakami i kieliszek białego wytrawnego.",
+      "link": "/sklep/zestaw-wieczor-z-winem.html",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1781714534090-cf7afbbf8484",
+        "alt": "Kieliszki wina i deska przekąsek przy kominku",
+        "credit": "Bruno Dias",
+        "credit_url": "https://unsplash.com/@onurbdias"
+      }
+    },
+    {
+      "title": "Kolacja dla gości",
+      "text": "Przystawka, o której będzie się mówić do deseru.",
+      "link": "/przepisy/slimaki-w-masle-czosnkowym.html",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1688437307687-fe226bddfab1",
+        "alt": "Stół nakryty do kolacji, świece i przystawki",
+        "credit": "Zac Cain",
+        "credit_url": "https://unsplash.com/@zaccain"
+      }
+    },
+    {
+      "title": "Prezent",
+      "text": "Zestaw z numerowanej serii: dla kogoś, kto ma już wszystko.",
+      "link": "/zestawy/",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1668463876833-339717e58c4c",
+        "alt": "Prezent zawinięty w szary papier z kokardą",
+        "credit": "Patrick Perkins",
+        "credit_url": "https://unsplash.com/@patrickperkins"
+      }
+    },
+    {
+      "title": "Święta",
+      "text": "Zapomniany staropolski przysmak wraca na świąteczny stół.",
+      "link": "/sklep/zestaw-swiateczny-rocznik-2026.html",
+      "image": {
+        "src": "https://images.unsplash.com/photo-1549413468-24b18ebf5d9c",
+        "alt": "Ślimaki w maśle czosnkowym i kieliszek szampana",
+        "credit": "Maria Orlova",
+        "credit_url": "https://unsplash.com/@orlovamaria"
+      }
+    }
+  ],
+  "kitchen_title": "Nasza kuchnia",
+  "kitchen_text": "Grażyna zaczynała od hodowli ślimaków. Dziś Lumaca to mała przetwórnia w Kołomaniu pod Kielcami: kupujemy ślimaki od polskich hodowców, gotujemy je według własnych receptur i zamykamy w słoikach małymi partiami.",
+  "kitchen_image": {
+    "src": "https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0",
+    "alt": "Ślimaki zapiekane w maśle ziołowym w żeliwnym naczyniu",
+    "credit": "Ali Robins",
+    "credit_url": "https://unsplash.com/@aliphotos_86"
+  },
+  "where_title": "Gdzie spróbować"
+}

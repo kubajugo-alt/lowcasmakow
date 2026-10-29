@@ -1,0 +1,56 @@
+{
+  "title": "w bulionie królewskim",
+  "kind": "Ślimaki",
+  "category": "sloiki",
+  "order": 1,
+  "price": 49.9,
+  "available": true,
+  "bestseller": true,
+  "badge": "",
+  "stripe": "#C9A35A",
+  "lead": "Mięso ślimaka gotowane 120 minut w bulionie warzywnym z białym winem wytrawnym. Najbardziej uniwersalny słoik: baza do maśla czosnkowego, babeczek i własnych dań.",
+  "image": {
+    "src": "/img/uploads/sloik-bulion-krolewski.jpg",
+    "alt": "Słoik: ślimaki w bulionie królewskim"
+  },
+  "dish_image": {
+    "src": "https://images.unsplash.com/photo-1549413468-24b18ebf5d9c",
+    "alt": "Ślimaki w maśle czosnkowym z pietruszką, obok kieliszek",
+    "credit": "Maria Orlova",
+    "credit_url": "https://unsplash.com/@orlovamaria"
+  },
+  "occasion": "Przystawka na wieczór z winem, kolacja dla gości",
+  "ready_in_5": "Odcedź, podsmaż 3 minuty na maśle z czosnkiem i natką, podaj z bagietką.",
+  "pairing": "Białe wytrawne wino, chrupiąca bagietka, masło czosnkowe",
+  "ways": [
+    {
+      "title": "Na grzance",
+      "text": "Podgrzej zawartość słoika na patelni przez 2–3 minuty i nałóż na opieczoną bagietkę natartą czosnkiem.",
+      "recipe": "grzanki-ze-slimakami"
+    },
+    {
+      "title": "Z makaronem",
+      "text": "Wymieszaj gorący makaron z zawartością słoika podgrzaną na patelni. Na koniec ser i świeży pieprz.",
+      "recipe": "tagliatelle-ze-slimakami-w-pesto"
+    },
+    {
+      "title": "W babeczce",
+      "text": "Nałóż do gotowych kruchych babeczek, posyp serem i zapiecz 5 minut w 200°C.",
+      "recipe": "babeczki-ze-slimakami"
+    }
+  ],
+  "net_weight": "250 g, w tym 100 g mięsa ślimaka",
+  "ingredients": "mięso ślimaka gotowane w bulionie warzywnym z dodatkiem białego wina wytrawnego, woda, przyprawy",
+  "allergens": "mięczaki (ślimaki); siarczyny z wina i seler z bulionu: do potwierdzenia z etykietą",
+  "storage": "Przed otwarciem w suchym, chłodnym miejscu, w temperaturze pokojowej. Po otwarciu w lodówce do 3 dni.",
+  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "video": "",
+  "recipes": [
+    "slimaki-w-masle-czosnkowym",
+    "babeczki-ze-slimakami",
+    "grzanki-ze-slimakami"
+  ],
+  "weight": 450,
+  "name_en": "Snails in court-bouillon",
+  "name_fr": "Escargots au court-bouillon"
+}

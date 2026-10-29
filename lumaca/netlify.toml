@@ -1,0 +1,90 @@
+# Lumaca: a separate Netlify project built from the lumaca/ folder of this repository.
+# In Netlify: Base directory = lumaca, build command and publish directory below.
+[build]
+  base = "lumaca"
+  publish = "."
+  # Rebuilds the pages from content/ (what the CMS edits). Standard-library Python only.
+  command = "python3 scripts/build.py"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+
+# Addresses of the old WordPress shop at lumaca.eco → the new pages (for when the domain moves here)
+[[redirects]]
+  from = "/produkt/slimaki-w-sosie-bolognese/"
+  to = "/sklep/slimaki-w-sosie-pomidorowym.html"
+  status = 301
+[[redirects]]
+  from = "/produkt/slimaki-w-sosie-pomidorowym/"
+  to = "/sklep/slimaki-w-sosie-pomidorowym.html"
+  status = 301
+[[redirects]]
+  from = "/produkt/slimaki-w-zielonym-pesto/"
+  to = "/sklep/slimaki-w-zielonym-pesto.html"
+  status = 301
+[[redirects]]
+  from = "/produkt/slimaki-w-zielonym-pesto-2/"
+  to = "/sklep/slimaki-w-zielonym-pesto.html"
+  status = 301
+[[redirects]]
+  from = "/produkt/slimaki-w-oleju-cytrynowo-pietruszkowym/"
+  to = "/sklep/slimaki-w-oleju-cytrynowo-pietruszkowym.html"
+  status = 301
+[[redirects]]
+  from = "/produkt/slimaki-w-bulionie-krolewskim-100g/"
+  to = "/sklep/slimaki-w-bulionie-krolewskim.html"
+  status = 301
+[[redirects]]
+  from = "/produkt/tuszki-slimaka-w-bulionie-warzywnym/"
+  to = "/sklep/slimaki-w-bulionie-krolewskim.html"
+  status = 301
+[[redirects]]
+  from = "/produkt/tuszki-slimaka-liofilizowane-opakowanie-200g/"
+  to = "/sklep/lio-liofilizowane-mieso-slimaka.html"
+  status = 301
+[[redirects]]
+  from = "/produkt/*"
+  to = "/sklep/"
+  status = 301
+[[redirects]]
+  from = "/kategoria-produktu/*"
+  to = "/sklep/"
+  status = 301
+[[redirects]]
+  from = "/dlaczego-slimaki/"
+  to = "/nasza-kuchnia/"
+  status = 301
+[[redirects]]
+  from = "/o-nas/"
+  to = "/nasza-kuchnia/"
+  status = 301
+[[redirects]]
+  from = "/formy-platnosci-i-ceny-dostawy-2/"
+  to = "/dostawa-i-platnosci/"
+  status = 301
+[[redirects]]
+  from = "/koszyk/"
+  to = "/sklep/"
+  status = 301
+[[redirects]]
+  from = "/zamowienie/"
+  to = "/sklep/"
+  status = 301
+[[redirects]]
+  from = "/moje-konto/"
+  to = "/sklep/"
+  status = 301
+[[redirects]]
+  from = "/sample-page/"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/en/*"
+  to = "/dla-firm/"
+  status = 302
+[[redirects]]
+  from = "/fr/*"
+  to = "/dla-firm/"
+  status = 302

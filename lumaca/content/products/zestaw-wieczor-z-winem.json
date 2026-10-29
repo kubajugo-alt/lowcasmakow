@@ -1,0 +1,30 @@
+{
+  "title": "Wieczór z winem",
+  "kind": "Zestaw",
+  "category": "zestawy",
+  "order": 8,
+  "price": 99,
+  "available": true,
+  "bestseller": false,
+  "badge": "",
+  "stripe": "#B9C46A",
+  "lead": "Dwie przystawki na jeden wieczór: ślimaki w oleju cytrynowo-pietruszkowym na grzanki i ślimaki w bulionie królewskim do maśla czosnkowego. Z kartą przepisów.",
+  "image": {
+    "src": "/img/uploads/podanie-grzanki.jpg",
+    "alt": "Grzanki z bagietki ze ślimakami, natką pietruszki i oliwą"
+  },
+  "occasion": "Wieczór z winem, kolacja dla gości",
+  "ready_in_5": "Grzanki w 5 minut, ślimaki w maśle czosnkowym w 5 minut: przepisy na karcie.",
+  "pairing": "Białe wytrawne wino, bagietka",
+  "net_weight": "2 × 250 g (2 × 100 g mięsa)",
+  "ingredients": "Skład każdego słoika na jego etykiecie.",
+  "allergens": "mięczaki (ślimaki)",
+  "storage": "Przed otwarciem w suchym, chłodnym miejscu, w temperaturze pokojowej. Po otwarciu w lodówce do 3 dni.",
+  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "video": "",
+  "recipes": [
+    "grzanki-ze-slimakami",
+    "slimaki-w-masle-czosnkowym"
+  ],
+  "weight": 900
+}

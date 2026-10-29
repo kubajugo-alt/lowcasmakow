@@ -1,0 +1,31 @@
+{
+  "title": "Lio",
+  "kind": "Liofilizowane mięso ślimaka",
+  "category": "liofilizaty",
+  "order": 6,
+  "price": 80,
+  "available": true,
+  "bestseller": false,
+  "badge": "",
+  "stripe": "#B08A5A",
+  "lead": "Mięso ślimaka ugotowane w bulionie warzywnym z białym winem, a potem liofilizowane. Baza do własnego dania: ze 100 g po namoczeniu wychodzi ok. 280 g mięsa.",
+  "image": {
+    "src": "/img/uploads/lio-liofilizowane.jpg",
+    "alt": "Lio: liofilizowane mięso ślimaka w papierowej torebce"
+  },
+  "occasion": "Dla gotujących: risotto, makaron, sałatka",
+  "ready_in_5": "Namocz ok. 2 godziny w gorącym bulionie, potem podsmaż na maśle czosnkowym albo dodaj do risotto.",
+  "pairing": "Risotto, makaron, masło czosnkowe z natką",
+  "net_weight": "100 g (po namoczeniu ok. 280 g)",
+  "ingredients": "mięso ślimaka gotowane w bulionie warzywnym z dodatkiem białego wina wytrawnego, liofilizowane",
+  "allergens": "mięczaki (ślimaki)",
+  "storage": "W temperaturze pokojowej, w zamkniętym opakowaniu.",
+  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "video": "",
+  "recipes": [
+    "risotto-z-lio"
+  ],
+  "weight": 450,
+  "name_en": "Lio – freeze-dried snail meat",
+  "name_fr": "Lio – chair d’escargot lyophilisée"
+}

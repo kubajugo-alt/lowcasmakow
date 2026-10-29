@@ -1,0 +1,32 @@
+{
+  "title": "Risotto z liofilizowanym mięsem ślimaka",
+  "order": 6,
+  "time": "30 min + 2 h moczenia",
+  "serves": "2 osoby",
+  "product": "lio-liofilizowane-mieso-slimaka",
+  "image": {
+    "src": "/img/uploads/lio-liofilizowane.jpg",
+    "alt": "Lio: liofilizowane mięso ślimaka"
+  },
+  "way": "Dla gotujących",
+  "lead": "Lio to baza dla tych, którzy lubią gotować sami. Po namoczeniu odzyskuje smak i konsystencję świeżo ugotowanego mięsa.",
+  "ingredients": [
+    "30–40 g Lio",
+    "1 l gorącego bulionu warzywnego albo rosołu",
+    "160 g ryżu arborio",
+    "1 szalotka",
+    "50 ml białego wina wytrawnego",
+    "30 g masła",
+    "40 g parmezanu",
+    "natka pietruszki"
+  ],
+  "steps": [
+    "Zalej Lio gorącym bulionem i odstaw na ok. 2 godziny. Odcedź, bulion zachowaj.",
+    "Zeszklij posiekaną szalotkę na połowie masła, dodaj ryż i smaż minutę.",
+    "Wlej wino, a gdy odparuje, dolewaj gorący bulion po chochli, mieszając, przez ok. 18 minut.",
+    "Na ostatnie 3 minuty dodaj mięso ślimaka.",
+    "Zdejmij z ognia, wmieszaj resztę masła i parmezan. Podawaj z natką."
+  ],
+  "tip": "Ze 100 g Lio po namoczeniu wychodzi ok. 280 g mięsa, więc jedno opakowanie wystarczy na kilka dań.",
+  "wine": "To samo białe wino, które dodałeś do risotto."
+}

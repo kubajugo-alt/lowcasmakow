@@ -1,0 +1,52 @@
+{
+  "title": "w sosie pomidorowym",
+  "kind": "Ślimaki",
+  "category": "sloiki",
+  "order": 4,
+  "price": 49.9,
+  "available": true,
+  "bestseller": false,
+  "badge": "",
+  "stripe": "#B5452F",
+  "lead": "Mięso ślimaka w sosie z passaty, papryki, selera naciowego i bazylii. Gotowy sos do spaghetti albo na grzankę.",
+  "image": {
+    "src": "/img/uploads/sloik-sos-pomidorowy.jpg",
+    "alt": "Słoik: ślimaki w sosie pomidorowym"
+  },
+  "dish_image": {
+    "src": "/img/uploads/sloik-sos-pomidorowy.jpg",
+    "alt": "Słoik: ślimaki w sosie pomidorowym"
+  },
+  "occasion": "Obiad w 10 minut",
+  "ready_in_5": "Podsmaż zawartość słoika na patelni i połącz ze spaghetti. Dopraw parmezanem i pieprzem.",
+  "pairing": "Spaghetti, parmezan, czerwone wino",
+  "ways": [
+    {
+      "title": "Na grzance",
+      "text": "Podgrzej zawartość słoika na patelni przez 2–3 minuty i nałóż na opieczoną bagietkę natartą czosnkiem.",
+      "recipe": "grzanki-ze-slimakami"
+    },
+    {
+      "title": "Z makaronem",
+      "text": "Wymieszaj gorący makaron z zawartością słoika podgrzaną na patelni. Na koniec ser i świeży pieprz.",
+      "recipe": "tagliatelle-ze-slimakami-w-pesto"
+    },
+    {
+      "title": "W babeczce",
+      "text": "Nałóż do gotowych kruchych babeczek, posyp serem i zapiecz 5 minut w 200°C.",
+      "recipe": "babeczki-ze-slimakami"
+    }
+  ],
+  "net_weight": "250 g, w tym 100 g mięsa ślimaka",
+  "ingredients": "mięso ślimaka gotowane w bulionie warzywnym z dodatkiem białego wina wytrawnego, passata pomidorowa, bazylia suszona, sól, cebula, świeża czerwona papryka, koncentrat pomidorowy, woda, pieprz, czosnek, olej rzepakowy, cukier, seler naciowy",
+  "allergens": "mięczaki (ślimaki), seler",
+  "storage": "Przed otwarciem w suchym, chłodnym miejscu, w temperaturze pokojowej. Po otwarciu w lodówce do 3 dni.",
+  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "video": "",
+  "recipes": [
+    "spaghetti-ze-slimakami-w-sosie-pomidorowym"
+  ],
+  "weight": 450,
+  "name_en": "Snails in tomato sauce",
+  "name_fr": "Escargots à la sauce tomate"
+}

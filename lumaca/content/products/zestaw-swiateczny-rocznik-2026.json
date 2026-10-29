@@ -1,0 +1,31 @@
+{
+  "title": "Zestaw świąteczny",
+  "kind": "Rocznik 2026",
+  "category": "zestawy",
+  "order": 7,
+  "price": 199,
+  "available": true,
+  "bestseller": false,
+  "badge": "Numerowana seria",
+  "stripe": "#C9A35A",
+  "lead": "Cztery słoiki z tegorocznej partii (bulion królewski, olej cytrynowo-pietruszkowy, zielone pesto, sos pomidorowy) i karta „3 sposoby w 5 minut”. Każdy zestaw ma swój numer. Dostawa gratis.",
+  "image": {
+    "src": "/img/uploads/podanie-stol-dania.jpg",
+    "alt": "Stół z makaronem ze ślimakami, kieliszkiem białego wina i babeczkami"
+  },
+  "occasion": "Prezent, Wigilia i Święta, prezent firmowy",
+  "ready_in_5": "Na każdy słoik trzy sposoby podania w 5 minut, opisane na karcie w zestawie.",
+  "pairing": "Wino białe wytrawne, bagietka, makaron",
+  "net_weight": "4 × 250 g (4 × 100 g mięsa)",
+  "ingredients": "Skład każdego słoika na jego etykiecie i na stronach poszczególnych słoików.",
+  "allergens": "mięczaki (ślimaki), orzechy włoskie, mleko, seler",
+  "storage": "Przed otwarciem w suchym, chłodnym miejscu, w temperaturze pokojowej. Po otwarciu w lodówce do 3 dni.",
+  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "video": "",
+  "recipes": [
+    "grzanki-ze-slimakami",
+    "tagliatelle-ze-slimakami-w-pesto",
+    "babeczki-ze-slimakami"
+  ],
+  "weight": 1800
+}

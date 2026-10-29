@@ -1,0 +1,28 @@
+{
+  "title": "Spaghetti ze ślimakami w sosie pomidorowym",
+  "order": 5,
+  "time": "10 min",
+  "serves": "2 osoby",
+  "product": "slimaki-w-sosie-pomidorowym",
+  "image": {
+    "src": "/img/uploads/sloik-sos-pomidorowy.jpg",
+    "alt": "Słoik ślimaków w sosie pomidorowym"
+  },
+  "way": "Z makaronem",
+  "lead": "Gotowy sos ze ślimakami do makaronu na co dzień i od święta.",
+  "ingredients": [
+    "1 słoik ślimaków w sosie pomidorowym",
+    "200 g spaghetti",
+    "parmezan",
+    "kilka listków świeżej bazylii",
+    "sól, pieprz, ewentualnie czosnek"
+  ],
+  "steps": [
+    "Ugotuj spaghetti al dente w osolonej wodzie.",
+    "Na patelni podsmaż zawartość słoika przez 3–4 minuty.",
+    "Dodaj odcedzony makaron i wymieszaj z sosem.",
+    "Dopraw do smaku, posyp parmezanem i bazylią."
+  ],
+  "tip": "Jeśli lubisz ostrzej, dodaj szczyptę płatków chili razem ze słoikiem.",
+  "wine": "Lekkie czerwone wino."
+}

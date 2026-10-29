@@ -1,0 +1,29 @@
+{
+  "title": "z chili",
+  "kind": "Ślimaki",
+  "category": "sloiki",
+  "order": 5,
+  "price": 49.9,
+  "available": false,
+  "bestseller": false,
+  "badge": "Wkrótce",
+  "stripe": "#8E1F1A",
+  "lead": "Nowy smak w przygotowaniu: mięso ślimaka z chili. Zapisz się do newslettera, damy znać o premierze.",
+  "image": {
+    "src": "",
+    "alt": ""
+  },
+  "occasion": "Wieczór z winem",
+  "ready_in_5": "",
+  "pairing": "",
+  "net_weight": "250 g, w tym 100 g mięsa ślimaka",
+  "ingredients": "",
+  "allergens": "mięczaki (ślimaki)",
+  "storage": "Przed otwarciem w suchym, chłodnym miejscu, w temperaturze pokojowej. Po otwarciu w lodówce do 3 dni.",
+  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "video": "",
+  "recipes": [],
+  "weight": 450,
+  "name_en": "Snails with chili",
+  "name_fr": "Escargots au piment"
+}
