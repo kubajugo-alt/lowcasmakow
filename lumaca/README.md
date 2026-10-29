@@ -19,8 +19,10 @@ The structure and wording follow the marketing plan ("Lumaca – plan marketingo
 - Gone: "Food & Beauty", "Snails Farm", "ecological", health claims, the "Dlaczego ślimaki" page, "tuszki", the vinegar jar and frozen meat.
   Old WordPress addresses redirect to the new pages (`netlify.toml`).
 - Look: black and gold from the black label on warm linen; the black card with a gold double rule is the label.
-  Lora for headings and dish names, Instrument Sans for text. The snail mark (`img/mark.svg`) is drawn for this site;
-  the old logo file (`freepik_br_…`) is not used.
+  Lora for headings and dish names, Instrument Sans for text.
+- Logo: the client's black-and-yellow badge (from lumaca.eco, `freepik_br_…png`) without the "Food & Beauty" line:
+  `img/logo-badge.png` (round), `img/logo-yellow.png` (snail + name, header), `img/mark-yellow.png` (snail alone), favicons.
+  The plan asks to confirm full rights to this logo before registering the trademark.
 
 ## Running it
 

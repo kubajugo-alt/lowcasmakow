@@ -124,7 +124,7 @@ def full_name(p):
 
 # ---------- search engines and link previews ----------
 
-ORG = {'@type': ['Organization', 'LocalBusiness'], 'name': 'Lumaca', 'url': SITE + '/', 'logo': SITE + '/img/logo.svg',
+ORG = {'@type': ['Organization', 'LocalBusiness'], 'name': 'Lumaca', 'url': SITE + '/', 'logo': SITE + '/img/logo-badge.png',
        'email': S['email'], 'telephone': S['phone'], 'description': S['description'],
        'address': {'@type': 'PostalAddress', 'streetAddress': 'ul. Miła', 'postalCode': '26-050', 'addressLocality': 'Kołomań',
                    'addressRegion': 'świętokrzyskie', 'addressCountry': 'PL'}}
@@ -199,7 +199,8 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
 <meta property="og:url" content="{SITE}{path}">
 {og_img}<meta name="twitter:card" content="summary_large_image">
 {ld_script(ld)}
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/img/favicon-64.png" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="preload" href="/fonts/lora-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/instrument-sans-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/fonts.css">
@@ -213,7 +214,7 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
     <a href="tel:{tel(S["phone"])}">{e(S["phone"])}</a>
   </div></div>
   <div class="wrap bar">
-    <a href="/" class="logo"><img src="/img/logo-light.svg" alt="Lumaca" width="168" height="33"></a>
+    <a href="/" class="logo"><img src="/img/logo-yellow.png" alt="Lumaca" width="237" height="34"></a>
     <nav class="main-nav" id="main-nav" aria-label="Główne menu">
 {nav}
     </nav>
@@ -231,7 +232,7 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
 <footer class="site-footer">
   <div class="wrap foot">
     <div class="foot-brand">
-      <img src="/img/logo-light.svg" alt="Lumaca" width="168" height="33" loading="lazy">
+      <img src="/img/logo-badge.png" alt="Lumaca" width="120" height="120" loading="lazy">
       <p>{e(S["description"])}</p>
     </div>
     <nav class="foot-col" aria-label="Sklep">
@@ -306,7 +307,7 @@ def buy_button(slug, p, cls='btn btn-ink', label='Do koszyka'):
 def jar_photo(p, sizes, eager=False):
     if p.get('image', {}).get('src'):
         return img(p['image'], sizes, eager)
-    return '<span class="soon"><img src="/img/mark-gold.svg" alt="" width="90" height="62"></span>'
+    return '<span class="soon"><img src="/img/mark-yellow.png" alt="" width="110" height="49"></span>'
 
 
 def product_card(slug, p, sizes='(max-width:720px) 50vw, 25vw'):
@@ -571,7 +572,7 @@ def kitchen_page():
     K = KITCHEN
     story = ''.join(f'<li><span class="num">{k + 1}</span><h3>{e(s["title"])}</h3><p>{e(s["text"])}</p></li>' for k, s in enumerate(K['story']))
     facts = ''.join(f'<li><h3>{e(f["title"])}</h3><p>{e(f["text"])}</p></li>' for f in K['facts'])
-    gphoto = img(K['grazyna_image'], '(max-width:720px) 100vw, 40vw') or '<div class="photo-todo"><img src="/img/mark-gold.svg" alt="" width="90" height="62"><p>Tu zdjęcie Grażyny w przetwórni</p></div>'
+    gphoto = img(K['grazyna_image'], '(max-width:720px) 100vw, 40vw') or '<div class="photo-todo"><img src="/img/mark-yellow.png" alt="" width="110" height="49"><p>Tu zdjęcie Grażyny w przetwórni</p></div>'
     main = f'''
 <div class="wrap">
   {crumbs([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/')])}
@@ -757,7 +758,7 @@ def home_page():
   <figure class="hero-photo">{img(H["hero_image"], "100vw", True)}</figure>
   <div class="wrap hero-in">
     <div class="label-card hero-card">
-      <img class="hero-mark" src="/img/mark-gold.svg" alt="" width="64" height="44">
+      <img class="hero-mark" src="/img/mark-yellow.png" alt="" width="90" height="40">
       <h1 id="h-hero">{e(H["hero_title"])}</h1>
       <p class="hero-badge">{e(H["hero_badge"])}</p>
       <p>{e(H["hero_text"])}</p>
@@ -805,7 +806,7 @@ def home_page():
 def not_found():
     main = '''
 <div class="wrap narrow nf">
-  <img src="/img/mark.svg" alt="" width="120" height="83">
+  <img src="/img/logo-badge.png" alt="" width="160" height="160">
   <h1>Tej strony nie ma</h1>
   <p class="lead">Ślimak się nie spieszy, ale tu chyba skręcił nie tam, gdzie trzeba.</p>
   <p class="btns"><a class="btn btn-ink" href="/">Strona główna</a> <a class="btn btn-line" href="/sklep/">Sklep</a></p>

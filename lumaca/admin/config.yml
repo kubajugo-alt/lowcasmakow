@@ -15,7 +15,7 @@ backend:
 
 local_backend: true
 locale: pl
-logo_url: /img/logo.svg
+logo_url: /img/logo-badge.png
 
 media_folder: lumaca/img/uploads
 public_folder: /img/uploads
