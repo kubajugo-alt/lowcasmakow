@@ -572,7 +572,7 @@ def kitchen_page():
     K = KITCHEN
     story = ''.join(f'<li><span class="num">{k + 1}</span><h3>{e(s["title"])}</h3><p>{e(s["text"])}</p></li>' for k, s in enumerate(K['story']))
     facts = ''.join(f'<li><h3>{e(f["title"])}</h3><p>{e(f["text"])}</p></li>' for f in K['facts'])
-    gphoto = img(K['grazyna_image'], '(max-width:720px) 100vw, 40vw') or '<div class="photo-todo"><img src="/img/mark-yellow.png" alt="" width="110" height="49"><p>Tu zdjęcie Grażyny w przetwórni</p></div>'
+    gphoto = img(K['grazyna_image'], '(max-width:720px) 100vw, 40vw') or '<div class="photo-todo"><img src="/img/mark-yellow.png" alt="" width="110" height="49"><p>Tu zdjęcie Grażyny i Tomasza w przetwórni</p></div>'
     main = f'''
 <div class="wrap">
   {crumbs([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/')])}
@@ -583,7 +583,7 @@ def kitchen_page():
   <section class="story" aria-labelledby="h-story"><h2 id="h-story" class="sec-title">Zapomniany polski przysmak</h2><ol>{story}</ol></section>
   <section class="person">
     <figure>{gphoto}</figure>
-    <div class="label-card dark"><p class="kind">Twarz Lumaki</p><h2>{e(K["grazyna_title"])}</h2><p>{e(K["grazyna_text"])}</p></div>
+    <div class="label-card dark"><p class="kind">Właściciele</p><h2>{e(K["grazyna_title"])}</h2><p>{e(K["grazyna_text"])}</p></div>
   </section>
   <section class="sec" aria-labelledby="h-facts"><h2 id="h-facts" class="sec-title">{e(K["facts_title"])}</h2><ul class="fact-grid">{facts}</ul></section>
   <section class="band-dark lowca">
@@ -685,8 +685,8 @@ def press_page():
   </header>
   <section class="sec"><h2 class="sec-title">Publikacje</h2>{f'<ul class="press">{items}</ul>' if items else '<p class="muted">Pierwsze publikacje pojawią się tu wkrótce.</p>'}</section>
   <section class="sec"><h2 class="sec-title">Historia w trzech zdaniach</h2><ol class="plain">{story}</ol></section>
-  <section class="band-dark"><div><p class="kind">Pakiet medialny</p><h2>Porozmawiaj z Grażyną</h2>
-    <p>Wyślemy komunikat, biogram i zdjęcia Grażyny, teczkę faktów, trzy przepisy i zdjęcia dań. Zestaw degustacyjny dla redakcji na życzenie.</p>
+  <section class="band-dark"><div><p class="kind">Pakiet medialny</p><h2>Porozmawiaj z Grażyną Nawrocką</h2>
+    <p>Wyślemy komunikat, biogram i zdjęcia Grażyny i Tomasza Nawrockich, teczkę faktów, trzy przepisy i zdjęcia dań. Zestaw degustacyjny dla redakcji na życzenie.</p>
     <a class="btn btn-gold" href="mailto:{e(S["email"])}?subject=Media">{e(S["email"])}</a></div></section>
 </div>'''
     write('/w-mediach/', shell('Lumaca w mediach', 'Publikacje o Lumace i pakiet medialny: zapomniany polski przysmak wraca na stół.', main, path='/w-mediach/',
