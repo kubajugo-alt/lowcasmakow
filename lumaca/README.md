@@ -28,7 +28,8 @@ The structure and wording follow the marketing plan ("Lumaca – plan marketingo
 
 - **Articles** (`/artykuly/`, CMS: Artykuły): seven Polish guides written for the plan's search phrases
   ("jak podać ślimaki", "ślimaki przepis", "ślimaki gdzie kupić") plus history, wine, the holidays and first tastes.
-  Each shows the matching products and recipes. Linked from the homepage, the recipes page and the footer.
+  Each shows the matching products and recipes. "Nasza kuchnia" is their hub: all articles are listed there, and article
+  pages sit under it in the menu and breadcrumbs. Also linked from the homepage, the recipes page and the footer.
 - **English and French** (`/en/`, `/fr/`): home, shop and every product, how to serve (with FAQ), our kitchen,
   trade & export (with the enquiry form) and contact. Retail is Polish-only, so EN/FR product buttons lead to an enquiry;
   enquiries land in the same Netlify forms with a `jezyk` field. A PL · EN · FR switcher in the header goes to the same

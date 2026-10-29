@@ -320,7 +320,7 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
       <h2>Sklep</h2>{''.join(f'<a href="{h}">{n}</a>' for n, h in NAV)}
     </nav>
     <nav class="foot-col" aria-label="Informacje">
-      <h2>Informacje</h2><a href="/artykuly/">Artykuły</a><a href="/przepisy/#faq">Pytania i odpowiedzi</a><a href="/w-mediach/">Lumaca w mediach</a>{pages_nav}<a href="/kontakt/">Kontakt</a>
+      <h2>Informacje</h2><a href="/nasza-kuchnia/#artykuly">Artykuły</a><a href="/przepisy/#faq">Pytania i odpowiedzi</a><a href="/w-mediach/">Lumaca w mediach</a>{pages_nav}<a href="/kontakt/">Kontakt</a>
     </nav>
     <div class="foot-col contact">
       <h2>Kontakt</h2>
@@ -668,6 +668,11 @@ def kitchen_page():
     <div class="label-card dark"><p class="kind">Właściciele</p><h2>{e(K["grazyna_title"])}</h2><p>{e(K["grazyna_text"])}</p></div>
   </section>
   <section class="sec" aria-labelledby="h-facts"><h2 id="h-facts" class="sec-title">{e(K["facts_title"])}</h2><ul class="fact-grid">{facts}</ul></section>
+  <section class="sec" id="artykuly" aria-labelledby="h-arts">
+    <div class="sec-head"><h2 id="h-arts" class="sec-title">Z naszej kuchni: artykuły</h2><a class="more" href="/artykuly/">Wszystkie artykuły</a></div>
+    <p class="sec-lead">Jak podać ślimaki, gdzie je kupić, jakie wino do nich wybrać i skąd się wzięły na polskim stole.</p>
+    <div class="grid recipes">{"".join(article_card(x) for x in ARTICLES)}</div>
+  </section>
   <section class="band-dark lowca">
     <div><p class="kind">Łowca Smaków</p><h2>{e(K["lowca_title"])}</h2><p>{e(K["lowca_text"])}</p>
     <a class="btn btn-gold" href="{e(K["lowca_url"])}">Ślimaki według Czernieckiego</a></div>
@@ -873,12 +878,12 @@ def home_page():
     <h2 id="h-kit" class="sec-title">{e(H["kitchen_title"])}</h2>
     <p>{e(H["kitchen_text"])}</p>
     <ol class="plain small">{"".join(f'<li>{e(s["title"])}.</li>' for s in KITCHEN["story"])}</ol>
-    <a class="btn btn-ink" href="/nasza-kuchnia/">Poznaj naszą historię</a>
+    <p class="btns"><a class="btn btn-ink" href="/nasza-kuchnia/">Poznaj naszą historię</a> <a class="btn btn-line" href="/nasza-kuchnia/#artykuly">Artykuły i poradniki</a></p>
   </div>
 </section>
 {press_html}
 <section class="wrap sec" aria-labelledby="h-art">
-  <div class="sec-head"><h2 id="h-art" class="sec-title">Z naszej kuchni</h2><a class="more" href="/artykuly/">Wszystkie artykuły</a></div>
+  <div class="sec-head"><h2 id="h-art" class="sec-title">Z naszej kuchni</h2><a class="more" href="/nasza-kuchnia/#artykuly">Więcej w Naszej kuchni</a></div>
   <div class="grid recipes">{"".join(article_card(x) for x in list(ARTICLES)[:3])}</div>
 </section>
 <section class="wrap sec" aria-labelledby="h-where">
@@ -926,7 +931,7 @@ def articles_page():
     cards = ''.join(article_card(s) for s in ARTICLES)
     main = f'''
 <div class="wrap">
-  {crumbs([('Strona główna', '/'), ('Artykuły', '/artykuly/')])}
+  {crumbs([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/'), ('Artykuły', '/artykuly/')])}
   <header class="page-head">
     <h1>Artykuły</h1>
     <p class="lead">Jak podać ślimaki, gdzie je kupić, jakie wino do nich wybrać i skąd się wzięły na polskim stole.</p>
@@ -934,8 +939,8 @@ def articles_page():
   <div class="grid recipes">{cards}</div>
 </div>'''
     write('/artykuly/', shell('Artykuły o ślimakach: jak podać, gdzie kupić, do jakiego wina', 'Poradniki i historie Lumaki: jak podać ślimaki, przepisy na szybkie przystawki, gdzie kupić gotowe ślimaki, jakie wino do ślimaków.',
-                              main, [a['image'] for a in ARTICLES.values()], current='Artykuły', path='/artykuly/',
-                              ld=[crumbs_ld([('Strona główna', '/'), ('Artykuły', '/artykuly/')])]))
+                              main, [a['image'] for a in ARTICLES.values()], current='Nasza kuchnia', path='/artykuly/',
+                              ld=[crumbs_ld([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/'), ('Artykuły', '/artykuly/')])]))
 
 
 def article_page(slug, a):
@@ -947,7 +952,7 @@ def article_page(slug, a):
         aside = '<aside class="art-shop"><h2>Z tego artykułu</h2>' + ''.join(product_card(x, PR[x], '(max-width:720px) 100vw, 300px') for x in prods[:2]) + '</aside>'
     main = f'''
 <div class="wrap">
-  {crumbs([('Strona główna', '/'), ('Artykuły', '/artykuly/'), (a['title'], f'/artykuly/{slug}.html')])}
+  {crumbs([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/'), ('Artykuły', '/artykuly/'), (a['title'], f'/artykuly/{slug}.html')])}
   <article class="article">
     <header class="article-head">
       <p class="kind">{pl_date(a.get("date"))} · Lumaca</p>
@@ -964,12 +969,12 @@ def article_page(slug, a):
   <section class="sec"><h2 class="sec-title">Czytaj dalej</h2><div class="grid recipes">{"".join(article_card(x) for x in more)}</div></section>
 </div>'''
     path = f'/artykuly/{slug}.html'
-    ld = [crumbs_ld([('Strona główna', '/'), ('Artykuły', '/artykuly/'), (a['title'], path)]),
+    ld = [crumbs_ld([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/'), ('Artykuły', '/artykuly/'), (a['title'], path)]),
           {'@type': 'Article', 'headline': a['title'], 'description': a['lead'], 'image': [abs_image(a['image'])], 'datePublished': a.get('date'),
            'author': {'@type': 'Organization', 'name': 'Lumaca'}, 'publisher': {'@type': 'Organization', 'name': 'Lumaca', 'logo': {'@type': 'ImageObject', 'url': SITE + '/img/logo-badge.png'}},
            'keywords': a.get('keywords', ''), 'inLanguage': 'pl', 'mainEntityOfPage': SITE + path}]
     images = [a['image']] + [PR[x]['image'] for x in prods] + [R[x]['image'] for x in recs]
-    write(path, shell(a['title'], a['lead'], main, images, current='Artykuły', path=path, image=a['image'], og_type='article', ld=ld))
+    write(path, shell(a['title'], a['lead'], main, images, current='Nasza kuchnia', path=path, image=a['image'], og_type='article', ld=ld))
 
 
 # ---------- English and French ----------
