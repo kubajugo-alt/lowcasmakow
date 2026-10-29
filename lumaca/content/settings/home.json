@@ -55,10 +55,8 @@
   "kitchen_title": "Nasza kuchnia",
   "kitchen_text": "Grażyna i Tomasz Nawroccy zaczynali od hodowli ślimaków. Dziś Lumaca to ich mała przetwórnia w Kołomaniu pod Kielcami: kupują ślimaki od polskich hodowców, gotują je według własnych receptur i zamykają w słoikach małymi partiami.",
   "kitchen_image": {
-    "src": "https://images.unsplash.com/photo-1585684278140-f6b0e42a9bc0",
-    "alt": "Ślimaki zapiekane w maśle ziołowym w żeliwnym naczyniu",
-    "credit": "Ali Robins",
-    "credit_url": "https://unsplash.com/@aliphotos_86"
+    "src": "/img/uploads/grazyna-i-tomasz-nawroccy.jpg",
+    "alt": "Grażyna i Tomasz Nawroccy na stoisku Lumaki podczas Festiwalu Winasera w Sandomierzu"
   },
   "where_title": "Gdzie spróbować"
 }

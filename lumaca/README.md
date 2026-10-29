@@ -52,7 +52,7 @@ and open the contact form with the product filled in. With the key, they add to 
 - Allergens: molluscs on every jar; whether the court-bouillon contains celery and the wine sulphites.
 - Photos: every photo with a jar (product shots, hero, sets, recipe and dish photos) was made with AI (Higgsfield) from the
   real product shots and the pro bono team's draft visuals, with the new black label. They are mock-ups until the
-  new labels are printed and photographed. The owners' photo (Grażyna and Tomasz Nawroccy) is missing; three
-  occasion and kitchen photos come from Unsplash.
+  new labels are printed and photographed. The owners' photo (Grażyna and Tomasz Nawroccy) is from Lumaca's Instagram
+  (Festiwal Winasera, Sandomierz), a screenshot crop, so a full-resolution original would be better; two occasion photos come from Unsplash.
 - Terms of sale and privacy policy texts (the old site had lorem ipsum).
 - EN and FR versions (product names in three languages are on the B2B page for now).
