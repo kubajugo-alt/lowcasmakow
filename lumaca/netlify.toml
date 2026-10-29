@@ -79,11 +79,12 @@
   from = "/sample-page/"
   to = "/"
   status = 301
+# old WordPress /en/ and /fr/ pages (existing files win, so the new EN/FR pages are unaffected)
 [[redirects]]
   from = "/en/*"
-  to = "/dla-firm/"
-  status = 302
+  to = "/en/"
+  status = 301
 [[redirects]]
   from = "/fr/*"
-  to = "/dla-firm/"
-  status = 302
+  to = "/fr/"
+  status = 301

@@ -24,6 +24,20 @@ The structure and wording follow the marketing plan ("Lumaca – plan marketingo
   `img/logo-badge.png` (round), `img/logo-yellow.png` (snail + name, header), `img/mark-yellow.png` (snail alone), favicons.
   The plan asks to confirm full rights to this logo before registering the trademark.
 
+## Articles and languages
+
+- **Articles** (`/artykuly/`, CMS: Artykuły): seven Polish guides written for the plan's search phrases
+  ("jak podać ślimaki", "ślimaki przepis", "ślimaki gdzie kupić") plus history, wine, the holidays and first tastes.
+  Each shows the matching products and recipes. Linked from the homepage, the recipes page and the footer.
+- **English and French** (`/en/`, `/fr/`): home, shop and every product, how to serve (with FAQ), our kitchen,
+  trade & export (with the enquiry form) and contact. Retail is Polish-only, so EN/FR product buttons lead to an enquiry;
+  enquiries land in the same Netlify forms with a `jezyk` field. A PL · EN · FR switcher in the header goes to the same
+  page in the other language, and every translated page carries hreflang links. Page texts: `content/i18n/{en,fr}.json`
+  (CMS: English / Français); product texts: the `en` and `fr` blocks in each product. The French should be checked by a
+  native speaker before SIAL or print, as the plan recommends.
+- **Social media**: Facebook (facebook.com/lumaca.eco) and Instagram (@lumaca_helix_snails), from the old site, as icons
+  in the footer and on the contact pages, in all three languages.
+
 ## Running it
 
     python3 scripts/build.py --local     # writes the pages; then serve this folder, e.g. python3 -m http.server
@@ -55,4 +69,4 @@ and open the contact form with the product filled in. With the key, they add to 
   new labels are printed and photographed. The owners' photo (Grażyna and Tomasz Nawroccy) is from Lumaca's Instagram
   (Festiwal Winasera, Sandomierz), a screenshot crop, so a full-resolution original would be better; two occasion photos come from Unsplash.
 - Terms of sale and privacy policy texts (the old site had lorem ipsum).
-- EN and FR versions (product names in three languages are on the B2B page for now).
+- French and English texts: a native-speaker check.

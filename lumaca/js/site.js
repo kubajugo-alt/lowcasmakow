@@ -24,7 +24,7 @@
           msg.textContent = form.dataset.ok;
           form.reset();
         })
-        .catch(function () { msg.textContent = 'Nie udało się wysłać. Napisz do nas: info@lumaca.eco'; })
+        .catch(function () { msg.textContent = form.dataset.err || 'Nie udało się wysłać. Napisz do nas: info@lumaca.eco'; })
         .then(function () { submit.disabled = false; });
     });
   });

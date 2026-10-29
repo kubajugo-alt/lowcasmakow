@@ -14,6 +14,10 @@
 <meta property="og:description" content="Gotowa przystawka, która oszczędza czas kuchni, i produkt regionalny, o który pytają klienci. Dowozimy raz w tygodniu w regionie świętokrzyskim, do Krakowa i Sandomierza.">
 <meta property="og:url" content="https://lumaca-slimaki.netlify.app/dla-firm/">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" hreflang="pl" href="https://lumaca-slimaki.netlify.app/dla-firm/">
+<link rel="alternate" hreflang="en" href="https://lumaca-slimaki.netlify.app/en/trade/">
+<link rel="alternate" hreflang="fr" href="https://lumaca-slimaki.netlify.app/fr/professionnels/">
+<link rel="alternate" hreflang="x-default" href="https://lumaca-slimaki.netlify.app/dla-firm/">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Strona główna", "item": "https://lumaca-slimaki.netlify.app/"}, {"@type": "ListItem", "position": 2, "name": "Dla gastronomii i firm", "item": "https://lumaca-slimaki.netlify.app/dla-firm/"}]}</script>
 <link rel="icon" href="/img/favicon-64.png" type="image/png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
@@ -40,7 +44,7 @@
       <a href="/dla-firm/" aria-current="page">Dla gastronomii i firm</a>
     </nav>
     <div class="actions">
-      <span class="lang" title="Wersje EN i FR w przygotowaniu">PL</span>
+      <nav class="lang" aria-label="Język / Language"><a href="/dla-firm/" hreflang="pl" lang="pl" title="Polski" aria-current="true">PL</a><a href="/en/trade/" hreflang="en" lang="en" title="English">EN</a><a href="/fr/professionnels/" hreflang="fr" lang="fr" title="Français">FR</a></nav>
       
       <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
@@ -62,8 +66,8 @@
     <div class="table-wrap"><table class="names"><thead><tr><th>Polski</th><th>English</th><th>Français</th></tr></thead><tbody><tr><td>Ślimaki w bulionie królewskim</td><td lang="en">Snails in court-bouillon</td><td lang="fr">Escargots au court-bouillon</td></tr><tr><td>Ślimaki w oleju cytrynowo-pietruszkowym</td><td lang="en">Snails in lemon and parsley oil</td><td lang="fr">Escargots à l’huile citron-persil</td></tr><tr><td>Ślimaki w zielonym pesto</td><td lang="en">Snails in green pesto</td><td lang="fr">Escargots au pesto vert</td></tr><tr><td>Ślimaki w sosie pomidorowym</td><td lang="en">Snails in tomato sauce</td><td lang="fr">Escargots à la sauce tomate</td></tr><tr><td>Ślimaki z chili</td><td lang="en">Snails with chili</td><td lang="fr">Escargots au piment</td></tr><tr><td>Lio: Liofilizowane mięso ślimaka</td><td lang="en">Lio – freeze-dried snail meat</td><td lang="fr">Lio – chair d’escargot lyophilisée</td></tr></tbody></table></div></section>
   <section class="sec enquiry" id="zapytanie" aria-labelledby="h-form"><h2 id="h-form" class="sec-title">Zapytanie o ofertę</h2>
     <p>Odpowiadamy w ciągu dwóch dni roboczych. Chętnie przyjedziemy z degustacją.</p>
-    <form class="form" name="zapytanie-b2b" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax data-ok="Dziękujemy! Odezwiemy się w ciągu dwóch dni roboczych.">
-      <input type="hidden" name="form-name" value="zapytanie-b2b">
+    <form class="form" name="zapytanie-b2b" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax data-ok="Dziękujemy! Odezwiemy się w ciągu dwóch dni roboczych." data-err="Nie udało się wysłać. Napisz do nas: info@lumaca.eco">
+      <input type="hidden" name="form-name" value="zapytanie-b2b"><input type="hidden" name="jezyk" value="pl">
       <p class="sr-only"><label>Nie wypełniaj <input name="bot-field" tabindex="-1"></label></p>
       <div class="fields"><label class="field"><span>Firma</span><input type="text" name="firma" required></label><label class="field"><span>Rodzaj działalności</span><select name="rodzaj" required><option>Restauracja lub bar winny</option><option>Sklep lub delikatesy</option><option>Winnica</option><option>Hotel</option><option>Catering lub eventy</option><option>Prezenty firmowe</option><option>Dystrybutor lub eksport</option><option>Inne</option></select></label><label class="field"><span>Miasto</span><input type="text" name="miasto"></label><label class="field"><span>Imię i nazwisko</span><input type="text" name="osoba" required></label><label class="field"><span>E-mail</span><input type="email" name="email" required></label><label class="field"><span>Telefon</span><input type="tel" name="telefon"></label><label class="field wide"><span>Czego szukasz?</span><textarea name="wiadomosc" rows="4"></textarea></label></div>
       <button class="btn btn-gold" type="submit">Wyślij zapytanie</button>
@@ -101,12 +105,12 @@
       <h2>Sklep</h2><a href="/sklep/">Sklep</a><a href="/zestawy/">Zestawy i prezenty</a><a href="/przepisy/">Przepisy</a><a href="/nasza-kuchnia/">Nasza kuchnia</a><a href="/gdzie-sprobowac/">Gdzie spróbować</a><a href="/dla-firm/">Dla gastronomii i firm</a>
     </nav>
     <nav class="foot-col" aria-label="Informacje">
-      <h2>Informacje</h2><a href="/przepisy/#faq">Pytania i odpowiedzi</a><a href="/w-mediach/">Lumaca w mediach</a><a href="/dostawa-i-platnosci/">Dostawa i płatności</a><a href="/regulamin/">Regulamin sklepu</a><a href="/polityka-prywatnosci/">Polityka prywatności</a><a href="/kontakt/">Kontakt</a>
+      <h2>Informacje</h2><a href="/artykuly/">Artykuły</a><a href="/przepisy/#faq">Pytania i odpowiedzi</a><a href="/w-mediach/">Lumaca w mediach</a><a href="/dostawa-i-platnosci/">Dostawa i płatności</a><a href="/regulamin/">Regulamin sklepu</a><a href="/polityka-prywatnosci/">Polityka prywatności</a><a href="/kontakt/">Kontakt</a>
     </nav>
     <div class="foot-col contact">
       <h2>Kontakt</h2>
       <a href="tel:+48501501130">+48 501 501 130</a><a href="mailto:info@lumaca.eco">info@lumaca.eco</a>
-      <span>26-050 Kołomań, ul. Miła</span><span>pon.–pt. 9:00–15:00</span>
+      <span>26-050 Kołomań, ul. Miła</span><span>pon.–pt. 9:00–15:00</span><p class="social"><a href="https://www.facebook.com/lumaca.eco" aria-label="Facebook" title="Facebook" rel="noopener" target="_blank"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V9c0-.6.4-1 1-1z"/></svg></a><a href="https://www.instagram.com/lumaca_helix_snails/" aria-label="Instagram" title="Instagram" rel="noopener" target="_blank"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.2"/></svg></a></p>
     </div>
   </div>
   <div class="wrap foot-meta">

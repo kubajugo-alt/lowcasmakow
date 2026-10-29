@@ -50,5 +50,59 @@
   ],
   "weight": 450,
   "name_en": "Snails in court-bouillon",
-  "name_fr": "Escargots au court-bouillon"
+  "name_fr": "Escargots au court-bouillon",
+  "en": {
+    "kind": "Snails",
+    "title": "in court-bouillon",
+    "lead": "Snail meat simmered for 120 minutes in vegetable stock with dry white wine. Our most versatile jar: the base for garlic butter, tartlets and your own dishes.",
+    "occasion": "Starter for a wine evening, dinner with guests",
+    "ready_in_5": "Drain, sauté for 3 minutes in butter with garlic and parsley, serve with a baguette.",
+    "pairing": "Dry white wine, crusty baguette, garlic butter",
+    "ingredients": "snail meat cooked in vegetable stock with dry white wine, water, spices",
+    "allergens": "molluscs (snails); sulphites from the wine and celery from the stock: to be confirmed against the label",
+    "storage": "Unopened: in a cool, dry place at room temperature. Once opened: refrigerate and eat within 3 days.",
+    "net_weight": "250 g, including 100 g of snail meat",
+    "shelf_life": "12 months from production (confirmed by SGS tests)",
+    "ways": [
+      {
+        "title": "On toast",
+        "text": "Warm the jar’s contents in a pan for 2–3 minutes and spoon onto toasted baguette rubbed with garlic."
+      },
+      {
+        "title": "With pasta",
+        "text": "Toss hot pasta with the warmed contents of the jar. Finish with cheese and fresh pepper."
+      },
+      {
+        "title": "In a tartlet",
+        "text": "Fill ready-made shortcrust tartlets, top with cheese and bake for 5 minutes at 200°C."
+      }
+    ]
+  },
+  "fr": {
+    "kind": "Escargots",
+    "title": "au court-bouillon",
+    "lead": "Chair d’escargot mijotée 120 minutes dans un bouillon de légumes au vin blanc sec. Notre bocal le plus polyvalent : la base du beurre à l’ail, des tartelettes et de vos propres plats.",
+    "occasion": "Apéritif autour d’un verre de vin, dîner entre amis",
+    "ready_in_5": "Égoutter, faire revenir 3 minutes au beurre avec ail et persil, servir avec une baguette.",
+    "pairing": "Vin blanc sec, baguette croustillante, beurre à l’ail",
+    "ingredients": "chair d’escargot cuite dans un bouillon de légumes au vin blanc sec, eau, épices",
+    "allergens": "mollusques (escargots) ; sulfites du vin et céleri du bouillon : à confirmer selon l’étiquette",
+    "storage": "Avant ouverture : dans un endroit frais et sec, à température ambiante. Après ouverture : au réfrigérateur, à consommer sous 3 jours.",
+    "net_weight": "250 g, dont 100 g de chair d’escargot",
+    "shelf_life": "12 mois à compter de la production (confirmé par les analyses SGS)",
+    "ways": [
+      {
+        "title": "Sur une tartine",
+        "text": "Réchauffer le contenu du bocal 2 à 3 minutes à la poêle et déposer sur une baguette grillée frottée d’ail."
+      },
+      {
+        "title": "Avec des pâtes",
+        "text": "Mélanger les pâtes chaudes au contenu du bocal réchauffé. Finir avec du fromage et du poivre frais."
+      },
+      {
+        "title": "En tartelette",
+        "text": "Garnir des fonds de tartelettes sablés, parsemer de fromage et enfourner 5 minutes à 200 °C."
+      }
+    ]
+  }
 }

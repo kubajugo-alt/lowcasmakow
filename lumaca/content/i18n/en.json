@@ -1,0 +1,205 @@
+{
+  "ui": {
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "home": "Home",
+    "shop": "Shop",
+    "how": "How to serve",
+    "kitchen": "Our kitchen",
+    "trade": "Trade & export",
+    "contact": "Contact",
+    "topbar": "Ready in 5 minutes · made in Poland",
+    "order": "Enquire",
+    "unavailable": "Currently unavailable",
+    "retail": "Retail price in Poland",
+    "serve5": "Ready in 5 minutes",
+    "occasion": "Occasion",
+    "pairing": "Serve with",
+    "ways": "How to serve in 5 minutes",
+    "facts": "Ingredients and details",
+    "net": "Net weight",
+    "ingredients": "Ingredients",
+    "allergens": "Allergens",
+    "storage": "Storage",
+    "shelf": "Shelf life",
+    "cats": {
+      "sloiki": "Jars",
+      "zestawy": "Sets",
+      "liofilizaty": "Freeze-dried"
+    },
+    "all_products": "All products",
+    "learn_more": "Our story",
+    "faq": "Snails, demystified",
+    "footer_about": "Ready-made snail dishes from Polish farms, prepared in a small kitchen in the Świętokrzyskie region. Just heat and serve.",
+    "vet": "Veterinary approval number",
+    "photos": "Photos",
+    "cta_title": "Retailers, restaurants and importers",
+    "cta_text": "Product sheet in English and French, private label and export pricing on request.",
+    "cta_btn": "Trade enquiry",
+    "form_ok": "Thank you! We will reply within two working days.",
+    "send": "Send",
+    "lang_name": "English"
+  },
+  "home": {
+    "title": "Lumaca: snails, ready for the table",
+    "hero_title": "Snails, ready for the table",
+    "hero_badge": "ready in 5 minutes",
+    "hero_text": "Ready-made snail dishes from Polish farms, prepared in a small kitchen in Świętokrzyskie, Poland. Heat, serve, surprise your guests.",
+    "cta_shop": "See the range",
+    "cta_trade": "For trade",
+    "best": "Our jars",
+    "how": "How to serve",
+    "how_text": "Each jar is a ready dish: 100 g of tender snail meat that takes on the flavour of its sauce. Three ways, each in 5 minutes."
+  },
+  "shop": {
+    "title": "Shop",
+    "lead": "Ready-made snail dishes: each jar holds 250 g, including 100 g of snail meat. Heat and serve in 5 minutes.",
+    "notice": "Our online shop delivers within Poland. For orders from abroad, retailers and restaurants, please send us an enquiry."
+  },
+  "how": {
+    "title": "How to serve snails",
+    "lead": "Each jar is a ready dish: 100 g of tender snail meat that takes on the flavour of its sauce. Three ways, each in 5 minutes.",
+    "ways": [
+      {
+        "title": "On toast",
+        "text": "Snails in lemon and parsley oil, warmed for 2–3 minutes, on toasted baguette rubbed with garlic. Parsley and a squeeze of lemon."
+      },
+      {
+        "title": "With pasta",
+        "text": "Snails in green pesto or tomato sauce, sautéed for 3–4 minutes and tossed with tagliatelle or spaghetti. A spoonful of pasta water makes it silky."
+      },
+      {
+        "title": "In a tartlet",
+        "text": "Ready-made shortcrust tartlets filled with snails in court-bouillon, garlic butter and grated cheese. 5–7 minutes at 200°C."
+      }
+    ],
+    "faq": [
+      {
+        "q": "What exactly is it?",
+        "a": "A ready dish: 100 g of tender snail meat in stock, oil or sauce, 250 g per jar. The meat is already cooked and seasoned; just heat it."
+      },
+      {
+        "q": "What do snails taste like?",
+        "a": "Delicate, a little like mushrooms or mussels. The texture is tender and springy, and the meat takes on the flavour of its sauce: garlic, lemon, pesto."
+      },
+      {
+        "q": "Are there shells in the jar?",
+        "a": "No. Our jars contain snail meat only, ready to eat once warmed."
+      },
+      {
+        "q": "Where do the snails come from?",
+        "a": "From Polish snail farms. We cook them in our small, veterinary-approved kitchen in Kołomań, in the Świętokrzyskie region."
+      },
+      {
+        "q": "How should I store it?",
+        "a": "Unopened jars keep for 12 months at room temperature in a cool, dry place. Once opened, refrigerate and eat within 3 days."
+      },
+      {
+        "q": "Allergens?",
+        "a": "Snails are molluscs, one of the allergens listed on food labels. The pesto contains walnuts and cheese, the tomato sauce contains celery. Full ingredients are listed for each jar."
+      }
+    ]
+  },
+  "kitchen": {
+    "title": "Our kitchen",
+    "lead": "A forgotten Polish delicacy returns to the table. Where it comes from, who cooks it and why it is worth a try.",
+    "story": [
+      {
+        "title": "Snails were a Polish delicacy",
+        "text": "Our ancestors ate them. Snail recipes already appear in the first Polish cookbook, Stanisław Czerniecki’s “Compendium ferculorum” of 1682."
+      },
+      {
+        "title": "Poland forgot them, yet still produces them",
+        "text": "For years Poland has farmed snails and exported them, mainly to France, while hardly eating them at home."
+      },
+      {
+        "title": "Lumaca brings them back to the Polish table",
+        "text": "In a modern form: ready-made dishes from Polish-farmed snails, prepared in a small kitchen in Świętokrzyskie. Just heat and serve."
+      }
+    ],
+    "owners_kind": "The owners",
+    "owners_title": "Grażyna and Tomasz Nawrocki",
+    "owners_text": "Lumaca is run by Grażyna Nawrocka and her husband, Tomasz Nawrocki. They started out farming snails and later turned to cooking them: today Lumaca buys snails from trusted Polish farms, and their own recipes are cooked in the kitchen in Kołomań.",
+    "facts_title": "Behind every jar",
+    "facts": [
+      {
+        "title": "Polish farms",
+        "text": "Gros gris snails (Helix aspersa maxima) from Polish farms, with certificates of origin and veterinary certificates."
+      },
+      {
+        "title": "A small kitchen",
+        "text": "Our processing kitchen in Kołomań is veterinary-approved (no. PL26040901). We cook in small batches."
+      },
+      {
+        "title": "Our own recipes",
+        "text": "The snail meat is simmered for 120 minutes in vegetable stock with dry white wine, then finished in sauces made to our recipes."
+      },
+      {
+        "title": "Tested labels and shelf life",
+        "text": "Labels checked by the Polish food quality inspectorate (IJHARS). Twelve months at room temperature, confirmed by SGS laboratory tests."
+      },
+      {
+        "title": "A vintage",
+        "text": "We buy snails once a year, in autumn. Each batch is a natural vintage, as with wine: the jars now hold the 2026 vintage."
+      }
+    ]
+  },
+  "trade": {
+    "title": "For retailers, restaurants and importers",
+    "lead": "A ready starter that saves kitchen time, and a distinctive regional product. Shelf-stable for 12 months, no cold chain needed.",
+    "segments": [
+      {
+        "title": "Importers and distributors",
+        "text": "Delicatessen and foodservice distributors in France, Belgium, Germany, Austria and Italy. Export price list (EXW) and minimum order on request."
+      },
+      {
+        "title": "Private label",
+        "text": "We produce under your brand, with labels in the language of your market."
+      },
+      {
+        "title": "Delicatessens and wine shops",
+        "text": "Jars and gift sets for the shelf, with a “3 ways in 5 minutes” card."
+      },
+      {
+        "title": "Restaurants, wine bars, hotels",
+        "text": "A ready starter: we agree the number of portions and the cost per portion with your chef."
+      }
+    ],
+    "facts": [
+      {
+        "k": "Format",
+        "v": "250 g jar, including 100 g of snail meat"
+      },
+      {
+        "k": "Shelf life",
+        "v": "12 months at room temperature, no cold chain (SGS tests)"
+      },
+      {
+        "k": "Codes and labels",
+        "v": "EAN barcodes; labels checked by IJHARS"
+      },
+      {
+        "k": "Plant",
+        "v": "veterinary-approved processing plant, no. PL26040901, approved for all forms of sale"
+      },
+      {
+        "k": "Origin",
+        "v": "gros gris snails from Polish farms, with certificates of origin"
+      },
+      {
+        "k": "Production",
+        "v": "batches from 60 jars in 2 days; up to 14,000 jars a year"
+      }
+    ],
+    "docs": "On request: product sheet in EN and FR, SGS shelf-life results, certificates of origin, export price list (EXW) and samples after a first conversation.",
+    "names_title": "Product names: PL · EN · FR",
+    "form_title": "Trade enquiry",
+    "form_lead": "We reply within two working days."
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "Orders, questions about snails, trade and export.",
+    "hours": "Mon–Fri, 9:00–15:00 (CET)",
+    "map": "Directions (Google Maps)"
+  }
+}

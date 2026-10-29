@@ -49,5 +49,59 @@
   ],
   "weight": 450,
   "name_en": "Snails in green pesto",
-  "name_fr": "Escargots au pesto vert"
+  "name_fr": "Escargots au pesto vert",
+  "en": {
+    "kind": "Snails",
+    "title": "in green pesto",
+    "lead": "Snail meat in a pesto of fresh basil, walnuts and Bursztyn cheese. Just toss with pasta.",
+    "occasion": "Dinner in 10 minutes, dinner for two",
+    "ready_in_5": "Sauté the contents of the jar for 3–4 minutes and toss with cooked tagliatelle.",
+    "pairing": "Tagliatelle, parmesan, white wine",
+    "ingredients": "snail meat cooked in vegetable stock with dry white wine, fresh basil, walnuts, garlic, lemon juice, salt, Bursztyn cheese, rapeseed oil, pepper",
+    "allergens": "molluscs (snails), walnuts, milk (cheese)",
+    "storage": "Unopened: in a cool, dry place at room temperature. Once opened: refrigerate and eat within 3 days.",
+    "net_weight": "250 g, including 100 g of snail meat",
+    "shelf_life": "12 months from production (confirmed by SGS tests)",
+    "ways": [
+      {
+        "title": "On toast",
+        "text": "Warm the jar’s contents in a pan for 2–3 minutes and spoon onto toasted baguette rubbed with garlic."
+      },
+      {
+        "title": "With pasta",
+        "text": "Toss hot pasta with the warmed contents of the jar. Finish with cheese and fresh pepper."
+      },
+      {
+        "title": "In a tartlet",
+        "text": "Fill ready-made shortcrust tartlets, top with cheese and bake for 5 minutes at 200°C."
+      }
+    ]
+  },
+  "fr": {
+    "kind": "Escargots",
+    "title": "au pesto vert",
+    "lead": "Chair d’escargot dans un pesto de basilic frais, noix et fromage Bursztyn. Il suffit de mélanger aux pâtes.",
+    "occasion": "Dîner en 10 minutes, dîner à deux",
+    "ready_in_5": "Faire revenir le contenu du bocal 3 à 4 minutes et mélanger aux tagliatelles cuites.",
+    "pairing": "Tagliatelles, parmesan, vin blanc",
+    "ingredients": "chair d’escargot cuite dans un bouillon de légumes au vin blanc sec, basilic frais, noix, ail, jus de citron, sel, fromage Bursztyn, huile de colza, poivre",
+    "allergens": "mollusques (escargots), noix, lait (fromage)",
+    "storage": "Avant ouverture : dans un endroit frais et sec, à température ambiante. Après ouverture : au réfrigérateur, à consommer sous 3 jours.",
+    "net_weight": "250 g, dont 100 g de chair d’escargot",
+    "shelf_life": "12 mois à compter de la production (confirmé par les analyses SGS)",
+    "ways": [
+      {
+        "title": "Sur une tartine",
+        "text": "Réchauffer le contenu du bocal 2 à 3 minutes à la poêle et déposer sur une baguette grillée frottée d’ail."
+      },
+      {
+        "title": "Avec des pâtes",
+        "text": "Mélanger les pâtes chaudes au contenu du bocal réchauffé. Finir avec du fromage et du poivre frais."
+      },
+      {
+        "title": "En tartelette",
+        "text": "Garnir des fonds de tartelettes sablés, parsemer de fromage et enfourner 5 minutes à 200 °C."
+      }
+    ]
+  }
 }

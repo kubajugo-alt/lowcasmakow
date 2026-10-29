@@ -25,5 +25,21 @@
   "recipes": [],
   "weight": 450,
   "name_en": "Snails with chili",
-  "name_fr": "Escargots au piment"
+  "name_fr": "Escargots au piment",
+  "en": {
+    "kind": "Snails",
+    "title": "with chili",
+    "badge": "Coming soon",
+    "lead": "A new flavour in the works: snail meat with chili.",
+    "occasion": "Wine evening",
+    "allergens": "molluscs (snails)"
+  },
+  "fr": {
+    "kind": "Escargots",
+    "title": "au piment",
+    "badge": "Bientôt",
+    "lead": "Une nouvelle saveur en préparation : chair d’escargot au piment.",
+    "occasion": "Apéritif",
+    "allergens": "mollusques (escargots)"
+  }
 }

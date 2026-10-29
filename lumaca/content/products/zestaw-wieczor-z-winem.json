@@ -26,5 +26,27 @@
     "grzanki-ze-slimakami",
     "slimaki-w-masle-czosnkowym"
   ],
-  "weight": 900
+  "weight": 900,
+  "en": {
+    "kind": "Set",
+    "title": "Wine evening",
+    "lead": "Two starters for one evening: snails in lemon and parsley oil for toast, and snails in court-bouillon for garlic butter. With a recipe card.",
+    "occasion": "Wine evening, dinner with guests",
+    "ready_in_5": "Toast in 5 minutes, snails in garlic butter in 5 minutes: recipes on the card.",
+    "pairing": "Dry white wine, baguette",
+    "ingredients": "Ingredients of each jar on its label.",
+    "allergens": "molluscs (snails)",
+    "net_weight": "2 × 250 g (2 × 100 g of snail meat)"
+  },
+  "fr": {
+    "kind": "Coffret",
+    "title": "Soirée vin",
+    "lead": "Deux entrées pour une soirée : escargots à l’huile citron-persil pour la tartine et escargots au court-bouillon pour le beurre à l’ail. Avec une carte de recettes.",
+    "occasion": "Apéritif, dîner entre amis",
+    "ready_in_5": "Tartines en 5 minutes, escargots au beurre à l’ail en 5 minutes : recettes sur la carte.",
+    "pairing": "Vin blanc sec, baguette",
+    "ingredients": "Composition de chaque bocal sur son étiquette.",
+    "allergens": "mollusques (escargots)",
+    "net_weight": "2 × 250 g (2 × 100 g de chair d’escargot)"
+  }
 }

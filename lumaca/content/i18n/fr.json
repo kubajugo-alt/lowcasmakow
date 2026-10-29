@@ -1,0 +1,205 @@
+{
+  "ui": {
+    "skip": "Aller au contenu",
+    "menu": "Menu",
+    "home": "Accueil",
+    "shop": "Boutique",
+    "how": "Comment servir",
+    "kitchen": "Notre cuisine",
+    "trade": "Professionnels & export",
+    "contact": "Contact",
+    "topbar": "Prêt en 5 minutes · fabriqué en Pologne",
+    "order": "Demander",
+    "unavailable": "Momentanément indisponible",
+    "retail": "Prix public en Pologne",
+    "serve5": "Prêt en 5 minutes",
+    "occasion": "Pour quelle occasion",
+    "pairing": "À servir avec",
+    "ways": "Comment servir en 5 minutes",
+    "facts": "Composition et informations",
+    "net": "Poids net",
+    "ingredients": "Ingrédients",
+    "allergens": "Allergènes",
+    "storage": "Conservation",
+    "shelf": "Durée de conservation",
+    "cats": {
+      "sloiki": "Bocaux",
+      "zestawy": "Coffrets",
+      "liofilizaty": "Lyophilisés"
+    },
+    "all_products": "Tous les produits",
+    "learn_more": "Notre histoire",
+    "faq": "L’escargot sans mystère",
+    "footer_about": "Plats d’escargots prêts à servir, issus d’élevages polonais et cuisinés dans une petite conserverie de la région de Świętokrzyskie. Il suffit de réchauffer.",
+    "vet": "Numéro d’agrément vétérinaire",
+    "photos": "Photos",
+    "cta_title": "Distributeurs, restaurants et importateurs",
+    "cta_text": "Fiche produit en français et en anglais, marque de distributeur et tarifs export sur demande.",
+    "cta_btn": "Demande professionnelle",
+    "form_ok": "Merci ! Nous vous répondrons sous deux jours ouvrés.",
+    "send": "Envoyer",
+    "lang_name": "Français"
+  },
+  "home": {
+    "title": "Lumaca : escargots prêts à servir",
+    "hero_title": "Escargots, prêts à servir",
+    "hero_badge": "prêt en 5 minutes",
+    "hero_text": "Plats d’escargots issus d’élevages polonais, cuisinés dans une petite conserverie de Świętokrzyskie, en Pologne. Réchauffez, servez, surprenez vos invités.",
+    "cta_shop": "Voir la gamme",
+    "cta_trade": "Professionnels",
+    "best": "Nos bocaux",
+    "how": "Comment servir",
+    "how_text": "Chaque bocal est un plat prêt : 100 g de chair d’escargot tendre qui prend le goût de sa sauce. Trois façons, chacune en 5 minutes."
+  },
+  "shop": {
+    "title": "Boutique",
+    "lead": "Plats d’escargots prêts à servir : chaque bocal contient 250 g, dont 100 g de chair d’escargot. À réchauffer et servir en 5 minutes.",
+    "notice": "Notre boutique en ligne livre en Pologne. Pour les commandes depuis l’étranger, les distributeurs et les restaurants, envoyez-nous une demande."
+  },
+  "how": {
+    "title": "Comment servir les escargots",
+    "lead": "Chaque bocal est un plat prêt : 100 g de chair d’escargot tendre qui prend le goût de sa sauce. Trois façons, chacune en 5 minutes.",
+    "ways": [
+      {
+        "title": "Sur une tartine",
+        "text": "Escargots à l’huile citron-persil, réchauffés 2 à 3 minutes, sur une baguette grillée frottée d’ail. Persil et un filet de citron."
+      },
+      {
+        "title": "Avec des pâtes",
+        "text": "Escargots au pesto vert ou à la sauce tomate, revenus 3 à 4 minutes et mélangés aux tagliatelles ou aux spaghettis. Une cuillère d’eau de cuisson rend la sauce onctueuse."
+      },
+      {
+        "title": "En tartelette",
+        "text": "Fonds de tartelettes sablés garnis d’escargots au court-bouillon, de beurre à l’ail et de fromage râpé. 5 à 7 minutes à 200 °C."
+      }
+    ],
+    "faq": [
+      {
+        "q": "De quoi s’agit-il exactement ?",
+        "a": "D’un plat prêt : 100 g de chair d’escargot tendre dans un bouillon, une huile ou une sauce, 250 g par bocal. La chair est déjà cuite et assaisonnée ; il suffit de la réchauffer."
+      },
+      {
+        "q": "Quel goût ont les escargots ?",
+        "a": "Délicat, un peu comme les champignons ou les moules. La texture est tendre et ferme, et la chair prend le goût de sa sauce : ail, citron, pesto."
+      },
+      {
+        "q": "Y a-t-il des coquilles dans le bocal ?",
+        "a": "Non. Nos bocaux contiennent uniquement la chair d’escargot, prête à déguster une fois réchauffée."
+      },
+      {
+        "q": "D’où viennent les escargots ?",
+        "a": "D’élevages polonais. Nous les cuisinons dans notre petite conserverie agréée à Kołomań, dans la région de Świętokrzyskie."
+      },
+      {
+        "q": "Comment les conserver ?",
+        "a": "Fermé, le bocal se conserve 12 mois à température ambiante, dans un endroit frais et sec. Après ouverture, au réfrigérateur, à consommer sous 3 jours."
+      },
+      {
+        "q": "Allergènes ?",
+        "a": "Les escargots sont des mollusques, l’un des allergènes signalés sur les étiquettes. Le pesto contient des noix et du fromage, la sauce tomate du céleri. La composition complète figure pour chaque bocal."
+      }
+    ]
+  },
+  "kitchen": {
+    "title": "Notre cuisine",
+    "lead": "Un mets polonais oublié revient à table. D’où il vient, qui le cuisine et pourquoi il mérite d’être goûté.",
+    "story": [
+      {
+        "title": "L’escargot était un mets polonais",
+        "text": "Nos ancêtres en mangeaient. Des recettes d’escargots figurent déjà dans le premier livre de cuisine polonais, le « Compendium ferculorum » de Stanisław Czerniecki, paru en 1682."
+      },
+      {
+        "title": "La Pologne les a oubliés, mais continue à les produire",
+        "text": "Depuis des années, la Pologne élève des escargots et les exporte, surtout vers la France, tout en n’en mangeant presque pas."
+      },
+      {
+        "title": "Lumaca les ramène sur la table polonaise",
+        "text": "Sous une forme moderne : des plats d’escargots issus d’élevages polonais, cuisinés dans une petite conserverie de Świętokrzyskie. Il suffit de réchauffer."
+      }
+    ],
+    "owners_kind": "Les propriétaires",
+    "owners_title": "Grażyna et Tomasz Nawrocki",
+    "owners_text": "Lumaca est dirigée par Grażyna Nawrocka et son mari, Tomasz Nawrocki. Ils ont commencé par l’élevage d’escargots, puis sont passés à la cuisine : aujourd’hui, Lumaca achète ses escargots auprès d’éleveurs polonais de confiance, et leurs recettes sont cuisinées dans la conserverie de Kołomań.",
+    "facts_title": "Derrière chaque bocal",
+    "facts": [
+      {
+        "title": "Élevages polonais",
+        "text": "Escargots gros gris (Helix aspersa maxima) d’élevages polonais, avec certificats d’origine et certificats vétérinaires."
+      },
+      {
+        "title": "Une petite conserverie",
+        "text": "Notre atelier de transformation à Kołomań est agréé par les services vétérinaires (n° PL26040901). Nous cuisinons en petites séries."
+      },
+      {
+        "title": "Nos propres recettes",
+        "text": "La chair d’escargot mijote 120 minutes dans un bouillon de légumes au vin blanc sec, puis est préparée dans des sauces selon nos recettes."
+      },
+      {
+        "title": "Étiquettes et conservation contrôlées",
+        "text": "Étiquettes vérifiées par l’inspection polonaise de la qualité alimentaire (IJHARS). Douze mois à température ambiante, confirmés par les analyses du laboratoire SGS."
+      },
+      {
+        "title": "Un millésime",
+        "text": "Nous achetons les escargots une fois par an, à l’automne. Chaque lot est un millésime, comme pour le vin : les bocaux actuels sont du millésime 2026."
+      }
+    ]
+  },
+  "trade": {
+    "title": "Distributeurs, restaurants et importateurs",
+    "lead": "Une entrée prête qui fait gagner du temps en cuisine, et un produit régional singulier. Conservation 12 mois à température ambiante, sans chaîne du froid.",
+    "segments": [
+      {
+        "title": "Importateurs et distributeurs",
+        "text": "Distributeurs épicerie fine et restauration en France, Belgique, Allemagne, Autriche et Italie. Tarif export (EXW) et minimum de commande sur demande."
+      },
+      {
+        "title": "Marque de distributeur",
+        "text": "Nous produisons sous votre marque, avec des étiquettes dans la langue de votre marché."
+      },
+      {
+        "title": "Épiceries fines et caves",
+        "text": "Bocaux et coffrets cadeaux pour vos rayons, avec la carte « 3 façons en 5 minutes »."
+      },
+      {
+        "title": "Restaurants, bars à vin, hôtels",
+        "text": "Une entrée prête : nous convenons avec votre chef du nombre de portions et du coût par portion."
+      }
+    ],
+    "facts": [
+      {
+        "k": "Format",
+        "v": "bocal de 250 g, dont 100 g de chair d’escargot"
+      },
+      {
+        "k": "Conservation",
+        "v": "12 mois à température ambiante, sans chaîne du froid (analyses SGS)"
+      },
+      {
+        "k": "Codes et étiquettes",
+        "v": "codes EAN ; étiquettes vérifiées par l’IJHARS"
+      },
+      {
+        "k": "Établissement",
+        "v": "atelier agréé par les services vétérinaires, n° PL26040901, pour toutes les formes de vente"
+      },
+      {
+        "k": "Origine",
+        "v": "escargots gros gris d’élevages polonais, avec certificats d’origine"
+      },
+      {
+        "k": "Production",
+        "v": "séries à partir de 60 bocaux en 2 jours ; jusqu’à 14 000 bocaux par an"
+      }
+    ],
+    "docs": "Sur demande : fiche produit en FR et EN, résultats des analyses de conservation SGS, certificats d’origine, tarif export (EXW) et échantillons après un premier échange.",
+    "names_title": "Noms des produits : PL · EN · FR",
+    "form_title": "Demande professionnelle",
+    "form_lead": "Nous répondons sous deux jours ouvrés."
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "Commandes, questions sur les escargots, distribution et export.",
+    "hours": "Lun.–ven., 9 h–15 h (CET)",
+    "map": "Itinéraire (Google Maps)"
+  }
+}

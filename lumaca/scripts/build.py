@@ -46,6 +46,48 @@ EV = load('events')
 PL = load('places')
 PRESS = dict(sorted(load('press', 'date').items(), key=lambda kv: kv[1].get('date') or '', reverse=True))
 PAGES = load('pages')
+ARTICLES = dict(sorted(load('articles').items(), key=lambda kv: kv[1].get('date') or '', reverse=True))
+I18N = {lang: json.load(open(os.path.join(ROOT, 'content', 'i18n', lang + '.json'), encoding='utf-8')) for lang in ('en', 'fr')}
+# the pages that exist in all three languages; everything else is Polish only
+PATHS = {'home': {'pl': '/', 'en': '/en/', 'fr': '/fr/'},
+         'shop': {'pl': '/sklep/', 'en': '/en/shop/', 'fr': '/fr/boutique/'},
+         'how': {'pl': '/przepisy/', 'en': '/en/how-to-serve/', 'fr': '/fr/comment-servir/'},
+         'kitchen': {'pl': '/nasza-kuchnia/', 'en': '/en/our-kitchen/', 'fr': '/fr/notre-cuisine/'},
+         'trade': {'pl': '/dla-firm/', 'en': '/en/trade/', 'fr': '/fr/professionnels/'},
+         'contact': {'pl': '/kontakt/', 'en': '/en/contact/', 'fr': '/fr/contact/'}}
+
+
+def product_path(slug, lang='pl'):
+    return {'pl': f'/sklep/{slug}.html', 'en': f'/en/shop/{slug}.html', 'fr': f'/fr/boutique/{slug}.html'}[lang]
+
+
+ALTS = {}  # any page path → its versions in pl/en/fr
+for _v in PATHS.values():
+    for _p in _v.values():
+        ALTS[_p] = _v
+for _s in PR:
+    _v = {lang: product_path(_s, lang) for lang in ('pl', 'en', 'fr')}
+    for _p in _v.values():
+        ALTS[_p] = _v
+LANGS = {'pl': ('PL', 'Polski', 'pl_PL'), 'en': ('EN', 'English', 'en_GB'), 'fr': ('FR', 'Français', 'fr_FR')}
+
+
+def lang_switch(lang, path):
+    alts = ALTS.get(path, {})
+    links = []
+    for code, (short, name, _) in LANGS.items():
+        href = alts.get(code) or PATHS['home'][code]
+        cur = ' aria-current="true"' if code == lang else ''
+        links.append(f'<a href="{href}" hreflang="{code}" lang="{code}" title="{name}"{cur}>{short}</a>')
+    return '<nav class="lang" aria-label="Język / Language">' + ''.join(links) + '</nav>'
+
+
+def hreflang(path):
+    alts = ALTS.get(path)
+    if not alts:
+        return ''
+    out = ''.join(f'<link rel="alternate" hreflang="{code}" href="{SITE}{p}">\n' for code, p in alts.items())
+    return out + f'<link rel="alternate" hreflang="x-default" href="{SITE}{alts["pl"]}">\n'
 # the cart and checkout are Snipcart's (https://snipcart.com); with no public API key set in the CMS
 # the shop shows its products but the buttons say "coming soon" and no Snipcart code loads
 SHOP_KEY = (S.get('snipcart_key') or '').strip()
@@ -126,6 +168,7 @@ def full_name(p):
 
 ORG = {'@type': ['Organization', 'LocalBusiness'], 'name': 'Lumaca', 'url': SITE + '/', 'logo': SITE + '/img/logo-badge.png',
        'email': S['email'], 'telephone': S['phone'], 'description': S['description'],
+       'sameAs': [u for u in (S.get('facebook'), S.get('instagram')) if u],
        'address': {'@type': 'PostalAddress', 'streetAddress': 'ul. Miła', 'postalCode': '26-050', 'addressLocality': 'Kołomań',
                    'addressRegion': 'świętokrzyskie', 'addressCountry': 'PL'}}
 
@@ -158,6 +201,19 @@ def crumbs(items):
 
 # ---------- page frame ----------
 
+ICONS = {
+    'facebook': ('Facebook', '<path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v9h4v-9h3l.5-4h-3.5V9c0-.6.4-1 1-1z"/>'),
+    'instagram': ('Instagram', '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>'
+                  '<circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.2"/>'),
+}
+
+
+def social():
+    links = ''.join(f'<a href="{e(S[k])}" aria-label="{name}" title="{name}" rel="noopener" target="_blank">'
+                    f'<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">{svg}</svg></a>'
+                    for k, (name, svg) in ICONS.items() if S.get(k))
+    return f'<p class="social">{links}</p>' if links else ''
+
 CART = ('<button class="icon-btn snipcart-checkout" type="button" aria-label="Koszyk">'
         '<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" '
         'stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8z"/>'
@@ -181,7 +237,6 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
         og_img = (f'<meta property="og:image" content="{e(abs_image(image))}">\n<meta property="og:image:width" content="1200">\n'
                   f'<meta property="og:image:height" content="630">\n')
     pages_nav = ''.join(f'<a href="/{s}/">{e(p["title"])}</a>' for s, p in PAGES.items())
-    social = ''.join(f'<a href="{e(S[k])}">{n}</a>' for k, n in (('facebook', 'Facebook'), ('instagram', 'Instagram')) if S.get(k))
     return f'''<!doctype html>
 <html lang="pl">
 <head>
@@ -198,7 +253,7 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{SITE}{path}">
 {og_img}<meta name="twitter:card" content="summary_large_image">
-{ld_script(ld)}
+{hreflang(path)}{ld_script(ld)}
 <link rel="icon" href="/img/favicon-64.png" type="image/png">
 <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="preload" href="/fonts/lora-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -219,7 +274,7 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
 {nav}
     </nav>
     <div class="actions">
-      <span class="lang" title="Wersje EN i FR w przygotowaniu">PL</span>
+      {lang_switch('pl', path)}
       {CART if SHOP_KEY else ''}
       <button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav" data-menu>{MENU}</button>
     </div>
@@ -239,12 +294,12 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
       <h2>Sklep</h2>{''.join(f'<a href="{h}">{n}</a>' for n, h in NAV)}
     </nav>
     <nav class="foot-col" aria-label="Informacje">
-      <h2>Informacje</h2><a href="/przepisy/#faq">Pytania i odpowiedzi</a><a href="/w-mediach/">Lumaca w mediach</a>{pages_nav}<a href="/kontakt/">Kontakt</a>
+      <h2>Informacje</h2><a href="/artykuly/">Artykuły</a><a href="/przepisy/#faq">Pytania i odpowiedzi</a><a href="/w-mediach/">Lumaca w mediach</a>{pages_nav}<a href="/kontakt/">Kontakt</a>
     </nav>
     <div class="foot-col contact">
       <h2>Kontakt</h2>
       <a href="tel:{tel(S["phone"])}">{e(S["phone"])}</a><a href="mailto:{e(S["email"])}">{e(S["email"])}</a>
-      <span>{e(S["address"])}</span><span>{e(S["hours"])}</span>{social}
+      <span>{e(S["address"])}</span><span>{e(S["hours"])}</span>{social()}
     </div>
   </div>
   <div class="wrap foot-meta">
@@ -519,6 +574,7 @@ def recipes_page():
   </header>
   {three_ways()}
   <section class="sec" aria-labelledby="h-all"><h2 id="h-all" class="sec-title">Wszystkie przepisy</h2><div class="grid recipes">{cards}</div></section>
+  <section class="sec" aria-labelledby="h-read"><h2 id="h-read" class="sec-title">Czytaj też</h2><div class="grid recipes">{"".join(article_card(x) for x in list(ARTICLES)[:3])}</div></section>
   {faq_html()}
   <p class="more-link">Gdzie kupić słoiki i spróbować ślimaków na żywo? <a href="/gdzie-sprobowac/">Sklepy, jarmarki i warsztaty</a></p>
 </div>'''
@@ -596,7 +652,7 @@ def kitchen_page():
                                    ld=[crumbs_ld([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/')]), ORG]))
 
 
-def form(name, fields, cta, ok, extra=''):
+def form(name, fields, cta, ok, extra='<input type="hidden" name="jezyk" value="pl">', err='Nie udało się wysłać. Napisz do nas: info@lumaca.eco'):
     rows = []
     for f in fields:
         kind, fid, label = f[0], f[1], f[2]
@@ -608,7 +664,7 @@ def form(name, fields, cta, ok, extra=''):
             rows.append(f'<label class="field"><span>{label}</span><select name="{fid}"{req}>{opts}</select></label>')
         else:
             rows.append(f'<label class="field"><span>{label}</span><input type="{kind}" name="{fid}"{req}></label>')
-    return f'''<form class="form" name="{name}" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax data-ok="{e(ok)}">
+    return f'''<form class="form" name="{name}" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-ajax data-ok="{e(ok)}" data-err="{e(err)}">
       <input type="hidden" name="form-name" value="{name}">{extra}
       <p class="sr-only"><label>Nie wypełniaj <input name="bot-field" tabindex="-1"></label></p>
       <div class="fields">{"".join(rows)}</div>
@@ -706,6 +762,7 @@ def contact_page():
       <p>{e(S["address"])}<br>{e(S["region"])}</p>
       <p>{e(S["hours"])}</p>
       <p><a href="https://www.google.com/maps/search/?api=1&amp;query={quote(S["address"])}">Jak dojechać (Mapy Google)</a></p>
+      {social()}
     </div>
     {form("kontakt", [("text", "imie", "Imię", True), ("email", "email", "E-mail", True), ("tel", "telefon", "Telefon", False), ("text", "zamowienie", "Dotyczy", False),
           ("textarea", "wiadomosc", "Wiadomość", True)], "Wyślij", "Dziękujemy! Odpowiemy najszybciej, jak to możliwe.")}
@@ -794,6 +851,10 @@ def home_page():
   </div>
 </section>
 {press_html}
+<section class="wrap sec" aria-labelledby="h-art">
+  <div class="sec-head"><h2 id="h-art" class="sec-title">Z naszej kuchni</h2><a class="more" href="/artykuly/">Wszystkie artykuły</a></div>
+  <div class="grid recipes">{"".join(article_card(x) for x in list(ARTICLES)[:3])}</div>
+</section>
 <section class="wrap sec" aria-labelledby="h-where">
   <div class="sec-head"><h2 id="h-where" class="sec-title">{e(H["where_title"])}</h2><a class="more" href="/gdzie-sprobowac/">Kalendarz i sklepy</a></div>
   <div class="where-grid">{event_list()}{place_list()}</div>
@@ -813,6 +874,381 @@ def not_found():
 </div>'''
     write('/404.html', shell('Nie znaleziono strony', 'Ta strona nie istnieje.', main, path='/404.html'))
     OUT.remove('/404.html')
+
+
+# ---------- articles (Polish blog) ----------
+
+MONTHS = ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia']
+
+
+def pl_date(d):
+    y, m, dd = (d or '2026-01-01').split('-')
+    return f'{int(dd)} {MONTHS[int(m) - 1]} {y}'
+
+
+def article_card(slug, sizes='(max-width:720px) 100vw, 33vw'):
+    a = ARTICLES[slug]
+    return f'''<article class="recipe-card article-card">
+  <a href="/artykuly/{slug}.html" class="rc-photo" tabindex="-1" aria-hidden="true">{img(a["image"], sizes)}</a>
+  <p class="kind">{pl_date(a.get("date"))}</p>
+  <h3><a href="/artykuly/{slug}.html">{e(a["title"])}</a></h3>
+  <p class="muted small-text">{e(a["lead"])}</p>
+</article>'''
+
+
+def articles_page():
+    cards = ''.join(article_card(s) for s in ARTICLES)
+    main = f'''
+<div class="wrap">
+  {crumbs([('Strona główna', '/'), ('Artykuły', '/artykuly/')])}
+  <header class="page-head">
+    <h1>Artykuły</h1>
+    <p class="lead">Jak podać ślimaki, gdzie je kupić, jakie wino do nich wybrać i skąd się wzięły na polskim stole.</p>
+  </header>
+  <div class="grid recipes">{cards}</div>
+</div>'''
+    write('/artykuly/', shell('Artykuły o ślimakach: jak podać, gdzie kupić, do jakiego wina', 'Poradniki i historie Lumaki: jak podać ślimaki, przepisy na szybkie przystawki, gdzie kupić gotowe ślimaki, jakie wino do ślimaków.',
+                              main, [a['image'] for a in ARTICLES.values()], current='Artykuły', path='/artykuly/',
+                              ld=[crumbs_ld([('Strona główna', '/'), ('Artykuły', '/artykuly/')])]))
+
+
+def article_page(slug, a):
+    prods = [x for x in a.get('products') or [] if x in PR]
+    recs = [x for x in a.get('recipes') or [] if x in R]
+    more = [x for x in ARTICLES if x != slug][:3]
+    aside = ''
+    if prods:
+        aside = '<aside class="art-shop"><h2>Z tego artykułu</h2>' + ''.join(product_card(x, PR[x], '(max-width:720px) 100vw, 300px') for x in prods[:2]) + '</aside>'
+    main = f'''
+<div class="wrap">
+  {crumbs([('Strona główna', '/'), ('Artykuły', '/artykuly/'), (a['title'], f'/artykuly/{slug}.html')])}
+  <article class="article">
+    <header class="article-head">
+      <p class="kind">{pl_date(a.get("date"))} · Lumaca</p>
+      <h1>{e(a["title"])}</h1>
+      <p class="lead">{e(a["lead"])}</p>
+    </header>
+    <figure class="article-photo">{img(a["image"], "(max-width:1200px) 100vw, 1200px", True)}</figure>
+    <div class="article-body">
+      <div class="prose">{md(a.get("body", ""))}</div>
+      {aside}
+    </div>
+  </article>
+  {f'<section class="sec"><h2 class="sec-title">Przepisy</h2><div class="grid recipes">{"".join(recipe_card(r) for r in recs)}</div></section>' if recs else ''}
+  <section class="sec"><h2 class="sec-title">Czytaj dalej</h2><div class="grid recipes">{"".join(article_card(x) for x in more)}</div></section>
+</div>'''
+    path = f'/artykuly/{slug}.html'
+    ld = [crumbs_ld([('Strona główna', '/'), ('Artykuły', '/artykuly/'), (a['title'], path)]),
+          {'@type': 'Article', 'headline': a['title'], 'description': a['lead'], 'image': [abs_image(a['image'])], 'datePublished': a.get('date'),
+           'author': {'@type': 'Organization', 'name': 'Lumaca'}, 'publisher': {'@type': 'Organization', 'name': 'Lumaca', 'logo': {'@type': 'ImageObject', 'url': SITE + '/img/logo-badge.png'}},
+           'keywords': a.get('keywords', ''), 'inLanguage': 'pl', 'mainEntityOfPage': SITE + path}]
+    images = [a['image']] + [PR[x]['image'] for x in prods] + [R[x]['image'] for x in recs]
+    write(path, shell(a['title'], a['lead'], main, images, current='Artykuły', path=path, image=a['image'], og_type='article', ld=ld))
+
+
+# ---------- English and French ----------
+
+def tr(p, lang):
+    """A product with its English or French fields laid over the Polish ones."""
+    return {**p, **(p.get(lang) or {})}
+
+
+def tname(p):
+    return f'{p["kind"]} {p["title"]}' if p['kind'] in ('Ślimaki', 'Snails', 'Escargots') else (
+        f'{p["title"]}: {p["kind"]}' if p['category'] != 'zestawy' else f'{p["title"]} · {p["kind"]}')
+
+
+def shell_i18n(lang, title, desc, main, path, images=(), current=None, image=None, og_type='website', ld=(), body_class='', home=False):
+    OUT.append(path)
+    U = I18N[lang]['ui']
+    P = {k: v[lang] for k, v in PATHS.items()}
+    nav_items = [('shop', U['shop']), ('how', U['how']), ('kitchen', U['kitchen']), ('trade', U['trade']), ('contact', U['contact'])]
+    cur = ' aria-current="page"'
+    nav = '\n'.join(f'      <a href="{P[k]}"{cur if k == current else ""}>{n}</a>' for k, n in nav_items)
+    og_img = (f'<meta property="og:image" content="{e(abs_image(image))}">\n') if image and image.get('src') else ''
+    cta = f'''
+<section class="newsletter" aria-labelledby="h-cta">
+  <div class="wrap nl">
+    <div><h2 id="h-cta">{e(U["cta_title"])}</h2><p>{e(U["cta_text"])}</p></div>
+    <p><a class="btn btn-gold" href="{P["trade"]}#enquiry">{e(U["cta_btn"])}</a></p>
+  </div>
+</section>''' if current != 'trade' else ''
+    return f'''<!doctype html>
+<html lang="{lang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{e(title)}{"" if home else " · Lumaca"}</title>
+<meta name="description" content="{e(desc)}">
+<meta name="theme-color" content="#1B1A18">
+<link rel="canonical" href="{SITE}{path}">
+<meta property="og:site_name" content="Lumaca">
+<meta property="og:locale" content="{LANGS[lang][2]}">
+<meta property="og:type" content="{og_type}">
+<meta property="og:title" content="{e(title)}">
+<meta property="og:description" content="{e(desc)}">
+<meta property="og:url" content="{SITE}{path}">
+{og_img}<meta name="twitter:card" content="summary_large_image">
+{hreflang(path)}{ld_script(ld)}
+<link rel="icon" href="/img/favicon-64.png" type="image/png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="preload" href="/fonts/lora-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/fonts.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="{body_class}">
+<a class="skip" href="#content">{e(U["skip"])}</a>
+<header class="site-header">
+  <div class="topbar"><div class="wrap">
+    <span>{e(U["topbar"])}</span>
+    <a href="tel:{tel(S["phone"])}">{e(S["phone"])}</a>
+  </div></div>
+  <div class="wrap bar">
+    <a href="{P["home"]}" class="logo"><img src="/img/logo-yellow.png" alt="Lumaca" width="237" height="34"></a>
+    <nav class="main-nav" id="main-nav" aria-label="{e(U["menu"])}">
+{nav}
+    </nav>
+    <div class="actions">
+      {lang_switch(lang, path)}
+      <button class="icon-btn menu-toggle" type="button" aria-label="{e(U["menu"])}" aria-expanded="false" aria-controls="main-nav" data-menu>{MENU}</button>
+    </div>
+  </div>
+</header>
+<main id="content">
+{main}
+{cta}
+</main>
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div class="foot-brand">
+      <img src="/img/logo-badge.png" alt="Lumaca" width="120" height="120" loading="lazy">
+      <p>{e(U["footer_about"])}</p>
+    </div>
+    <nav class="foot-col" aria-label="Lumaca">
+      <h2>Lumaca</h2>{"".join(f'<a href="{P[k]}">{n}</a>' for k, n in nav_items)}
+    </nav>
+    <div class="foot-col contact">
+      <h2>{e(U["contact"])}</h2>
+      <a href="tel:{tel(S["phone"])}">{e(S["phone"])}</a><a href="mailto:{e(S["email"])}">{e(S["email"])}</a>
+      <span>{e(S["address"])}, Poland</span>{social()}
+    </div>
+  </div>
+  <div class="wrap foot-meta">
+    <p>© 2026 Lumaca · {e(U["vet"])} {e(S["vet_number"])}</p>
+  </div>
+</footer>
+<script src="/js/site.js" defer></script>
+</body>
+</html>
+'''
+
+
+def i_card(slug, p, lang, sizes='(max-width:720px) 50vw, 25vw'):
+    U = I18N[lang]['ui']
+    q = tr(p, lang)
+    badge = f'<span class="badge">{e(q["badge"])}</span>' if q.get('badge') else ''
+    link = product_path(slug, lang)
+    return f'''<article class="product-card" style="--stripe:{e(p.get("stripe") or "#C9A35A")}">
+  <a href="{link}" class="pc-photo" tabindex="-1" aria-hidden="true">{jar_photo(p, sizes)}{badge}</a>
+  <div class="pc-body">
+    <p class="kind">{e(q["kind"])}</p>
+    <h3><a href="{link}">{e(q["title"])}</a></h3>
+    <p class="pc-occ">{e(q.get("occasion", ""))}</p>
+    <p class="pc-buy"><span class="price">{pln(p["price"])}</span><a class="btn btn-ink btn-sm" href="{link}">{e(U["order"]) if p.get("available", True) else e(q.get("badge") or U["unavailable"])}</a></p>
+  </div>
+</article>'''
+
+
+def i_three_ways(lang):
+    H = I18N[lang]['how']
+    pics = ['grzanki-ze-slimakami', 'tagliatelle-ze-slimakami-w-pesto', 'babeczki-ze-slimakami']
+    return '<ol class="three-ways">' + ''.join(f'''<li class="way">
+      <span class="way-photo">{img(R[r]["image"], "(max-width:720px) 100vw, 33vw") if r in R else ""}</span>
+      <span class="step">{k + 1}</span><h3>{e(w["title"])}</h3><p>{e(w["text"])}</p></li>''' for k, (w, r) in enumerate(zip(H['ways'], pics))) + '</ol>'
+
+
+def i_home(lang):
+    T = I18N[lang]
+    H, U, P = T['home'], T['ui'], {k: v[lang] for k, v in PATHS.items()}
+    jars = [(s, p) for s, p in PR.items() if p['category'] == 'sloiki' and p.get('available', True)][:4]
+    K = T['kitchen']
+    main = f'''
+<section class="hero" aria-labelledby="h-hero">
+  <figure class="hero-photo">{img(HOME["hero_image"], "100vw", True)}</figure>
+  <div class="wrap hero-in">
+    <div class="label-card hero-card">
+      <img class="hero-mark" src="/img/mark-yellow.png" alt="" width="90" height="40">
+      <h1 id="h-hero">{e(H["hero_title"])}</h1>
+      <p class="hero-badge">{e(H["hero_badge"])}</p>
+      <p>{e(H["hero_text"])}</p>
+      <p class="btns"><a class="btn btn-gold" href="{P["shop"]}">{e(H["cta_shop"])}</a> <a class="btn btn-line-light" href="{P["trade"]}">{e(H["cta_trade"])}</a></p>
+    </div>
+  </div>
+</section>
+<section class="wrap sec"><div class="sec-head"><h2 class="sec-title">{e(H["best"])}</h2><a class="more" href="{P["shop"]}">{e(U["all_products"])}</a></div>
+  <div class="grid products">{"".join(i_card(s, p, lang) for s, p in jars)}</div></section>
+<section class="wrap sec"><div class="sec-head"><h2 class="sec-title">{e(H["how"])}</h2><a class="more" href="{P["how"]}">{e(U["how"])}</a></div>
+  <p class="sec-lead">{e(H["how_text"])}</p>{i_three_ways(lang)}</section>
+<section class="wrap sec kitchen">
+  <figure>{img(KITCHEN["grazyna_image"], "(max-width:720px) 100vw, 50vw")}</figure>
+  <div><p class="kind">{e(K["owners_kind"])}</p><h2 class="sec-title">{e(K["title"])}</h2><p>{e(K["owners_text"])}</p>
+    <ol class="plain small">{"".join(f'<li>{e(x["title"])}.</li>' for x in K["story"])}</ol>
+    <a class="btn btn-ink" href="{P["kitchen"]}">{e(U["learn_more"])}</a></div>
+</section>'''
+    write(P['home'], shell_i18n(lang, H['title'], H['hero_text'], main, P['home'], image=HOME['hero_image'], home=True, body_class='home',
+                                ld=[{**ORG, 'description': U['footer_about']}, {'@type': 'WebSite', 'name': 'Lumaca', 'url': SITE + P['home'], 'inLanguage': lang}]))
+
+
+def i_shop(lang):
+    T = I18N[lang]
+    U, P, SH = T['ui'], {k: v[lang] for k, v in PATHS.items()}, T['shop']
+    groups = ''.join(f'''<section class="sec" id="{c}"><h2 class="sec-title">{e(U["cats"][c])}</h2>
+    <div class="grid products">{"".join(i_card(s, p, lang) for s, p in PR.items() if p["category"] == c)}</div></section>'''
+                     for c in CATS if any(p['category'] == c for p in PR.values()))
+    main = f'''
+<div class="wrap">
+  {crumbs([(U['home'], P['home']), (SH['title'], P['shop'])])}
+  <header class="page-head"><h1>{e(SH["title"])}</h1><p class="lead">{e(SH["lead"])}</p>
+    <p class="notice">{e(SH["notice"])} <a href="{P["trade"]}#enquiry">{e(U["cta_btn"])}</a></p></header>
+  {groups}
+</div>'''
+    write(P['shop'], shell_i18n(lang, SH['title'], SH['lead'], main, P['shop'], current='shop', image=HOME['hero_image']))
+
+
+def i_product(slug, p, lang):
+    T = I18N[lang]
+    U, P = T['ui'], {k: v[lang] for k, v in PATHS.items()}
+    q = tr(p, lang)
+    name = tname(q)
+    dish = p.get('dish_image') if p.get('dish_image', {}).get('src') and p.get('dish_image', {}).get('src') != p['image'].get('src') else None
+    gallery = ('<div class="pr-photos">' + (f'<figure class="dish">{img(dish, "(max-width:720px) 100vw, 40vw", True)}</figure>' if dish else '')
+               + f'<figure class="jar">{jar_photo(p, "(max-width:720px) 100vw, 30vw", not dish)}</figure></div>')
+    ways = q.get('ways') or []
+    ways_html = (f'<section class="ways"><h2>{e(U["ways"])}</h2><ol>' + ''.join(f'<li><h3>{e(w["title"])}</h3><p>{e(w["text"])}</p></li>' for w in ways)
+                 + '</ol></section>') if ways else ''
+    facts = [(U['net'], q.get('net_weight')), (U['ingredients'], q.get('ingredients')), (U['allergens'], q.get('allergens')),
+             (U['storage'], q.get('storage')), (U['shelf'], q.get('shelf_life'))]
+    facts_html = ''.join(f'<div><dt>{k}</dt><dd>{e(v)}</dd></div>' for k, v in facts if v)
+    order = f'{P["contact"]}?zamowienie={quote(name)}'
+    btn = (f'<a class="btn btn-gold btn-buy" href="{order}">{e(U["order"])}</a>' if p.get('available', True)
+           else f'<button type="button" class="btn btn-gold btn-buy" disabled>{e(q.get("badge") or U["unavailable"])}</button>')
+    main = f'''
+<div class="wrap">
+  {crumbs([(U['home'], P['home']), (U['shop'], P['shop']), (name, product_path(slug, lang))])}
+  <article class="product" style="--stripe:{e(p.get("stripe") or "#C9A35A")}">
+    {gallery}
+    <div class="pr-info">
+      <div class="label-card"><p class="kind">{e(q["kind"])}</p><h1>{e(q["title"])}</h1>
+        {f'<p class="badge-inline">{e(q["badge"])}</p>' if q.get('badge') else ''}
+        <p class="pr-price">{pln(p["price"])}</p><p class="small-text">{e(U["retail"])}</p></div>
+      <p class="lead">{e(q["lead"])}</p>
+      <div class="pr-buy">{btn}</div>
+      <dl class="pr-quick">
+        {f'<div><dt>{e(U["occasion"])}</dt><dd>{e(q["occasion"])}</dd></div>' if q.get('occasion') else ''}
+        {f'<div><dt>{e(U["serve5"])}</dt><dd>{e(q["ready_in_5"])}</dd></div>' if q.get('ready_in_5') else ''}
+        {f'<div><dt>{e(U["pairing"])}</dt><dd>{e(q["pairing"])}</dd></div>' if q.get('pairing') else ''}
+      </dl>
+    </div>
+  </article>
+  {ways_html}
+  {f'<section class="facts"><h2>{e(U["facts"])}</h2><dl>{facts_html}</dl></section>' if facts_html else ''}
+</div>'''
+    path = product_path(slug, lang)
+    write(path, shell_i18n(lang, name, q['lead'], main, path, current='shop', image=dish or p['image'], og_type='product', body_class='product-page'))
+
+
+def i_how(lang):
+    T = I18N[lang]
+    U, P, H = T['ui'], {k: v[lang] for k, v in PATHS.items()}, T['how']
+    faq = ''.join(f'<details><summary>{e(x["q"])}</summary><p>{e(x["a"])}</p></details>' for x in H['faq'])
+    main = f'''
+<div class="wrap">
+  {crumbs([(U['home'], P['home']), (H['title'], P['how'])])}
+  <header class="page-head"><h1>{e(H["title"])}</h1><p class="lead">{e(H["lead"])}</p></header>
+  {i_three_ways(lang)}
+  <section class="faq" id="faq"><h2 class="sec-title">{e(U["faq"])}</h2>{faq}</section>
+</div>'''
+    ld = [{'@type': 'FAQPage', 'inLanguage': lang, 'mainEntity': [{'@type': 'Question', 'name': x['q'], 'acceptedAnswer': {'@type': 'Answer', 'text': x['a']}} for x in H['faq']]}]
+    write(P['how'], shell_i18n(lang, H['title'], H['lead'], main, P['how'], current='how', image=R['grzanki-ze-slimakami']['image'], ld=ld))
+
+
+def i_kitchen(lang):
+    T = I18N[lang]
+    U, P, K = T['ui'], {k: v[lang] for k, v in PATHS.items()}, T['kitchen']
+    story = ''.join(f'<li><span class="num">{k + 1}</span><h3>{e(x["title"])}</h3><p>{e(x["text"])}</p></li>' for k, x in enumerate(K['story']))
+    facts = ''.join(f'<li><h3>{e(x["title"])}</h3><p>{e(x["text"])}</p></li>' for x in K['facts'])
+    main = f'''
+<div class="wrap">
+  {crumbs([(U['home'], P['home']), (K['title'], P['kitchen'])])}
+  <header class="page-head"><h1>{e(K["title"])}</h1><p class="lead">{e(K["lead"])}</p></header>
+  <section class="story"><ol>{story}</ol></section>
+  <section class="person"><figure>{img(KITCHEN["grazyna_image"], "(max-width:720px) 100vw, 40vw")}</figure>
+    <div class="label-card dark"><p class="kind">{e(K["owners_kind"])}</p><h2>{e(K["owners_title"])}</h2><p>{e(K["owners_text"])}</p></div></section>
+  <section class="sec"><h2 class="sec-title">{e(K["facts_title"])}</h2><ul class="fact-grid">{facts}</ul></section>
+</div>'''
+    write(P['kitchen'], shell_i18n(lang, K['title'], K['lead'], main, P['kitchen'], current='kitchen', image=KITCHEN['grazyna_image']))
+
+
+def i_trade(lang):
+    T = I18N[lang]
+    U, P, B = T['ui'], {k: v[lang] for k, v in PATHS.items()}, T['trade']
+    seg = ''.join(f'<li><h3>{e(x["title"])}</h3><p>{e(x["text"])}</p></li>' for x in B['segments'])
+    facts = ''.join(f'<div><dt>{e(x["k"])}</dt><dd>{e(x["v"])}</dd></div>' for x in B['facts'])
+    names = ''.join(f'<tr><td lang="pl">{e(full_name(p))}</td><td lang="en">{e(p["name_en"])}</td><td lang="fr">{e(p["name_fr"])}</td></tr>'
+                    for p in PR.values() if p.get('name_en'))
+    L = {'en': {'firma': 'Company', 'rodzaj': 'Business type', 'kraj': 'Country', 'osoba': 'Name', 'telefon': 'Phone', 'wiadomosc': 'What are you looking for?',
+                'opts': ['Importer or distributor', 'Retailer or delicatessen', 'Restaurant, wine bar or hotel', 'Private label', 'Other']},
+         'fr': {'firma': 'Société', 'rodzaj': 'Activité', 'kraj': 'Pays', 'osoba': 'Nom', 'telefon': 'Téléphone', 'wiadomosc': 'Que recherchez-vous ?',
+                'opts': ['Importateur ou distributeur', 'Épicerie fine ou commerce', 'Restaurant, bar à vin ou hôtel', 'Marque de distributeur', 'Autre']}}[lang]
+    enquiry = form('zapytanie-b2b', [('text', 'firma', L['firma'], True), ('select', 'rodzaj', L['rodzaj'], True, L['opts']), ('text', 'miasto', L['kraj'], False),
+                                     ('text', 'osoba', L['osoba'], True), ('email', 'email', 'E-mail', True), ('tel', 'telefon', L['telefon'], False),
+                                     ('textarea', 'wiadomosc', L['wiadomosc'], False)], U['send'], U['form_ok'],
+                   extra=f'<input type="hidden" name="jezyk" value="{lang}">', err={'en': 'Sending failed. Please email info@lumaca.eco', 'fr': 'Échec de l’envoi. Écrivez-nous : info@lumaca.eco'}[lang])
+    main = f'''
+<div class="wrap">
+  {crumbs([(U['home'], P['home']), (B['title'], P['trade'])])}
+  <header class="page-head"><h1>{e(B["title"])}</h1><p class="lead">{e(B["lead"])}</p><p><a class="btn btn-gold" href="#enquiry">{e(U["cta_btn"])}</a></p></header>
+  <section class="sec"><ul class="fact-grid">{seg}</ul></section>
+  <section class="facts"><h2>{e(U["facts"])}</h2><dl>{facts}</dl><p class="muted">{e(B["docs"])}</p></section>
+  <section class="sec"><h2 class="sec-title">{e(B["names_title"])}</h2>
+    <div class="table-wrap"><table class="names"><thead><tr><th>Polski</th><th>English</th><th>Français</th></tr></thead><tbody>{names}</tbody></table></div></section>
+  <section class="sec enquiry" id="enquiry"><h2 class="sec-title">{e(B["form_title"])}</h2><p>{e(B["form_lead"])}</p>{enquiry}</section>
+</div>'''
+    write(P['trade'], shell_i18n(lang, B['title'], B['lead'], main, P['trade'], current='trade', image=HOME['hero_image']))
+
+
+def i_contact(lang):
+    T = I18N[lang]
+    U, P, C = T['ui'], {k: v[lang] for k, v in PATHS.items()}, T['contact']
+    L = {'en': ('Name', 'Phone', 'Subject', 'Message'), 'fr': ('Nom', 'Téléphone', 'Objet', 'Message')}[lang]
+    contact_form = form('kontakt', [('text', 'imie', L[0], True), ('email', 'email', 'E-mail', True), ('tel', 'telefon', L[1], False), ('text', 'zamowienie', L[2], False),
+                                    ('textarea', 'wiadomosc', L[3], True)], U['send'], U['form_ok'], extra=f'<input type="hidden" name="jezyk" value="{lang}">',
+                        err={'en': 'Sending failed. Please email info@lumaca.eco', 'fr': 'Échec de l’envoi. Écrivez-nous : info@lumaca.eco'}[lang])
+    main = f'''
+<div class="wrap">
+  {crumbs([(U['home'], P['home']), (C['title'], P['contact'])])}
+  <header class="page-head"><h1>{e(C["title"])}</h1><p class="lead">{e(C["lead"])}</p></header>
+  <div class="contact-grid">
+    <div class="label-card dark"><p class="kind">Lumaca</p>
+      <p class="big"><a href="tel:{tel(S["phone"])}">{e(S["phone"])}</a></p><p class="big"><a href="mailto:{e(S["email"])}">{e(S["email"])}</a></p>
+      <p>{e(S["address"])}<br>Poland</p><p>{e(C["hours"])}</p>
+      <p><a href="https://www.google.com/maps/search/?api=1&amp;query={quote(S["address"])}">{e(C["map"])}</a></p>{social()}</div>
+    {contact_form}
+  </div>
+</div>'''
+    write(P['contact'], shell_i18n(lang, C['title'], C['lead'], main, P['contact'], current='contact', ld=[ORG]))
+
+
+def i18n_pages():
+    for lang in ('en', 'fr'):
+        i_home(lang)
+        i_shop(lang)
+        for s, p in PR.items():
+            i_product(s, p, lang)
+        i_how(lang)
+        i_kitchen(lang)
+        i_trade(lang)
+        i_contact(lang)
 
 
 def write_sitemap():
@@ -836,9 +1272,13 @@ def main():
     press_page()
     contact_page()
     plain_pages()
+    articles_page()
+    for s, a in ARTICLES.items():
+        article_page(s, a)
+    i18n_pages()
     not_found()
     write_sitemap()
-    print(f'Lumaca: {len(OUT)} pages, {len(PR)} products, {len(R)} recipes → {SITE}')
+    print(f'Lumaca: {len(OUT)} pages, {len(PR)} products, {len(R)} recipes, {len(ARTICLES)} articles, EN + FR → {SITE}')
 
 
 if __name__ == '__main__':
