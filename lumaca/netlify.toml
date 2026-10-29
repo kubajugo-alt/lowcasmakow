@@ -79,12 +79,36 @@
   from = "/sample-page/"
   to = "/"
   status = 301
-# old WordPress /en/ and /fr/ pages (existing files win, so the new EN/FR pages are unaffected)
+# old WordPress English and French pages
 [[redirects]]
-  from = "/en/*"
-  to = "/en/"
+  from = "/en/about-us/"
+  to = "/en/our-kitchen/"
   status = 301
 [[redirects]]
-  from = "/fr/*"
-  to = "/fr/"
+  from = "/en/why-snails/"
+  to = "/en/how-to-serve/"
+  status = 301
+[[redirects]]
+  from = "/fr/a-propos-de-nous/"
+  to = "/fr/notre-cuisine/"
+  status = 301
+[[redirects]]
+  from = "/fr/pourquoi-les-escargots/"
+  to = "/fr/comment-servir/"
+  status = 301
+[[redirects]]
+  from = "/about-us/"
+  to = "/en/our-kitchen/"
+  status = 301
+[[redirects]]
+  from = "/why-snails/"
+  to = "/en/how-to-serve/"
+  status = 301
+[[redirects]]
+  from = "/a-propos-de-nous/"
+  to = "/fr/notre-cuisine/"
+  status = 301
+[[redirects]]
+  from = "/pourquoi-les-escargots/"
+  to = "/fr/comment-servir/"
   status = 301
