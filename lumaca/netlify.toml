@@ -12,6 +12,21 @@
 
 # Addresses of the old WordPress shop at lumaca.eco → the new pages (for when the domain moves here)
 [[redirects]]
+  from = "/sklep/slimaki-z-chili.html"
+  to = "/sklep/slimaki-w-oleju-z-chili.html"
+  status = 301
+
+[[redirects]]
+  from = "/en/shop/slimaki-z-chili.html"
+  to = "/en/shop/slimaki-w-oleju-z-chili.html"
+  status = 301
+
+[[redirects]]
+  from = "/fr/boutique/slimaki-z-chili.html"
+  to = "/fr/boutique/slimaki-w-oleju-z-chili.html"
+  status = 301
+
+[[redirects]]
   from = "/produkt/slimaki-w-sosie-bolognese/"
   to = "/sklep/slimaki-w-sosie-pomidorowym.html"
   status = 301

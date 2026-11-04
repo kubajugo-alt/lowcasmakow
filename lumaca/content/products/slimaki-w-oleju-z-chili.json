@@ -1,5 +1,5 @@
 {
-  "title": "z chili",
+  "title": "w oleju z chili",
   "kind": "Ślimaki",
   "category": "sloiki",
   "order": 5,
@@ -8,10 +8,10 @@
   "bestseller": false,
   "badge": "Wkrótce",
   "stripe": "#8E1F1A",
-  "lead": "Nowy smak w przygotowaniu: mięso ślimaka z chili. Zapisz się do newslettera, damy znać o premierze.",
+  "lead": "Nowy smak w przygotowaniu: mięso ślimaka w oleju z chili. Zapisz się do newslettera, damy znać o premierze.",
   "image": {
-    "src": "/img/uploads/sloik-z-chili.jpg",
-    "alt": "Słoik: ślimaki z chili (wkrótce)"
+    "src": "/img/uploads/sloik-w-oleju-z-chili.jpg",
+    "alt": "Słoik: ślimaki w oleju z chili (wkrótce)"
   },
   "occasion": "Wieczór z winem",
   "ready_in_5": "",
@@ -26,21 +26,21 @@
     "chrupiacy-tost-ze-slimakami-i-serem-bursztyn"
   ],
   "weight": 450,
-  "name_en": "Snails with chili",
-  "name_fr": "Escargots au piment",
+  "name_en": "Snails in chili oil",
+  "name_fr": "Escargots à l’huile pimentée",
   "en": {
     "kind": "Snails",
-    "title": "with chili",
+    "title": "in chili oil",
     "badge": "Coming soon",
-    "lead": "A new flavour in the works: snail meat with chili.",
+    "lead": "A new flavour in the works: snail meat in chili oil.",
     "occasion": "Wine evening",
     "allergens": "molluscs (snails)"
   },
   "fr": {
     "kind": "Escargots",
-    "title": "au piment",
+    "title": "à l’huile pimentée",
     "badge": "Bientôt",
-    "lead": "Une nouvelle saveur en préparation : chair d’escargot au piment.",
+    "lead": "Une nouvelle saveur en préparation : chair d’escargot à l’huile pimentée.",
     "occasion": "Apéritif",
     "allergens": "mollusques (escargots)"
   }
