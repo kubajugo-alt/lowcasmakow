@@ -3,16 +3,57 @@
   "lead": "Zapomniany polski przysmak wraca na stół. Opowiadamy, skąd się wziął, kto go gotuje i dlaczego warto spróbować. Tu znajdziesz też nasze artykuły i poradniki.",
   "story": [
     {
-      "title": "Ślimaki były polskim przysmakiem",
-      "text": "Jedli je nasi przodkowie. Przepisy na ślimaki znajdziemy już w pierwszej polskiej książce kucharskiej, „Compendium ferculorum” Stanisława Czernieckiego z 1682 roku."
+      "year": "Średniowiecze",
+      "title": "Ślimak na post",
+      "text": "Ślimaki, podobnie jak ryby, raki i bobrze ogony, nie były uznawane za mięso. Według przekazów papież Grzegorz VII ogłosił je potrawą postną, a cystersi i dominikanie hodowali je w przyklasztornych ogrodach."
     },
     {
-      "title": "Polska o nich zapomniała, choć nadal je produkuje",
-      "text": "Od lat hodujemy i eksportujemy ślimaki, głównie do Francji, a sami prawie ich nie jemy."
+      "year": "ok. 1140",
+      "title": "Cystersi w Jędrzejowie",
+      "text": "Klasztor powstał jako filia francuskiego opactwa Morimond. Mnisi przenieśli z Francji układ klasztoru, ogrody i zwyczaje żywieniowe, w tym, jak przyjmują historycy, hodowlę ślimaków."
     },
     {
-      "title": "Lumaca przywraca je na polski stół",
-      "text": "W nowoczesnej formie: gotowe dania ze ślimaków z polskich hodowli, przyrządzane w małej przetwórni w Świętokrzyskiem. Wystarczy podgrzać i podać."
+      "year": "1534",
+      "title": "„O ziołach i o mocy ich”",
+      "text": "Stefan Falimirz opisuje ślimaki zbierane w ogrodach, ich postny charakter i zastosowanie w medycynie klasztornej.",
+      "image": {
+        "src": "/img/uploads/falimirz-o-ziolach-strona-tytulowa.jpg",
+        "alt": "Strona tytułowa traktatu Stefana Falimirza „O ziołach i o mocy ich”"
+      }
+    },
+    {
+      "year": "XVI wiek",
+      "title": "„Bądźcie rybami na wieki”",
+      "text": "Papież Pius V miał podobno taką słabość do ślimaków, że zadekretował, by uznać je za ryby: Estote pisces in aeternum."
+    },
+    {
+      "year": "1682",
+      "title": "„Compendium ferculorum”",
+      "text": "W pierwszej polskiej książce kucharskiej Stanisław Czerniecki umieszcza ślimaki w dodatku do potraw rybnych, jako luksusowe danie na wigilijne stoły magnatów.",
+      "image": {
+        "src": "/img/uploads/compendium-ferculorum-strona-tytulowa.jpg",
+        "alt": "Strona tytułowa „Compendium ferculorum” Stanisława Czernieckiego, Kraków 1682"
+      }
+    },
+    {
+      "year": "1695–1696",
+      "title": "Na stole Jana III Sobieskiego",
+      "text": "Księgi szafarskie dworu królewskiego notują ślimaki kupowane całymi kopami, po 60 sztuk. Podawano je z pieprzem, imbirem, cynamonem i rodzynkami, a nawet w szarym sosie z piernikiem."
+    },
+    {
+      "year": "1783",
+      "title": "„Kucharz doskonały”",
+      "text": "Wojciech Wielądko zamieszcza w swojej książce kucharskiej receptury na potrawy ze ślimaków."
+    },
+    {
+      "year": "XX wiek",
+      "title": "Przerwana tradycja",
+      "text": "Wojny i komunizm, który uznał ślimaki za burżujski wymysł, wypchnęły je z polskiej kuchni. Polska nadal je hoduje i eksportuje, głównie do Francji, ale sama prawie ich nie je."
+    },
+    {
+      "year": "Dziś",
+      "title": "Lumaca przywraca je na stół",
+      "text": "W nowoczesnej formie: gotowe dania ze ślimaków z polskich hodowli, przyrządzane w małej przetwórni u podnóża Gór Świętokrzyskich. Wystarczy podgrzać i podać."
     }
   ],
   "grazyna_title": "Grażyna i Tomasz Nawroccy",
@@ -46,5 +87,6 @@
   ],
   "lowca_title": "Od hodowli do słoika z Łowcą Smaków",
   "lowca_text": "Łowca Smaków, portal o antropologii jedzenia, odwiedził nas w przetwórni i u hodowcy. Razem gotujemy też ślimaki według dawnych przepisów.",
-  "lowca_url": "https://lowca-smakow.netlify.app/historie/slimaki-wedlug-czernieckiego.html"
+  "lowca_url": "https://lowca-smakow.netlify.app/historie/slimaki-wedlug-czernieckiego.html",
+  "story_lead": "Krótka historia ślimaków na polskim stole, na podstawie tekstu Grażyny Nawrockiej."
 }

@@ -144,7 +144,7 @@ collections:
   - name: articles
     label: 'Artykuły'
     label_singular: 'Artykuł'
-    description: 'Poradniki i historie. Treść w Markdown: ## śródtytuł, **pogrubienie**, [link](/sklep/...).'
+    description: 'Poradniki i historie. Treść w Markdown: ## śródtytuł, **pogrubienie**, *kursywa*, [link](/sklep/...), ![podpis](/img/uploads/plik.jpg) jako osobny akapit.'
     folder: lumaca/content/articles
     create: true
     extension: json
@@ -154,10 +154,11 @@ collections:
     fields:
       - {name: title, label: 'Tytuł'}
       - {name: date, label: 'Data', widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, format: 'YYYY-MM-DD'}
+      - {name: author, label: 'Autor', required: false, hint: 'Puste = Lumaca'}
       - {name: lead, label: 'Wstęp (też opis dla Google)', widget: text}
       - {name: image, label: 'Zdjęcie', widget: object, fields: *image}
       - {name: keywords, label: 'Frazy dla Google', required: false}
-      - {name: body, label: 'Treść', widget: markdown, buttons: [bold, link, heading-two, bulleted-list], editor_components: []}
+      - {name: body, label: 'Treść', widget: markdown, buttons: [bold, italic, link, heading-two, bulleted-list], editor_components: [image]}
       - {name: products, label: 'Produkty obok artykułu', widget: relation, collection: products, value_field: '{{slug}}', search_fields: [title], display_fields: ['{{kind}} {{title}}'], multiple: true, required: false}
       - {name: recipes, label: 'Przepisy pod artykułem', widget: relation, collection: recipes, value_field: '{{slug}}', search_fields: [title], display_fields: [title], multiple: true, required: false}
 
@@ -222,7 +223,7 @@ collections:
     fields:
       - {name: title, label: 'Tytuł'}
       - {name: order, label: 'Kolejność w stopce', widget: number, value_type: int, default: 10}
-      - {name: body, label: 'Treść', widget: markdown, buttons: [bold, link, heading-two, bulleted-list], editor_components: []}
+      - {name: body, label: 'Treść', widget: markdown, buttons: [bold, italic, link, heading-two, bulleted-list], editor_components: [image]}
 
   - name: settings
     label: 'Ustawienia i stałe teksty'
@@ -283,7 +284,16 @@ collections:
         fields:
           - {name: title, label: 'Tytuł'}
           - {name: lead, label: 'Wstęp', widget: text}
-          - {name: story, label: 'Opowieść w trzech zdaniach', widget: list, fields: [{name: title, label: 'Zdanie'}, {name: text, label: 'Rozwinięcie', widget: text}]}
+          - {name: story_lead, label: 'Historia: wstęp', required: false}
+          - name: story
+            label: 'Historia: oś czasu'
+            widget: list
+            summary: '{{year}} · {{title}}'
+            fields:
+              - {name: year, label: 'Kiedy', hint: 'np. „1682”, „XVI wiek”, „Dziś”'}
+              - {name: title, label: 'Tytuł'}
+              - {name: text, label: 'Tekst', widget: text}
+              - {name: image, label: 'Ilustracja (opcjonalnie)', widget: object, required: false, collapsed: true, fields: *image}
           - {name: grazyna_title, label: 'Grażyna: tytuł'}
           - {name: grazyna_text, label: 'Grażyna: tekst', widget: text}
           - {name: grazyna_image, label: 'Grażyna: zdjęcie', widget: object, fields: *image}

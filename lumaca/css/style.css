@@ -351,10 +351,33 @@ p { margin: 0 0 1em; }
 .faq details p { color: var(--muted); max-width: 44em; }
 
 /* kitchen page */
-.story ol { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-.story .num { font: 600 2.6rem/1 var(--serif); color: var(--gold); display: block; margin-bottom: 12px; }
-.story p { color: var(--muted); }
-@media (max-width: 860px) { .story ol { grid-template-columns: 1fr; } }
+.tl-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 56px; align-items: start; margin-top: 28px; }
+.timeline { list-style: none; padding: 0; margin: 0; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 150px; top: 8px; bottom: 8px; width: 1px; background: var(--gold); }
+.timeline li { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 0 41px; align-items: start; padding: 0 0 28px; position: relative; }
+.timeline li::before { content: ""; position: absolute; left: 145px; top: 9px; width: 11px; height: 11px; border-radius: 50%; background: var(--linen); border: 2px solid var(--gold); }
+.tl-year { font: 600 1.1rem/1.3 var(--serif); color: var(--gold-deep); text-align: right; margin: 0; }
+.tl-body h3 { margin: 0 0 .3em; }
+.tl-body p { margin: 0; color: var(--muted); max-width: 62ch; }
+.timeline li:last-child .tl-year { color: var(--ink); }
+.tl-figs { position: sticky; top: 120px; display: grid; gap: 28px; }
+.tl-fig { margin: 0; }
+.tl-fig img { width: 100%; height: auto; border: 1px solid var(--line); box-shadow: 0 8px 22px rgba(27,26,24,.18); }
+.tl-fig figcaption { font-size: .85rem; color: var(--muted); margin-top: 8px; font-style: italic; }
+.story .more-link { margin-top: 4px; }
+@media (max-width: 960px) {
+  .tl-wrap { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .tl-figs { position: static; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 520px; }
+}
+@media (max-width: 720px) {
+  .timeline::before { left: 6px; }
+  .timeline li { grid-template-columns: minmax(0, 1fr); gap: 4px; padding-left: 30px; }
+  .timeline li::before { left: 1px; top: 6px; }
+  .tl-year { text-align: left; font-size: 1.05rem; }
+}
+.art-fig { margin: 8px 0 28px; max-width: 420px; }
+.art-fig img { width: 100%; height: auto; border: 1px solid var(--line); box-shadow: 0 8px 22px rgba(27,26,24,.16); }
+.art-fig figcaption { font-size: .88rem; color: var(--muted); margin-top: 8px; font-style: italic; }
 .person { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; margin-top: 64px; }
 .person figure { margin: 0; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; background: var(--ink-2); }
 .person figure img { width: 100%; height: 100%; object-fit: cover; }

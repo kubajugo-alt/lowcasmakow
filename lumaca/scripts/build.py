@@ -149,15 +149,20 @@ def credits(images):
 
 
 def md(text):
-    """Tiny Markdown: paragraphs, ##/### headings, - lists, - [ ] checklists, | tables |, **bold**, [links](url)."""
+    """Tiny Markdown: paragraphs, ##/### headings, - lists, - [ ] checklists, | tables |, ![images](/img/...), **bold**, *italic*, [links](url)."""
     out = []
     for block in re.split(r'\n\s*\n', (text or '').strip()):
         def inline(s):
             s = e(s)
             s = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', s)
+            s = re.sub(r'(?<![*\w])\*(?=\S)(.+?)(?<=\S)\*(?![*\w])', r'<em>\1</em>', s)
             return re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href="\2">\1</a>', s)
         lines = block.splitlines()
-        if block.startswith(('## ', '### ')):
+        pic = re.match(r'^!\[(.+?)\]\((/[^)\s]+)\)$', block.strip())
+        if pic:
+            out.append(f'<figure class="art-fig"><img src="{e(pic.group(2))}" alt="{e(pic.group(1))}" loading="lazy" decoding="async">'
+                       f'<figcaption>{inline(pic.group(1))}</figcaption></figure>')
+        elif block.startswith(('## ', '### ')):
             out.append(f'<h2>{inline(block.split(" ", 1)[1])}</h2>')
         elif all(l.startswith('|') for l in lines):
             rows = [[c.strip() for c in l.strip().strip('|').split('|')] for l in lines if not re.match(r'^[|\s:-]+$', l)]
@@ -795,7 +800,11 @@ def where_page():
 
 def kitchen_page():
     K = KITCHEN
-    story = ''.join(f'<li><span class="num">{k + 1}</span><h3>{e(s["title"])}</h3><p>{e(s["text"])}</p></li>' for k, s in enumerate(K['story']))
+    story = ''.join(f'<li><p class="tl-year">{e(s.get("year") or k + 1)}</p><div class="tl-body"><h3>{e(s["title"])}</h3><p>{e(s["text"])}</p></div></li>'
+                    for k, s in enumerate(K['story']))
+    figs = ''.join(f'<figure class="tl-fig">{img(s["image"], "(max-width:720px) 45vw, 260px")}<figcaption>{e(s.get("year", ""))} · {e(s["title"])}</figcaption></figure>'
+                   for s in K['story'] if (s.get('image') or {}).get('src'))
+    history = next((x for x in ARTICLES if x == 'slimaki-w-polsce-historia'), None)
     facts = ''.join(f'<li><h3>{e(f["title"])}</h3><p>{e(f["text"])}</p></li>' for f in K['facts'])
     gphoto = img(K['grazyna_image'], '(max-width:720px) 100vw, 40vw') or '<div class="photo-todo"><img src="/img/mark-yellow.png" alt="" width="110" height="49"><p>Tu zdjęcie Grażyny i Tomasza w przetwórni</p></div>'
     main = f'''
@@ -805,7 +814,10 @@ def kitchen_page():
     <h1>{e(K["title"])}</h1>
     <p class="lead">{e(K["lead"])}</p>
   </header>
-  <section class="story" aria-labelledby="h-story"><h2 id="h-story" class="sec-title">Zapomniany polski przysmak</h2><ol>{story}</ol></section>
+  <section class="story" aria-labelledby="h-story"><h2 id="h-story" class="sec-title">Zapomniany polski przysmak</h2>
+    {f'<p class="sec-lead">{e(K["story_lead"])}</p>' if K.get('story_lead') else ''}
+    <div class="tl-wrap"><ol class="timeline">{story}</ol>{f'<div class="tl-figs">{figs}</div>' if figs else ''}</div>
+    {f'<p class="more-link"><a class="btn btn-line" href="/artykuly/{history}.html">Przeczytaj całą historię</a></p>' if history else ''}</section>
   <section class="person">
     <figure>{gphoto}</figure>
     <div class="label-card dark"><p class="kind">Właściciele</p><h2>{e(K["grazyna_title"])}</h2><p>{e(K["grazyna_text"])}</p></div>
@@ -1098,7 +1110,7 @@ def article_page(slug, a):
   {crumbs([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/'), ('Artykuły', '/artykuly/'), (a['title'], f'/artykuly/{slug}.html')])}
   <article class="article">
     <header class="article-head">
-      <p class="kind">{pl_date(a.get("date"))} · Lumaca</p>
+      <p class="kind">{pl_date(a.get("date"))} · {e(a.get("author") or "Lumaca")}</p>
       <h1>{e(a["title"])}</h1>
       <p class="lead">{e(a["lead"])}</p>
     </header>
@@ -1114,7 +1126,7 @@ def article_page(slug, a):
     path = f'/artykuly/{slug}.html'
     ld = [crumbs_ld([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/'), ('Artykuły', '/artykuly/'), (a['title'], path)]),
           {'@type': 'Article', 'headline': a['title'], 'description': a['lead'], 'image': [abs_image(a['image'])], 'datePublished': a.get('date'),
-           'author': {'@type': 'Organization', 'name': 'Lumaca'}, 'publisher': {'@type': 'Organization', 'name': 'Lumaca', 'logo': {'@type': 'ImageObject', 'url': SITE + '/img/logo-badge.png'}},
+           'author': {'@type': 'Person', 'name': a['author']} if a.get('author') else {'@type': 'Organization', 'name': 'Lumaca'}, 'publisher': {'@type': 'Organization', 'name': 'Lumaca', 'logo': {'@type': 'ImageObject', 'url': SITE + '/img/logo-badge.png'}},
            'keywords': a.get('keywords', ''), 'inLanguage': 'pl', 'mainEntityOfPage': SITE + path}]
     images = [a['image']] + [PR[x]['image'] for x in prods] + [R[x]['image'] for x in recs]
     write(path, shell(a['title'], a['lead'], main, images, current='Nasza kuchnia', path=path, image=a['image'], og_type='article', ld=ld))
