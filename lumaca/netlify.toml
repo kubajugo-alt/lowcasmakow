@@ -12,6 +12,11 @@
 
 # Addresses of the old WordPress shop at lumaca.eco → the new pages (for when the domain moves here)
 [[redirects]]
+  from = "/przepisy/spaghetti-ze-slimakami-w-sosie-pomidorowym.html"
+  to = "/przepisy/slimaki-w-pomidorach-pod-kruszonka.html"
+  status = 301
+
+[[redirects]]
   from = "/sklep/slimaki-z-chili.html"
   to = "/sklep/slimaki-w-oleju-z-chili.html"
   status = 301

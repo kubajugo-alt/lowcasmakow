@@ -1,0 +1,75 @@
+{
+  "title": "Ślimaki w pomidorach pod chrupiącą kruszonką",
+  "order": 5,
+  "time": "15 min",
+  "product": "slimaki-w-sosie-pomidorowym",
+  "image": {
+    "src": "/img/uploads/podanie-pomidory-kruszonka.jpg",
+    "alt": "Ślimaki w sosie pomidorowym zapieczone pod złotą kruszonką z panko, natki i parmezanu w glinianym naczyniu, obok bagietka i słoik Lumaca"
+  },
+  "way": "Styl tapas",
+  "lead": "Ślimaki w sosie pomidorowym zapieczone pod kruszonką z panko, natki i parmezanu. Podawajcie gorące, najlepiej ze świeżą bagietką do wyjadania pysznego sosu!",
+  "ingredients": [
+    {
+      "q": 1,
+      "u": "słoik",
+      "n": "Ślimaki w sosie pomidorowym Lumaca"
+    },
+    {
+      "q": 3.5,
+      "u": "łyżka",
+      "n": "Bułka tarta, najlepiej gruba, typu panko"
+    },
+    {
+      "q": 1,
+      "u": "garść",
+      "n": "Posiekana świeża natka pietruszki"
+    },
+    {
+      "q": 2,
+      "u": "łyżka",
+      "n": "Tarty parmezan albo grana padano"
+    },
+    {
+      "q": 2.5,
+      "u": "łyżka",
+      "n": "Oliwa z oliwek"
+    },
+    {
+      "q": 1,
+      "u": "szt.",
+      "n": "Świeża bagietka do podania"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Rozgrzej piekarnik",
+      "text": "Rozgrzej piekarnik do 190°C, najlepiej z funkcją góra-dół albo grill."
+    },
+    {
+      "title": "Kruszonka",
+      "text": "W miseczce wymieszaj bułkę tartą, posiekaną pietruszkę i tarty ser. Wlej oliwę i wymieszaj palcami, aż powstanie wilgotna kruszonka, przypominająca mokry piasek."
+    },
+    {
+      "title": "Ślimaki do naczynia",
+      "text": "Przelej całą zawartość słoika, ślimaki razem z sosem pomidorowym, do małego naczynia żaroodpornego."
+    },
+    {
+      "title": "Posyp kruszonką",
+      "text": "Posyp ślimaki przygotowaną kruszonką tak, aby równo przykryła sos."
+    },
+    {
+      "title": "Zapiecz",
+      "text": "Wstaw do piekarnika na około 6–8 minut. Obserwuj kruszonkę: wyjmij danie, gdy góra ładnie się zrumieni i zrobi się chrupiąca.",
+      "minutes": 7
+    },
+    {
+      "title": "Podaj",
+      "text": "Podawajcie gorące, najlepiej ze świeżą bagietką do wyjadania pysznego sosu!"
+    }
+  ],
+  "tip": "Kruszonkę możesz przygotować wcześniej i trzymać w lodówce. Wtedy przed podaniem zostaje tylko przelać słoik i zapiec.",
+  "wine": "Lekkie czerwone wino.",
+  "servings": 2,
+  "servings_unit": "osoby"
+}

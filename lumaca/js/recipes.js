@@ -31,7 +31,7 @@
       if (q >= 1000) return String(q / 1000).replace('.', ',') + (u === 'g' ? ' kg' : ' l');
       return q + ' ' + u;
     }
-    q = Math.max(0.25, Math.round(q * 4) / 4);
+    q = q >= 1 ? Math.round(q * 2) / 2 : Math.max(0.25, Math.round(q * 4) / 4);
     var unit = u;
     if (UNITS[u]) unit = q % 1 ? UNITS[u][3] : plural(q, UNITS[u]);
     return (fmtNum(q) + (unit ? ' ' + unit : '')).trim();
