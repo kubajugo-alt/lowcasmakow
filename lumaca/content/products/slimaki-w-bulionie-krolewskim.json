@@ -41,7 +41,7 @@
   "ingredients": "mięso ślimaka gotowane w bulionie warzywnym z dodatkiem białego wina wytrawnego, woda, przyprawy",
   "allergens": "mięczaki (ślimaki); siarczyny z wina i seler z bulionu: do potwierdzenia z etykietą",
   "storage": "Przed otwarciem w suchym, chłodnym miejscu, w temperaturze pokojowej. Po otwarciu w lodówce do 3 dni.",
-  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "shelf_life": "6 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
   "video": "",
   "recipes": [
     "slimaki-w-masle-czosnkowym",
@@ -62,7 +62,7 @@
     "allergens": "molluscs (snails); sulphites from the wine and celery from the stock: to be confirmed against the label",
     "storage": "Unopened: in a cool, dry place at room temperature. Once opened: refrigerate and eat within 3 days.",
     "net_weight": "250 g, including 100 g of snail meat",
-    "shelf_life": "12 months from production (confirmed by SGS tests)",
+    "shelf_life": "6 months from production (confirmed by SGS tests)",
     "ways": [
       {
         "title": "On toast",
@@ -89,7 +89,7 @@
     "allergens": "mollusques (escargots) ; sulfites du vin et céleri du bouillon : à confirmer selon l’étiquette",
     "storage": "Avant ouverture : dans un endroit frais et sec, à température ambiante. Après ouverture : au réfrigérateur, à consommer sous 3 jours.",
     "net_weight": "250 g, dont 100 g de chair d’escargot",
-    "shelf_life": "12 mois à compter de la production (confirmé par les analyses SGS)",
+    "shelf_life": "6 mois à compter de la production (confirmé par les analyses SGS)",
     "ways": [
       {
         "title": "Sur une tartine",

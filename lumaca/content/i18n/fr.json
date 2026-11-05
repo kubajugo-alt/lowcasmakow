@@ -93,7 +93,7 @@
       },
       {
         "q": "Comment les conserver ?",
-        "a": "Fermé, le bocal se conserve 12 mois à température ambiante, dans un endroit frais et sec. Après ouverture, au réfrigérateur, à consommer sous 3 jours."
+        "a": "Fermé, le bocal se conserve 6 mois à température ambiante, dans un endroit frais et sec. Après ouverture, au réfrigérateur, à consommer sous 3 jours."
       },
       {
         "q": "Allergènes ?",
@@ -137,7 +137,7 @@
       },
       {
         "title": "Étiquettes et conservation contrôlées",
-        "text": "Étiquettes vérifiées par l’inspection polonaise de la qualité alimentaire (IJHARS). Douze mois à température ambiante, confirmés par les analyses du laboratoire SGS."
+        "text": "Étiquettes vérifiées par l’inspection polonaise de la qualité alimentaire (IJHARS). Six mois à température ambiante, confirmés par les analyses du laboratoire SGS."
       },
       {
         "title": "Un millésime",
@@ -147,7 +147,7 @@
   },
   "trade": {
     "title": "Distributeurs, restaurants et importateurs",
-    "lead": "Une entrée prête qui fait gagner du temps en cuisine, et un produit régional singulier. Conservation 12 mois à température ambiante, sans chaîne du froid.",
+    "lead": "Une entrée prête qui fait gagner du temps en cuisine, et un produit régional singulier. Conservation 6 mois à température ambiante, sans chaîne du froid.",
     "segments": [
       {
         "title": "Importateurs et distributeurs",
@@ -173,7 +173,7 @@
       },
       {
         "k": "Conservation",
-        "v": "12 mois à température ambiante, sans chaîne du froid (analyses SGS)"
+        "v": "6 mois à température ambiante, sans chaîne du froid (analyses SGS)"
       },
       {
         "k": "Codes et étiquettes",

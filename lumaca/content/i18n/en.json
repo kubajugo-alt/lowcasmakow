@@ -93,7 +93,7 @@
       },
       {
         "q": "How should I store it?",
-        "a": "Unopened jars keep for 12 months at room temperature in a cool, dry place. Once opened, refrigerate and eat within 3 days."
+        "a": "Unopened jars keep for 6 months at room temperature in a cool, dry place. Once opened, refrigerate and eat within 3 days."
       },
       {
         "q": "Allergens?",
@@ -137,7 +137,7 @@
       },
       {
         "title": "Tested labels and shelf life",
-        "text": "Labels checked by the Polish food quality inspectorate (IJHARS). Twelve months at room temperature, confirmed by SGS laboratory tests."
+        "text": "Labels checked by the Polish food quality inspectorate (IJHARS). Six months at room temperature, confirmed by SGS laboratory tests."
       },
       {
         "title": "A vintage",
@@ -147,7 +147,7 @@
   },
   "trade": {
     "title": "For retailers, restaurants and importers",
-    "lead": "A ready starter that saves kitchen time, and a distinctive regional product. Shelf-stable for 12 months, no cold chain needed.",
+    "lead": "A ready starter that saves kitchen time, and a distinctive regional product. Shelf-stable for 6 months, no cold chain needed.",
     "segments": [
       {
         "title": "Importers and distributors",
@@ -173,7 +173,7 @@
       },
       {
         "k": "Shelf life",
-        "v": "12 months at room temperature, no cold chain (SGS tests)"
+        "v": "6 months at room temperature, no cold chain (SGS tests)"
       },
       {
         "k": "Codes and labels",

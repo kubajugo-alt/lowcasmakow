@@ -72,7 +72,7 @@ and open the contact form with the product filled in. With the key, they add to 
 
 ## To confirm with the owners before going live
 
-- Prices: jars at 49,90 zł (the plan's recommendation; the old shop had 44,90 zł), sets at 199 zł (4 jars) and 99 zł (2 jars).
+- Prices: retail prices follow the B2B offer of 5 Nov 2026: bulion, lemon-parsley oil and chili oil 49,90 zł, pesto 59,90 zł, tomato 54,90 zł, Christmas set 199 zł (the old shop had 44,90 zł), sets at 199 zł (4 jars) and 99 zł (2 jars).
 - "Rocznik 2026" and the limited Christmas series (a decision listed in the plan).
 - One phone number for everything (the site uses +48 501 501 130).
 - Allergens: molluscs on every jar; whether the court-bouillon contains celery and the wine sulphites.

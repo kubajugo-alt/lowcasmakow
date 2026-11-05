@@ -3,7 +3,7 @@
   "kind": "Ślimaki",
   "category": "sloiki",
   "order": 3,
-  "price": 49.9,
+  "price": 59.9,
   "available": true,
   "bestseller": true,
   "badge": "",
@@ -41,7 +41,7 @@
   "ingredients": "mięso ślimaka gotowane w bulionie warzywnym z dodatkiem białego wina wytrawnego, świeża bazylia, orzechy włoskie, czosnek, sok z cytryny, sól, ser Bursztyn, olej rzepakowy, pieprz",
   "allergens": "mięczaki (ślimaki), orzechy włoskie, mleko (ser)",
   "storage": "Przed otwarciem w suchym, chłodnym miejscu, w temperaturze pokojowej. Po otwarciu w lodówce do 3 dni.",
-  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "shelf_life": "6 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
   "video": "",
   "recipes": [
     "tagliatelle-ze-slimakami-w-pesto",
@@ -61,7 +61,7 @@
     "allergens": "molluscs (snails), walnuts, milk (cheese)",
     "storage": "Unopened: in a cool, dry place at room temperature. Once opened: refrigerate and eat within 3 days.",
     "net_weight": "250 g, including 100 g of snail meat",
-    "shelf_life": "12 months from production (confirmed by SGS tests)",
+    "shelf_life": "6 months from production (confirmed by SGS tests)",
     "ways": [
       {
         "title": "On toast",
@@ -88,7 +88,7 @@
     "allergens": "mollusques (escargots), noix, lait (fromage)",
     "storage": "Avant ouverture : dans un endroit frais et sec, à température ambiante. Après ouverture : au réfrigérateur, à consommer sous 3 jours.",
     "net_weight": "250 g, dont 100 g de chair d’escargot",
-    "shelf_life": "12 mois à compter de la production (confirmé par les analyses SGS)",
+    "shelf_life": "6 mois à compter de la production (confirmé par les analyses SGS)",
     "ways": [
       {
         "title": "Sur une tartine",
