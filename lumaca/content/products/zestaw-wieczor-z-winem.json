@@ -1,0 +1,52 @@
+{
+  "title": "Wieczór z winem",
+  "kind": "Zestaw",
+  "category": "zestawy",
+  "order": 8,
+  "price": 99,
+  "available": true,
+  "bestseller": false,
+  "badge": "",
+  "stripe": "#B9C46A",
+  "lead": "Dwie przystawki na jeden wieczór: ślimaki w oleju cytrynowo-pietruszkowym na grzanki i ślimaki w bulionie królewskim do maśla czosnkowego. Z kartą przepisów.",
+  "image": {
+    "src": "/img/uploads/zestaw-wieczor-z-winem.jpg",
+    "alt": "Dwa słoiki Lumaca, grzanki ze ślimakami i białe wino przy świecach"
+  },
+  "occasion": "Wieczór z winem, kolacja dla gości",
+  "ready_in_5": "Grzanki w 5 minut, ślimaki w maśle czosnkowym w 5 minut: przepisy na karcie.",
+  "pairing": "Białe wytrawne wino, bagietka",
+  "net_weight": "2 × 250 g (2 × 100 g mięsa)",
+  "ingredients": "Skład każdego słoika na jego etykiecie.",
+  "allergens": "mięczaki (ślimaki)",
+  "storage": "Przed otwarciem w suchym, chłodnym miejscu, w temperaturze pokojowej. Po otwarciu w lodówce do 3 dni.",
+  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "video": "",
+  "recipes": [
+    "grzanki-ze-slimakami",
+    "slimaki-w-masle-czosnkowym"
+  ],
+  "weight": 900,
+  "en": {
+    "kind": "Set",
+    "title": "Wine evening",
+    "lead": "Two starters for one evening: snails in lemon and parsley oil for toast, and snails in court-bouillon for garlic butter. With a recipe card.",
+    "occasion": "Wine evening, dinner with guests",
+    "ready_in_5": "Toast in 5 minutes, snails in garlic butter in 5 minutes: recipes on the card.",
+    "pairing": "Dry white wine, baguette",
+    "ingredients": "Ingredients of each jar on its label.",
+    "allergens": "molluscs (snails)",
+    "net_weight": "2 × 250 g (2 × 100 g of snail meat)"
+  },
+  "fr": {
+    "kind": "Coffret",
+    "title": "Soirée vin",
+    "lead": "Deux entrées pour une soirée : escargots à l’huile citron-persil pour la tartine et escargots au court-bouillon pour le beurre à l’ail. Avec une carte de recettes.",
+    "occasion": "Apéritif, dîner entre amis",
+    "ready_in_5": "Tartines en 5 minutes, escargots au beurre à l’ail en 5 minutes : recettes sur la carte.",
+    "pairing": "Vin blanc sec, baguette",
+    "ingredients": "Composition de chaque bocal sur son étiquette.",
+    "allergens": "mollusques (escargots)",
+    "net_weight": "2 × 250 g (2 × 100 g de chair d’escargot)"
+  }
+}

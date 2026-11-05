@@ -1,0 +1,68 @@
+{
+  "title": "Tagliatelle ze ślimakami w zielonym pesto",
+  "order": 2,
+  "time": "10 min",
+  "product": "slimaki-w-zielonym-pesto",
+  "image": {
+    "src": "/img/uploads/podanie-makaron.jpg",
+    "alt": "Tagliatelle ze ślimakami w zielonym pesto i słoik Lumaca"
+  },
+  "way": "Z makaronem",
+  "lead": "Obiad, który robi się sam: makaron gotuje się 8 minut, a w tym czasie ślimaki w pesto są już gotowe.",
+  "ingredients": [
+    {
+      "q": 1,
+      "u": "słoik",
+      "n": "Ślimaki w zielonym pesto Lumaca"
+    },
+    {
+      "q": 200,
+      "u": "g",
+      "n": "Tagliatelle"
+    },
+    {
+      "q": 2,
+      "u": "łyżka",
+      "n": "Orzeszki piniowe albo posiekane orzechy włoskie"
+    },
+    {
+      "q": 30,
+      "u": "g",
+      "n": "Parmezan"
+    },
+    {
+      "q": null,
+      "u": "",
+      "n": "Sól i pieprz"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Ugotuj makaron",
+      "text": "Ugotuj makaron al dente w osolonej wodzie. Odlej pół szklanki wody z gotowania.",
+      "minutes": 8
+    },
+    {
+      "title": "Podgrzej ślimaki",
+      "text": "W tym czasie podsmaż zawartość słoika na patelni przez 3–4 minuty.",
+      "minutes": 4
+    },
+    {
+      "title": "Upraż orzeszki",
+      "text": "Upraż orzeszki na suchej patelni i odłóż na bok.",
+      "minutes": 2
+    },
+    {
+      "title": "Połącz",
+      "text": "Wrzuć odcedzony makaron na patelnię, dodaj kilka łyżek wody z gotowania i wymieszaj, aż sos oblepi makaron."
+    },
+    {
+      "title": "Podaj",
+      "text": "Podawaj z orzeszkami, parmezanem i świeżym pieprzem."
+    }
+  ],
+  "tip": "Woda z gotowania makaronu łączy pesto w gładki sos. Dodawaj ją po łyżce.",
+  "wine": "Białe wytrawne o świeżej kwasowości.",
+  "servings": 2,
+  "servings_unit": "osoby"
+}

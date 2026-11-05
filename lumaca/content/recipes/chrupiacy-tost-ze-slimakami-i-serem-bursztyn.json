@@ -1,0 +1,74 @@
+{
+  "title": "Chrupiący tost ze ślimakami i serem Bursztyn",
+  "order": 7,
+  "time": "15 min",
+  "product": "slimaki-w-oleju-z-chili",
+  "image": {
+    "src": "/img/uploads/podanie-tost-chili.jpg",
+    "alt": "Tosty z chleba na zakwasie ze ślimakami w oleju z chili, zapieczonym serem Bursztyn i dymką, obok słoik Lumaca ze ślimakami w oleju z chili"
+  },
+  "way": "Na toście",
+  "lead": "Chleb na zakwasie podsmażony na oliwie, ślimaki w oleju z chili i zapieczony ser Bursztyn. Ostro, chrupiąco i ciągnąco. Zajadajcie od razu, póki gorące!",
+  "ingredients": [
+    {
+      "q": 1,
+      "u": "słoik",
+      "n": "Ślimaki w oleju z chili Lumaca"
+    },
+    {
+      "q": 2,
+      "u": "szt.",
+      "n": "Kromka chleba na zakwasie"
+    },
+    {
+      "q": 1,
+      "u": "łyżka",
+      "n": "Oliwa z oliwek"
+    },
+    {
+      "q": 40,
+      "u": "g",
+      "n": "Ser Bursztyn (albo inny twardy, wyrazisty ser), starty na tarce"
+    },
+    {
+      "q": 1,
+      "u": "garść",
+      "n": "Posiekana zielona dymka"
+    }
+  ],
+  "steps": [
+    {
+      "title": "Rozgrzej piekarnik",
+      "text": "Rozgrzej piekarnik do 180°C."
+    },
+    {
+      "title": "Podsmaż chleb",
+      "text": "Rozgrzej na patelni trochę oliwy i podsmaż kromki chleba z obu stron, aż zrobią się rumiane i chrupiące.",
+      "minutes": 4
+    },
+    {
+      "title": "Na blaszkę",
+      "text": "Zdejmij chleb z patelni i połóż na blaszce do pieczenia."
+    },
+    {
+      "title": "Ślimaki",
+      "text": "Nałóż na chleb tyle ślimaków ze słoika, ile chcesz."
+    },
+    {
+      "title": "Ser",
+      "text": "Posyp wszystko grubo startym serem Bursztyn."
+    },
+    {
+      "title": "Zapiecz",
+      "text": "Wstaw do piekarnika i piecz tylko do momentu, aż ser całkowicie się rozpuści.",
+      "minutes": 5
+    },
+    {
+      "title": "Dymka i podanie",
+      "text": "Wyjmij tost, posyp go dymką i na koniec polej odrobiną oleju albo sosu, który został w słoiku. Zajadajcie od razu, póki gorące!"
+    }
+  ],
+  "tip": "Nie wylewaj oleju z chili ze słoika: kilka kropel na gorący tost to najlepsze wykończenie.",
+  "servings": 2,
+  "servings_unit": "osoby"
+}

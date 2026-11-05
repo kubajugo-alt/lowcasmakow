@@ -1,0 +1,61 @@
+{
+  "title": "Lio",
+  "kind": "Liofilizowane mięso ślimaka",
+  "category": "liofilizaty",
+  "order": 6,
+  "price": 80,
+  "available": true,
+  "bestseller": false,
+  "badge": "",
+  "stripe": "#B08A5A",
+  "lead": "Mięso ślimaka ugotowane w bulionie warzywnym z białym winem, a potem liofilizowane. Baza do własnego dania: ze 100 g po namoczeniu wychodzi ok. 280 g mięsa.",
+  "image": {
+    "src": "/img/uploads/lio-liofilizowane.jpg",
+    "alt": "Lio: liofilizowane mięso ślimaka w papierowej torebce"
+  },
+  "occasion": "Dla gotujących: risotto, makaron, sałatka",
+  "ready_in_5": "Namocz ok. 2 godziny w gorącym bulionie, potem podsmaż na maśle czosnkowym albo dodaj do risotto.",
+  "pairing": "Risotto, makaron, masło czosnkowe z natką",
+  "net_weight": "100 g (po namoczeniu ok. 280 g)",
+  "ingredients": "mięso ślimaka gotowane w bulionie warzywnym z dodatkiem białego wina wytrawnego, liofilizowane",
+  "allergens": "mięczaki (ślimaki)",
+  "storage": "W temperaturze pokojowej, w zamkniętym opakowaniu.",
+  "shelf_life": "12 miesięcy od daty produkcji (potwierdzone badaniami SGS)",
+  "video": "",
+  "recipes": [
+    "risotto-z-lio"
+  ],
+  "weight": 450,
+  "name_en": "Lio – freeze-dried snail meat",
+  "name_fr": "Lio – chair d’escargot lyophilisée",
+  "dish_image": {
+    "src": "/img/uploads/podanie-risotto.jpg",
+    "alt": "Risotto z mięsem ślimaka i torebka Lio"
+  },
+  "en": {
+    "kind": "Freeze-dried snail meat",
+    "title": "Lio",
+    "lead": "Snail meat cooked in vegetable stock with white wine, then freeze-dried. A base for your own cooking: 100 g makes about 280 g of meat once soaked.",
+    "occasion": "For cooks: risotto, pasta, salads",
+    "ready_in_5": "Soak for about 2 hours in hot stock, then sauté in garlic butter or add to risotto.",
+    "pairing": "Risotto, pasta, garlic butter with parsley",
+    "ingredients": "snail meat cooked in vegetable stock with dry white wine, freeze-dried",
+    "allergens": "molluscs (snails)",
+    "storage": "At room temperature, in the sealed bag.",
+    "net_weight": "100 g (about 280 g once soaked)",
+    "shelf_life": "12 months from production"
+  },
+  "fr": {
+    "kind": "Chair d’escargot lyophilisée",
+    "title": "Lio",
+    "lead": "Chair d’escargot cuite dans un bouillon de légumes au vin blanc, puis lyophilisée. Une base pour cuisiner : 100 g donnent environ 280 g de chair après réhydratation.",
+    "occasion": "Pour cuisiner : risotto, pâtes, salades",
+    "ready_in_5": "Réhydrater environ 2 heures dans un bouillon chaud, puis faire revenir au beurre à l’ail ou ajouter au risotto.",
+    "pairing": "Risotto, pâtes, beurre à l’ail et persil",
+    "ingredients": "chair d’escargot cuite dans un bouillon de légumes au vin blanc sec, lyophilisée",
+    "allergens": "mollusques (escargots)",
+    "storage": "À température ambiante, dans le sachet fermé.",
+    "net_weight": "100 g (environ 280 g après réhydratation)",
+    "shelf_life": "12 mois à compter de la production"
+  }
+}
