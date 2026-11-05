@@ -52,7 +52,7 @@ I18N = {lang: json.load(open(os.path.join(ROOT, 'content', 'i18n', lang + '.json
 PATHS = {'home': {'pl': '/', 'en': '/en/', 'fr': '/fr/'},
          'shop': {'pl': '/sklep/', 'en': '/en/shop/', 'fr': '/fr/boutique/'},
          'how': {'pl': '/przepisy/', 'en': '/en/how-to-serve/', 'fr': '/fr/comment-servir/'},
-         'kitchen': {'pl': '/nasza-historia/', 'en': '/en/our-kitchen/', 'fr': '/fr/notre-cuisine/'},
+         'kitchen': {'pl': '/nasza-historia/', 'en': '/en/our-story/', 'fr': '/fr/notre-histoire/'},
          'trade': {'pl': '/dla-firm/', 'en': '/en/trade/', 'fr': '/fr/professionnels/'},
          'contact': {'pl': '/kontakt/', 'en': '/en/contact/', 'fr': '/fr/contact/'}}
 

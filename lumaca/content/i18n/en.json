@@ -5,7 +5,7 @@
     "home": "Home",
     "shop": "Shop",
     "how": "How to serve",
-    "kitchen": "Our kitchen",
+    "kitchen": "Our story",
     "trade": "Trade & export",
     "contact": "Contact",
     "topbar": "Ready in 5 minutes · made in Poland",
@@ -102,7 +102,7 @@
     ]
   },
   "kitchen": {
-    "title": "Our kitchen",
+    "title": "Our story",
     "lead": "A forgotten Polish delicacy returns to the table. Where it comes from, who cooks it and why it is worth a try.",
     "story": [
       {

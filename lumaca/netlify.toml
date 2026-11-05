@@ -12,6 +12,26 @@
 
 # Addresses of the old WordPress shop at lumaca.eco → the new pages (for when the domain moves here)
 [[redirects]]
+  from = "/en/our-kitchen/*"
+  to = "/en/our-story/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/en/our-kitchen"
+  to = "/en/our-story/"
+  status = 301
+
+[[redirects]]
+  from = "/fr/notre-cuisine/*"
+  to = "/fr/notre-histoire/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/fr/notre-cuisine"
+  to = "/fr/notre-histoire/"
+  status = 301
+
+[[redirects]]
   from = "/nasza-kuchnia/*"
   to = "/nasza-historia/:splat"
   status = 301
@@ -112,7 +132,7 @@
 # old WordPress English and French pages
 [[redirects]]
   from = "/en/about-us/"
-  to = "/en/our-kitchen/"
+  to = "/en/our-story/"
   status = 301
 [[redirects]]
   from = "/en/why-snails/"
@@ -120,7 +140,7 @@
   status = 301
 [[redirects]]
   from = "/fr/a-propos-de-nous/"
-  to = "/fr/notre-cuisine/"
+  to = "/fr/notre-histoire/"
   status = 301
 [[redirects]]
   from = "/fr/pourquoi-les-escargots/"
@@ -128,7 +148,7 @@
   status = 301
 [[redirects]]
   from = "/about-us/"
-  to = "/en/our-kitchen/"
+  to = "/en/our-story/"
   status = 301
 [[redirects]]
   from = "/why-snails/"
@@ -136,7 +156,7 @@
   status = 301
 [[redirects]]
   from = "/a-propos-de-nous/"
-  to = "/fr/notre-cuisine/"
+  to = "/fr/notre-histoire/"
   status = 301
 [[redirects]]
   from = "/pourquoi-les-escargots/"

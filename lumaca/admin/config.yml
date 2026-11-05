@@ -409,7 +409,7 @@ collections:
             label: Answer
             widget: text
       - name: kitchen
-        label: Our kitchen
+        label: Our story
         widget: object
         fields:
         - name: title

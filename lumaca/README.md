@@ -39,7 +39,7 @@ steps as title / text / timer minutes; `js/recipe-data.js` is generated from the
   ("jak podać ślimaki", "ślimaki przepis", "ślimaki gdzie kupić") plus history, wine, the holidays and first tastes.
   Each shows the matching products and recipes. "Nasza historia" is their hub: all articles are listed there, and article
   pages sit under it in the menu and breadcrumbs. Also linked from the homepage, the recipes page and the footer.
-- **English and French** (`/en/`, `/fr/`): home, shop and every product, how to serve (with FAQ), our kitchen,
+- **English and French** (`/en/`, `/fr/`): home, shop and every product, how to serve (with FAQ), our story,
   trade & export (with the enquiry form) and contact. Retail is Polish-only, so EN/FR product buttons lead to an enquiry;
   enquiries land in the same Netlify forms with a `jezyk` field. A PL · EN · FR switcher in the header goes to the same
   page in the other language, and every translated page carries hreflang links. Page texts: `content/i18n/{en,fr}.json`

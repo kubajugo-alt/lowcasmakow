@@ -5,7 +5,7 @@
     "home": "Accueil",
     "shop": "Boutique",
     "how": "Comment servir",
-    "kitchen": "Notre cuisine",
+    "kitchen": "Notre histoire",
     "trade": "Professionnels & export",
     "contact": "Contact",
     "topbar": "Prêt en 5 minutes · fabriqué en Pologne",
@@ -102,7 +102,7 @@
     ]
   },
   "kitchen": {
-    "title": "Notre cuisine",
+    "title": "Notre histoire",
     "lead": "Un mets polonais oublié revient à table. D’où il vient, qui le cuisine et pourquoi il mérite d’être goûté.",
     "story": [
       {
