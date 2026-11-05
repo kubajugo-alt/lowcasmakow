@@ -860,6 +860,17 @@ def form(name, fields, cta, ok, extra='<input type="hidden" name="jezyk" value="
     </form>'''
 
 
+def fair_band(d):
+    """Trade-fair block for the B2B pages (PL, EN, FR): photo, text, link to the press coverage."""
+    if not d or not d.get('title'):
+        return ''
+    photo = f'<figure class="pf-photo">{img(d["image"], "(max-width:720px) 100vw, 360px", ratio=1.25)}</figure>' if (d.get('image') or {}).get('src') else ''
+    link = (f'<p><a class="btn btn-line" href="{e(d["url"])}" rel="noopener" target="_blank">{e(d.get("link_text") or d["url"])}</a></p>'
+            if d.get('url') else '')
+    return f'''<section class="sec" aria-labelledby="h-fair"><article class="press-feature">{photo}<div class="pf-body">
+      <p class="kind">{e(d.get("kind", ""))}</p><h2 id="h-fair" class="pf-title">{e(d["title"])}</h2><p>{e(d.get("text", ""))}</p>{link}</div></article></section>'''
+
+
 def b2b_page():
     B = B2B
     seg = ''.join(f'<li><h3>{e(s["title"])}</h3><p>{e(s["text"])}</p></li>' for s in B['segments'])
@@ -875,6 +886,7 @@ def b2b_page():
     <p><a class="btn btn-gold" href="#zapytanie">Zapytaj o ofertę</a></p>
   </header>
   <section class="sec" aria-labelledby="h-seg"><h2 id="h-seg" class="sec-title">Dla kogo</h2><ul class="fact-grid">{seg}</ul></section>
+  {fair_band(B.get("fair"))}
   <section class="facts" aria-labelledby="h-tech"><h2 id="h-tech">Karta techniczna w skrócie</h2><dl>{facts}</dl><p class="muted">{e(B["docs_text"])}</p></section>
   <section class="band-dark"><div><p class="kind">Program</p><h2>{e(B["chefs_title"])}</h2><p>{e(B["chefs_text"])}</p></div></section>
   <section class="sec" aria-labelledby="h-names"><h2 id="h-names" class="sec-title">Nazwy produktów: PL · EN · FR</h2>
@@ -1048,7 +1060,6 @@ def home_page():
     <p class="kind">Zapomniany polski przysmak</p>
     <h2 id="h-kit" class="sec-title">{e(H["kitchen_title"])}</h2>
     <p>{e(H["kitchen_text"])}</p>
-    <ol class="plain small">{"".join(f'<li>{e(s["title"])}.</li>' for s in KITCHEN["story"])}</ol>
     <p class="btns"><a class="btn btn-ink" href="/nasza-kuchnia/">Poznaj naszą historię</a> <a class="btn btn-line" href="/nasza-kuchnia/#artykuly">Artykuły i poradniki</a></p>
   </div>
 </section>
@@ -1413,6 +1424,7 @@ def i_trade(lang):
   {crumbs([(U['home'], P['home']), (B['title'], P['trade'])])}
   <header class="page-head"><h1>{e(B["title"])}</h1><p class="lead">{e(B["lead"])}</p><p><a class="btn btn-gold" href="#enquiry">{e(U["cta_btn"])}</a></p></header>
   <section class="sec"><ul class="fact-grid">{seg}</ul></section>
+  {fair_band(B.get("fair"))}
   <section class="facts"><h2>{e(U["facts"])}</h2><dl>{facts}</dl><p class="muted">{e(B["docs"])}</p></section>
   <section class="sec"><h2 class="sec-title">{e(B["names_title"])}</h2>
     <div class="table-wrap"><table class="names"><thead><tr><th>Polski</th><th>English</th><th>Français</th></tr></thead><tbody>{names}</tbody></table></div></section>

@@ -195,7 +195,18 @@
     "docs": "On request: product sheet in EN and FR, SGS shelf-life results, certificates of origin, export price list (EXW) and samples after a first conversation.",
     "names_title": "Product names: PL · EN · FR",
     "form_title": "Trade enquiry",
-    "form_lead": "We reply within two working days."
+    "form_lead": "We reply within two working days.",
+    "fair": {
+      "kind": "Trade fairs",
+      "title": "Lumaca at SIAL Paris 2026",
+      "text": "At SIAL 2026 in Paris, on the Polish stand, we presented our new snails in chili oil and a live demonstration of snails in garlic and parsley butter. We are happy to bring a tasting to your premises or to the next trade fair.",
+      "image": {
+        "src": "/img/uploads/grazyna-sial-2026-paryz.jpg",
+        "alt": "Grażyna Nawrocka with chefs on the Polish stand at SIAL 2026 in Paris"
+      },
+      "url": "https://e-restauracja.com/artykul/17805/slimaki-wracaja-do-kuchni-od-staropolskich-receptur-po-nowe-metody-przetworstwa/",
+      "link_text": "Coverage in Restauracja magazine (in Polish)"
+    }
   },
   "contact": {
     "title": "Contact",

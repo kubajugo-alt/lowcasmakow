@@ -519,3 +519,5 @@ p { margin: 0 0 1em; }
 .pf-body h3 a:hover { text-decoration: underline; }
 .pf-body blockquote { margin: 0 0 1.2em; padding: 4px 0 4px 18px; border-left: 3px solid var(--gold); font: italic 500 1.1rem/1.5 var(--serif); color: var(--ink); }
 @media (max-width: 760px) { .press-feature { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 18px; } .pf-photo { max-width: 360px; } }
+.pf-body .btn { white-space: normal; text-align: center; max-width: 100%; height: auto; line-height: 1.3; padding-top: 10px; padding-bottom: 10px; }
+.pf-title { font-size: clamp(1.25rem, 2.2vw, 1.6rem); margin: .2em 0 .5em; }

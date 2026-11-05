@@ -195,7 +195,18 @@
     "docs": "Sur demande : fiche produit en FR et EN, résultats des analyses de conservation SGS, certificats d’origine, tarif export (EXW) et échantillons après un premier échange.",
     "names_title": "Noms des produits : PL · EN · FR",
     "form_title": "Demande professionnelle",
-    "form_lead": "Nous répondons sous deux jours ouvrés."
+    "form_lead": "Nous répondons sous deux jours ouvrés.",
+    "fair": {
+      "kind": "Salons",
+      "title": "Lumaca au SIAL Paris 2026",
+      "text": "Au SIAL 2026 à Paris, sur le stand polonais, nous avons présenté nos nouveaux escargots à l’huile pimentée et une démonstration d’escargots au beurre d’ail et de persil. Nous organisons volontiers une dégustation chez vous ou lors du prochain salon.",
+      "image": {
+        "src": "/img/uploads/grazyna-sial-2026-paryz.jpg",
+        "alt": "Grażyna Nawrocka avec des chefs sur le stand polonais au SIAL 2026 à Paris"
+      },
+      "url": "https://e-restauracja.com/artykul/17805/slimaki-wracaja-do-kuchni-od-staropolskich-receptur-po-nowe-metody-przetworstwa/",
+      "link_text": "Article dans le magazine Restauracja (en polonais)"
+    }
   },
   "contact": {
     "title": "Contact",

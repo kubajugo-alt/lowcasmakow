@@ -55,5 +55,16 @@
   ],
   "chefs_title": "Szefowie ze ślimakiem",
   "chefs_text": "Program dla szefów kuchni z regionu świętokrzyskiego i Krakowa: przekazujemy słoiki do opracowania dania, a danie trafia do karty z nazwą Lumaki i do wspólnej publikacji przepisów. Prowadzimy też warsztaty w szkołach gastronomicznych.",
-  "docs_text": "Na życzenie wyślemy kartę techniczną (waga, zawartość mięsa, alergeny, trwałość, sposób podgrzania, liczba porcji i 5 pomysłów na danie), cennik hurtowy i katalog w wersji PL, EN i FR."
+  "docs_text": "Na życzenie wyślemy kartę techniczną (waga, zawartość mięsa, alergeny, trwałość, sposób podgrzania, liczba porcji i 5 pomysłów na danie), cennik hurtowy i katalog w wersji PL, EN i FR.",
+  "fair": {
+    "kind": "Targi",
+    "title": "Lumaca na SIAL Paris 2026",
+    "text": "Na targach SIAL 2026 w Paryżu, na polskim stoisku, pokazaliśmy nowe ślimaki w oleju z chili i przygotowanie ślimaków w maśle czosnkowo-pietruszkowym. Chętnie pokażemy je też w Twoim lokalu albo na kolejnych targach: umów się na degustację.",
+    "image": {
+      "src": "/img/uploads/grazyna-sial-2026-paryz.jpg",
+      "alt": "Grażyna Nawrocka z kucharzami na polskim stoisku podczas targów SIAL 2026 w Paryżu"
+    },
+    "url": "https://e-restauracja.com/artykul/17805/slimaki-wracaja-do-kuchni-od-staropolskich-receptur-po-nowe-metody-przetworstwa/",
+    "link_text": "Relacja w magazynie „Restauracja”"
+  }
 }

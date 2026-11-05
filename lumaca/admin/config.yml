@@ -319,6 +319,18 @@ collections:
           - {name: title, label: 'Tytuł'}
           - {name: lead, label: 'Wstęp', widget: text}
           - {name: segments, label: 'Dla kogo', widget: list, fields: [{name: title, label: 'Tytuł'}, {name: text, label: 'Tekst', widget: text}]}
+          - name: fair
+            label: 'Targi (np. SIAL)'
+            widget: object
+            required: false
+            collapsed: true
+            fields:
+              - {name: kind, label: 'Nadtytuł', required: false}
+              - {name: title, label: 'Tytuł', required: false}
+              - {name: text, label: 'Tekst', widget: text, required: false}
+              - {name: image, label: 'Zdjęcie', widget: object, required: false, fields: *image}
+              - {name: url, label: 'Link (np. relacja w mediach)', required: false}
+              - {name: link_text, label: 'Tekst linku', required: false}
           - {name: facts, label: 'Karta techniczna', widget: list, fields: [{name: k, label: 'Cecha'}, {name: v, label: 'Wartość'}]}
           - {name: chefs_title, label: 'Program: tytuł'}
           - {name: chefs_text, label: 'Program: tekst', widget: text}
@@ -433,6 +445,18 @@ collections:
         fields:
         - name: title
           label: Title
+        - name: fair
+          label: Trade fair
+          widget: object
+          required: false
+          collapsed: true
+          fields:
+          - {name: kind, label: Kicker, required: false}
+          - {name: title, label: Title, required: false}
+          - {name: text, label: Text, widget: text, required: false}
+          - {name: image, label: Photo, widget: object, required: false, fields: [{name: src, label: Image, widget: image}, {name: alt, label: Alt text}]}
+          - {name: url, label: Link, required: false}
+          - {name: link_text, label: Link text, required: false}
         - name: lead
           label: Lead
           widget: text
