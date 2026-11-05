@@ -351,7 +351,7 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
       <h2>Sklep</h2>{''.join(f'<a href="{h}">{n}</a>' for n, h in NAV)}
     </nav>
     <nav class="foot-col" aria-label="Informacje">
-      <h2>Informacje</h2><a href="/nasza-kuchnia/#artykuly">Artykuły</a><a href="/przepisy/#faq">Pytania i odpowiedzi</a><a href="/w-mediach/">Lumaca w mediach</a>{pages_nav}<a href="/kontakt/">Kontakt</a>
+      <h2>Informacje</h2><a href="/nasza-kuchnia/#artykuly">Artykuły</a><a href="/przepisy/#faq">Pytania i odpowiedzi</a><a href="/w-mediach/">Piszą o nas</a>{pages_nav}<a href="/kontakt/">Kontakt</a>
     </nav>
     <div class="foot-col contact">
       <h2>Kontakt</h2>
@@ -823,6 +823,7 @@ def kitchen_page():
     <div class="label-card dark"><p class="kind">Właściciele</p><h2>{e(K["grazyna_title"])}</h2><p>{e(K["grazyna_text"])}</p></div>
   </section>
   <section class="sec" aria-labelledby="h-facts"><h2 id="h-facts" class="sec-title">{e(K["facts_title"])}</h2><ul class="fact-grid">{facts}</ul></section>
+  {press_section()}
   <section class="sec" id="artykuly" aria-labelledby="h-arts">
     <div class="sec-head"><h2 id="h-arts" class="sec-title">Z naszej kuchni: artykuły</h2><a class="more" href="/artykuly/">Wszystkie artykuły</a></div>
     <p class="sec-lead">Jak podać ślimaki, gdzie je kupić, jakie wino do nich wybrać i skąd się wzięły na polskim stole.</p>
@@ -910,14 +911,33 @@ def sets_page():
                              image=sets[0][1]['image'] if sets else None, ld=[crumbs_ld([('Strona główna', '/'), ('Zestawy i prezenty', '/zestawy/')])]))
 
 
+def press_feature(x):
+    """One 'Piszą o nas' card: photo, outlet, title linking to the original, short lead and a quote."""
+    url = e(x.get('url') or '')
+    title = f'<a href="{url}" rel="noopener" target="_blank">{e(x["title"])}</a>' if url else e(x['title'])
+    photo = f'<figure class="pf-photo">{img(x["image"], "(max-width:720px) 100vw, 360px", ratio=1.25)}</figure>' if (x.get('image') or {}).get('src') else ''
+    logo = f'<img class="pf-logo" src="{e(x["logo"])}" alt="{e(x.get("outlet", ""))}" loading="lazy" height="40">' if x.get('logo') else ''
+    return f'''<article class="press-feature">{photo}<div class="pf-body">
+      {logo}<p class="kind">{e(x.get("outlet", ""))} · {pl_date(x.get("date"))}</p>
+      <h3>{title}</h3>
+      {f'<p>{e(x["lead"])}</p>' if x.get('lead') else ''}
+      {f'<blockquote>„{e(x["quote"])}”</blockquote>' if x.get('quote') else ''}
+      {f'<p><a class="btn btn-line" href="{url}" rel="noopener" target="_blank">Przeczytaj cały artykuł</a></p>' if url else ''}
+    </div></article>'''
+
+
+def press_section(limit=1, more=True):
+    items = [x for x in PRESS.values() if x.get('title')][:limit]
+    if not items:
+        return ''
+    link = '<a class="more" href="/w-mediach/">Lumaca w mediach</a>' if more else ''
+    return (f'<section class="sec" aria-labelledby="h-press"><div class="sec-head"><h2 id="h-press" class="sec-title">Piszą o nas</h2>{link}</div>'
+            + ''.join(press_feature(x) for x in items) + '</section>')
+
+
 def press_page():
-    def press_item(x):
-        title = e(x['title'])
-        if x.get('url'):
-            title = f'<a href="{e(x["url"])}">{title}</a>'
-        return f'<li><p class="kind">{e(x.get("outlet", ""))} · {e(x.get("date", ""))}</p><h3>{title}</h3></li>'
-    items = ''.join(press_item(x) for x in PRESS.values() if x.get('title'))
-    story = ''.join(f'<li>{e(s["title"])}. {e(s["text"])}</li>' for s in KITCHEN['story'])
+    items = ''.join(press_feature(x) for x in PRESS.values() if x.get('title'))
+    story = ''.join(f'<li><strong>{e(s.get("year", ""))}</strong>: {e(s["title"])}. {e(s["text"])}</li>' for s in KITCHEN['story'])
     main = f'''
 <div class="wrap">
   {crumbs([('Strona główna', '/'), ('Lumaca w mediach', '/w-mediach/')])}
@@ -925,8 +945,8 @@ def press_page():
     <h1>Lumaca w mediach</h1>
     <p class="lead">Zapomniany polski przysmak wraca na stół. Dla dziennikarzy: historia, bohaterka, zdjęcia dań i przetwórni, przepisy i fragmenty wideo Łowcy Smaków.</p>
   </header>
-  <section class="sec"><h2 class="sec-title">Publikacje</h2>{f'<ul class="press">{items}</ul>' if items else '<p class="muted">Pierwsze publikacje pojawią się tu wkrótce.</p>'}</section>
-  <section class="sec"><h2 class="sec-title">Historia w trzech zdaniach</h2><ol class="plain">{story}</ol></section>
+  <section class="sec"><h2 class="sec-title">Piszą o nas</h2>{items or '<p class="muted">Pierwsze publikacje pojawią się tu wkrótce.</p>'}</section>
+  <section class="sec"><h2 class="sec-title">Historia w skrócie</h2><ul class="plain">{story}</ul></section>
   <section class="band-dark"><div><p class="kind">Pakiet medialny</p><h2>Porozmawiaj z Grażyną Nawrocką</h2>
     <p>Wyślemy komunikat, biogram i zdjęcia Grażyny i Tomasza Nawrockich, teczkę faktów, trzy przepisy i zdjęcia dań. Zestaw degustacyjny dla redakcji na życzenie.</p>
     <a class="btn btn-gold" href="mailto:{e(S["email"])}?subject=Media">{e(S["email"])}</a></div></section>
@@ -991,11 +1011,7 @@ def home_page():
     </div>
   </div>
 </section>'''
-    press = list(PRESS.values())[:4]
-    press_html = ''
-    if press:
-        press_html = '<section class="wrap sec"><h2 class="sec-title">Piszą o nas</h2><ul class="press">' + ''.join(
-            f'<li><p class="kind">{e(x.get("outlet", ""))}</p><h3>{e(x["title"])}</h3></li>' for x in press) + '</ul></section>'
+    press_html = f'<div class="wrap">{press_section()}</div>' if PRESS else ''
     main = f'''
 <section class="hero" aria-labelledby="h-hero">
   <figure class="hero-photo">{img(H["hero_image"], "100vw", True)}</figure>

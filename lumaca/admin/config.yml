@@ -200,7 +200,7 @@ collections:
       - {name: url, label: 'Link', required: false}
 
   - name: press
-    label: 'Lumaca w mediach'
+    label: 'Piszą o nas (media)'
     label_singular: 'Publikacja'
     folder: lumaca/content/press
     create: true
@@ -212,6 +212,10 @@ collections:
       - {name: outlet, label: 'Medium', hint: 'np. Echo Dnia, Radio Kielce'}
       - {name: date, label: 'Data', widget: datetime, date_format: 'YYYY-MM-DD', time_format: false, format: 'YYYY-MM-DD'}
       - {name: url, label: 'Link', required: false}
+      - {name: lead, label: 'Krótko o czym (nasze słowa)', widget: text, required: false}
+      - {name: quote, label: 'Cytat z artykułu (jedno, dwa zdania)', widget: text, required: false}
+      - {name: image, label: 'Zdjęcie', widget: object, required: false, fields: *image}
+      - {name: logo, label: 'Logo medium (PNG z przezroczystym tłem)', widget: image, required: false}
 
   - name: pages
     label: 'Strony informacyjne'

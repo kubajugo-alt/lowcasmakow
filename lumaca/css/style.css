@@ -507,3 +507,15 @@ p { margin: 0 0 1em; }
   .foot-col h2 { margin-top: 8px; }
   .cook-top .logo { display: flex; align-items: center; min-height: 44px; }
 }
+
+/* "Piszą o nas" press feature */
+.press-feature { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 40px; align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; margin-top: 18px; }
+.press-feature + .press-feature { margin-top: 24px; }
+.pf-photo { margin: 0; aspect-ratio: 4/5; overflow: hidden; border-radius: var(--radius); background: #E6DED0; }
+.pf-photo img { width: 100%; height: 100%; object-fit: cover; }
+.pf-logo { display: block; height: 40px; width: auto; margin-bottom: 14px; }
+.pf-body h3 { font-size: clamp(1.25rem, 2.2vw, 1.6rem); margin: .2em 0 .5em; }
+.pf-body h3 a { text-decoration: none; }
+.pf-body h3 a:hover { text-decoration: underline; }
+.pf-body blockquote { margin: 0 0 1.2em; padding: 4px 0 4px 18px; border-left: 3px solid var(--gold); font: italic 500 1.1rem/1.5 var(--serif); color: var(--ink); }
+@media (max-width: 760px) { .press-feature { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 18px; } .pf-photo { max-width: 360px; } }
