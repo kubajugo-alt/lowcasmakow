@@ -10,9 +10,9 @@ Preview: https://lumaca-slimaki.netlify.app (Netlify project `lumaca-slimaki`).
 
 The structure and wording follow the marketing plan ("Lumaca – plan marketingowy", section "Strona lumaca.eco: diagnoza i rekomendacje"):
 
-- Menu: Sklep · Zestawy i prezenty · Przepisy · Nasza kuchnia · Gdzie spróbować · Dla gastronomii i firm. Terms, delivery and privacy are in the footer.
+- Menu: Sklep · Zestawy i prezenty · Przepisy · Nasza historia · Gdzie spróbować · Dla gastronomii i firm. Terms, delivery and privacy are in the footer.
 - Homepage, top to bottom: served dish + "Ślimaki gotowe do stołu" + "gotowe w 5 minut"; three bestsellers with prices; "Jak to podać" (three ways);
-  occasions; the Christmas set; "Nasza kuchnia" (Grażyna, the forgotten Polish delicacy); press (shown once there is any); where to try; newsletter.
+  occasions; the Christmas set; "Nasza historia" (Grażyna, the forgotten Polish delicacy); press (shown once there is any); where to try; newsletter.
 - Product page: dish name, served dish next to the jar, price and button, occasion, how to serve in 5 minutes, pairing, three ways,
   then weight and meat content, ingredients, allergens, storage.
 - Shop: three categories (jars, sets, freeze-dried), square photos, no filters or sorting, everything in Polish.
@@ -37,7 +37,7 @@ steps as title / text / timer minutes; `js/recipe-data.js` is generated from the
 
 - **Articles** (`/artykuly/`, CMS: Artykuły): seven Polish guides written for the plan's search phrases
   ("jak podać ślimaki", "ślimaki przepis", "ślimaki gdzie kupić") plus history, wine, the holidays and first tastes.
-  Each shows the matching products and recipes. "Nasza kuchnia" is their hub: all articles are listed there, and article
+  Each shows the matching products and recipes. "Nasza historia" is their hub: all articles are listed there, and article
   pages sit under it in the menu and breadcrumbs. Also linked from the homepage, the recipes page and the footer.
 - **English and French** (`/en/`, `/fr/`): home, shop and every product, how to serve (with FAQ), our kitchen,
   trade & export (with the enquiry form) and contact. Retail is Polish-only, so EN/FR product buttons lead to an enquiry;
@@ -62,7 +62,7 @@ Netlify: base directory `lumaca`, build command `python3 scripts/build.py`, publ
 installed on this Netlify project too (Project configuration → Access & security → OAuth), same as for Łowca Smaków.
 
 Collections: products, recipes, events (calendar), places (where to buy), press, info pages, and settings
-(contact and shop, homepage, "Nasza kuchnia", FAQ, B2B).
+(contact and shop, homepage, "Nasza historia", FAQ, B2B).
 
 ## Shop
 

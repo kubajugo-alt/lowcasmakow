@@ -12,6 +12,16 @@
 
 # Addresses of the old WordPress shop at lumaca.eco → the new pages (for when the domain moves here)
 [[redirects]]
+  from = "/nasza-kuchnia/*"
+  to = "/nasza-historia/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/nasza-kuchnia"
+  to = "/nasza-historia/"
+  status = 301
+
+[[redirects]]
   from = "/przepisy/spaghetti-ze-slimakami-w-sosie-pomidorowym.html"
   to = "/przepisy/slimaki-w-pomidorach-pod-kruszonka.html"
   status = 301
@@ -73,11 +83,11 @@
   status = 301
 [[redirects]]
   from = "/dlaczego-slimaki/"
-  to = "/nasza-kuchnia/"
+  to = "/nasza-historia/"
   status = 301
 [[redirects]]
   from = "/o-nas/"
-  to = "/nasza-kuchnia/"
+  to = "/nasza-historia/"
   status = 301
 [[redirects]]
   from = "/formy-platnosci-i-ceny-dostawy-2/"

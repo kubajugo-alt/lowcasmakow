@@ -278,12 +278,12 @@ collections:
               - {name: text, label: 'Tekst'}
               - {name: link, label: 'Link'}
               - {name: image, label: 'Zdjęcie', widget: object, fields: *image}
-          - {name: kitchen_title, label: 'Tytuł: nasza kuchnia'}
-          - {name: kitchen_text, label: 'Tekst: nasza kuchnia', widget: text}
-          - {name: kitchen_image, label: 'Zdjęcie: nasza kuchnia', widget: object, fields: *image}
+          - {name: kitchen_title, label: 'Tytuł: nasza historia'}
+          - {name: kitchen_text, label: 'Tekst: nasza historia', widget: text}
+          - {name: kitchen_image, label: 'Zdjęcie: nasza historia', widget: object, fields: *image}
           - {name: where_title, label: 'Tytuł: gdzie spróbować'}
       - name: kuchnia
-        label: 'Nasza kuchnia'
+        label: 'Nasza historia'
         file: lumaca/content/settings/kuchnia.json
         fields:
           - {name: title, label: 'Tytuł'}

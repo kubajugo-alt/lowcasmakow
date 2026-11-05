@@ -52,7 +52,7 @@ I18N = {lang: json.load(open(os.path.join(ROOT, 'content', 'i18n', lang + '.json
 PATHS = {'home': {'pl': '/', 'en': '/en/', 'fr': '/fr/'},
          'shop': {'pl': '/sklep/', 'en': '/en/shop/', 'fr': '/fr/boutique/'},
          'how': {'pl': '/przepisy/', 'en': '/en/how-to-serve/', 'fr': '/fr/comment-servir/'},
-         'kitchen': {'pl': '/nasza-kuchnia/', 'en': '/en/our-kitchen/', 'fr': '/fr/notre-cuisine/'},
+         'kitchen': {'pl': '/nasza-historia/', 'en': '/en/our-kitchen/', 'fr': '/fr/notre-cuisine/'},
          'trade': {'pl': '/dla-firm/', 'en': '/en/trade/', 'fr': '/fr/professionnels/'},
          'contact': {'pl': '/kontakt/', 'en': '/en/contact/', 'fr': '/fr/contact/'}}
 
@@ -276,7 +276,7 @@ CART = ('<button class="icon-btn snipcart-checkout" type="button" aria-label="Ko
         '<path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="snipcart-items-count" aria-hidden="true"></span></button>')
 MENU = ('<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>')
-NAV = [('Sklep', '/sklep/'), ('Zestawy i prezenty', '/zestawy/'), ('Przepisy', '/przepisy/'), ('Nasza kuchnia', '/nasza-kuchnia/'),
+NAV = [('Sklep', '/sklep/'), ('Zestawy i prezenty', '/zestawy/'), ('Przepisy', '/przepisy/'), ('Nasza historia', '/nasza-historia/'),
        ('Gdzie spróbować', '/gdzie-sprobowac/'), ('Dla gastronomii i firm', '/dla-firm/')]
 
 
@@ -351,7 +351,7 @@ def shell(title, desc, main, images=(), current=None, path='/', image=None, og_t
       <h2>Sklep</h2>{''.join(f'<a href="{h}">{n}</a>' for n, h in NAV)}
     </nav>
     <nav class="foot-col" aria-label="Informacje">
-      <h2>Informacje</h2><a href="/nasza-kuchnia/#artykuly">Artykuły</a><a href="/przepisy/#faq">Pytania i odpowiedzi</a><a href="/w-mediach/">Piszą o nas</a>{pages_nav}<a href="/kontakt/">Kontakt</a>
+      <h2>Informacje</h2><a href="/nasza-historia/#artykuly">Artykuły</a><a href="/przepisy/#faq">Pytania i odpowiedzi</a><a href="/w-mediach/">Piszą o nas</a>{pages_nav}<a href="/kontakt/">Kontakt</a>
     </nav>
     <div class="foot-col contact">
       <h2>Kontakt</h2>
@@ -809,7 +809,7 @@ def kitchen_page():
     gphoto = img(K['grazyna_image'], '(max-width:720px) 100vw, 40vw') or '<div class="photo-todo"><img src="/img/mark-yellow.png" alt="" width="110" height="49"><p>Tu zdjęcie Grażyny i Tomasza w przetwórni</p></div>'
     main = f'''
 <div class="wrap">
-  {crumbs([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/')])}
+  {crumbs([('Strona główna', '/'), ('Nasza historia', '/nasza-historia/')])}
   <header class="page-head">
     <h1>{e(K["title"])}</h1>
     <p class="lead">{e(K["lead"])}</p>
@@ -834,9 +834,9 @@ def kitchen_page():
     <a class="btn btn-gold" href="{e(K["lowca_url"])}">Ślimaki według Czernieckiego</a></div>
   </section>
 </div>'''
-    write('/nasza-kuchnia/', shell('Nasza kuchnia: zapomniany polski przysmak', K['lead'], main, [K['grazyna_image']], current='Nasza kuchnia',
-                                   path='/nasza-kuchnia/', image=HOME['kitchen_image'],
-                                   ld=[crumbs_ld([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/')]), ORG]))
+    write('/nasza-historia/', shell('Nasza historia: zapomniany polski przysmak', K['lead'], main, [K['grazyna_image']], current='Nasza historia',
+                                   path='/nasza-historia/', image=HOME['kitchen_image'],
+                                   ld=[crumbs_ld([('Strona główna', '/'), ('Nasza historia', '/nasza-historia/')]), ORG]))
 
 
 def form(name, fields, cta, ok, extra='<input type="hidden" name="jezyk" value="pl">', err='Nie udało się wysłać. Napisz do nas: info@lumaca.eco'):
@@ -1056,7 +1056,7 @@ def home_page():
 {set_band}
 {press_html}
 <section class="wrap sec" aria-labelledby="h-art">
-  <div class="sec-head"><h2 id="h-art" class="sec-title">Z naszej kuchni</h2><a class="more" href="/nasza-kuchnia/#artykuly">Więcej w Naszej kuchni</a></div>
+  <div class="sec-head"><h2 id="h-art" class="sec-title">Z naszej kuchni</h2><a class="more" href="/nasza-historia/#artykuly">Więcej w Naszej historii</a></div>
   <div class="grid recipes">{"".join(article_card(x) for x in list(ARTICLES)[:3])}</div>
 </section>
 <section class="wrap sec" aria-labelledby="h-where">
@@ -1104,7 +1104,7 @@ def articles_page():
     cards = ''.join(article_card(s) for s in ARTICLES)
     main = f'''
 <div class="wrap">
-  {crumbs([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/'), ('Artykuły', '/artykuly/')])}
+  {crumbs([('Strona główna', '/'), ('Nasza historia', '/nasza-historia/'), ('Artykuły', '/artykuly/')])}
   <header class="page-head">
     <h1>Artykuły</h1>
     <p class="lead">Jak podać ślimaki, gdzie je kupić, jakie wino do nich wybrać i skąd się wzięły na polskim stole.</p>
@@ -1112,8 +1112,8 @@ def articles_page():
   <div class="grid recipes">{cards}</div>
 </div>'''
     write('/artykuly/', shell('Artykuły o ślimakach: jak podać, gdzie kupić, do jakiego wina', 'Poradniki i historie Lumaki: jak podać ślimaki, przepisy na szybkie przystawki, gdzie kupić gotowe ślimaki, jakie wino do ślimaków.',
-                              main, [a['image'] for a in ARTICLES.values()], current='Nasza kuchnia', path='/artykuly/',
-                              ld=[crumbs_ld([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/'), ('Artykuły', '/artykuly/')])]))
+                              main, [a['image'] for a in ARTICLES.values()], current='Nasza historia', path='/artykuly/',
+                              ld=[crumbs_ld([('Strona główna', '/'), ('Nasza historia', '/nasza-historia/'), ('Artykuły', '/artykuly/')])]))
 
 
 def article_page(slug, a):
@@ -1125,7 +1125,7 @@ def article_page(slug, a):
         aside = '<aside class="art-shop"><h2>Z tego artykułu</h2>' + ''.join(product_card(x, PR[x], '(max-width:720px) 100vw, 300px') for x in prods[:2]) + '</aside>'
     main = f'''
 <div class="wrap">
-  {crumbs([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/'), ('Artykuły', '/artykuly/'), (a['title'], f'/artykuly/{slug}.html')])}
+  {crumbs([('Strona główna', '/'), ('Nasza historia', '/nasza-historia/'), ('Artykuły', '/artykuly/'), (a['title'], f'/artykuly/{slug}.html')])}
   <article class="article">
     <header class="article-head">
       <p class="kind">{pl_date(a.get("date"))} · {e(a.get("author") or "Lumaca")}</p>
@@ -1142,12 +1142,12 @@ def article_page(slug, a):
   <section class="sec"><h2 class="sec-title">Czytaj dalej</h2><div class="grid recipes">{"".join(article_card(x) for x in more)}</div></section>
 </div>'''
     path = f'/artykuly/{slug}.html'
-    ld = [crumbs_ld([('Strona główna', '/'), ('Nasza kuchnia', '/nasza-kuchnia/'), ('Artykuły', '/artykuly/'), (a['title'], path)]),
+    ld = [crumbs_ld([('Strona główna', '/'), ('Nasza historia', '/nasza-historia/'), ('Artykuły', '/artykuly/'), (a['title'], path)]),
           {'@type': 'Article', 'headline': a['title'], 'description': a['lead'], 'image': [abs_image(a['image'])], 'datePublished': a.get('date'),
            'author': {'@type': 'Person', 'name': a['author']} if a.get('author') else {'@type': 'Organization', 'name': 'Lumaca'}, 'publisher': {'@type': 'Organization', 'name': 'Lumaca', 'logo': {'@type': 'ImageObject', 'url': SITE + '/img/logo-badge.png'}},
            'keywords': a.get('keywords', ''), 'inLanguage': 'pl', 'mainEntityOfPage': SITE + path}]
     images = [a['image']] + [PR[x]['image'] for x in prods] + [R[x]['image'] for x in recs]
-    write(path, shell(a['title'], a['lead'], main, images, current='Nasza kuchnia', path=path, image=a['image'], og_type='article', ld=ld))
+    write(path, shell(a['title'], a['lead'], main, images, current='Nasza historia', path=path, image=a['image'], og_type='article', ld=ld))
 
 
 # ---------- English and French ----------
