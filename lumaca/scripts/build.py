@@ -1054,15 +1054,6 @@ def home_page():
   <ul class="occasions">{occ}</ul>
 </section>
 {set_band}
-<section class="wrap sec kitchen" aria-labelledby="h-kit">
-  <figure>{img(H["kitchen_image"], "(max-width:720px) 100vw, 50vw")}</figure>
-  <div>
-    <p class="kind">Zapomniany polski przysmak</p>
-    <h2 id="h-kit" class="sec-title">{e(H["kitchen_title"])}</h2>
-    <p>{e(H["kitchen_text"])}</p>
-    <p class="btns"><a class="btn btn-ink" href="/nasza-kuchnia/">Poznaj naszą historię</a> <a class="btn btn-line" href="/nasza-kuchnia/#artykuly">Artykuły i poradniki</a></p>
-  </div>
-</section>
 {press_html}
 <section class="wrap sec" aria-labelledby="h-art">
   <div class="sec-head"><h2 id="h-art" class="sec-title">Z naszej kuchni</h2><a class="more" href="/nasza-kuchnia/#artykuly">Więcej w Naszej kuchni</a></div>
@@ -1072,7 +1063,7 @@ def home_page():
   <div class="sec-head"><h2 id="h-where" class="sec-title">{e(H["where_title"])}</h2><a class="more" href="/gdzie-sprobowac/">Kalendarz i sklepy</a></div>
   <div class="where-grid">{event_list()}{place_list()}</div>
 </section>'''
-    images = [H['hero_image']] + [p['image'] for s, p in best] + [o['image'] for o in H['occasions']] + [H['kitchen_image']] + [R[r]['image'] for r in R]
+    images = [H['hero_image']] + [p['image'] for s, p in best] + [o['image'] for o in H['occasions']] + [R[r]['image'] for r in R]
     write('/', shell('Lumaca: ślimaki gotowe do stołu', S['description'], main, images, path='/', image=H['hero_image'], home=True,
                      body_class='home', ld=[ORG, {'@type': 'WebSite', 'name': 'Lumaca', 'url': SITE + '/'}]))
 
